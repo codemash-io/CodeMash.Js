@@ -1,0 +1,186 @@
+import * as server from './server';
+import { CONFIG } from './config';
+import { CONFIG as Endpoints } from './routes';
+
+
+exports.getRecords = async function(collectionName, pageNumber, pageSize, sort, filter, projection) {
+    
+    if (projection == null || projection == undefined)
+    {
+        projection = ''
+    }
+
+    if (filter == null || filter == undefined)
+    {
+        filter = ''
+    }
+    
+    if (sort == null || sort == undefined)
+    { 
+        sort = ''
+    }
+
+    let response;
+
+    try {
+        response = await server.loadJson(`${CONFIG.API_URL}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.GET_ALL(collectionName)}`,
+        {
+            method: 'POST',
+            headers: {
+                'X-CM-ProjectId': CONFIG.PROJECT_ID,
+                Authorization: `Bearer ${CONFIG.TOKEN}`,
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "PageSize": pageSize || CONFIG.TABLE_PAGE_SIZE,
+                "PageNumber": pageNumber || 0,
+                "projection" : projection,
+                "filter": filter,
+                "sort": sort,
+            }),
+        });        
+    } catch(err) {
+
+        if (err instanceof server.HttpError && err.response.status == 404) {
+            // loop continues after the alert
+            alert("Such url not found.");
+        } else {
+            // unknown error, rethrow
+            throw err;
+        }
+    }
+    
+    let result = JSON.parse(response.result)
+    return result;
+}
+
+exports.deleteRecord = async function(collectionName, filter) {
+    
+    let response;
+
+    try {
+        response = await server.loadJson(`${CONFIG.API_URL}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.DELETE(collectionName)}`,
+        {
+            method: 'DELETE',
+            headers: {
+                'X-CM-ProjectId': CONFIG.PROJECT_ID,
+                Authorization: `Bearer ${CONFIG.TOKEN}`,
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({"filter" : filter }),
+        });   
+    } catch(err) {
+
+        console.log(err)
+
+        if (err instanceof server.HttpError && err.response.status == 404) {
+            // loop continues after the alert
+            alert("Such url not found.");
+        } else {
+            // unknown error, rethrow
+            throw err;
+        }
+    }
+    return response.result.deletedCount > 0;
+}
+
+
+exports.saveRecord = async function(document, collectionName) {
+    
+    let response;
+    try {
+        response = await server.loadJson(`${CONFIG.API_URL}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.CREATE(collectionName)}`,
+        {
+            method: 'POST',
+            headers: {
+                'X-CM-ProjectId': CONFIG.PROJECT_ID,
+                Authorization: `Bearer ${CONFIG.TOKEN}`,
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({document : JSON.stringify(document) }),
+        });        
+    } catch(err) {
+
+        console.log(err)
+
+        if (err instanceof server.HttpError && err.response.status == 404) {
+            // loop continues after the alert
+            alert("Such url not found.");
+        } else {
+            // unknown error, rethrow
+            throw err;
+        }
+    }
+    let result = JSON.parse(response.result)
+    return result;
+}
+
+
+exports.updateRecord = async function(collectionName, filter, updateClause) {
+    
+    let response;
+    
+    try {
+        response = await server.loadJson(`${CONFIG.API_URL}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.UPDATE_PART_OF_DOCUMENT(collectionName)}`,
+        {
+            method: 'PATCH',
+            headers: {
+                'X-CM-ProjectId': CONFIG.PROJECT_ID,
+                Authorization: `Bearer ${CONFIG.TOKEN}`,
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(
+                {   
+                    filter : JSON.stringify(filter),
+                    update : JSON.stringify(updateClause)
+                }),
+        });        
+    } catch(err) {
+
+        console.log(err)
+
+        if (err instanceof server.HttpError && err.response.status == 404) {
+            // loop continues after the alert
+            alert("Such url not found.");
+        } else {
+            // unknown error, rethrow
+            throw err;
+        }
+    }
+    let result = response.result;
+    return result;
+}
+
+exports.getRecord = async function(collectionName, recordId) {
+
+    let response;
+    try {
+        response = await server.loadJson(`${CONFIG.API_URL}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.GET(collectionName, recordId)}`,
+        {
+            method: 'GET',
+            headers: {
+                'X-CM-ProjectId': CONFIG.PROJECT_ID,
+                Authorization: `Bearer ${CONFIG.TOKEN}`,
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                'Accept-Language': 'en'
+            },
+            body: null,
+        });        
+    } catch(err) {
+
+        if (err instanceof server.HttpError && err.response.status == 404) {
+            // loop continues after the alert
+            alert("Such url not found.");
+        } else {
+            // unknown error, rethrow
+            throw err;
+        }
+    }
+    let result = JSON.parse(response.result)
+    return result;
+}

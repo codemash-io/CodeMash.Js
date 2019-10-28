@@ -1,0 +1,22 @@
+{
+  "name": "codemash",
+  "version": "1.0.0",
+  "description": "CodeMash tools for Node and javascript  developers. Access codemash.io tools from npm",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codemash-io/CodeMash.Js.git"
+  },
+  "keywords": [
+    "baas"
+  ],
+  "author": "Domantas Jovaisas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codemash-io/CodeMash.Js/issues"
+  },
+  "homepage": "https://github.com/codemash-io/CodeMash.Js#readme"
+}
