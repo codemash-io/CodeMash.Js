@@ -1,9 +1,9 @@
 import * as server from './server';
-import { CONFIG } from './config';
+import Config from './config';
 import { CONFIG as Endpoints } from './routes';
 
 
-exports.getRecords = async function(collectionName, pageNumber, pageSize, sort, filter, projection) {
+export async function getRecords(collectionName, pageNumber, pageSize, sort, filter, projection) {
     
     if (projection == null || projection == undefined)
     {
@@ -23,17 +23,17 @@ exports.getRecords = async function(collectionName, pageNumber, pageSize, sort, 
     let response;
 
     try {
-        response = await server.loadJson(`${CONFIG.API_URL}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.GET_ALL(collectionName)}`,
+        response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.GET_ALL(collectionName)}`,
         {
             method: 'POST',
             headers: {
-                'X-CM-ProjectId': CONFIG.PROJECT_ID,
-                Authorization: `Bearer ${CONFIG.TOKEN}`,
+                'X-CM-ProjectId': Config.projectId,
+                Authorization: `Bearer ${Config.token}`,
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                "PageSize": pageSize || CONFIG.TABLE_PAGE_SIZE,
+                "PageSize": pageSize || Config.tablePageSize,
                 "PageNumber": pageNumber || 0,
                 "projection" : projection,
                 "filter": filter,
@@ -55,17 +55,17 @@ exports.getRecords = async function(collectionName, pageNumber, pageSize, sort, 
     return result;
 }
 
-exports.deleteRecord = async function(collectionName, filter) {
+export async function deleteRecord(collectionName, filter) {
     
     let response;
 
     try {
-        response = await server.loadJson(`${CONFIG.API_URL}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.DELETE(collectionName)}`,
+        response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.DELETE(collectionName)}`,
         {
             method: 'DELETE',
             headers: {
-                'X-CM-ProjectId': CONFIG.PROJECT_ID,
-                Authorization: `Bearer ${CONFIG.TOKEN}`,
+                'X-CM-ProjectId': Config.projectId,
+                Authorization: `Bearer ${Config.token}`,
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
@@ -87,16 +87,16 @@ exports.deleteRecord = async function(collectionName, filter) {
 }
 
 
-exports.saveRecord = async function(document, collectionName) {
+export async function saveRecord(collectionName, document) {
     
     let response;
     try {
-        response = await server.loadJson(`${CONFIG.API_URL}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.CREATE(collectionName)}`,
+        response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.CREATE(collectionName)}`,
         {
             method: 'POST',
             headers: {
-                'X-CM-ProjectId': CONFIG.PROJECT_ID,
-                Authorization: `Bearer ${CONFIG.TOKEN}`,
+                'X-CM-ProjectId': Config.projectId,
+                Authorization: `Bearer ${Config.token}`,
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
@@ -119,17 +119,17 @@ exports.saveRecord = async function(document, collectionName) {
 }
 
 
-exports.updateRecord = async function(collectionName, filter, updateClause) {
+export async function updateRecord(collectionName, filter, updateClause) {
     
     let response;
     
     try {
-        response = await server.loadJson(`${CONFIG.API_URL}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.UPDATE_PART_OF_DOCUMENT(collectionName)}`,
+        response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.UPDATE_PART_OF_DOCUMENT(collectionName)}`,
         {
             method: 'PATCH',
             headers: {
-                'X-CM-ProjectId': CONFIG.PROJECT_ID,
-                Authorization: `Bearer ${CONFIG.TOKEN}`,
+                'X-CM-ProjectId': Config.projectId,
+                Authorization: `Bearer ${Config.token}`,
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
@@ -155,16 +155,16 @@ exports.updateRecord = async function(collectionName, filter, updateClause) {
     return result;
 }
 
-exports.getRecord = async function(collectionName, recordId) {
+export async function getRecord(collectionName, recordId) {
 
     let response;
     try {
-        response = await server.loadJson(`${CONFIG.API_URL}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.GET(collectionName, recordId)}`,
+        response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.GET(collectionName, recordId)}`,
         {
             method: 'GET',
             headers: {
-                'X-CM-ProjectId': CONFIG.PROJECT_ID,
-                Authorization: `Bearer ${CONFIG.TOKEN}`,
+                'X-CM-ProjectId': Config.projectId,
+                Authorization: `Bearer ${Config.token}`,
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
                 'Accept-Language': 'en'

@@ -1,18 +1,18 @@
 import * as server from './server';
-import { CONFIG } from './config';
+import Config from './config';
 import { CONFIG as Endpoints } from './routes';
 
-exports.registerNotificationToken = async function(token, userId) {
+export async function registerNotificationToken(token, userId) {
 
     let response;
 
     try {
-        response = await server.loadJson(`${CONFIG.API_URL}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.REGISTER_TOKEN}`,
+        response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.REGISTER_TOKEN}`,
         {
             method: 'POST',
             headers: {
-                'X-CM-ProjectId': CONFIG.PROJECT_ID,
-                Authorization: `Bearer ${CONFIG.TOKEN}`,
+                'X-CM-ProjectId': Config.projectId,
+                Authorization: `Bearer ${Config.token}`,
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
@@ -34,15 +34,15 @@ exports.registerNotificationToken = async function(token, userId) {
     return response;
 }
 
-exports.getNotifications = async function(userId) {
+export async function getNotifications(userId) {
     let response;
     try {
-        response = await server.loadJson(`${CONFIG.API_URL}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET_ALL(userId)}`,
+        response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET_ALL(userId)}`,
         {
             method: 'GET',
             headers: {
-                'X-CM-ProjectId': CONFIG.PROJECT_ID,
-                Authorization: `Bearer ${CONFIG.TOKEN}`,
+                'X-CM-ProjectId': Config.projectId,
+                Authorization: `Bearer ${Config.token}`,
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
@@ -61,17 +61,17 @@ exports.getNotifications = async function(userId) {
     return response;
 }
 
-exports.getNotification = async function(id) {
+export async function getNotification(id) {
 
     let response;
 
     try {
-        response = await server.loadJson(`${CONFIG.API_URL}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET(id)}`,
+        response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET(id)}`,
         {
             method: 'GET',
             headers: {
-                'X-CM-ProjectId': CONFIG.PROJECT_ID,
-                Authorization: `Bearer ${CONFIG.TOKEN}`,
+                'X-CM-ProjectId': Config.projectId,
+                Authorization: `Bearer ${Config.token}`,
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
@@ -90,17 +90,17 @@ exports.getNotification = async function(id) {
     return response.result;
 }
 
-exports.markNotificationAsRead = async function(id, userId) {
+export async function markNotificationAsRead(id, userId) {
 
     let response;
 
     try {
-        response = await server.loadJson(`${CONFIG.API_URL}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.MARK_NOTIFICATION_AS_READ(id)}`,
+        response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.MARK_NOTIFICATION_AS_READ(id)}`,
         {
             method: 'PATCH',
             headers: {
-                'X-CM-ProjectId': CONFIG.PROJECT_ID,
-                Authorization: `Bearer ${CONFIG.TOKEN}`,
+                'X-CM-ProjectId': Config.projectId,
+                Authorization: `Bearer ${Config.token}`,
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },

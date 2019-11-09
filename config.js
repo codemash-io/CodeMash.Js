@@ -1,11 +1,17 @@
-// Config example
-export const CONFIG = {
-    API_URL: 'https://api.codemash.io',    
-    VERSION: '', // not mandatory
-    PROJECT_ID: '', 
-    REGION: '', // not mandatory
-    TOKEN: '',
-    GET_TOKEN: () => 'Bearer '.concat(sessionStorage.getItem('token')),
-    TABLE_PAGE_SIZE: 10,
-    MAX_FILES_SIZE: 104857600,
-};
+class Config {
+    constructor(){
+        this.apiUrl = 'https://api.codemash.io';
+    }
+
+    init(config){
+        this.token = config.token;
+        this.projectId = config.projectId;
+        this.region = config.region;
+        this.version = config.version;
+        this.tablePageSize = config.tablePageSize || 10;
+        this.maxFileSize = config.maxFileSize || 104857600;
+    }
+}
+
+export var APP = new Config();
+export default APP;

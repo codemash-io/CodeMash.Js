@@ -1,8 +1,8 @@
 import * as server from './server';
-import { CONFIG } from './config';
+import Config from './config';
 import { CONFIG as Endpoints } from './routes';
 
-exports.saveUser = async function(record) {
+export async function saveUser(record) {
     
     let response;
 
@@ -10,12 +10,12 @@ exports.saveUser = async function(record) {
     if (record && record.id) {
 
         try {
-            response = await server.loadJson(`${CONFIG.API_URL}${Endpoints.PROJECT.MEMBERSHIP.USERS.UPDATE}`,
+            response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.UPDATE}`,
             {
                 method: 'POST',
                 headers: {
-                    'X-CM-ProjectId': CONFIG.PROJECT_ID,
-                    Authorization: `Bearer ${CONFIG.TOKEN}`,
+                    'X-CM-ProjectId': Config.projectId,
+                    Authorization: `Bearer ${Config.token}`,
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
                 },
@@ -35,12 +35,12 @@ exports.saveUser = async function(record) {
     else {
         
         try {
-            response = await server.loadJson(`${CONFIG.API_URL}${Endpoints.PROJECT.MEMBERSHIP.USERS.REGISTER}`,
+            response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.REGISTER}`,
             {
                 method: 'POST',
                 headers: {
-                    'X-CM-ProjectId': CONFIG.PROJECT_ID,
-                    Authorization: `Bearer ${CONFIG.TOKEN}`,
+                    'X-CM-ProjectId': Config.projectId,
+                    Authorization: `Bearer ${Config.token}`,
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
                 },
@@ -64,16 +64,16 @@ exports.saveUser = async function(record) {
     return response;    
 }
 
-exports.getUser = async function getUser(id) {
+export async function getUser(userId) {
     
     let response;
     try {
-        response = await server.loadJson(`${CONFIG.API_URL}${Endpoints.PROJECT.MEMBERSHIP.USERS.GET(id)}`,
+        response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.GET(userId)}`,
         {
             method: 'GET',
             headers: {
-                'X-CM-ProjectId': CONFIG.PROJECT_ID,
-                Authorization: `Bearer ${CONFIG.TOKEN}`,
+                'X-CM-ProjectId': Config.projectId,
+                Authorization: `Bearer ${Config.token}`,
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
@@ -92,17 +92,17 @@ exports.getUser = async function getUser(id) {
     return response.result;
 }
 
-exports.deleteUser = async function(userId) {
+export async function deleteUser(userId) {
     
     let response;
 
     try {
-        response = await server.loadJson(`${CONFIG.API_URL}${Endpoints.PROJECT.MEMBERSHIP.USERS.DELETE(userId)}`,
+        response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.DELETE(userId)}`,
         {
             method: 'DELETE',
             headers: {
-                'X-CM-ProjectId': CONFIG.PROJECT_ID,
-                Authorization: `Bearer ${CONFIG.TOKEN}`,
+                'X-CM-ProjectId': Config.projectId,
+                Authorization: `Bearer ${Config.token}`,
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
@@ -123,17 +123,17 @@ exports.deleteUser = async function(userId) {
 }
 
 
-exports.resetPassword = async function(email) {
+export async function resetPassword(email) {
     
     let response;
 
     try {
-        let response = await server.loadJson(`${CONFIG.API_URL}${Endpoints.PROJECT.MEMBERSHIP.USERS.RESET_PASSWORD}`,
+        let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.RESET_PASSWORD}`,
         {
             method: 'POST',
             headers: {
-                'X-CM-ProjectId': CONFIG.PROJECT_ID,
-                Authorization: `Bearer ${CONFIG.TOKEN}`,
+                'X-CM-ProjectId': Config.projectId,
+                Authorization: `Bearer ${Config.token}`,
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
@@ -153,5 +153,3 @@ exports.resetPassword = async function(email) {
 
     return response;    
 }
-
-

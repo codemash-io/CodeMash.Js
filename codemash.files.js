@@ -1,25 +1,25 @@
 import * as server from './server';
-import { CONFIG } from './config';
+import Config from './config';
 import { CONFIG as Endpoints } from './routes';
 
-exports.downloadImage = async function (fileId, optimization) {
+export async function downloadImage(fileId, optimization) {
 
   let response;
 
   try {
 
-      let route = `${CONFIG.API_URL}${Endpoints.PROJECT.FILES.DOWNLOAD(fileId)}`;
+      let route = `${Config.apiUrl}${Endpoints.PROJECT.FILES.DOWNLOAD(fileId)}`;
 
       if (optimization)
       {
-          route = `${CONFIG.API_URL}${Endpoints.PROJECT.FILES.DOWNLOAD_OPTIMIZED(fileId, optimization)}`;
+          route = `${Config.apiUrl}${Endpoints.PROJECT.FILES.DOWNLOAD_OPTIMIZED(fileId, optimization)}`;
       }
       response = await server.loadText(route,
       {
           method: 'GET',
           headers: {
-              'X-CM-ProjectId': CONFIG.PROJECT_ID,
-              Authorization: `Bearer ${CONFIG.TOKEN}`,
+              'X-CM-ProjectId': Config.projectId,
+              Authorization: `Bearer ${Config.token}`,
               Accept: 'text/plain',      
           },
           body: null,
@@ -43,7 +43,7 @@ exports.downloadImage = async function (fileId, optimization) {
 
 }
 
-exports.uploadFile = async function(fileUri, collectionName, recordId, uniqueFieldName) {
+export async function uploadFile(fileUri, collectionName, recordId, uniqueFieldName) {
 
   let response;
 
@@ -68,12 +68,12 @@ exports.uploadFile = async function(fileUri, collectionName, recordId, uniqueFie
   
   
   try {
-      response = await fetch(`${CONFIG.API_URL}${Endpoints.PROJECT.DATABASE.COLLECTION.FILES.UPLOAD(collectionName)}`,
+      response = await fetch(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.FILES.UPLOAD(collectionName)}`,
       {
           method: 'POST',
           headers: {
-              'X-CM-ProjectId': CONFIG.PROJECT_ID,
-              Authorization: `Bearer ${CONFIG.TOKEN}`,
+              'X-CM-ProjectId': Config.projectId,
+              Authorization: `Bearer ${Config.token}`,
               'Content-Type': 'multipart/form-data',   
               'Accept': 'application/json',
           },
