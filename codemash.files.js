@@ -19,7 +19,7 @@ export async function downloadImage(fileId, optimization) {
           method: 'GET',
           headers: {
               'X-CM-ProjectId': Config.projectId,
-              Authorization: `Bearer ${Config.token}`,
+              Authorization: `Bearer ${Config.secretKey}`,
               Accept: 'text/plain',      
           },
           body: null,
@@ -73,7 +73,7 @@ export async function uploadFile(fileUri, collectionName, recordId, uniqueFieldN
           method: 'POST',
           headers: {
               'X-CM-ProjectId': Config.projectId,
-              Authorization: `Bearer ${Config.token}`,
+              Authorization: `Bearer ${Config.secretKey}`,
               'Content-Type': 'multipart/form-data',   
               'Accept': 'application/json',
           },

@@ -15,7 +15,7 @@ export async function saveUser(record) {
                 method: 'POST',
                 headers: {
                     'X-CM-ProjectId': Config.projectId,
-                    Authorization: `Bearer ${Config.token}`,
+                    Authorization: `Bearer ${Config.secretKey}`,
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
                 },
@@ -40,7 +40,7 @@ export async function saveUser(record) {
                 method: 'POST',
                 headers: {
                     'X-CM-ProjectId': Config.projectId,
-                    Authorization: `Bearer ${Config.token}`,
+                    Authorization: `Bearer ${Config.secretKey}`,
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
                 },
@@ -73,7 +73,7 @@ export async function getUser(userId) {
             method: 'GET',
             headers: {
                 'X-CM-ProjectId': Config.projectId,
-                Authorization: `Bearer ${Config.token}`,
+                Authorization: `Bearer ${Config.secretKey}`,
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
@@ -102,7 +102,7 @@ export async function deleteUser(userId) {
             method: 'DELETE',
             headers: {
                 'X-CM-ProjectId': Config.projectId,
-                Authorization: `Bearer ${Config.token}`,
+                Authorization: `Bearer ${Config.secretKey}`,
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
@@ -133,7 +133,7 @@ export async function resetPassword(email) {
             method: 'POST',
             headers: {
                 'X-CM-ProjectId': Config.projectId,
-                Authorization: `Bearer ${Config.token}`,
+                Authorization: `Bearer ${Config.secretKey}`,
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },

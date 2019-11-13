@@ -83,7 +83,7 @@ declare module 'codemash' {
         ): any;
     }
 
-    export namespace Config {
+    export namespace config {
         export function init(
             config: object
         ): any;

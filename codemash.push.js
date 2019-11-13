@@ -12,7 +12,7 @@ export async function registerNotificationToken(token, userId) {
             method: 'POST',
             headers: {
                 'X-CM-ProjectId': Config.projectId,
-                Authorization: `Bearer ${Config.token}`,
+                Authorization: `Bearer ${Config.secretKey}`,
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
@@ -42,7 +42,7 @@ export async function getNotifications(userId) {
             method: 'GET',
             headers: {
                 'X-CM-ProjectId': Config.projectId,
-                Authorization: `Bearer ${Config.token}`,
+                Authorization: `Bearer ${Config.secretKey}`,
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
@@ -71,7 +71,7 @@ export async function getNotification(id) {
             method: 'GET',
             headers: {
                 'X-CM-ProjectId': Config.projectId,
-                Authorization: `Bearer ${Config.token}`,
+                Authorization: `Bearer ${Config.secretKey}`,
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
@@ -100,7 +100,7 @@ export async function markNotificationAsRead(id, userId) {
             method: 'PATCH',
             headers: {
                 'X-CM-ProjectId': Config.projectId,
-                Authorization: `Bearer ${Config.token}`,
+                Authorization: `Bearer ${Config.secretKey}`,
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },

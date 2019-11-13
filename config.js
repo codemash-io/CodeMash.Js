@@ -4,7 +4,7 @@ class Config {
     }
 
     init(config){
-        this.token = config.token;
+        this.secretKey = config.secretKey;
         this.projectId = config.projectId;
         this.region = config.region;
         this.version = config.version;

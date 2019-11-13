@@ -28,7 +28,7 @@ export async function getRecords(collectionName, pageNumber, pageSize, sort, fil
             method: 'POST',
             headers: {
                 'X-CM-ProjectId': Config.projectId,
-                Authorization: `Bearer ${Config.token}`,
+                Authorization: `Bearer ${Config.secretKey}`,
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
@@ -65,7 +65,7 @@ export async function deleteRecord(collectionName, filter) {
             method: 'DELETE',
             headers: {
                 'X-CM-ProjectId': Config.projectId,
-                Authorization: `Bearer ${Config.token}`,
+                Authorization: `Bearer ${Config.secretKey}`,
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
@@ -96,7 +96,7 @@ export async function saveRecord(collectionName, document) {
             method: 'POST',
             headers: {
                 'X-CM-ProjectId': Config.projectId,
-                Authorization: `Bearer ${Config.token}`,
+                Authorization: `Bearer ${Config.secretKey}`,
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
@@ -129,7 +129,7 @@ export async function updateRecord(collectionName, filter, updateClause) {
             method: 'PATCH',
             headers: {
                 'X-CM-ProjectId': Config.projectId,
-                Authorization: `Bearer ${Config.token}`,
+                Authorization: `Bearer ${Config.secretKey}`,
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
@@ -164,7 +164,7 @@ export async function getRecord(collectionName, recordId) {
             method: 'GET',
             headers: {
                 'X-CM-ProjectId': Config.projectId,
-                Authorization: `Bearer ${Config.token}`,
+                Authorization: `Bearer ${Config.secretKey}`,
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
                 'Accept-Language': 'en'
