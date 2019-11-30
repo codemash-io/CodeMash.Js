@@ -184,3 +184,34 @@ export async function getRecord(collectionName, recordId) {
     let result = JSON.parse(response.result)
     return result;
 }
+
+export async function getTaxonomyTerms(taxonomyName) {
+
+    let response;
+
+    try {
+        response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.TAXONOMY.TERM.GET_ALL(taxonomyName)}`,
+        {
+            method: 'GET',
+            headers: {
+                'X-CM-ProjectId': Config.projectId,
+                Authorization: `Bearer ${Config.secretKey}`,
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: null,
+        });        
+    } catch(err) {
+
+        if (err instanceof server.HttpError && err.response.status == 404) {
+            // loop continues after the alert
+            alert("Such url not found.");
+        } else {
+            // unknown error, rethrow
+            throw err;
+        }
+    }
+    
+    let result = JSON.parse(response.result)
+    return result;
+}
