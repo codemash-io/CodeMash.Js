@@ -34,7 +34,7 @@ export const CONFIG = {
         NOTIFICATIONS: {
             PUSH: {
                 REGISTER_TOKEN: '/notifications/push/token/expo',
-                GET_ALL: '/notifications/push',
+                GET_ALL: (userId, pageNumber, pageSize) => `/notifications/push?userId=${userId}&pageSize=${pageSize}&pageNumber=${pageNumber}`,
                 GET: (id) => `/notifications/push/${id}`,
                 MARK_NOTIFICATION_AS_READ: (id) => `/notifications/push/${id}/read`,
                 SEND: '/notifications/push',

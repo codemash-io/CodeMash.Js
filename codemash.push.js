@@ -71,6 +71,7 @@ export async function sendPushNotification(templateId, users, devices, tokens, p
     return response;
 }
 
+// TODO : make it as POST and pass filter and sort parameters
 export async function getNotifications(userId, pageNumber, pageSize, filter, sort) {
     
     if (filter == null || filter == undefined)
@@ -85,7 +86,7 @@ export async function getNotifications(userId, pageNumber, pageSize, filter, sor
     
     let response;
     try {
-        response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET_ALL}`,
+        response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET_ALL(userId, pageNumber, pageSize)}`,
         {
             method: 'GET',
             headers: {
@@ -94,13 +95,7 @@ export async function getNotifications(userId, pageNumber, pageSize, filter, sor
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                userId: userId,
-                pageSize: pageSize || Config.tablePageSize,
-                pageNumber: pageNumber || 0,                
-                filter: filter,
-                sort: sort,
-            }),
+            body: null,
         });        
     } catch(err) {
         
