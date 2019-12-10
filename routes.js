@@ -12,7 +12,7 @@ export const CONFIG = {
                     UPDATE_PART_OF_DOCUMENT: (collectionName) => `/db/${collectionName}`,
                     UPDATE: (collectionName) => `/db/${collectionName}/replaceOne`,
                     GET: (collectionName, id) => `/db/${collectionName}/${id}`,
-                    GET_ALL: (collectionName) => `/db/${collectionName}/find`,
+                    GET_ALL: (collectionName) => `/v1/db/${collectionName}/find`,
                     DELETE: (collectionName) => `/db/${collectionName}`,
                 },
                 FILES: {
