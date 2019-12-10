@@ -49,13 +49,13 @@ export async function sendPushNotification(templateId, users, devices, tokens, p
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                "templateId": templateId,
-                "users": users || [],                
-                "devices": devices || [],
-                "tokens": tokens || null,
-                "postpone": postpone || false,
-                "respectTimeZone": respectTimeZone || true,
-                "isNonPushable": isNonPushable || false,
+                templateId: templateId,
+                users: users || [],                
+                devices: devices || [],
+                tokens: tokens || null,
+                postpone: postpone || false,
+                respectTimeZone: respectTimeZone || true,
+                isNonPushable: isNonPushable || false,
             }),
         });        
     } catch(err) {
@@ -71,10 +71,21 @@ export async function sendPushNotification(templateId, users, devices, tokens, p
     return response;
 }
 
-export async function getNotifications(userId) {
+export async function getNotifications(userId, pageNumber, pageSize, filter, sort) {
+    
+    if (filter == null || filter == undefined)
+    {
+        filter = ''
+    }
+    
+    if (sort == null || sort == undefined)
+    { 
+        sort = ''
+    }
+    
     let response;
     try {
-        response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET_ALL(userId)}`,
+        response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET_ALL}`,
         {
             method: 'GET',
             headers: {
@@ -83,7 +94,13 @@ export async function getNotifications(userId) {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: null,
+            body: JSON.stringify({
+                userId: userId,
+                pageSize: pageSize || Config.tablePageSize,
+                pageNumber: pageNumber || 0,                
+                filter: filter,
+                sort: sort,
+            }),
         });        
     } catch(err) {
         
@@ -95,7 +112,7 @@ export async function getNotifications(userId) {
             throw err;
         }
     }
-    return response;
+    return response.result;
 }
 
 export async function getNotification(id) {
