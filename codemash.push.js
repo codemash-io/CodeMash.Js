@@ -34,6 +34,43 @@ export async function registerNotificationToken(token, userId) {
     return response;
 }
 
+export async function sendPushNotification(templateId, users, devices, tokens, postpone, respectTimeZone, isNonPushable) {
+
+    let response;
+
+    try {
+        response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.SEND}`,
+        {
+            method: 'POST',
+            headers: {
+                'X-CM-ProjectId': Config.projectId,
+                Authorization: `Bearer ${Config.secretKey}`,
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "templateId": templateId,
+                "users": users || [],                
+                "devices": devices || [],
+                "tokens": tokens || null,
+                "postpone": postpone || false,
+                "respectTimeZone": respectTimeZone || true,
+                "isNonPushable": isNonPushable || false,
+            }),
+        });        
+    } catch(err) {
+
+        if (err instanceof server.HttpError && err.response.status == 404) {
+            // loop continues after the alert
+            alert("Such url not found.");
+        } else {
+            // unknown error, rethrow
+            throw err;
+        }
+    }
+    return response;
+}
+
 export async function getNotifications(userId) {
     let response;
     try {

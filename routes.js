@@ -37,7 +37,7 @@ export const CONFIG = {
                 GET_ALL: (id) => `/notifications/push?userId=${id}&pageSize=100&pageNumber=0`,
                 GET: (id) => `/notifications/push/${id}`,
                 MARK_NOTIFICATION_AS_READ: (id) => `/notifications/push/${id}/read`,
-                SAVE: '/notifications/push',
+                SEND: '/notifications/push',
             },
             EMAIL: {
                 BASE_URL: '/email',

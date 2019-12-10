@@ -29,6 +29,10 @@ declare module 'codemash' {
             collectionName:string,
             recordId: string
         ): any;
+
+        export function getTaxonomyTerms(
+            taxonomyName:string
+        ): any;
     }
 
     export namespace files {
@@ -54,6 +58,13 @@ declare module 'codemash' {
             userId:string,
         ): any;
 
+        export function getUsers(            
+            pageNumber: number, 
+            pageSize: number, 
+            filter: string, 
+            sort: string
+        ): any;
+
         export function deleteUser(
             userId:string,
         ): any;
@@ -69,6 +80,16 @@ declare module 'codemash' {
             userId: string
         ): any;
 
+        export function sendPushNotification(
+            templateId: string, 
+            users: Array, 
+            devices: Array, 
+            tokens: any, 
+            postpone: boolean, 
+            respectTimeZone: boolean, 
+            isNonPushable: boolean
+        ): any;
+        
         export function getNotifications(
             userId: string
         ): any;
