@@ -1,6 +1,6 @@
 {
   "name": "codemash",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "CodeMash tools for Node and javascript  developers. Access codemash.io tools from npm",
   "main": "index.js",
   "scripts": {
@@ -18,5 +18,5 @@
   "bugs": {
     "url": "https://github.com/codemash-io/CodeMash.Js/issues"
   },
-  "homepage": "https://github.com/codemash-io/CodeMash.Js#readme"
+  "homepage": "http://codemash.io"
 }

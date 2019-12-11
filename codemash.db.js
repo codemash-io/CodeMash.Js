@@ -20,197 +20,134 @@ export async function getRecords(collectionName, pageNumber, pageSize, sort, fil
         sort = ''
     }
 
-    let response;
-
-    try {
-        response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.GET_ALL(collectionName)}`,
-        {
-            method: 'POST',
-            headers: {
-                'X-CM-ProjectId': Config.projectId,
-                Authorization: `Bearer ${Config.secretKey}`,
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                "PageSize": pageSize || Config.tablePageSize,
-                "PageNumber": pageNumber || 0,
-                "projection" : projection,
-                "filter": filter,
-                "sort": sort,
-            }),
-        });        
-    } catch(err) {
-
-        if (err instanceof server.HttpError && err.response.status == 404) {
-            // loop continues after the alert
-            alert("Such url not found.");
-        } else {
-            // unknown error, rethrow
-            throw err;
-        }
-    }
-    
-    let result = JSON.parse(response.result)
+    let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.GET_ALL(collectionName)}`,
+    {
+        method: 'POST',
+        headers: {
+            'X-CM-ProjectId': Config.projectId,
+            Authorization: `Bearer ${Config.secretKey}`,
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            PageSize: pageSize || Config.tablePageSize,
+            PageNumber: pageNumber || 0,
+            projection : projection,
+            filter: filter,
+            sort: sort,
+        }),
+    });  
+        
+    let result = JSON.parse(response.result)    
     return result;
+
+    // try {
+        
+    // } catch(err) {
+
+    //     if (err instanceof server.HttpError && err.response.status == 404) {            
+    //         alert("Such url not found.");
+    //     } else {            
+    //         throw err;
+    //     }
+    // }
 }
 
 export async function deleteRecord(collectionName, filter) {
     
-    let response;
+    let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.DELETE(collectionName)}`,
+    {
+        method: 'DELETE',
+        headers: {
+            'X-CM-ProjectId': Config.projectId,
+            Authorization: `Bearer ${Config.secretKey}`,
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({"filter" : filter }),
+    });   
 
-    try {
-        response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.DELETE(collectionName)}`,
-        {
-            method: 'DELETE',
-            headers: {
-                'X-CM-ProjectId': Config.projectId,
-                Authorization: `Bearer ${Config.secretKey}`,
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({"filter" : filter }),
-        });   
-    } catch(err) {
-
-        console.log(err)
-
-        if (err instanceof server.HttpError && err.response.status == 404) {
-            // loop continues after the alert
-            alert("Such url not found.");
-        } else {
-            // unknown error, rethrow
-            throw err;
-        }
-    }
     return response.result.deletedCount > 0;
+    
 }
 
 
 export async function saveRecord(collectionName, document) {
     
-    let response;
-    try {
-        response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.CREATE(collectionName)}`,
-        {
-            method: 'POST',
-            headers: {
-                'X-CM-ProjectId': Config.projectId,
-                Authorization: `Bearer ${Config.secretKey}`,
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({document : JSON.stringify(document) }),
-        });        
-    } catch(err) {
+    let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.CREATE(collectionName)}`,
+    {
+        method: 'POST',
+        headers: {
+            'X-CM-ProjectId': Config.projectId,
+            Authorization: `Bearer ${Config.secretKey}`,
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({document : JSON.stringify(document) }),
+    });
 
-        console.log(err)
-
-        if (err instanceof server.HttpError && err.response.status == 404) {
-            // loop continues after the alert
-            alert("Such url not found.");
-        } else {
-            // unknown error, rethrow
-            throw err;
-        }
-    }
     let result = JSON.parse(response.result)
     return result;
+    
 }
 
 
 export async function updateRecord(collectionName, filter, updateClause) {
     
-    let response;
+    let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.UPDATE_PART_OF_DOCUMENT(collectionName)}`,
+    {
+        method: 'PATCH',
+        headers: {
+            'X-CM-ProjectId': Config.projectId,
+            Authorization: `Bearer ${Config.secretKey}`,
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+            {   
+                filter : JSON.stringify(filter),
+                update : JSON.stringify(updateClause)
+            }),
+    });  
     
-    try {
-        response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.UPDATE_PART_OF_DOCUMENT(collectionName)}`,
-        {
-            method: 'PATCH',
-            headers: {
-                'X-CM-ProjectId': Config.projectId,
-                Authorization: `Bearer ${Config.secretKey}`,
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(
-                {   
-                    filter : JSON.stringify(filter),
-                    update : JSON.stringify(updateClause)
-                }),
-        });        
-    } catch(err) {
-
-        console.log(err)
-
-        if (err instanceof server.HttpError && err.response.status == 404) {
-            // loop continues after the alert
-            alert("Such url not found.");
-        } else {
-            // unknown error, rethrow
-            throw err;
-        }
-    }
     let result = response.result;
     return result;
+    
 }
 
 export async function getRecord(collectionName, recordId) {
 
-    let response;
-    try {
-        response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.GET(collectionName, recordId)}`,
-        {
-            method: 'GET',
-            headers: {
-                'X-CM-ProjectId': Config.projectId,
-                Authorization: `Bearer ${Config.secretKey}`,
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                'Accept-Language': 'en'
-            },
-            body: null,
-        });        
-    } catch(err) {
-
-        if (err instanceof server.HttpError && err.response.status == 404) {
-            // loop continues after the alert
-            alert("Such url not found.");
-        } else {
-            // unknown error, rethrow
-            throw err;
-        }
-    }
+    let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.GET(collectionName, recordId)}`,
+    {
+        method: 'GET',
+        headers: {
+            'X-CM-ProjectId': Config.projectId,
+            Authorization: `Bearer ${Config.secretKey}`,
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'Accept-Language': 'en'
+        },
+        body: null,
+    });     
+    
     let result = JSON.parse(response.result)
     return result;
+    
 }
 
 export async function getTaxonomyTerms(taxonomyName) {
 
-    let response;
-
-    try {
-        response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.TAXONOMY.TERM.GET_ALL(taxonomyName)}`,
-        {
-            method: 'GET',
-            headers: {
-                'X-CM-ProjectId': Config.projectId,
-                Authorization: `Bearer ${Config.secretKey}`,
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: null,
-        });        
-    } catch(err) {
-
-        if (err instanceof server.HttpError && err.response.status == 404) {
-            // loop continues after the alert
-            alert("Such url not found.");
-        } else {
-            // unknown error, rethrow
-            throw err;
-        }
-    }
+    let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.TAXONOMY.TERM.GET_ALL(taxonomyName)}`,
+    {
+        method: 'GET',
+        headers: {
+            'X-CM-ProjectId': Config.projectId,
+            Authorization: `Bearer ${Config.secretKey}`,
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: null,
+    });
     
     let result = JSON.parse(response.result)
     return result;
