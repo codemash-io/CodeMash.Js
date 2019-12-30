@@ -40,7 +40,7 @@ db.getRecord('YOUR_COLLECTION_NAME', 'YOUR_RECORD_ID');
 db.getRecords('YOUR_COLLECTION_NAME', CURENT_PAGE, PAGE_SIZE);
 
 // Example:
-db.getRecords('YOUR_COLLECTION_NAME', 1, 20); // 1:ASC -1:DESC
+db.getRecords('YOUR_COLLECTION_NAME', 1, 20);
 ```
 
 #### Sort:
