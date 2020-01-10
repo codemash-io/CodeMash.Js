@@ -135,20 +135,25 @@ export async function getRecord(collectionName, recordId) {
     
 }
 
+// todo: empty filter is defined because of bug. Later 
+// is not necessary to define empty filter.
 export async function getTaxonomyTerms(taxonomyName) {
-
+    
     let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.TAXONOMY.TERM.GET_ALL(taxonomyName)}`,
     {
-        method: 'GET',
+        method: 'POST',
         headers: {
             'X-CM-ProjectId': Config.projectId,
             Authorization: `Bearer ${Config.secretKey}`,
             Accept: 'application/json',
             'Content-Type': 'application/json',
         },
-        body: null,
-    });
-    
-    let result = JSON.parse(response.result)
+        body: JSON.stringify({
+            "filter": {},
+            "cultureCode": "en",
+        }),
+    });    
+
+    let result = response.result;
     return result;
 }
