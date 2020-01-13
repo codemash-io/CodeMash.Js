@@ -1,6 +1,6 @@
 {
   "name": "codemash",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "CodeMash tools for Node and javascript  developers. Access codemash.io tools from npm",
   "main": "index.js",
   "scripts": {
