@@ -148,10 +148,7 @@ export async function getTaxonomyTerms(taxonomyName) {
             Accept: 'application/json',
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-            "filter": {},
-            "cultureCode": "en",
-        }),
+        body: null,
     });    
 
     let result = response.result;
