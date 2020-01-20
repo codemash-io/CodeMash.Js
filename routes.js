@@ -60,6 +60,9 @@ export const CONFIG = {
             DOWNLOAD_OPTIMIZED: (id, optimmization) => `/files?fileId=${id}&optimization=${optimmization}`,        
             UPLOAD: '/files'    
         },
+        CODE: {
+            EXECUTE: (id) => `/v1/serverless/functions/${id}/execute`   
+        },
     },
     API_KEYS: (env) => `/apikeys/${env}`, // /apikeys/{Environment}. There are 2 environments - "live" and "test". Key Types are "secret" and "publishable"
 };

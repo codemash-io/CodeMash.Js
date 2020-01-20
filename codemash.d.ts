@@ -103,6 +103,14 @@ declare module 'codemash' {
             userId: string
         ): any;
     }
+    
+    export namespace code {
+        export function executeFunction(
+            functionId:string,
+            data: string,
+            qualifier: string
+        ): any;
+    }
 
     export namespace config {
         export function init(
