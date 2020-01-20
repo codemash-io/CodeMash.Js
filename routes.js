@@ -61,6 +61,7 @@ export const CONFIG = {
             UPLOAD: '/files'    
         },
         CODE: {
+            BASE_URL: '/serverless',
             EXECUTE: (id) => `/v1/serverless/functions/${id}/execute`   
         },
     },
