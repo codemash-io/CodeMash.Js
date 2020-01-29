@@ -22,14 +22,20 @@ export async function registerNotificationToken(token, userId) {
     return response; 
 }
 
-export async function sendPushNotification(templateId, users, devices, tokens, postpone, respectTimeZone, isNonPushable) {
+// TODO, replace it later with object
+export async function sendPushNotification(templateId, users, senderApiKey, devices, tokens, postpone, respectTimeZone, isNonPushable) {
+
+    let apieKey = Config.secretKey;
+
+    if (senderApiKey)
+        apieKey = senderApiKey
 
     let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.SEND}`,
     {
         method: 'POST',
         headers: {
             'X-CM-ProjectId': Config.projectId,
-            Authorization: `Bearer ${Config.secretKey}`,
+            Authorization: `Bearer ${apieKey}`,
             Accept: 'application/json',
             'Content-Type': 'application/json',
         },

@@ -29,6 +29,12 @@ declare module 'codemash' {
             collectionName:string,
             recordId: string
         ): any;
+        
+        
+        export function getRecordWithFilter(
+            collectionName:string,
+            filter: any
+        ): any;
 
         export function getTaxonomyTerms(
             taxonomyName:string
@@ -83,6 +89,7 @@ declare module 'codemash' {
         export function sendPushNotification(
             templateId: string, 
             users: Array, 
+            senderApiKey: string,
             devices: Array, 
             tokens: any, 
             postpone: boolean, 

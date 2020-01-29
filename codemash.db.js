@@ -135,6 +135,27 @@ export async function getRecord(collectionName, recordId) {
     
 }
 
+export async function getRecordWithFilter(collectionName, filter) {
+
+    let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.GET_WITH_FILTER(collectionName)}`,
+    {
+        method: 'GET',
+        headers: {
+            'X-CM-ProjectId': Config.projectId,
+            Authorization: `Bearer ${Config.secretKey}`,
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'Accept-Language': 'en'
+        },
+        body: JSON.stringify({ filter : filter}),
+    });     
+    
+    let result = JSON.parse(response.result)
+    return result;
+    
+}
+
+
 // todo: empty filter is defined because of bug. Later 
 // is not necessary to define empty filter.
 export async function getTaxonomyTerms(taxonomyName) {
