@@ -139,7 +139,7 @@ export async function getRecordWithFilter(collectionName, filter) {
 
     let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.GET_WITH_FILTER(collectionName)}`,
     {
-        method: 'GET',
+        method: 'POST',
         headers: {
             'X-CM-ProjectId': Config.projectId,
             Authorization: `Bearer ${Config.secretKey}`,
@@ -147,7 +147,7 @@ export async function getRecordWithFilter(collectionName, filter) {
             'Content-Type': 'application/json',
             'Accept-Language': 'en'
         },
-        body: JSON.stringify({ filter : filter}),
+        body: JSON.stringify({ filter : JSON.stringify(filter)}),
     });     
     
     let result = JSON.parse(response.result)
