@@ -56,7 +56,7 @@ export async function getUsers(pageNumber, pageSize, filter, sort) {
     
     let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.GET_ALL}`,
     {
-        method: 'GET',
+        method: 'POST',
         headers: {
             'X-CM-ProjectId': Config.projectId,
             Authorization: `Bearer ${Config.secretKey}`,

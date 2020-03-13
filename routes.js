@@ -48,11 +48,12 @@ export const CONFIG = {
         MEMBERSHIP: {
             BASE_URL: '/membership',
             USERS: {
-                REGISTER: '/membership/users/register',
-                UPDATE: '/membership/users',
-                GET_ALL: '/membership/users',
-                GET: (id) => `/membership/users/${id}`,
-                RESET_PASSWORD: '/membership/users/password/reset/token'
+                REGISTER: '/v1/membership/users/register',
+                UPDATE: '/v1/membership/users',
+                GET_ALL: '/v1/membership/users',
+                GET: (id) => `/v1/membership/users/${id}?IncludeMeta=true`,
+                DELETE: (id) => `/v1/membership/users/${id}`,
+                RESET_PASSWORD: '/membership/users/password/reset'
             },
         },
         FILES: {
