@@ -9,7 +9,7 @@ Use the package manager [codemash](https://docs.codemash.io/get-started/install-
 npm install codemash
 ```
 ## Configuration
-```js
+```jshttps://docs.codemash.io/microservices/files-service/files-api
 import { config } from 'codemash';
 
 config.init({
