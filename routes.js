@@ -39,6 +39,7 @@ export const CONFIG = {
                 GET: (id) => `/notifications/push/${id}`,
                 MARK_NOTIFICATION_AS_READ: (id) => `/notifications/push/${id}/read`,
                 SEND: '/notifications/push',
+                DELETE_DEVICE_TOKEN: (id) => `/v1/notifications/push/devices/${id}/token`,
             },
             EMAIL: {
                 BASE_URL: '/email',
@@ -51,7 +52,7 @@ export const CONFIG = {
                 REGISTER: '/v1/membership/users/register',
                 UPDATE: '/v1/membership/users',
                 GET_ALL: '/v1/membership/users',
-                GET: (id) => `/v1/membership/users/${id}?IncludeMeta=true`,
+                GET: (id) => `/v1/membership/users/${id}?IncludeMeta=true&IncludeDevices=true`,
                 DELETE: (id) => `/v1/membership/users/${id}`,
                 RESET_PASSWORD: '/membership/users/password/reset'
             },

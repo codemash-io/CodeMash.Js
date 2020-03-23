@@ -22,6 +22,25 @@ export async function registerNotificationToken(token, userId) {
     return response; 
 }
 
+export async function deleteDeviceToken(deviceId) {
+
+    let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.DELETE_DEVICE_TOKEN(deviceId)}`,
+    {
+        method: 'DELETE',
+        headers: {
+            'X-CM-ProjectId': Config.projectId,
+            Authorization: `Bearer ${Config.secretKey}`,
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: null
+    });
+
+    return response; 
+}
+
+
+
 // TODO, replace it later with object
 export async function sendPushNotification(templateId, users, senderApiKey, devices, tokens, postpone, respectTimeZone, isNonPushable) {
 
