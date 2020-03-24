@@ -40,6 +40,7 @@ export const CONFIG = {
                 MARK_NOTIFICATION_AS_READ: (id) => `/notifications/push/${id}/read`,
                 SEND: '/notifications/push',
                 DELETE_DEVICE_TOKEN: (id) => `/v1/notifications/push/devices/${id}/token`,
+                DELETE_DEVICE:(id) => `/v1/notifications/push/devices/${id}`,
             },
             EMAIL: {
                 BASE_URL: '/email',

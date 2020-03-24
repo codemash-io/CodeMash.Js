@@ -86,6 +86,14 @@ declare module 'codemash' {
             userId: string
         ): any;
 
+        export function deleteDeviceToken(
+            deviceId:string
+        ): any;
+
+        export function deleteDevice(
+            deviceId:string
+        ): any;
+
         export function sendPushNotification(
             templateId: string, 
             users: Array, 
