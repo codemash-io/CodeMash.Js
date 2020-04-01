@@ -3,7 +3,7 @@ import Config from './config';
 import { CONFIG as Endpoints } from './routes';
 
 
-export async function getRecords(collectionName, pageNumber, pageSize, sort, filter, projection) {
+export async function getRecords(collectionName, pageNumber, pageSize, sort, filter, projection, referencedFields) {
     
     if (projection == null || projection == undefined)
     {
@@ -35,6 +35,7 @@ export async function getRecords(collectionName, pageNumber, pageSize, sort, fil
             projection : projection,
             filter: filter,
             sort: sort,
+            referencedFields: referencedFields
         }),
     });  
         

@@ -6,7 +6,8 @@ declare module 'codemash' {
             pageSize?: number,
             sort?: string,
             filter?:string,
-            projection?: any
+            projection?: any,
+            referencedFields? : string
         ): any;
 
         export function deleteRecord(
@@ -33,7 +34,8 @@ declare module 'codemash' {
         
         export function getRecordWithFilter(
             collectionName:string,
-            filter: any
+            filter: any,
+            referencedFields? : string
         ): any;
 
         export function getTaxonomyTerms(
