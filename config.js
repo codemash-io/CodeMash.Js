@@ -17,6 +17,7 @@ class Config {
         }
 
         this.loginUrl = `${this.apiUrl}/auth/aad?projectId=${config.projectId}${modeParameter}`;
+        this.logoutUrl = `${this.apiUrl}/auth/logout?projectId=${config.projectId}${modeParameter}`;
         this.baseFilePath = `https://cm-${config.projectId}.s3.eu-central-1.amazonaws.com`;
     }
 }
