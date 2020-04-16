@@ -119,6 +119,10 @@ declare module 'codemash' {
             id: string,
             userId: string
         ): any;
+        
+        export function markNotificationsAsRead(
+            userId: string
+        ): any;
     }
     
     export namespace code {

@@ -147,5 +147,24 @@ export async function markNotificationAsRead(id, userId) {
             }),
     });
     return response;
+}
+
+export async function markNotificationsAsRead(userId) {
+
+    let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.MARK_NOTIFICATIONS_AS_READ}`,
+    {
+        method: 'PATCH',
+        headers: {
+            'X-CM-ProjectId': Config.projectId,
+            Authorization: `Bearer ${Config.secretKey}`,
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+            {
+                userId : userId,
+            }),
+    });
     
+    return response;
 }
