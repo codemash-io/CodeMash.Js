@@ -38,7 +38,7 @@ export const CONFIG = {
                 GET_ALL: (userId, pageNumber, pageSize) => `/notifications/push?userId=${userId}&pageSize=${pageSize}&pageNumber=${pageNumber}`,
                 GET: (id) => `/notifications/push/${id}`,
                 MARK_NOTIFICATION_AS_READ: (id) => `/notifications/push/${id}/read`,
-                MARK_NOTIFICATIONS_AS_READ: 'notifications/push/read',
+                MARK_NOTIFICATIONS_AS_READ: '/notifications/push/read',
                 SEND: '/notifications/push',
                 DELETE_DEVICE_TOKEN: (id) => `/v1/notifications/push/devices/${id}/token`,
                 DELETE_DEVICE:(id) => `/v1/notifications/push/devices/${id}`,
