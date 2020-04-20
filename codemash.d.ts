@@ -55,6 +55,13 @@ declare module 'codemash' {
             recordId: string,
             uniqueFieldName: string
         ): any;
+
+        export function uploadBase64File(
+            base64File:Object,
+            collectionName: string,
+            recordId: string,
+            uniqueFieldName: string
+        ): any;
     }
 
     export namespace iam {
