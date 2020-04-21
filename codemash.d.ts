@@ -130,6 +130,10 @@ declare module 'codemash' {
         export function markNotificationsAsRead(
             userId: string
         ): any;
+
+        export function GetNotificationsCount(
+            userId: string
+        ): any;
     }
     
     export namespace code {

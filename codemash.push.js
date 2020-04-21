@@ -168,3 +168,19 @@ export async function markNotificationsAsRead(userId) {
     
     return response;
 }
+
+export async function GetNotificationsCount(userId) {
+
+    let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET_NOTIFICATIONS_COUNT(userId)}`,
+        {
+            method: 'GET',
+            headers: {
+                'X-CM-ProjectId': Config.projectId,
+                Authorization: `Bearer ${Config.secretKey}`,
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: null,
+        });      
+    return response;
+}
