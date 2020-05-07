@@ -9,59 +9,81 @@ Use the package manager [codemash](https://docs.codemash.io/get-started/install-
 npm install codemash
 ```
 ## Configuration
-```jshttps://docs.codemash.io/microservices/files-service/files-api
+```js
 import { config } from 'codemash';
 
 config.init({
-  projectId: 'YOUR_PROJECT_ID',
-  secretKey: 'YOUR_SECRET_KEY',
-});
+      secretKey: '<YOUR_SECRET_KEY>',
+      projectId: '<YOUR_PROJECT_ID>'
+    }, process.env.NODE_ENV)
 ```
 
 See full documentation [here](https://docs.codemash.io/get-started/set-up-api-keys#storing-tokens)
 
 ## Database Module
 
-### Usage:
-```js
-import { db } from 'codemash';
-```
-
 ### Get Data:
 ```js
-db.getRecords('YOUR_COLLECTION_NAME');
+import { db } from 'codemash';
+
+// gets all first 100 employees 
+export async function getEmployees() {
+    return await db.getRecords('emplpyees', 0, 100);
+}
+
+// gets all first 100 active employees
+// get only first name and last name - projection
+// sort out by created on date in DESC order. 
+export async function getActiveEmployees() {    
+
+    const filter = JSON.stringify({ 'is_active': true });
+    
+    const response = 
+        await db.getRecords('employees', 0, 100,
+        { first_name: 1, last_name: 1 }, 
+        filter, 
+        { created_on: -1 });  
+              
+    return response;
+}
+
 ```
-
-See full documentation [here](https://docs.codemash.io/microservices/database/collections-api/find)
-
 
 #### Pagination (by default page size is set to 10):
 ```js
-db.getRecords('YOUR_COLLECTION_NAME', CURENT_PAGE, PAGE_SIZE);
-
-// Example:
-db.getRecords('YOUR_COLLECTION_NAME', 1, 20);
+await db.getRecords('employees', 0, 100);
 ```
 
 #### Sort:
 ```js
-db.getRecords('YOUR_COLLECTION_NAME', null, null, SORTER);
-
-// Example:
-db.getRecords('YOUR_COLLECTION_NAME', null, null, { PROPERTY_TO_SORT: 1 }); // 1:ASC -1:DESC
+await db.getRecords('employees', 0, 100, { created_on: -1 });
 ```
 
 #### Filter:
 ```js
-db.getRecords('YOUR_COLLECTION_NAME', null, null, null, FILTER);
-
-// Example:
-db.getRecords('YOUR_COLLECTION_NAME', null, null, null, { PROPERTY_TO_FILTER: { $eq: `'${FILTER_VALUE}'` } });
+const filter = JSON.stringify({ 'is_active': true });
+await db.getRecords('employees', 0, 100, { created_on: -1 }, filter);
 ```
+
+See full documentation [here](https://docs.codemash.io/microservices/database/collections-api/find)
 
 #### Get One Record:
 ```js
-db.getRecord('YOUR_COLLECTION_NAME', 'YOUR_RECORD_ID');
+import { db } from 'codemash';
+
+// gets employee by id
+export async function getEmployeeDetails(id) {
+    const response = await db.getRecord('employees', id);
+    return response;
+}
+
+// gets employee by custom filter
+export async function getEmployeeByUserId(id) {    
+    
+    const filter = { userId : id };    
+    return await db.getRecordWithFilter(collectionName, filter, null);
+}
+
 ```
 See full documentation [here](https://docs.codemash.io/microservices/database/collections-api/find-one)
 
@@ -69,42 +91,70 @@ See full documentation [here](https://docs.codemash.io/microservices/database/co
 
 ### Save Data:
 ```js
-db.saveRecord('YOUR_COLLECTION_NAME', YOUR_OBJECT_TO_SAVE);
+import { db } from 'codemash';
 
-// Example:
-db.saveRecord('YOUR_COLLECTION_NAME', {
-   name: 'John',
-   age: 37,
-   birthday: 1577742140460,
-   isApproved: true
-});
+const request = {
+    start: '1588855312059', // Unix time stamp in miliseconds
+    end: '1588855340191', // Unix time stamp in miliseconds
+    employee: 'some_user_id',
+    type: 'paid',
+};
+
+export async function saveHolidaysRequest(request) {
+    const response = await db.saveRecord('holidays', request);
+    return response;
+}
 ```
 
 See full documentation [here](https://docs.codemash.io/microservices/database/collections-api/insert)
 
+### Replace Data:
+```js
+import { db } from 'codemash';
+
+export async function replaceEmployeeInformation(id, employee) {
+    return await db.replaceRecord('employees', { _id: id }, employee);
+}
+```
 ### Update Data:
 ```js
-db.updateRecord('YOUR_COLLECTION_NAME', FILTER, UPDATE_CLAUSE);
+import { db } from 'codemash';
 
-// Example:
-db.updateRecord( 'YOUR_COLLECTION_NAME',
-  { _id: 'RECORD_TO_UPDATE_ID' },
-  { $set: { name: 'Mike', age: 77 } },
-);
+export async function activateEmployee(id) {
+
+    return await db.updateRecord('employees', 
+        { _id: id }, 
+        { $set: { 'is_active' : 1 }});
+}
+
 ```
+
 See full documentation [here](https://docs.codemash.io/microservices/database/collections-api/update)
 
 ### Delete Data:
 ```js
-db.deleteRecord('YOUR_COLLECTION_NAME', FILTER);
+import { db } from 'codemash';
 
-// Example:
-db.deleteRecord('YOUR_COLLECTION_NAME', { _id: `'${RECORD_TO_DELETE_ID}'` });
+export async function deleteEmployee(id) {
+    return await db.deleteRecord('employees', { _id: id });
+}
 ```
 
 See full documentation [here](https://docs.codemash.io/microservices/database/collections-api/delete)
 
-## TODO Taxonomy terms:
+## Get Taxonomy terms:
+
+```js
+import { db } from 'codemash';
+
+export async function getCountries() {
+    return await db.getTaxonomyTerms('countries');
+}
+
+export async function getCities() {
+    return await db.getTaxonomyTerms('cities');
+}
+```
 
 Documentation about Terms module you can find [here]()
 https://docs.codemash.io/microservices/database/taxonomies
