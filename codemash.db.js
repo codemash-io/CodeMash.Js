@@ -176,3 +176,21 @@ export async function getTaxonomyTerms(taxonomyName) {
     let result = response.result;
     return result;
 }
+
+export async function executeAggregate(collectionName, id) {
+    
+    let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.AGGREGATES.GET(collectionName, id)}`,
+    {
+        method: 'GET',
+        headers: {
+            'X-CM-ProjectId': Config.projectId,
+            Authorization: `Bearer ${Config.secretKey}`,
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: null,
+    });    
+
+    let result = response.result;
+    return result;
+}

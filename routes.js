@@ -19,6 +19,9 @@ export const CONFIG = {
                 FILES: {
                     UPLOAD: (collectionName) => `/db/${collectionName}/files`,
                 },
+                AGGREGATES:{
+                    GET: (collectionName, id) => `/db/${collectionName}/aggregate/${id}`,
+                }
             },
             TAXONOMY: {
                 GET_ALL: '/db/taxonomies',
