@@ -6,72 +6,72 @@ export const CONFIG = {
     PROJECT: {
         DATABASE: {
             COLLECTION: {
-                GET: (collectionName) => `/db/schemas/${collectionName}`,
+                GET: (collectionName) => `/v2/db/schemas/${collectionName}`,
                 RECORD: {
-                    CREATE: (collectionName) => `/db/${collectionName}`,
-                    UPDATE_PART_OF_DOCUMENT: (collectionName) => `/db/${collectionName}`,
-                    UPDATE: (collectionName) => `/db/${collectionName}/replaceOne`,
-                    GET: (collectionName, id) => `/db/${collectionName}/${id}`,
-                    GET_WITH_FILTER: (collectionName) => `/v1/db/${collectionName}/findOne`,
-                    GET_ALL: (collectionName) => `/v1/db/${collectionName}/find`,
-                    DELETE: (collectionName) => `/db/${collectionName}`,
+                    CREATE: (collectionName) => `/v2/db/${collectionName}`,
+                    UPDATE_PART_OF_DOCUMENT: (collectionName) => `/v2/db/${collectionName}`,
+                    UPDATE: (collectionName) => `/v2/db/${collectionName}/replaceOne`,
+                    GET: (collectionName, id) => `/v2/db/${collectionName}/${id}`,
+                    GET_WITH_FILTER: (collectionName) => `/v2/db/${collectionName}/findOne`,
+                    GET_ALL: (collectionName) => `/v2/db/${collectionName}/find`,
+                    DELETE: (collectionName) => `/v2/db/${collectionName}`,
                 },
                 FILES: {
-                    UPLOAD: (collectionName) => `/db/${collectionName}/files`,
+                    UPLOAD: (collectionName) => `/v2/db/${collectionName}/files`,
                 },
                 AGGREGATES:{
-                    GET: (collectionName, id) => `/db/${collectionName}/aggregate/${id}`,
+                    GET: (collectionName, id) => `/v2/db/${collectionName}/aggregate/${id}`,
                 }
             },
             TAXONOMY: {
-                GET_ALL: '/db/taxonomies',
-                GET: (taxonomyName) => `/db/taxonomies/${taxonomyName}`,
+                GET_ALL: '/v2/db/taxonomies',
+                GET: (taxonomyName) => `/v2/db/taxonomies/${taxonomyName}`,
                 TERM: {
-                    GET: (id) => `/db/terms/${id}`,
-                    GET_ALL: (taxonomyName) => `/db/taxonomies/${taxonomyName}/terms`,
+                    GET: (id) => `/v2/db/terms/${id}`,
+                    GET_ALL: (taxonomyName) => `/v2/db/taxonomies/${taxonomyName}/terms`,
                 },
                 SYSTEM: {
-                    GET_TERMS: (taxonomyName) => `/taxonomies/${taxonomyName}/terms`,
+                    GET_TERMS: (taxonomyName) => `/v2/taxonomies/${taxonomyName}/terms`,
                 },
             },
         },
         NOTIFICATIONS: {
             PUSH: {
-                REGISTER_TOKEN: '/notifications/push/token/expo',
-                GET_ALL: (userId, pageNumber, pageSize) => `/notifications/push?userId=${userId}&pageSize=${pageSize}&pageNumber=${pageNumber}`,
-                GET: (id) => `/notifications/push/${id}`,
-                MARK_NOTIFICATION_AS_READ: (id) => `/notifications/push/${id}/read`,
-                MARK_NOTIFICATIONS_AS_READ: '/notifications/push/read',
-                GET_NOTIFICATIONS_COUNT: (userId) => `/notifications/push/count?userId=${userId}`,
-                SEND: '/notifications/push',
-                DELETE_DEVICE_TOKEN: (id) => `/v1/notifications/push/devices/${id}/token`,
-                DELETE_DEVICE:(id) => `/v1/notifications/push/devices/${id}`,
+                REGISTER_TOKEN: '/v2/notifications/push/token/expo',
+                GET_ALL: (userId, pageNumber, pageSize) => `/v2/notifications/push?userId=${userId}&pageSize=${pageSize}&pageNumber=${pageNumber}`,
+                GET: (id) => `/v2/notifications/push/${id}`,
+                MARK_NOTIFICATION_AS_READ: (id) => `/v2/notifications/push/${id}/read`,
+                MARK_NOTIFICATIONS_AS_READ: '/v2/notifications/push/read',
+                GET_NOTIFICATIONS_COUNT: (userId) => `/v2/notifications/push/count?userId=${userId}`,
+                SEND: '/v2/notifications/push',
+                DELETE_DEVICE_TOKEN: (id) => `/v2/notifications/push/devices/${id}/token`,
+                DELETE_DEVICE:(id) => `/v2/notifications/push/devices/${id}`,
             },
             EMAIL: {
-                BASE_URL: '/email',
-                SEND_EMAIL: '/email/send',
+                BASE_URL: '/v2/notifications/email',
+                SEND_EMAIL: '/v2/notifications/email',
             },
         },
         MEMBERSHIP: {
-            BASE_URL: '/membership',
+            BASE_URL: '/v2/membership',
             USERS: {
-                REGISTER: '/v1/membership/users/register',
-                UPDATE: '/v1/membership/users',
-                GET_ALL: '/v1/membership/users',
-                GET: (id) => `/v1/membership/users/${id}?IncludeMeta=true&IncludeDevices=true`,
-                DELETE: (id) => `/v1/membership/users/${id}`,
-                RESET_PASSWORD: '/membership/users/password/reset'
+                REGISTER: '/v2/membership/users/register',
+                UPDATE: '/v2/membership/users',
+                GET_ALL: '/v2/membership/users',
+                GET: (id) => `/v2/membership/users/${id}?IncludeMeta=true&IncludeDevices=true`,
+                DELETE: (id) => `/v2/membership/users/${id}`,
+                RESET_PASSWORD: '/v2/membership/users/password/reset'
             },
         },
         FILES: {
-            BASE_URL: '/files',
-            DOWNLOAD: (id) => `/files?fileId=${id}`,        
-            DOWNLOAD_OPTIMIZED: (id, optimmization) => `/files?fileId=${id}&optimization=${optimmization}`,        
-            UPLOAD: '/files'    
+            BASE_URL: '/v2/files',
+            DOWNLOAD: (id) => `/v2/files?fileId=${id}`,        
+            DOWNLOAD_OPTIMIZED: (id, optimmization) => `/v2/files?fileId=${id}&optimization=${optimmization}`,        
+            UPLOAD: '/v2/files'    
         },
         CODE: {
-            BASE_URL: '/serverless',
-            EXECUTE: (id) => `/v1/serverless/functions/${id}/execute`   
+            BASE_URL: '/v2/serverless',
+            EXECUTE: (id) => `/v2/serverless/functions/${id}/execute`   
         },
     },
     API_KEYS: (env) => `/apikeys/${env}`, // /apikeys/{Environment}. There are 2 environments - "live" and "test". Key Types are "secret" and "publishable"

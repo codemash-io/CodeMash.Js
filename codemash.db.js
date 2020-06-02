@@ -3,7 +3,7 @@ import Config from './config';
 import { CONFIG as Endpoints } from './routes';
 
 
-export async function getRecords(collectionName, pageNumber, pageSize, sort, filter, projection, referencedFields) {
+export async function getRecords(collectionName, pageNumber, pageSize, sort, filter, projection, referencedFields, language) {
     
     if (projection == null || projection == undefined)
     {
@@ -28,6 +28,7 @@ export async function getRecords(collectionName, pageNumber, pageSize, sort, fil
             Authorization: `Bearer ${Config.secretKey}`,
             Accept: 'application/json',
             'Content-Type': 'application/json',
+            'Accept-Language': language || 'en'
         },
         body: JSON.stringify({
             PageSize: pageSize || Config.tablePageSize,
@@ -116,7 +117,7 @@ export async function updateRecord(collectionName, filter, updateClause) {
     
 }
 
-export async function getRecord(collectionName, recordId) {
+export async function getRecord(collectionName, recordId, language) {
 
     let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.GET(collectionName, recordId)}`,
     {
@@ -126,7 +127,7 @@ export async function getRecord(collectionName, recordId) {
             Authorization: `Bearer ${Config.secretKey}`,
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            'Accept-Language': 'en'
+            'Accept-Language': language || 'en'
         },
         body: null,
     });     
@@ -136,7 +137,7 @@ export async function getRecord(collectionName, recordId) {
     
 }
 
-export async function getRecordWithFilter(collectionName, filter, referencedFields) {
+export async function getRecordWithFilter(collectionName, filter, referencedFields, language) {
 
     let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.GET_WITH_FILTER(collectionName)}`,
     {
@@ -146,7 +147,7 @@ export async function getRecordWithFilter(collectionName, filter, referencedFiel
             Authorization: `Bearer ${Config.secretKey}`,
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            'Accept-Language': 'en'
+            'Accept-Language': language || 'en'
         },
         body: JSON.stringify({ filter : JSON.stringify(filter), referencedFields : referencedFields}),
     });     
@@ -159,7 +160,7 @@ export async function getRecordWithFilter(collectionName, filter, referencedFiel
 
 // todo: empty filter is defined because of bug. Later 
 // is not necessary to define empty filter.
-export async function getTaxonomyTerms(taxonomyName) {
+export async function getTaxonomyTerms(taxonomyName, language) {
     
     let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.TAXONOMY.TERM.GET_ALL(taxonomyName)}`,
     {
@@ -169,6 +170,7 @@ export async function getTaxonomyTerms(taxonomyName) {
             Authorization: `Bearer ${Config.secretKey}`,
             Accept: 'application/json',
             'Content-Type': 'application/json',
+            'Accept-Language': language || 'en'
         },
         body: null,
     });    
