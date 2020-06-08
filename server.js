@@ -24,6 +24,25 @@ export class HttpError extends Error {
     }
 }
 
+export class UnAuthorizedError extends Error {
+  constructor(response) {
+    super('UnAuthorized exception'); 
+    this.errorMessage = response.responseStatus.message;
+    this.errorCode = response.responseStatus.errorCode;    
+    this.errorTranslationKey = 'iam.unauthorizedAcess';
+
+    if (this.errorCode == "ResourceNotFound"){
+      this.errorMessage = "Such user doesn't exist";
+      this.errorTranslationKey = 'iam.noUser';
+    }
+
+    if (this.errorCode == "Unauthorized"){
+      this.errorTranslationKey = 'iam.invalidUserNameOrPassword';
+    }
+
+  }
+}
+
 export async function loadText(url, requestInfo, mimeType = 'image/png') {
     let response = await fetch(url, requestInfo);
     if (response.status == 200) {
@@ -41,11 +60,14 @@ export async function loadText(url, requestInfo, mimeType = 'image/png') {
 
 
 export async function loadJson(url, requestInfo) {
-    let response = await fetch(url, requestInfo);
+  let response = await fetch(url, requestInfo);
 
-    if (response.status >=200 && response.status < 300){      
-      return response.json();
-    } else {
-      throw new HttpError(response);
-    }
+  if (response.status >=200 && response.status < 300){      
+    return response.json();
+  } else if (response.status >=400 && response.status < 500) {
+    const ex = await response.json();
+    throw new UnAuthorizedError(ex);
+  } else {
+    throw new HttpError(response);
+  }
 }
