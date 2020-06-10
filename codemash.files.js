@@ -2,7 +2,7 @@ import * as server from './server';
 import Config from './config';
 import { CONFIG as Endpoints } from './routes';
 
-export async function downloadImage(fileId, optimization) {
+export async function downloadImage({fileId, optimization}) {
 
   let route = `${Config.apiUrl}${Endpoints.PROJECT.FILES.DOWNLOAD(fileId)}`;
 
@@ -27,7 +27,7 @@ export async function downloadImage(fileId, optimization) {
   return result;
 }
 
-export async function uploadFile(fileUri, collectionName, recordId, uniqueFieldName) {
+export async function uploadFile({fileUri, collectionName, recordId, uniqueFieldName}) {
 
   const formData = new FormData();
 
@@ -63,7 +63,7 @@ export async function uploadFile(fileUri, collectionName, recordId, uniqueFieldN
   return response;
 }
 
-export async function uploadBase64File(base64File, collectionName, recordId, uniqueFieldName) {
+export async function uploadBase64File({base64File, collectionName, recordId, uniqueFieldName}) {
 
   let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.FILES.UPLOAD(collectionName)}`,
     {

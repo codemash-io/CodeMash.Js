@@ -2,7 +2,7 @@ import * as server from './server';
 import Config from './config';
 import { CONFIG as Endpoints } from './routes';
 
-export async function register(email, password, displayName = null, firstName = null, lastName = null) {
+export async function register({email, password, displayName = null, firstName = null, lastName = null, autoLogin = true}) {
     
     let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.REGISTER}`,
     {
@@ -19,7 +19,7 @@ export async function register(email, password, displayName = null, firstName = 
             displayName,
             firstName,
             lastName,
-            autoLogin: false,
+            autoLogin
         }),
     });   
     return response;
@@ -42,7 +42,7 @@ export async function updateUser(record) {
     return response; 
 }
 
-export async function getUsers(pageNumber, pageSize, filter, sort) {
+export async function getUsers({pageNumber, pageSize, filter, sort}) {
 
     if (filter == null || filter == undefined)
     {
@@ -123,7 +123,7 @@ export async function resetPassword(email) {
     return response.result;
 }
 
-export async function login(username, password) {
+export async function login({username, password}) {
     
     let response = await server.loadJson(`${Config.apiUrl}${Endpoints.ACCOUNT.LOGIN(username, password)}`,
     {
@@ -135,5 +135,5 @@ export async function login(username, password) {
             'Content-Type': 'application/json',
         }
     });        
-    return response;
+    return response.result;
 }

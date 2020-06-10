@@ -56,7 +56,7 @@ export async function deleteDevice(deviceId) {
 }
 
 // TODO, replace it later with object
-export async function sendPushNotification(templateId, users, senderApiKey, devices, tokens, postpone, respectTimeZone, isNonPushable) {
+export async function sendPushNotification({templateId, users, senderApiKey, devices, tokens, postpone, respectTimeZone, isNonPushable}) {
 
     let apieKey = Config.secretKey;
 
@@ -87,7 +87,7 @@ export async function sendPushNotification(templateId, users, senderApiKey, devi
 }
 
 // TODO : make it as POST and pass filter and sort parameters
-export async function getNotifications(userId, pageNumber, pageSize, filter, sort) {
+export async function getNotifications({userId, pageNumber, pageSize, filter, sort}) {
     
     if (filter == null || filter == undefined)
     {

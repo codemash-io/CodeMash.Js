@@ -2,7 +2,7 @@ import * as server from './server';
 import Config from './config';
 import { CONFIG as Endpoints } from './routes';
 
-export async function executeFunction(functionId, data, qualifier) {
+export async function executeFunction({functionId, data, qualifier}) {
     
     let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.CODE.EXECUTE(functionId)}`,
     {

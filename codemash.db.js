@@ -3,7 +3,7 @@ import Config from './config';
 import { CONFIG as Endpoints } from './routes';
 
 
-export async function getRecords(collectionName, pageNumber, pageSize, sort, filter, projection, referencedFields, language) {
+export async function getRecords({collectionName, pageNumber, pageSize, sort, filter, projection, referencedFields, language}) {
     
     if (projection == null || projection == undefined)
     {
@@ -42,20 +42,9 @@ export async function getRecords(collectionName, pageNumber, pageSize, sort, fil
         
     let result = JSON.parse(response.result)    
     return result;
-
-    // try {
-        
-    // } catch(err) {
-
-    //     if (err instanceof server.HttpError && err.response.status == 404) {            
-    //         alert("Such url not found.");
-    //     } else {            
-    //         throw err;
-    //     }
-    // }
 }
 
-export async function deleteRecord(collectionName, filter) {
+export async function deleteRecord({collectionName, filter}) {
     
     let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.DELETE(collectionName)}`,
     {
@@ -74,7 +63,7 @@ export async function deleteRecord(collectionName, filter) {
 }
 
 
-export async function saveRecord(collectionName, document) {
+export async function saveRecord({collectionName, document}) {
     
     let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.CREATE(collectionName)}`,
     {
@@ -94,7 +83,7 @@ export async function saveRecord(collectionName, document) {
 }
 
 
-export async function updateRecord(collectionName, filter, updateClause) {
+export async function updateRecord({collectionName, filter, updateClause}) {
     
     let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.UPDATE_PART_OF_DOCUMENT(collectionName)}`,
     {
@@ -117,7 +106,7 @@ export async function updateRecord(collectionName, filter, updateClause) {
     
 }
 
-export async function getRecord(collectionName, recordId, language) {
+export async function getRecord({collectionName, recordId, language}) {
 
     let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.GET(collectionName, recordId)}`,
     {
@@ -137,7 +126,7 @@ export async function getRecord(collectionName, recordId, language) {
     
 }
 
-export async function getRecordWithFilter(collectionName, filter, referencedFields, language) {
+export async function getRecordWithFilter({collectionName, filter, referencedFields, language}) {
 
     let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.GET_WITH_FILTER(collectionName)}`,
     {
@@ -160,7 +149,7 @@ export async function getRecordWithFilter(collectionName, filter, referencedFiel
 
 // todo: empty filter is defined because of bug. Later 
 // is not necessary to define empty filter.
-export async function getTaxonomyTerms(taxonomyName, language) {
+export async function getTaxonomyTerms({taxonomyName, language}) {
     
     let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.TAXONOMY.TERM.GET_ALL(taxonomyName)}`,
     {
@@ -179,7 +168,7 @@ export async function getTaxonomyTerms(taxonomyName, language) {
     return result;
 }
 
-export async function executeAggregate(collectionName, id) {
+export async function executeAggregate({collectionName, id}) {
     
     let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.AGGREGATES.GET(collectionName, id)}`,
     {
