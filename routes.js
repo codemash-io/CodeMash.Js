@@ -49,7 +49,7 @@ export const CONFIG = {
             },
             EMAIL: {
                 BASE_URL: '/v2/notifications/email',
-                SEND_EMAIL: '/v2/notifications/email',
+                SEND: '/v2/notifications/email',
             },
         },
         MEMBERSHIP: {
@@ -72,6 +72,17 @@ export const CONFIG = {
         CODE: {
             BASE_URL: '/v2/serverless',
             EXECUTE: (id) => `/v2/serverless/functions/${id}/execute`   
+        },
+        PAYMENTS: {
+            BASE_URL: '/v2/payments',
+            ORDERS: {
+                GET: (orderId) => `/v2/payments/orders/${orderId}`,
+                GET_ALL: '/v2/payments/orders',
+                CREATE: '/v2/payments/orders'
+            },
+            TRANSACTIONS: {
+                CREATE_PAYSERA: (orderId) => `/v2/payments/orders/${orderId}/paysera/pay`,
+            }
         },
     },
     API_KEYS: (env) => `/apikeys/${env}`, // /apikeys/{Environment}. There are 2 environments - "live" and "test". Key Types are "secret" and "publishable"
