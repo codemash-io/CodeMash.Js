@@ -2,9 +2,8 @@ import * as server from './server';
 import Config from './config';
 import { CONFIG as Endpoints } from './routes';
 
-export async function executeFunction(functionId, data, qualifier) {
-    
-    let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.CODE.EXECUTE(functionId)}`,
+export async function executeFunction({ functionId, data, qualifier, meta, tokens }) {
+    const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.CODE.EXECUTE(functionId)}`,
     {
         method: 'POST',
         headers: {
@@ -14,11 +13,12 @@ export async function executeFunction(functionId, data, qualifier) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            data : JSON.stringify(data),
-            qualifier : qualifier,
+            data: JSON.stringify(data),
+            qualifier: qualifier,
+            meta: meta,
+            tokens: tokens,
         }),
     });  
-        
-    let result = JSON.parse(response.result)    
-    return result;
+
+    return response.result ? JSON.parse(response.result) : null;
 }

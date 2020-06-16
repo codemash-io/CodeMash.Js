@@ -14,13 +14,15 @@ export const CONFIG = {
                     GET: (collectionName, id) => `/v2/db/${collectionName}/${id}`,
                     GET_WITH_FILTER: (collectionName) => `/v2/db/${collectionName}/findOne`,
                     GET_ALL: (collectionName) => `/v2/db/${collectionName}/find`,
-                    DELETE: (collectionName) => `/v2/db/${collectionName}`,
+                    DELETE: (collectionName, id) => `/v2/db/${collectionName}/${id}`,
+                    DELETE_BY_FILTER: (collectionName) => `/v2/db/${collectionName}`,
                 },
                 FILES: {
                     UPLOAD: (collectionName) => `/v2/db/${collectionName}/files`,
                 },
                 AGGREGATES:{
                     GET: (collectionName, id) => `/v2/db/${collectionName}/aggregate/${id}`,
+                    GET_CUSTOM: (collectionName) => `/v2/db/${collectionName}/aggregate/pipeline`,
                 }
             },
             TAXONOMY: {

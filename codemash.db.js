@@ -2,25 +2,12 @@ import * as server from './server';
 import Config from './config';
 import { CONFIG as Endpoints } from './routes';
 
-
-export async function getRecords(collectionName, pageNumber, pageSize, sort, filter, projection, referencedFields, language) {
-    
-    if (projection == null || projection == undefined)
-    {
-        projection = ''
-    }
-
-    if (filter == null || filter == undefined)
-    {
-        filter = ''
-    }
-    
-    if (sort == null || sort == undefined)
-    { 
-        sort = ''
-    }
-
-    let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.GET_ALL(collectionName)}`,
+export async function getRecords({ 
+  collectionName, pageNumber, pageSize, sort, filter, projection, language,
+  includeUserNames, includeRoleNames, includeCollectionNames, includeTermNames,
+  referencedFields, addReferencesFirst, excludeCulture
+}) {
+    const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.GET_ALL(collectionName)}`,
     {
         method: 'POST',
         headers: {
@@ -31,32 +18,46 @@ export async function getRecords(collectionName, pageNumber, pageSize, sort, fil
             'Accept-Language': language || 'en'
         },
         body: JSON.stringify({
-            PageSize: pageSize || Config.tablePageSize,
-            PageNumber: pageNumber || 0,
-            projection : projection,
-            filter: filter,
-            sort: sort,
-            referencedFields: referencedFields
+            pageSize: pageSize || Config.tablePageSize,
+            pageNumber: pageNumber || 0,
+            projection : projection || undefined,
+            filter: filter || undefined,
+            sort: sort || undefined,
+            referencedFields: referencedFields,
+            includeUserNames,
+            includeRoleNames,
+            includeCollectionNames,
+            includeTermNames,
+            excludeCulture,
+            addReferencesFirst
         }),
     });  
         
-    let result = JSON.parse(response.result)    
-    return result;
-
-    // try {
-        
-    // } catch(err) {
-
-    //     if (err instanceof server.HttpError && err.response.status == 404) {            
-    //         alert("Such url not found.");
-    //     } else {            
-    //         throw err;
-    //     }
-    // }
+    return {
+      totalCount: response.totalCount,
+      result: JSON.parse(response.result),
+    };
 }
 
-export async function deleteRecord(collectionName, filter) {
-    
+export async function deleteRecordById({ collectionName, id, ignoreTriggers }) {
+  let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.DELETE(collectionName, id)}`,
+  {
+      method: 'DELETE',
+      headers: {
+          'X-CM-ProjectId': Config.projectId,
+          Authorization: `Bearer ${Config.secretKey}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ignoreTriggers
+      }),
+  });   
+
+  return response.result.deletedCount > 0;
+}
+
+export async function deleteRecord({ collectionName, filter, ignoreTriggers }) {
     let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.DELETE(collectionName)}`,
     {
         method: 'DELETE',
@@ -70,12 +71,10 @@ export async function deleteRecord(collectionName, filter) {
     });   
 
     return response.result.deletedCount > 0;
-    
 }
 
 
-export async function saveRecord(collectionName, document) {
-    
+export async function saveRecord({collectionName, document}) {
     let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.CREATE(collectionName)}`,
     {
         method: 'POST',
@@ -90,12 +89,10 @@ export async function saveRecord(collectionName, document) {
 
     let result = JSON.parse(response.result)
     return result;
-    
 }
 
 
-export async function updateRecord(collectionName, filter, updateClause) {
-    
+export async function updateRecord({collectionName, filter, updateClause}) {
     let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.UPDATE_PART_OF_DOCUMENT(collectionName)}`,
     {
         method: 'PATCH',
@@ -114,12 +111,12 @@ export async function updateRecord(collectionName, filter, updateClause) {
     
     let result = response.result;
     return result;
-    
 }
 
-export async function getRecord(collectionName, recordId, language) {
+export async function getRecord({collectionName, id, projection, includeUserNames, includeRoleNames, includeCollectionNames,
+  includeTermNames, referencedFields, addReferencesFirst, excludeCulture, language}) {
 
-    let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.GET(collectionName, recordId)}`,
+    const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.GET(collectionName, id)}`,
     {
         method: 'GET',
         headers: {
@@ -129,17 +126,25 @@ export async function getRecord(collectionName, recordId, language) {
             'Content-Type': 'application/json',
             'Accept-Language': language || 'en'
         },
-        body: null,
+        body: JSON.stringify({
+          projection : projection || undefined,
+          referencedFields: referencedFields,
+          includeUserNames,
+          includeRoleNames,
+          includeCollectionNames,
+          includeTermNames,
+          excludeCulture,
+          addReferencesFirst
+      }),
     });     
     
-    let result = JSON.parse(response.result)
-    return result;
-    
+    return response.result ? JSON.parse(response.result) : null;
 }
 
-export async function getRecordWithFilter(collectionName, filter, referencedFields, language) {
+export async function getRecordWithFilter({collectionName, filter, projection, includeUserNames, includeRoleNames, includeCollectionNames,
+  includeTermNames, referencedFields, addReferencesFirst, excludeCulture, language}) {
 
-    let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.GET_WITH_FILTER(collectionName)}`,
+    const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.GET_WITH_FILTER(collectionName)}`,
     {
         method: 'POST',
         headers: {
@@ -149,18 +154,26 @@ export async function getRecordWithFilter(collectionName, filter, referencedFiel
             'Content-Type': 'application/json',
             'Accept-Language': language || 'en'
         },
-        body: JSON.stringify({ filter : JSON.stringify(filter), referencedFields : referencedFields}),
+        body: JSON.stringify({ 
+          filter,
+          projection : projection || undefined,
+          referencedFields: referencedFields,
+          includeUserNames,
+          includeRoleNames,
+          includeCollectionNames,
+          includeTermNames,
+          excludeCulture,
+          addReferencesFirst
+        }),
     });     
     
-    let result = JSON.parse(response.result)
-    return result;
-    
+    return response.result ? JSON.parse(response.result) : null;
 }
 
 
 // todo: empty filter is defined because of bug. Later 
 // is not necessary to define empty filter.
-export async function getTaxonomyTerms(taxonomyName, language) {
+export async function getTaxonomyTerms({taxonomyName, language}) {
     
     let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.TAXONOMY.TERM.GET_ALL(taxonomyName)}`,
     {
@@ -179,20 +192,24 @@ export async function getTaxonomyTerms(taxonomyName, language) {
     return result;
 }
 
-export async function executeAggregate(collectionName, id) {
-    
-    let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.AGGREGATES.GET(collectionName, id)}`,
+export async function executeAggregate({ collectionName, id, pipeline, tokens }) {
+    const url = pipeline
+      ? `${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.AGGREGATES.GET_CUSTOM(collectionName)}`
+      : `${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.AGGREGATES.GET(collectionName, id)}`;
+
+    const response = await server.loadJson(url,
     {
-        method: 'GET',
+        method: 'POST',
         headers: {
             'X-CM-ProjectId': Config.projectId,
             Authorization: `Bearer ${Config.secretKey}`,
             Accept: 'application/json',
             'Content-Type': 'application/json',
         },
-        body: null,
+        body: JSON.stringify({
+          tokens
+        }),
     });    
 
-    let result = response.result;
-    return result;
+    return JSON.parse(response.result);
 }
