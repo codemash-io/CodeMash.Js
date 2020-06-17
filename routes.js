@@ -9,7 +9,8 @@ export const CONFIG = {
                 GET: (collectionName) => `/v2/db/schemas/${collectionName}`,
                 RECORD: {
                     CREATE: (collectionName) => `/v2/db/${collectionName}`,
-                    UPDATE_PART_OF_DOCUMENT: (collectionName) => `/v2/db/${collectionName}`,
+                    PATCH: (collectionName, id) => `/v2/db/${collectionName}/${id}`,
+                    PATCH_BY_FILTER: (collectionName) => `/v2/db/${collectionName}`,
                     UPDATE: (collectionName) => `/v2/db/${collectionName}/replaceOne`,
                     GET: (collectionName, id) => `/v2/db/${collectionName}/${id}`,
                     GET_WITH_FILTER: (collectionName) => `/v2/db/${collectionName}/findOne`,

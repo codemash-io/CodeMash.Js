@@ -20,9 +20,9 @@ export async function getRecords({
         body: JSON.stringify({
             pageSize: pageSize || Config.tablePageSize,
             pageNumber: pageNumber || 0,
-            projection : projection || undefined,
-            filter: filter || undefined,
-            sort: sort || undefined,
+            projection : filterToString(projection),
+            filter: filterToString(filter),
+            sort: filterToString(sort),
             referencedFields: referencedFields,
             includeUserNames,
             includeRoleNames,
@@ -92,8 +92,32 @@ export async function saveRecord({collectionName, document}) {
 }
 
 
-export async function updateRecord({collectionName, filter, updateClause}) {
-    let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.UPDATE_PART_OF_DOCUMENT(collectionName)}`,
+export async function updateRecord({ collectionName, id, update, waitForFileUpload, bypassDocumentValidation, ignoreTriggers, isUpsert }) {
+    let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.PATCH(collectionName, id)}`,
+    {
+        method: 'PATCH',
+        headers: {
+          'X-CM-ProjectId': Config.projectId,
+          Authorization: `Bearer ${Config.secretKey}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({   
+          update: filterToString(update),
+          waitForFileUpload,
+          bypassDocumentValidation,
+          ignoreTriggers,
+          isUpsert,
+        }),
+    });  
+    
+    let result = response.result;
+    return result;
+}
+
+export async function updateRecordWithFilter({ collectionName, filter, update, waitForFileUpload, bypassDocumentValidation, ignoreTriggers, isUpsert }) {
+
+    let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.PATCH_BY_FILTER(collectionName)}`,
     {
         method: 'PATCH',
         headers: {
@@ -102,11 +126,14 @@ export async function updateRecord({collectionName, filter, updateClause}) {
             Accept: 'application/json',
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(
-            {   
-                filter : JSON.stringify(filter),
-                update : JSON.stringify(updateClause)
-            }),
+        body: JSON.stringify({   
+            filter: filterToString(filter),
+            update: filterToString(update),
+            waitForFileUpload,
+            bypassDocumentValidation,
+            ignoreTriggers,
+            isUpsert,
+        }),
     });  
     
     let result = response.result;
@@ -127,7 +154,7 @@ export async function getRecord({collectionName, id, projection, includeUserName
             'Accept-Language': language || 'en'
         },
         body: JSON.stringify({
-          projection : projection || undefined,
+          projection: filterToString(projection),
           referencedFields: referencedFields,
           includeUserNames,
           includeRoleNames,
@@ -138,7 +165,7 @@ export async function getRecord({collectionName, id, projection, includeUserName
       }),
     });     
     
-    return response.result ? JSON.parse(response.result) : null;
+    return response && response.result ? JSON.parse(response.result) : null;
 }
 
 export async function getRecordWithFilter({collectionName, filter, projection, includeUserNames, includeRoleNames, includeCollectionNames,
@@ -155,8 +182,8 @@ export async function getRecordWithFilter({collectionName, filter, projection, i
             'Accept-Language': language || 'en'
         },
         body: JSON.stringify({ 
-          filter,
-          projection : projection || undefined,
+          filter: filterToString(filter),
+          projection : filterToString(projection),
           referencedFields: referencedFields,
           includeUserNames,
           includeRoleNames,
@@ -167,7 +194,7 @@ export async function getRecordWithFilter({collectionName, filter, projection, i
         }),
     });     
     
-    return response.result ? JSON.parse(response.result) : null;
+    return response && response.result ? JSON.parse(response.result) : null;
 }
 
 
@@ -212,4 +239,10 @@ export async function executeAggregate({ collectionName, id, pipeline, tokens })
     });    
 
     return JSON.parse(response.result);
+}
+
+function filterToString(filter) {
+  const stringifiedFilter = filter !== undefined && typeof filter === 'object' && filter !== null ? JSON.stringify(filter) : filter;
+  if (!stringifiedFilter) return undefined;
+  return stringifiedFilter;
 }
