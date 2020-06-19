@@ -3,7 +3,6 @@ import Config from './config';
 import { CONFIG as Endpoints } from './routes';
 
 export async function downloadImage(fileId, optimization) {
-
   let route = `${Config.apiUrl}${Endpoints.PROJECT.FILES.DOWNLOAD(fileId)}`;
 
   if (optimization) {
@@ -25,6 +24,29 @@ export async function downloadImage(fileId, optimization) {
     image: response
   };
   return result;
+}
+
+export async function getFileUrl({ fileId, optimization }) {
+  const route = optimization
+    ? `${Config.apiUrl}${Endpoints.PROJECT.FILES.GET_URL_OPTIMIZED(fileId, optimization)}`
+    : `${Config.apiUrl}${Endpoints.PROJECT.FILES.GET_URL(fileId)}`;
+
+  let response = await server.loadJson(route,
+    {
+      method: 'GET',
+      headers: {
+        'X-CM-ProjectId': Config.projectId,
+        Authorization: `Bearer ${Config.secretKey}`,
+        Accept: 'text/plain',
+      },
+      body: null,
+    });
+
+  return {
+    result: response.result,
+    file: response.file,
+    isImage: response.isImage
+  };
 }
 
 export async function uploadFile(fileUri, collectionName, recordId, uniqueFieldName) {

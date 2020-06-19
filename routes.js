@@ -69,7 +69,9 @@ export const CONFIG = {
         FILES: {
             BASE_URL: '/v2/files',
             DOWNLOAD: (id) => `/v2/files?fileId=${id}`,        
-            DOWNLOAD_OPTIMIZED: (id, optimmization) => `/v2/files?fileId=${id}&optimization=${optimmization}`,        
+            DOWNLOAD_OPTIMIZED: (id, optimmization) => `/v2/files?fileId=${id}&optimization=${optimmization}`,
+            GET_URL: (id) => `/v2/files/url?fileId=${id}`,
+            GET_URL_OPTIMIZED: (id, optimmization) => `/v2/files/url?fileId=${id}&optimization=${optimmization}`,
             UPLOAD: '/v2/files'    
         },
         CODE: {
