@@ -42,19 +42,8 @@ export async function updateUser(record) {
     return response; 
 }
 
-export async function getUsers(pageNumber, pageSize, filter, sort) {
-
-    if (filter == null || filter == undefined)
-    {
-        filter = ''
-    }
-    
-    if (sort == null || sort == undefined)
-    { 
-        sort = ''
-    }
-    
-    let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.GET_ALL}`,
+export async function getUsers({ pageNumber, pageSize, filter, sort }) {
+    const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.GET_ALL}`,
     {
         method: 'POST',
         headers: {
@@ -64,13 +53,13 @@ export async function getUsers(pageNumber, pageSize, filter, sort) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            "PageSize": pageSize || Config.tablePageSize,
-            "PageNumber": pageNumber || 0,                
-            "filter": filter,
-            "sort": sort,
+          pageSize: pageSize || Config.tablePageSize,
+          pageNumber: pageNumber || 0,
+          filter: filterToString(filter),
+          sort: filterToString(sort),
         }),
     });
-    return response.result; 
+    return response; 
 }
 
 
@@ -136,4 +125,10 @@ export async function login(username, password) {
         }
     });        
     return response;
+}
+
+function filterToString(filter) {
+  const stringifiedFilter = filter !== undefined && typeof filter === 'object' && filter !== null ? JSON.stringify(filter) : filter;
+  if (!stringifiedFilter) return undefined;
+  return stringifiedFilter;
 }
