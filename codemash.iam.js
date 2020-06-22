@@ -1,10 +1,13 @@
 import * as server from './server';
 import Config from './config';
 import { CONFIG as Endpoints } from './routes';
+import { objectOrStringToString } from './utils';
 
-export async function register(email, password, displayName = null, firstName = null, lastName = null) {
-    
-    let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.REGISTER}`,
+export async function register({ email, password, displayName, firstName, lastName,
+  autoLogin = true, meta, language, timeZone, subscribeToNews, country, countryCode,
+  area, city, address, address2, phone, fax, company, postalCode, gender, birthday }) {
+
+    const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.REGISTER}`,
     {
         method: 'POST',
         headers: {
@@ -14,21 +17,43 @@ export async function register(email, password, displayName = null, firstName = 
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            email,
-            password,
-            displayName,
-            firstName,
-            lastName,
-            autoLogin: false,
+            email, password, displayName, firstName, lastName,
+            autoLogin, meta: objectOrStringToString(meta), language, timeZone, subscribeToNews,
+            country, countryCode, area, city, address, address2,
+            phone, fax, company, postalCode, gender, birthday
         }),
-    });   
+    });
     return response;
 }
 
+export async function invite({ email, displayName, firstName, lastName,
+  meta, language, timeZone, subscribeToNews, country, countryCode,
+  area, city, address, address2, phone, fax, company, postalCode, gender, birthday }) {
 
-export async function updateUser(record) {
+    const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.INVITE}`,
+    {
+        method: 'POST',
+        headers: {
+            'X-CM-ProjectId': Config.projectId,
+            Authorization: `Bearer ${Config.secretKey}`,
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            email, displayName, firstName, lastName,
+            meta: objectOrStringToString(meta), language, timeZone, subscribeToNews,
+            country, countryCode, area, city, address, address2,
+            phone, fax, company, postalCode, gender, birthday
+        }),
+    });
+    return response;
+}
+
+export async function updateUser({ id, displayName, firstName, lastName,
+  meta, language, timeZone, subscribeToNews, unsubscribedNewsTags, country, countryCode,
+  area, city, address, address2, phone, fax, company, postalCode, gender, birthday }) {
     
-    let response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.UPDATE}`,
+    const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.UPDATE(id)}`,
     {
         method: 'PUT',
         headers: {
@@ -37,7 +62,13 @@ export async function updateUser(record) {
             Accept: 'application/json',
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(record),
+        body: JSON.stringify({
+          displayName, firstName, lastName,
+          meta: objectOrStringToString(meta), language, timeZone,
+          subscribeToNews, unsubscribedNewsTags,
+          country, countryCode, area, city, address, address2,
+          phone, fax, company, postalCode, gender, birthday
+        }),
     }); 
     return response; 
 }
@@ -55,13 +86,12 @@ export async function getUsers({ pageNumber, pageSize, filter, sort }) {
         body: JSON.stringify({
           pageSize: pageSize || Config.tablePageSize,
           pageNumber: pageNumber || 0,
-          filter: filterToString(filter),
-          sort: filterToString(sort),
+          filter: objectOrStringToString(filter),
+          sort: objectOrStringToString(sort),
         }),
     });
     return response; 
 }
-
 
 export async function getUser(userId) {
     
@@ -125,10 +155,4 @@ export async function login(username, password) {
         }
     });        
     return response;
-}
-
-function filterToString(filter) {
-  const stringifiedFilter = filter !== undefined && typeof filter === 'object' && filter !== null ? JSON.stringify(filter) : filter;
-  if (!stringifiedFilter) return undefined;
-  return stringifiedFilter;
 }

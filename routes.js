@@ -59,7 +59,8 @@ export const CONFIG = {
             BASE_URL: '/v2/membership',
             USERS: {
                 REGISTER: '/v2/membership/users/register',
-                UPDATE: '/v2/membership/users',
+                INVITE: '/v2/membership/users/invite',
+                UPDATE: (id) => `/v2/membership/users/${id}`,
                 GET_ALL: '/v2/membership/users',
                 GET: (id) => `/v2/membership/users/${id}?IncludeMeta=true&IncludeDevices=true`,
                 DELETE: (id) => `/v2/membership/users/${id}`,
