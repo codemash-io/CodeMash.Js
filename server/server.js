@@ -1,5 +1,5 @@
 export class HttpError extends Error {
-  constructor(response, responseBody) {
+  constructor (response, responseBody) {
     super(`${response.status} for ${response.url}`);
 
     if (responseBody && responseBody.responseStatus) {
@@ -8,7 +8,7 @@ export class HttpError extends Error {
       this.message = responseBody.responseStatus.message;
     } else {
       this.name = 'HttpError';
-      this.message = `Unknow error`;
+      this.message = 'Unknow error';
     }
 
     this.status = response.status;
@@ -16,22 +16,22 @@ export class HttpError extends Error {
   }
 }
 
-export async function loadText(url, requestInfo, mimeType = 'image/png') {
-  let response = await fetch(url, requestInfo);
-  if (response.status == 200) {
+export async function loadText (url, requestInfo, mimeType = 'image/png') {
+  const response = await fetch(url, requestInfo);
+  if (response.status === 200) {
     return response.text().then(text => {
       return {
         contentType: mimeType,
         raw: text
-      }
+      };
     });
   } else {
     throw new HttpError(response);
   }
 }
 
-export async function loadJson(url, requestInfo) {
-  let response = await fetch(url, requestInfo);
+export async function loadJson (url, requestInfo) {
+  const response = await fetch(url, requestInfo);
 
   if (response.status >= 200 && response.status < 300) {
     return response.json();

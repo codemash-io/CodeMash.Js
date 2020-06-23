@@ -1,10 +1,10 @@
-import * as databaseService from './codemash.db';
-import * as filesService from './codemash.files';
-import * as iamService from './codemash.iam';
-import * as notificationsService from './codemash.push';
-import * as codeService from './codemash.code';
-import * as paymentsService from './codemash.payments';
-import configuration from './config';
+import * as databaseService from './src/codemash.db';
+import * as filesService from './src/codemash.files';
+import * as iamService from './src/codemash.iam';
+import * as notificationsService from './src/codemash.push';
+import * as codeService from './src/codemash.code';
+import * as paymentsService from './src/codemash.payments';
+import configuration from './config/config';
 
 export const db = databaseService;
 export const files = filesService;
