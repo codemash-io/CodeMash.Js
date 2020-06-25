@@ -396,9 +396,9 @@ export async function distinct ({ collectionName, filter, field }) {
   return response ? response.result : null;
 }
 
-// todo: empty filter is defined because of bug. Later
-// is not necessary to define empty filter.
-export async function getTaxonomyTerms ({ taxonomyName, language }) {
+export async function getTerms ({ taxonomyName, language, pageNumber, pageSize, sort, filter, projection,
+  excludeCulture 
+}) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.TAXONOMY.TERM.GET_ALL(taxonomyName)}`,
     {
       method: 'POST',
@@ -409,9 +409,19 @@ export async function getTaxonomyTerms ({ taxonomyName, language }) {
         'Content-Type': 'application/json',
         'Accept-Language': language || 'en'
       },
-      body: null
+      body: JSON.stringify({
+        pageSize: pageSize || Config.tablePageSize,
+        pageNumber: pageNumber || 0,
+        projection: objectOrStringToString(projection),
+        filter: objectOrStringToString(filter),
+        sort: objectOrStringToString(sort),
+        excludeCulture,
+      })
     });
 
-  const result = response.result;
-  return result;
+  if (!response) return null;
+  return {
+    totalCount: response.totalCount,
+    result: response.result,
+  };
 }
