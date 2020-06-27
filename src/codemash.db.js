@@ -47,7 +47,7 @@ export async function getRecord ({
 }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.GET(collectionName, id)}`,
     {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'X-CM-ProjectId': Config.projectId,
         Authorization: `Bearer ${Config.secretKey}`,
