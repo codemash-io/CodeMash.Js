@@ -34,7 +34,9 @@ export async function loadJson (url, requestInfo) {
   const response = await fetch(url, requestInfo);
 
   if (response.status >= 200 && response.status < 300) {
-    return response.json();
+    return response.text().then((text) => {
+      return text ? JSON.parse(text) : {};
+    });
   } else {
     throw new HttpError(response, await response.json());
   }

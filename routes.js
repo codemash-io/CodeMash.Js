@@ -1,7 +1,7 @@
 export const CONFIG = {
   ACCOUNT: {
-    LOGIN: (username, password) => `/auth/credentials?username=${username}&password=${password}`,
-    REGISTER: '/accounts'
+    LOGIN: (username, password) => `/v2/auth/credentials?username=${username}&password=${password}`,
+    REGISTER: '/v2/membership/users/register'
   },
   PROJECT: {
     DATABASE: {

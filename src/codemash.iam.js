@@ -421,5 +421,5 @@ export async function login ({ username, password }) {
         'Content-Type': 'application/json'
       }
     });
-  return response;
+  return response ? response.result : null;
 }

@@ -396,8 +396,9 @@ export async function distinct ({ collectionName, filter, field }) {
   return response ? response.result : null;
 }
 
-export async function getTerms ({ taxonomyName, language, pageNumber, pageSize, sort, filter, projection,
-  excludeCulture 
+export async function getTerms ({
+  taxonomyName, language, pageNumber, pageSize, sort, filter, projection,
+  excludeCulture
 }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.TAXONOMY.TERM.GET_ALL(taxonomyName)}`,
     {
@@ -415,13 +416,13 @@ export async function getTerms ({ taxonomyName, language, pageNumber, pageSize, 
         projection: objectOrStringToString(projection),
         filter: objectOrStringToString(filter),
         sort: objectOrStringToString(sort),
-        excludeCulture,
+        excludeCulture
       })
     });
 
   if (!response) return null;
   return {
     totalCount: response.totalCount,
-    result: response.result,
+    result: response.result
   };
 }
