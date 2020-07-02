@@ -129,7 +129,7 @@ export async function updateUser ({
 }
 
 export async function updateProfile ({
-  displayName, firstName, lastName,
+  secretKey, displayName, firstName, lastName,
   meta, language, timeZone, subscribeToNews, unsubscribedNewsTags, country, countryCode,
   area, city, address, address2, phone, fax, company, postalCode, gender, birthday
 }) {
@@ -138,7 +138,7 @@ export async function updateProfile ({
       method: 'PATCH',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -248,7 +248,7 @@ export async function getUserByEmail ({ email, provider, includePermissions, inc
   return response.result;
 }
 
-export async function getProfile ({ includePermissions, includeDevices, includeMeta, includeUnreadNotifications }) {
+export async function getProfile ({ secretKey, includePermissions, includeDevices, includeMeta, includeUnreadNotifications }) {
   let url = `${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.GET_PROFILE}`;
   const queries = [];
 
@@ -266,7 +266,7 @@ export async function getProfile ({ includePermissions, includeDevices, includeM
       method: 'GET',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
