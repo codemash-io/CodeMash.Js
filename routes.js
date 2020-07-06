@@ -45,14 +45,14 @@ export const CONFIG = {
     },
     NOTIFICATIONS: {
       PUSH: {
-        REGISTER_TOKEN: '/v2/notifications/push/token/expo',
-        GET_ALL: (userId, pageNumber, pageSize) => `/v2/notifications/push?userId=${userId}&pageSize=${pageSize}&pageNumber=${pageNumber}`,
+        REGISTER_TOKEN: '/v2/notifications/push/devices/token',
+        DELETE_DEVICE_TOKEN: (id) => `/v2/notifications/push/devices/${id}/token`,
+        GET_ALL: '/v2/notifications/push',
         GET: (id) => `/v2/notifications/push/${id}`,
         MARK_NOTIFICATION_AS_READ: (id) => `/v2/notifications/push/${id}/read`,
         MARK_NOTIFICATIONS_AS_READ: '/v2/notifications/push/read',
         GET_NOTIFICATIONS_COUNT: (userId) => `/v2/notifications/push/count?userId=${userId}`,
         SEND: '/v2/notifications/push',
-        DELETE_DEVICE_TOKEN: (id) => `/v2/notifications/push/devices/${id}/token`,
         DELETE_DEVICE: (id) => `/v2/notifications/push/devices/${id}`
       },
       EMAIL: {

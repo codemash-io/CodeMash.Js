@@ -1,39 +1,93 @@
 import * as server from '../server/server';
 import Config from '../config/config';
 import { CONFIG as Endpoints } from '../routes';
+import { objectOrStringToString, toQueryString } from '../utils/utils';
 
-export async function registerNotificationToken (token, userId) {
+export async function registerDeviceToken ({
+  secretKey, provider, token, userId, deviceId,
+  operatingSystem, brand, deviceName, timeZone, language, locale, meta
+}) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.REGISTER_TOKEN}`,
     {
       method: 'POST',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
+        provider,
         token,
-        userId
+        userId,
+        deviceId,
+        operatingSystem,
+        brand,
+        deviceName,
+        timeZone,
+        language,
+        locale,
+        meta
       })
     });
 
   return response;
 }
 
-export async function deleteDeviceToken (deviceId) {
+export async function deleteDeviceToken ({ secretKey, deviceId }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.DELETE_DEVICE_TOKEN(deviceId)}`,
     {
-      method: 'DELETE',
+      method: 'POST',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
       body: null
     });
 
+  return response;
+}
+
+export async function getNotifications ({ secretKey, userId, deviceId, pageNumber, pageSize, filter, sort }) {
+  const request = {
+    userId,
+    deviceId,
+    pageSize: pageSize || Config.tablePageSize,
+    pageNumber: pageNumber || 0,
+    filter: objectOrStringToString(filter),
+    sort: objectOrStringToString(sort)
+  };
+
+  const requestUrl = `${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET_ALL}?${toQueryString(request)}`;
+
+  const response = await server.loadJson(`${Config.apiUrl}${requestUrl}`,
+    {
+      method: 'GET',
+      headers: {
+        'X-CM-ProjectId': Config.projectId,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: null
+    });
+  return response;
+}
+
+export async function getNotification ({ secretKey, id }) {
+  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET(id)}`,
+    {
+      method: 'GET',
+      headers: {
+        'X-CM-ProjectId': Config.projectId,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: null
+    });
   return response;
 }
 
@@ -78,45 +132,6 @@ export async function sendPushNotification (templateId, users, senderApiKey, dev
       })
     });
   return response;
-}
-
-// TODO : make it as POST and pass filter and sort parameters
-export async function getNotifications (userId, pageNumber, pageSize, filter, sort) {
-  if (filter == null || filter === undefined) {
-    filter = '';
-  }
-
-  if (sort == null || sort === undefined) {
-    sort = '';
-  }
-
-  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET_ALL(userId, pageNumber, pageSize)}`,
-    {
-      method: 'GET',
-      headers: {
-        'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: null
-    });
-  return response.result;
-}
-
-export async function getNotification (id) {
-  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET(id)}`,
-    {
-      method: 'GET',
-      headers: {
-        'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: null
-    });
-  return response.result;
 }
 
 export async function markNotificationAsRead (id, userId) {
