@@ -51,7 +51,7 @@ export const CONFIG = {
         GET: (id) => `/v2/notifications/push/${id}`,
         MARK_NOTIFICATION_AS_READ: (id) => `/v2/notifications/push/${id}/read`,
         MARK_NOTIFICATIONS_AS_READ: '/v2/notifications/push/read',
-        GET_NOTIFICATIONS_COUNT: (userId) => `/v2/notifications/push/count?userId=${userId}`,
+        GET_NOTIFICATIONS_COUNT: (userId, deviceId) => `/v2/notifications/push/count?userId=${userId}&deviceId=${deviceId}`,
         SEND: '/v2/notifications/push',
         DELETE_DEVICE: (id) => `/v2/notifications/push/devices/${id}`
       },
@@ -74,6 +74,7 @@ export const CONFIG = {
         DELETE: (id) => `/v2/membership/users/${id}`,
         BLOCK: (id) => `/v2/membership/users/${id}/block`,
         UNBLOCK: (id) => `/v2/membership/users/${id}/unblock`,
+        UPDATE_PASSWORD: '/v2/membership/users/password',
         CREATE_PASSWORD_RESET: '/v2/membership/users/password/reset/token',
         CHECK_PASSWORD_RESET: '/v2/membership/users/password/reset/token',
         RESET_PASSWORD: '/v2/membership/users/password/reset',

@@ -320,6 +320,26 @@ export async function unblockUser ({ id }) {
   return response;
 }
 
+export async function updatePassword ({ secretKey, userId, currentPassword, password, repeatedPassword }) {
+  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.CREATE_PASSWORD_RESET}`,
+    {
+      method: 'PATCH',
+      headers: {
+        'X-CM-ProjectId': Config.projectId,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        userId,
+        currentPassword,
+        password,
+        repeatedPassword
+      })
+    });
+  return response;
+}
+
 export async function createPasswordReset ({ email }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.CREATE_PASSWORD_RESET}`,
     {
