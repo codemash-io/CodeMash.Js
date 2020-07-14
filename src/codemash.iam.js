@@ -321,7 +321,7 @@ export async function unblockUser ({ id }) {
 }
 
 export async function updatePassword ({ secretKey, userId, currentPassword, password, repeatedPassword }) {
-  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.CREATE_PASSWORD_RESET}`,
+  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.UPDATE_PASSWORD}`,
     {
       method: 'PATCH',
       headers: {
