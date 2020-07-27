@@ -4,7 +4,7 @@ import { CONFIG as Endpoints } from '../routes';
 import { objectOrStringToString } from '../utils/utils';
 
 export async function getRecords ({
-  collectionName, pageNumber, pageSize, sort, filter, projection, language,
+  secretKey, collectionName, pageNumber, pageSize, sort, filter, projection, language,
   includeUserNames, includeRoleNames, includeCollectionNames, includeTermNames,
   referencedFields, addReferencesFirst, excludeCulture
 }) {
@@ -13,7 +13,7 @@ export async function getRecords ({
       method: 'POST',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
         'Accept-Language': language || 'en'
@@ -42,7 +42,7 @@ export async function getRecords ({
 }
 
 export async function getRecord ({
-  collectionName, id, projection, includeUserNames, includeRoleNames, includeCollectionNames,
+  secretKey, collectionName, id, projection, includeUserNames, includeRoleNames, includeCollectionNames,
   includeTermNames, referencedFields, addReferencesFirst, excludeCulture, language
 }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.GET(collectionName, id)}`,
@@ -50,7 +50,7 @@ export async function getRecord ({
       method: 'POST',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
         'Accept-Language': language || 'en'
@@ -71,7 +71,7 @@ export async function getRecord ({
 }
 
 export async function getRecordWithFilter ({
-  collectionName, filter, projection, includeUserNames, includeRoleNames, includeCollectionNames,
+  secretKey, collectionName, filter, projection, includeUserNames, includeRoleNames, includeCollectionNames,
   includeTermNames, referencedFields, addReferencesFirst, excludeCulture, language
 }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.GET_WITH_FILTER(collectionName)}`,
@@ -79,7 +79,7 @@ export async function getRecordWithFilter ({
       method: 'POST',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
         'Accept-Language': language || 'en'
@@ -100,7 +100,7 @@ export async function getRecordWithFilter ({
   return response && response.result ? JSON.parse(response.result) : null;
 }
 
-export async function deleteRecord ({ collectionName, id, ignoreTriggers }) {
+export async function deleteRecord ({ secretKey, collectionName, id, ignoreTriggers }) {
   let url = `${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.DELETE(collectionName, id)}`;
   const queries = [];
   if (ignoreTriggers) queries.push(`ignoreTriggers=${true}`);
@@ -114,7 +114,7 @@ export async function deleteRecord ({ collectionName, id, ignoreTriggers }) {
       method: 'DELETE',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -124,7 +124,7 @@ export async function deleteRecord ({ collectionName, id, ignoreTriggers }) {
   return response;
 }
 
-export async function deleteRecordWithFilter ({ collectionName, filter, ignoreTriggers }) {
+export async function deleteRecordWithFilter ({ secretKey, collectionName, filter, ignoreTriggers }) {
   let url = `${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.DELETE_BY_FILTER(collectionName)}`;
   const queries = [];
   if (ignoreTriggers) queries.push(`ignoreTriggers=${true}`);
@@ -139,7 +139,7 @@ export async function deleteRecordWithFilter ({ collectionName, filter, ignoreTr
       method: 'DELETE',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -149,7 +149,7 @@ export async function deleteRecordWithFilter ({ collectionName, filter, ignoreTr
   return response;
 }
 
-export async function deleteManyRecords ({ collectionName, filter, ignoreTriggers }) {
+export async function deleteManyRecords ({ secretKey, collectionName, filter, ignoreTriggers }) {
   let url = `${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.DELETE_MANY(collectionName)}`;
   const queries = [];
   if (ignoreTriggers) queries.push(`ignoreTriggers=${true}`);
@@ -164,7 +164,7 @@ export async function deleteManyRecords ({ collectionName, filter, ignoreTrigger
       method: 'DELETE',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -174,13 +174,13 @@ export async function deleteManyRecords ({ collectionName, filter, ignoreTrigger
   return response;
 }
 
-export async function insertRecord ({ collectionName, document, bypassDocumentValidation, waitForFileUpload, ignoreTriggers }) {
+export async function insertRecord ({ secretKey, collectionName, document, bypassDocumentValidation, waitForFileUpload, ignoreTriggers }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.CREATE(collectionName)}`,
     {
       method: 'POST',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -195,7 +195,7 @@ export async function insertRecord ({ collectionName, document, bypassDocumentVa
   return response && response.result ? JSON.parse(response.result) : null;
 }
 
-export async function insertManyRecords ({ collectionName, documents, bypassDocumentValidation, ignoreTriggers }) {
+export async function insertManyRecords ({ secretKey, collectionName, documents, bypassDocumentValidation, ignoreTriggers }) {
   const stringDocs = [];
   if (documents && Array.isArray(documents)) {
     documents.forEach((doc) => {
@@ -208,7 +208,7 @@ export async function insertManyRecords ({ collectionName, documents, bypassDocu
       method: 'POST',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -222,13 +222,13 @@ export async function insertManyRecords ({ collectionName, documents, bypassDocu
   return response && response.result ? JSON.parse(response.result) : null;
 }
 
-export async function updateRecord ({ collectionName, id, update, waitForFileUpload, bypassDocumentValidation, ignoreTriggers, isUpsert }) {
+export async function updateRecord ({ secretKey, collectionName, id, update, waitForFileUpload, bypassDocumentValidation, ignoreTriggers, isUpsert }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.PATCH(collectionName, id)}`,
     {
       method: 'PATCH',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -244,13 +244,13 @@ export async function updateRecord ({ collectionName, id, update, waitForFileUpl
   return response ? response.result : null;
 }
 
-export async function updateRecordWithFilter ({ collectionName, filter, update, waitForFileUpload, bypassDocumentValidation, ignoreTriggers, isUpsert }) {
+export async function updateRecordWithFilter ({ secretKey, collectionName, filter, update, waitForFileUpload, bypassDocumentValidation, ignoreTriggers, isUpsert }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.PATCH_BY_FILTER(collectionName)}`,
     {
       method: 'PATCH',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -267,13 +267,13 @@ export async function updateRecordWithFilter ({ collectionName, filter, update, 
   return response ? response.result : null;
 }
 
-export async function updateManyRecords ({ collectionName, filter, update, bypassDocumentValidation, ignoreTriggers, isUpsert }) {
+export async function updateManyRecords ({ secretKey, collectionName, filter, update, bypassDocumentValidation, ignoreTriggers, isUpsert }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.PATCH_MANY(collectionName)}`,
     {
       method: 'PATCH',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -289,13 +289,13 @@ export async function updateManyRecords ({ collectionName, filter, update, bypas
   return response ? response.result : null;
 }
 
-export async function replaceRecord ({ collectionName, id, document, waitForFileUpload, bypassDocumentValidation, ignoreTriggers, isUpsert }) {
+export async function replaceRecord ({ secretKey, collectionName, id, document, waitForFileUpload, bypassDocumentValidation, ignoreTriggers, isUpsert }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.UPDATE(collectionName)}`,
     {
       method: 'PUT',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -312,13 +312,13 @@ export async function replaceRecord ({ collectionName, id, document, waitForFile
   return response ? response.result : null;
 }
 
-export async function replaceRecordWithFilter ({ collectionName, filter, document, waitForFileUpload, bypassDocumentValidation, ignoreTriggers, isUpsert }) {
+export async function replaceRecordWithFilter ({ secretKey, collectionName, filter, document, waitForFileUpload, bypassDocumentValidation, ignoreTriggers, isUpsert }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.UPDATE(collectionName)}`,
     {
       method: 'PUT',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -335,7 +335,7 @@ export async function replaceRecordWithFilter ({ collectionName, filter, documen
   return response ? response.result : null;
 }
 
-export async function executeAggregate ({ collectionName, id, pipeline, tokens }) {
+export async function executeAggregate ({ secretKey, collectionName, id, pipeline, tokens }) {
   const url = pipeline
     ? `${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.AGGREGATES.GET_CUSTOM(collectionName)}`
     : `${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.AGGREGATES.GET(collectionName, id)}`;
@@ -345,7 +345,7 @@ export async function executeAggregate ({ collectionName, id, pipeline, tokens }
       method: 'POST',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -357,13 +357,13 @@ export async function executeAggregate ({ collectionName, id, pipeline, tokens }
   return response && response.result ? JSON.parse(response.result) : null;
 }
 
-export async function count ({ collectionName, filter, limit, skip }) {
+export async function count ({ secretKey, collectionName, filter, limit, skip }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.COUNT(collectionName)}`,
     {
       method: 'POST',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -377,13 +377,13 @@ export async function count ({ collectionName, filter, limit, skip }) {
   return response ? response.result : null;
 }
 
-export async function distinct ({ collectionName, filter, field }) {
+export async function distinct ({ secretKey, collectionName, filter, field }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.DISTINCT(collectionName)}`,
     {
       method: 'POST',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -397,7 +397,7 @@ export async function distinct ({ collectionName, filter, field }) {
 }
 
 export async function getTerms ({
-  taxonomyName, language, pageNumber, pageSize, sort, filter, projection,
+  secretKey, taxonomyName, language, pageNumber, pageSize, sort, filter, projection,
   excludeCulture
 }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.TAXONOMY.TERM.GET_ALL(taxonomyName)}`,
@@ -405,7 +405,7 @@ export async function getTerms ({
       method: 'POST',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
         'Accept-Language': language || 'en'

@@ -91,13 +91,13 @@ export async function getNotification ({ secretKey, id }) {
   return response;
 }
 
-export async function deleteDevice (deviceId) {
-  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.DELETE_DEVICE(deviceId)}`,
+export async function deleteDevice ({ secretKey, id }) {
+  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.DELETE_DEVICE(id)}`,
     {
       method: 'DELETE',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -106,79 +106,78 @@ export async function deleteDevice (deviceId) {
   return response;
 }
 
-// TODO, replace it later with object
-export async function sendPushNotification (templateId, users, senderApiKey, devices, tokens, postpone, respectTimeZone, isNonPushable) {
-  let apieKey = Config.secretKey;
-
-  if (senderApiKey) { apieKey = senderApiKey; };
-
+export async function sendPushNotification ({
+  secretKey, templateId, users, devices, roles, tokens, postpone, respectTimeZone, isNonPushable, forceRequestLanguage
+}) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.SEND}`,
     {
       method: 'POST',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${apieKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        templateId: templateId,
-        users: users || [],
-        devices: devices || [],
-        tokens: tokens || null,
-        postpone: postpone || false,
-        respectTimeZone: respectTimeZone || true,
-        isNonPushable: isNonPushable || false
+        templateId,
+        users,
+        devices,
+        roles,
+        tokens,
+        postpone,
+        respectTimeZone,
+        isNonPushable,
+        forceRequestLanguage
       })
     });
   return response;
 }
 
-export async function markNotificationAsRead (id, userId) {
+export async function markNotificationAsRead ({ secretKey, id, userId, deviceId }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.MARK_NOTIFICATION_AS_READ(id)}`,
     {
       method: 'PATCH',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(
-        {
-          userId: userId,
-          notificationId: id
-        })
+      body: JSON.stringify({
+        userId,
+        deviceId,
+        notificationId: id
+      })
     });
   return response;
 }
 
-export async function markNotificationsAsRead (userId) {
+export async function markNotificationsAsRead ({ secretKey, userId, deviceId }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.MARK_NOTIFICATIONS_AS_READ}`,
     {
       method: 'PATCH',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(
-        {
-          userId: userId
-        })
+      body: JSON.stringify({
+        userId,
+        deviceId
+      })
     });
 
   return response;
 }
 
-export async function GetNotificationsCount (userId) {
-  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET_NOTIFICATIONS_COUNT(userId)}`,
+export async function getNotificationsCount ({ secretKey, userId, deviceId }) {
+  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET_NOTIFICATIONS_COUNT(userId, deviceId)}`,
     {
       method: 'GET',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
