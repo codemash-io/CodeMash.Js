@@ -443,3 +443,17 @@ export async function login ({ username, password }) {
     });
   return response ? response.result : null;
 }
+
+export async function checkAuthentication ({ secretKey }) {
+  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.ACCOUNT.CHECK_AUTH}`,
+    {
+      method: 'GET',
+      headers: {
+        'X-CM-ProjectId': Config.projectId,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+  return response ? response.result : null;
+}
