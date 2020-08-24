@@ -85,3 +85,173 @@ export async function createPayseraTransaction ({ secretKey, orderId, mode }) {
 
   return response;
 }
+
+export async function createCustomer ({
+  secretKey, accountId, userId, name, email, description, phone, countryCode, city,
+  address, address2, postalCode, area, meta
+}) {
+  const response = await server.loadJson(`${'http://localhost:5002'}${Endpoints.PROJECT.PAYMENTS.CUSTOMERS.CREATE}`,
+    {
+      method: 'POST',
+      headers: {
+        'X-CM-ProjectId': Config.projectId,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        accountId,
+        userId,
+        name,
+        email,
+        description,
+        phone,
+        countryCode,
+        city,
+        address,
+        address2,
+        postalCode,
+        area,
+        meta
+      })
+    });
+
+  return response;
+}
+
+export async function updateCustomer ({
+  secretKey, id, name, email, description, phone, countryCode, city,
+  address, address2, postalCode, area, meta
+}) {
+  const response = await server.loadJson(`${'http://localhost:5002'}${Endpoints.PROJECT.PAYMENTS.CUSTOMERS.UPDATE(id)}`,
+    {
+      method: 'POST',
+      headers: {
+        'X-CM-ProjectId': Config.projectId,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        description,
+        phone,
+        countryCode,
+        city,
+        address,
+        address2,
+        postalCode,
+        area,
+        meta
+      })
+    });
+
+  return response;
+}
+
+export async function getCustomers ({ secretKey, userId, pageNumber, pageSize, filter, sort }) {
+  const response = await server.loadJson(`${'http://localhost:5002'}${Endpoints.PROJECT.PAYMENTS.CUSTOMERS.GET_ALL}`,
+    {
+      method: 'POST',
+      headers: {
+        'X-CM-ProjectId': Config.projectId,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        userId,
+        pageSize: pageSize || Config.tablePageSize,
+        pageNumber: pageNumber || 0,
+        filter: objectOrStringToString(filter),
+        sort: objectOrStringToString(sort)
+      })
+    });
+
+  return response;
+}
+
+export async function getCustomer ({ secretKey, id }) {
+  const response = await server.loadJson(`${'http://localhost:5002'}${Endpoints.PROJECT.PAYMENTS.CUSTOMERS.GET(id)}`,
+    {
+      method: 'GET',
+      headers: {
+        'X-CM-ProjectId': Config.projectId,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+
+  return response ? response.result : null;
+}
+
+export async function deleteCustomer ({ secretKey, id }) {
+  const response = await server.loadJson(`${'http://localhost:5002'}${Endpoints.PROJECT.PAYMENTS.CUSTOMERS.DELETE(id)}`,
+    {
+      method: 'DELETE',
+      headers: {
+        'X-CM-ProjectId': Config.projectId,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+
+  return response;
+}
+
+export async function getPaymentMethodSetup ({ secretKey, accountId, usage }) {
+  const request = {
+    accountId, usage
+  };
+  const response = await server.loadJson(`${'http://localhost:5002'}${Endpoints.PROJECT.PAYMENTS.METHODS.GET_SETUP}?${toQueryString(request)}`,
+    {
+      method: 'GET',
+      headers: {
+        'X-CM-ProjectId': Config.projectId,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+
+  return response;
+}
+
+export async function attachPaymentMethod ({ secretKey, customerId, setupId, setupClientSecret, asDefault }) {
+  const response = await server.loadJson(`${'http://localhost:5002'}${Endpoints.PROJECT.PAYMENTS.METHODS.ATTACH}`,
+    {
+      method: 'POST',
+      headers: {
+        'X-CM-ProjectId': Config.projectId,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        customerId,
+        setupId,
+        setupClientSecret,
+        asDefault
+      })
+    });
+
+  return response;
+}
+
+export async function detachPaymentMethod ({ secretKey, id, customerId }) {
+  const response = await server.loadJson(`${'http://localhost:5002'}${Endpoints.PROJECT.PAYMENTS.METHODS.DETACH}?paymentMethodId=${id}&customerId=${customerId}`,
+    {
+      method: 'DELETE',
+      headers: {
+        'X-CM-ProjectId': Config.projectId,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+
+  return response;
+}
