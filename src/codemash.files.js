@@ -36,7 +36,7 @@ export async function getFileUrl ({ secretKey, fileId, optimization }) {
       method: 'GET',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${secretKey || Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`
       },
       body: null
     });
@@ -47,16 +47,16 @@ export async function getFileUrl ({ secretKey, fileId, optimization }) {
 export async function uploadFile ({ secretKey, fileUri, path, base64, fileType, fileName }) {
   if (base64) {
     const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.FILES.UPLOAD}`,
-    {
-      method: 'POST',
-      headers: {
-        'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${secretKey || Config.secretKey}`,
-      },
-      body: JSON.stringify({
-        base64File: { data: base64, contentType: fileType, fileName },
-      })
-    });
+      {
+        method: 'POST',
+        headers: {
+          'X-CM-ProjectId': Config.projectId,
+          Authorization: `Bearer ${secretKey || Config.secretKey}`
+        },
+        body: JSON.stringify({
+          base64File: { data: base64, contentType: fileType, fileName }
+        })
+      });
 
     return response;
   }
@@ -80,7 +80,7 @@ export async function uploadFile ({ secretKey, fileUri, path, base64, fileType, 
       headers: {
         'X-CM-ProjectId': Config.projectId,
         Authorization: `Bearer ${secretKey || Config.secretKey}`,
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': 'multipart/form-data'
       },
       body: formData
     });
@@ -91,18 +91,18 @@ export async function uploadFile ({ secretKey, fileUri, path, base64, fileType, 
 export async function uploadRecordFile ({ secretKey, fileUri, base64, fileType, fileName, collectionName, recordId, uniqueFieldName }) {
   if (base64) {
     const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.FILES.UPLOAD(collectionName)}`,
-    {
-      method: 'POST',
-      headers: {
-        'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${secretKey || Config.secretKey}`,
-      },
-      body: JSON.stringify({
-        recordId,
-        uniqueFieldName,
-        base64File: { data: base64, contentType: fileType, fileName },
-      })
-    });
+      {
+        method: 'POST',
+        headers: {
+          'X-CM-ProjectId': Config.projectId,
+          Authorization: `Bearer ${secretKey || Config.secretKey}`
+        },
+        body: JSON.stringify({
+          recordId,
+          uniqueFieldName,
+          base64File: { data: base64, contentType: fileType, fileName }
+        })
+      });
 
     return response;
   }
@@ -130,7 +130,7 @@ export async function uploadRecordFile ({ secretKey, fileUri, base64, fileType, 
       headers: {
         'X-CM-ProjectId': Config.projectId,
         Authorization: `Bearer ${secretKey || Config.secretKey}`,
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': 'multipart/form-data'
       },
       body: formData
     });

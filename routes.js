@@ -105,6 +105,18 @@ export const CONFIG = {
       },
       TRANSACTIONS: {
         CREATE_PAYSERA: (orderId) => `/v2/payments/orders/${orderId}/paysera/pay`
+      },
+      CUSTOMERS: {
+        CREATE: '/v2/payments/customers',
+        GET: (customerId) => `/v2/payments/customers/${customerId}`,
+        GET_ALL: '/v2/payments/customers',
+        UPDATE: (customerId) => `/v2/payments/customers/${customerId}`,
+        DELETE: (customerId) => `/v2/payments/customers/${customerId}`
+      },
+      METHODS: {
+        GET_SETUP: '/v2/payments/methods/setup',
+        ATTACH: '/v2/payments/methods/attach',
+        DETACH: '/v2/payments/methods/detach'
       }
     }
   },
