@@ -4,7 +4,7 @@ description: Overview of database service
 
 # Database
 
-CodeMash **Database** service provides many operations for database management like CRUD operations, schema builder and data validation.
+CodeMash **Database** service provides many operations for database management like CRUD operations, schema builder, and data validation.
 
 When you enable a database service in your [CodeMash dashboard page](https://cloud.codemash.io/) we create a new MongoDb database for you. When that is done you are able to create collections using our provided tools in the dashboard. After you create a collection you can start adding records through the dashboard or calling to API endpoints.
 
@@ -30,7 +30,7 @@ var client = new CodeMashClient(apiKey, projectId);
 var service = new CodeMashRepository<Person>(client);
 ```
 
-Here **`Person`** is a class which extends interface **`IEntity`**. The example below shows a class extending **`Entity`** class which extends **`IEntity`** interface. Attribute **`CollectionName`** is a helper for a client. It takes one parameter - name of your collection in CodeMash.
+Here **`Person`** is a class which extends the interface **`IEntity`**. The example below shows a class extending**`Entity`**class which extends**`IEntity`**interface. The attribute**`CollectionName`**is a helper for a client. It takes one parameter - the name of your collection in CodeMash.
 
 ```csharp
 [Collection("persons")]
@@ -41,7 +41,7 @@ public class Person : Entity
 }
 ```
 
-Here `UniqueName` is an attribute which is used to set the unique name of a field \(the name that is used inside a database\). This name can be found in your collection, field details. If this attribute is not used, then your field will be serialized and deserialized as a lowercase property name.
+Here `UniqueName` is an attribute that is used to set the unique name of a field \(the name that is used inside a database\). This name can be found in your collection, field details. If this attribute is not used, then your field will be serialized and deserialized as a lowercase property name.
 {% endtab %}
 
 {% tab title="Node" %}
@@ -51,7 +51,7 @@ import { db } from 'codemash';
 {% endtab %}
 {% endtabs %}
 
-The following are the examples of database SDK using different languages and frameworks.
+The following are examples of database [SDK](https://docs.codemash.io/sdks) using different languages and frameworks.
 
 {% tabs %}
 {% tab title=".NET" %}
