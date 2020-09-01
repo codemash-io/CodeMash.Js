@@ -17,7 +17,7 @@ Creates a custom log.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-The version of API endpoint. Current latest **v1**.
+The version of the API endpoint. Current latest **v1**.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
@@ -27,17 +27,17 @@ User's bearer token.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
 {% api-method-parameter name="message" type="string" required=true %}
-Message of the log.
+The message of the log.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="items" type="object" required=false %}
-Key value pair \(string: string\) object of custom items.
+Key-value pair \(string: string\) object of custom items.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="level" type="string" required=false %}
