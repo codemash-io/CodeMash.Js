@@ -10,28 +10,28 @@ Replace One
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Replaces a record in collection.
+Replaces a record in a collection.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-A version of API endpoint.
+A version of the API endpoint.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="collectionName" type="string" required=true %}
-The name of collection to replace record in.
+The name of the collection to replace record in.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
 {% api-method-headers %}
 {% api-method-parameter name="Authorization" type="string" required=true %}
-Secret API key which belongs to your project or user. Not required if using cookies with session ID.
+Secret API key which belongs to your project or user. Not required if using cookies with a session ID.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
@@ -45,11 +45,11 @@ A replacement for a found record.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="bypassDocumentValidation" type="boolean" required=false %}
-If set to true, document will not be validated against the schema.
+If set to true, the document will not be validated against the schema.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="waitForFileUpload" type="boolean" required=false %}
-If set to true, waits for files to be uploaded before returning from endpoint.
+If set to true, waits for files to be uploaded before returning from the endpoint.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="isUpsert" type="boolean" required=false %}
@@ -128,21 +128,21 @@ Updates specified fields in a record.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-A version of API endpoint.
+A version of the API endpoint.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="collectionName" type="string" required=true %}
-The name of collection to replace record in.
+The name of the collection to replace record in.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
 {% api-method-headers %}
 {% api-method-parameter name="Authorization" type="string" required=true %}
-Secret API key which belongs to your project or user. Not required if using cookies with session ID.
+Secret API key which belongs to your project or user. Not required if using cookies with a session ID.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
@@ -156,11 +156,11 @@ Update document. Used to specify how to update the record. More about update doc
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="bypassDocumentValidation" type="boolean" required=false %}
-If set to true, document will not be validated against the schema.
+If set to true, the document will not be validated against the schema.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="waitForFileUpload" type="boolean" required=false %}
-If set to true, waits for files to be uploaded before returning from endpoint.
+If set to true, waits for files to be uploaded before returning from the endpoint.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="isUpsert" type="boolean" required=false %}
