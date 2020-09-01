@@ -4,9 +4,9 @@ description: Overview of files service
 
 # Files Service
 
-CodeMash **Files** service allows you to store all your project files. These files include files from database, user files and your custom files. All the files can be seen from dashboard in provided file browser.
+CodeMash **Files** service allows you to store all your project files. These files include files from the database, user files, and custom files. All the files can be seen from the dashboard in the file browser.
 
-To start using files services and API methods you firstly need to enable files service in your CodeMash dashboard.
+To start using **Files** services and [API](https://docs.codemash.io/sdks) methods you firstly need to enable files service in your CodeMash dashboard.
 
 Features included in files service:
 
@@ -36,7 +36,7 @@ var filesService = new CodeMashFilesService(client);
 
 ## Example
 
-The following are the examples of files SDK using different languages and frameworks.
+The following are examples of files SDK using different languages and frameworks.
 
 {% tabs %}
 {% tab title=".NET" %}
