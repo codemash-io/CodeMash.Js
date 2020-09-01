@@ -17,21 +17,21 @@ Inserts a new record to a particular collection.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-A version of API endpoint.
+A version of the API endpoint.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="collectionName" type="string" required=true %}
-The name of collection to insert record to.
+The name of the collection to insert record to.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
 {% api-method-headers %}
 {% api-method-parameter name="Authorization" type="string" required=true %}
-Secret API key which belongs to your project or user. Not required if using cookies with session ID.
+Secret API key which belongs to your project or user. Not required if using cookies with a session ID.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
@@ -41,11 +41,11 @@ Record to insert.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="bypassDocumentValidation" type="boolean" required=false %}
-If set to true, document will not be validated against the schema.
+If set to true, the document will not be validated against the schema.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="waitForFileUpload" type="boolean" required=false %}
-If set to true, waits for files to be uploaded before returning from endpoint.
+If set to true, waits for files to be uploaded before returning from the endpoint.
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
 {% endapi-method-request %}
@@ -115,27 +115,27 @@ Inserts multiple records to a particular collection.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-A version of API endpoint.
+A version of the API endpoint.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="collectionName" type="string" required=true %}
-The name of collection to insert records to.
+The name of the collection to insert records to.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
 {% api-method-headers %}
 {% api-method-parameter name="Authorization" type="string" required=true %}
-Secret API key which belongs to your project or user. Not required if using cookies with session ID. 
+Secret API key which belongs to your project or user. Not required if using cookies with a session ID. 
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
 {% api-method-parameter name="documents" type="array" required=true %}
-Array of records to insert. Each record is of string type.
+An array of records to insert. Each record is of string type.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="bypassDocumentValidation" type="boolean" required=false %}
