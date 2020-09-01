@@ -6,7 +6,7 @@ description: Overview of creating Python functions
 
 ### Getting and publishing a function
 
-The following shows how to get, edit and pack your template for upload.
+The following shows how to get, edit, and pack your template for upload.
 
 | Versions | Template |
 | :--- | :--- |
