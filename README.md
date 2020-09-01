@@ -4,11 +4,11 @@ description: Introduction to CodeMash
 
 # Home
 
-CodeMash is a vital toolset for each developer who wants to achieve daily development tasks in a rapid way. CodeMash provides many common back-end services for you so you can focus on your front-end. Services such as database, email and push notifications, authentication, file storage and others are already implemented and can be easily accessed through CodeMash dashboard or through API. More about CodeMash at [http://codemash.io](http://codemash.io).
+CodeMash is a vital toolset for each developer who wants to achieve daily development tasks in a rapid way. CodeMash provides many common back-end services for you so you can focus on your front-end. Services such as database, email and push notifications, authentication, file storage, and others are already implemented and can be easily accessed through CodeMash dashboard or through API. More about CodeMash at [https://codemash.io.](https://codemash.io)
 
 ## Getting Started
 
-To start using CodeMash you firstly need to create an account at [CodeMash](http://codemash.io) home site. Using our provided dashboard you can manage your projects and resources. To access our services through API you can use our provided SDK . The following pages follows you through set up process.
+To start using CodeMash you firstly need to create an account at [CodeMash](http://codemash.io) home site. Using our provided dashboard you can manage your projects and resources. To access our services through API you can use our provided SDK. The following pages follow you through set up process.
 
 {% page-ref page="get-started/register-at-codemash.md" %}
 
