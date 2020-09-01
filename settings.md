@@ -17,7 +17,7 @@ Gets data of a particular project.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-The version of API endpoint.
+The version of the API endpoint.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="projectId" type="string" required=true %}
@@ -27,7 +27,7 @@ Your project's ID.
 
 {% api-method-headers %}
 {% api-method-parameter name="Authorization" type="string" required=true %}
-Secret API key which belongs to your project or user. Not required if using cookies with session ID.
+Secret API key which belongs to your project or user. Not required if using cookies with a session ID.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 {% endapi-method-request %}
@@ -74,7 +74,7 @@ var settings = await projectService.GetProjectAsync(new GetProjectRequest());
 ```
 
 {% hint style="warning" %}
-If you are using client provided by SDK, project ID will be set from client. Otherwise, specify project ID in request object.
+If you are using a client provided by [SDK](https://docs.codemash.io/sdks), the project ID will be set from the client. Otherwise, specify the project ID in the request object.
 {% endhint %}
 {% endtab %}
 
