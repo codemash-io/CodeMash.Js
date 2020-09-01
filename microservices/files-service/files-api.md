@@ -17,7 +17,7 @@ Uploads a file.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-The version of API endpoint.
+The version of the API endpoint.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
@@ -27,7 +27,7 @@ Your project's secret key.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
@@ -115,7 +115,7 @@ Uploads a file for a record field.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-The version of API endpoint.
+The version of the API endpoint.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="collectionName" type="string" required=true %}
@@ -129,13 +129,13 @@ Your project's secret key.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
 {% api-method-parameter name="recordId" type="string" required=true %}
-ID of a record inside collection.
+The ID of a record inside collection.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="uniqueFieldName" type="string" required=true %}
@@ -222,7 +222,7 @@ Uploads a file for a user meta field.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-The version of API endpoint.
+The version of the API endpoint.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
@@ -232,17 +232,17 @@ Your project's secret key.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
 {% api-method-parameter name="userId" type="string" required=true %}
-ID of a user.
+The ID of a user.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="metaFieldName" type="string" required=true %}
-User meta file field name.
+User meta-file field name.
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
 {% endapi-method-request %}
