@@ -4,8 +4,6 @@ description: Here is the list of available SDKs you can use while developing app
 
 # SDKs
 
-
-
 The database and other services we do provide has REST API on top of it. So each interaction and much more are available using our robust API. Even though, work with API can be less joyful, than having a well-prepared SDK \(Software Development Kit\) for your programming language. For such reason, we provide ready to production SDKs which allows you to handle your tedious tasks very quickly and focus more on your app.
 
 Currently, we do support:
