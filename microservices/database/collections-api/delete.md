@@ -10,34 +10,34 @@ Delete One
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Deletes a particular record from collection.
+Deletes a particular record from a collection.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-A version of API endpoint.
+A version of the API endpoint.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="collectionName" type="string" required=true %}
-The name of collection to delete a record from.
+The name of the collection to delete a record from.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
 {% api-method-headers %}
 {% api-method-parameter name="Authorization" type="string" required=true %}
-Secret API key which belongs to your project or user. Not required if using cookies with session ID.
+Secret API key which belongs to your project or user. Not required if using cookies with a session ID.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
 {% api-method-parameter name="filter" type="string" required=true %}
-Filter document. Used to find the record to delete. More about filters follow the a below.
+Filter document. Used to find the record to delete. More about filters follow the example below.
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
 {% endapi-method-request %}
@@ -98,28 +98,28 @@ Delete Many
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Deletes multiple records from collection.
+Deletes multiple records from a collection.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-A version of API endpoint.
+A version of the API endpoint.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="collectionName" type="string" required=true %}
-The name of collection to delete records from.
+The name of the collection to delete records from.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
 {% api-method-headers %}
 {% api-method-parameter name="Authorization" type="string" required=true %}
-Secret API key which belongs to your project or user. Not required if using cookies with session ID.
+Secret API key which belongs to your project or user. Not required if using cookies with a session ID.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
