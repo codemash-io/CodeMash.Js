@@ -1,6 +1,8 @@
 # Table of contents
 
 * [Home](README.md)
+* [Roadmap](roadmap.md)
+* [SDKs](sdks.md)
 * [Changelog](changelog.md)
 * [Billing](billing.md)
 * [Versions](versions.md)
