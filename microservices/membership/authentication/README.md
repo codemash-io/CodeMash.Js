@@ -4,7 +4,7 @@ description: Overview of authentication
 
 # Authentication
 
-Users can be authenticated using built-in CodeMash authentication or other third party provider. Authentication is done through API methods. After authentication is done, a session is persisted and can be used to access API methods.
+Users can be authenticated using built-in CodeMash authentication or any other third-party provider. Authentication is done through [API](https://docs.codemash.io/sdks) methods. After authentication is done, a session is persisted and can be used to access [API](https://docs.codemash.io/sdks) methods.
 
 ## Supported authentication methods
 

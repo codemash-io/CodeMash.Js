@@ -37,7 +37,7 @@ var membershipService = new CodeMashMembershipService(client);
 
 ## Example
 
-The following are the examples of membership SDK using different languages and frameworks.
+The following are examples of membership [SDK](https://docs.codemash.io/sdks) using different languages and frameworks.
 
 {% tabs %}
 {% tab title=".NET" %}
