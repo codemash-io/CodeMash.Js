@@ -10,34 +10,34 @@ Find
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Gets many records by filter. This endpoint accepts GET and POST methods.
+Gets many records by using a filter. This endpoint accepts GET and POST methods.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-A version of API endpoint.
+A version of the API endpoint.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="collectionName" type="string" required=true %}
-The name of collection to get records from.
+The name of the collection to get records from.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
 {% api-method-headers %}
 {% api-method-parameter name="Authorization" type="string" required=true %}
-Secret API key which belongs to your project or user. Not required if using cookies with session ID.
+Secret API key which belongs to your project or user. Not required if using cookies with a session ID.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
 {% api-method-query-parameters %}
 {% api-method-parameter name="filter" type="string" required=true %}
-Filter document. This allows you to find records by custom filter. More about filters follow the link below.
+Filter document. This allows you to find records by a custom filter. More about filters follow the link below.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="referencedFields" type="array" required=false %}
@@ -49,7 +49,7 @@ If set to true, left joins first before applying other processing to main record
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="cultureCode" type="string" required=false %}
-Language code. If your records have translatable fields, those fields will only include this specified language. If not provided, will take language from Accept-Language header.
+Language code. If your records have translatable fields, those fields will only include this specified language. If not provided, will take language from the Accept-Language header.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="sort" type="string" required=false %}
@@ -69,23 +69,23 @@ The page to return. More about paging follow the link below.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="includeSchema" type="boolean" required=false %}
-If set to true, includes your collection details in response.
+If set to true, includes your collection details in the response.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="includeUserNames" type="boolean" required=false %}
-If set to true, will inject your user references.
+If set to true will inject referenced user\(s\) information.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="includeRoleNames" type="boolean" required=false %}
-If set to true, will inject your role references.
+If set to true will inject role\(s\) information.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="includeCollectionNames" type="boolean" required=false %}
-If set to true, will inject your referenced collections.
+If set to true will inject referenced collections.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="includeTermNames" type="boolean" required=false %}
-If set to true, will inject your referenced terms.
+If set to true will inject referenced terms.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="excludeCulture" type="boolean" required=false %}
