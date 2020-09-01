@@ -1,12 +1,12 @@
 # Code
 
-CodeMash **Code** service allows to add your own custom functions or CodeMash provided functions which can later be used in various triggers, scheduled tasks or called through API.
+CodeMash **Code** service allows you to add your own custom functions or CodeMash provided functions which can later be used in various triggers, scheduled tasks, or called through [API](https://docs.codemash.io/sdks).
 
-To start using Code API you firstly need to enable code service in your CodeMash dashboard.
+To start using Code [API](https://docs.codemash.io/sdks) you first need to enable code service in your CodeMash dashboard.
 
 Features included in code service:
 
-1. Providers - ability to add your own functions from external providers.
+1. Providers - the ability to add your own functions from external providers.
 2. Functions - executing your own custom pieces of code.
 3. CodeMash functions - using CodeMash implemented functions.
 
@@ -34,7 +34,7 @@ var codeService = new CodeMashCodeService(client);
 
 ## Example
 
-The following are the examples of code SDK using different languages and frameworks.
+The following are examples of code SDK using different languages and frameworks.
 
 {% tabs %}
 {% tab title=".NET" %}
