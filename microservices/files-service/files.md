@@ -8,7 +8,7 @@ description: Overview of files
 
 ## Files API methods
 
-Exposed API files methods allows you to upload, download and delete files.
+Exposed [API](https://docs.codemash.io/sdks) methods allow you to upload, download, and delete files.
 
 {% page-ref page="files-api.md" %}
 
