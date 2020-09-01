@@ -4,7 +4,7 @@ description: Overview of Microsoft functions
 
 # Microsoft Functions
 
-Microsoft Graph provided API services implemented in CodeMash. These functions allows to easily integrate Microsoft Graph provided services, like calendar and users, into CodeMash.
+Microsoft Graph provided API services implemented in CodeMash. These functions allow to easily integrate Microsoft Graph provided services, like calendar and users, into CodeMash.
 
 ## API implementations
 
@@ -22,22 +22,22 @@ To be able to use these functions, first Microsoft authentication needs to be en
 
 ## API authentication
 
-To use these functions you will need to enable Azure Active Directory authentication in your membership settings. Then you will have to add scopes that you want your users to consent to during login process. Note, that here you add **Delegated** permissions and not **Application** permissions. More on that below.
+To use these functions you will need to enable Azure Active Directory authentication in your membership settings. Then you will have to add scopes that you want your users to consent to during the login process. Note, that here you add **Delegated** permissions and not **Application** permissions. More on that below.
 
 ![Microsoft Graph API settings](../../../../.gitbook/assets/microsoft-functions-api-settings.png)
 
-Here we have two fields for scopes, the upper one is default, the second one is for **Dev** mode. The default scopes are always used unless **Override default** is checked and mode is passed during authentication process. This could be helpful if you are developing your application further and want to add more scopes in development environment without changing production. 
+Here we have two fields for scopes, the upper one is default, the second one is for **Dev** mode. The default scopes are always used unless **Override default** is checked and mode is passed during the authentication process. This could be helpful if you are developing your application further and want to add more scopes in a development environment without changing production. 
 
-For application permissions, you must add **App tenant ID**. The difference between this tenant ID and the one in authentication tab is that in authentication tab, tenant can have other values when using multi-tenancy. This ID though, must be an actual GUID of your Azure directory where your app is.
+For application permissions, you must add an **App tenant ID**. The difference between this tenant ID and the one in the authentication tab is that in authentication tab, tenant can have other values when using multi-tenancy. This ID though must be an actual GUID of your Azure directory where your app is.
 
 ### Delegated permissions
 
-These are the permissions that the user has to consent to during authentication process. They belong to **work**, **school** and **personal** Microsoft accounts. You will have to add these permissions in Azure portal and in CodeMash. Grant them admin consent if required.
+These are the permissions that the user has to consent to during the authentication process. They belong to **work**, **school,** and **personal** Microsoft accounts. You will have to add these permissions in Azure portal and in CodeMash. Grant them admin consent if required.
 
 ![Microsoft Graph API delegated permissions](../../../../.gitbook/assets/microsoft-functions-delegated.png)
 
 {% hint style="warning" %}
-These permissions can also be used in background, without user by using refresh token. CodeMash automatically renews refresh tokens so that they don't expire.
+These permissions can also be used in background, without user by using a refresh token. CodeMash automatically renews refresh tokens so that they don't expire.
 
 This could still cause problems, if you add new scopes, users might have to go through Microsoft authentication flow to consent to new scopes.
 {% endhint %}

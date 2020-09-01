@@ -4,7 +4,7 @@ description: Overview of update record function
 
 # Collection Update
 
-This function allows you to quickly update a record inside collection with a single button.
+This function allows you to quickly update a record inside the collection with a single button.
 
 ### Specifics
 
@@ -17,7 +17,7 @@ This function allows you to quickly update a record inside collection with a sin
 
 ### Configuration
 
-Function requires the following parameters.
+The function requires the following parameters.
 
 | Parameter | Description |
 | :--- | :--- |
@@ -27,11 +27,11 @@ Function requires the following parameters.
 
 ### Update Query
 
-Update query is a BSON document which is similar to JSON but has some of it's own additions. As it is a document, all query needs to be wrapped inside `{ ... }`. The following shows some examples. Full documentation with all available operators and examples can be found in external resources at the end of a page.
+An update query is a BSON document that is similar to JSON but has some of its own additions. As it is a document, all query needs to be wrapped inside `{ ... }`. The following shows some examples. Full documentation with all available operators and examples can be found in external resources at the end of a page.
 
 #### General update syntax
 
-The following is a general syntax of an update query.
+The following is the general syntax of an update query.
 
 ```sql
 {
@@ -41,9 +41,9 @@ The following is a general syntax of an update query.
 }
 ```
 
-* **Operator** - a command to execute on it's fields.
-* **Field** - field name \(unique name of a field\). To reach nested levels separate fields by `.` and use index  to reach specific document. An example of a nested field - `details.0.status`.
-* **Value** - updated value of a field.
+* **Operator** - a command to execute on its fields.
+* **Field** - field name \(unique name of a field\). To reach nested levels separate fields by `.` and use index  to reach the specific document. An example of a nested field - `details.0.status`.
+* **Value** - an updated value of a field.
 
 #### Examples
 
@@ -67,7 +67,7 @@ The following is a general syntax of an update query.
 
 ### External references
 
-As CodeMash is using MongoDB database internally, the following resources explains more of how to use update query.
+As CodeMash is using the MongoDB database internally, the following resources explain more of how to use an update query.
 
 * [Full update command documentation](https://docs.mongodb.com/manual/reference/method/db.collection.update/)
 * [Possible update operators](https://docs.mongodb.com/manual/reference/operator/update/#id1)
