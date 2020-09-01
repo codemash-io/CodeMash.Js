@@ -1,8 +1,26 @@
 ---
-description: Here is the list of available SDKs you can use while developing apps.
+description: >-
+  Here is the list of available SDKs you can use while developing apps. In case
+  you are missing implementation of your programming language you can use our
+  API directly
 ---
 
-# SDKs
+# API & SDKs
+
+## API
+
+Discover our API at [https://api.codemash.io/metadata](https://api.codemash.io/metadata)
+
+All of the API requests takes in a version parameter. Developing CodeMash further may require us to change how requests are processed. To avoid breaking older functionality we introduced version parameters.
+
+The following table displays currently available API method versions.
+
+| Version | Available since |
+| :--- | :--- |
+| v1 | 2019-10-21 |
+| v2 | 2020-05-18 |
+
+## SDKs
 
 The database and other services we do provide has REST API on top of it. So each interaction and much more are available using our robust API. Even though, work with API can be less joyful, than having a well-prepared SDK \(Software Development Kit\) for your programming language. For such reason, we provide ready to production SDKs which allows you to handle your tedious tasks very quickly and focus more on your app.
 

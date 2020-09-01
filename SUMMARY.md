@@ -2,10 +2,9 @@
 
 * [Home](README.md)
 * [Roadmap](roadmap.md)
-* [SDKs](sdks.md)
 * [Release Notes](changelog.md)
+* [API & SDKs](sdks.md)
 * [Billing](billing.md)
-* [Versions](versions.md)
 
 ## Get Started
 
