@@ -4,13 +4,13 @@ description: Overview of collection references
 
 # References
 
-From your collection you can reference other collections, taxonomies, users or roles. By default all references are saved as IDs. For referenced collections and taxonomies we allow using **left joins** in **Find** and **FindOne** requests for first reference level. Unfortunately that is not possible with user and role references and will require additional server calls. 
+From your collection, you can reference other collections, taxonomies, users, or roles. By default, all references are saved as IDs. For referenced collections and taxonomies we allow using **left joins** in **Find** and **FindOne** requests for the first reference level. Unfortunately, that is not possible with user and role references and will require additional server calls. 
 
 For deeper and more customized referencing, use your own [aggregates](../aggregation.md). 
 
 ## How to add references
 
-References are added using **Select** field in your collection builder. When configuring it you can select one of the references - role, user, collection or taxonomy. You also may specify it as a single \(one to one\) or multiple \(one to many\) reference.
+References are added using the **Select** field in your collection builder. When configuring it you can select one of the references - role, user, collection, or taxonomy. You also may specify it as a single \(one to one\) or multiple \(one to many\) references.
 
 ![Reference field in collection builder](../../../.gitbook/assets/references_select.png)
 
@@ -41,7 +41,7 @@ As mentioned, references can be used in **Find** and **FindOne** requests. You a
         <p>By default referencing is done after your main collections records have
           been processed (filters, sort, projection, pagination applied).</p>
         <p>If this is set to true, referencing is done first and you can apply your
-          top level filters, sort and projection based on these resolved references
+          top-level filters, sort, and projection based on these resolved references
           (because the referenced fields will now be objects or arrays instead of
           IDs). Though setting this to true will slow down the response.</p>
       </td>
@@ -51,7 +51,7 @@ As mentioned, references can be used in **Find** and **FindOne** requests. You a
 
 ### Form of referencing field
 
-The following shows the form of `referencedFields` parameter. It is a list of objects where object defines parameters for each field to join. The one required value is `name`. All others are optional.
+The following shows the form of`referencedFields`parameter. It is a list of objects where object defines parameters for each field to join. The one required value is `name`. All others are optional.
 
 ```javascript
 [
@@ -80,11 +80,11 @@ All of the parameters defined in each of the objects are applied to joined recor
 
 ### Expected response
 
-Let's say you have a record which is referencing another collection. You have two collections - person and company. In database your records could look like the following.
+Let's say you have a record that is referencing another collection. You have two collections - person and company. In the database, your records could look like the following.
 
 #### Person example record
 
-Here company field is a reference to some record inside company collection.
+Here the company field is a reference to some record inside the company collection.
 
 ```javascript
 { "_id": "person_id_1", "name": "John", "company": "comp_id_1" }
@@ -185,14 +185,14 @@ public class ReferencedEntity: Entity
 
 ## Basic references
 
-If you only need id/name pair from reference, then you can use basic references without much of configuration. These are controlled by 4 parameters.
+If you only need id/name pair from reference, then you can use basic references without much configuration. These are controlled by 4 parameters.
 
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
-| includeUserNames | bool | Includes user's display label and id into response. |
-| includeRoleNames | bool | Includes role's display name and value name. |
-| includeCollectionNames | bool | Includes record's display label and id into response. |
-| includeTermNames | bool | Includes term's title and id into response. |
+| includeUserNames | bool | Includes the user's display label and id into a response. |
+| includeRoleNames | bool | Includes the role's display name and value name. |
+| includeCollectionNames | bool | Includes record's display label and id into a response. |
+| includeTermNames | bool | Includes the term's title and id into a response. |
 
 The following shows examples of returned objects by using any of the parameters.
 
