@@ -11,7 +11,7 @@
 * [Register at CodeMash](get-started/register-at-codemash.md)
 * [Install CodeMash](get-started/install-codemash.md)
 * [Set up API keys](get-started/set-up-api-keys.md)
-* [Creating a website](get-started/creating-a-website.md)
+* [Creating a web app](get-started/creating-a-website.md)
 * [Creating a mobile app](get-started/creating-a-mobile-app.md)
 
 ## Projects

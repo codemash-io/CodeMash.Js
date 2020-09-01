@@ -1,6 +1,6 @@
-# Creating a website
+# Creating a web app
 
-If you are creating a website make sure to check the information provided below.
+If you are creating a web app or making a request from a website, please make sure to check the information provided below.
 
 ## CORS mechanism
 
