@@ -10,14 +10,14 @@ Find
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Gets many terms by filter. This endpoint accepts GET and POST methods.
+Gets many terms by using a filter. This endpoint accepts GET and POST methods.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-A version of API endpoint.
+A version of the API endpoint.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="taxonomyName" type="string" required=true %}
@@ -27,21 +27,21 @@ The name of taxonomy to get records from.
 
 {% api-method-headers %}
 {% api-method-parameter name="Authorization" type="string" required=true %}
-Secret API key which belongs to your project or user. Not required if using cookies with session ID.
+Secret API key which belongs to your project or user. Not required if using cookies with a session ID.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
 {% api-method-query-parameters %}
 {% api-method-parameter name="filter" type="string" required=true %}
-Filter document. This allows you to find records by custom filter. More about filters follow the link below.
+Filter document. This allows you to find records by a custom filter. More about filters follow the link below.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="cultureCode" type="string" required=false %}
-Language code. If your terms have translatable fields, those fields will only include this specified language. If not provided, will take language from Accept-Language header.
+Language code. If your terms have translatable fields, those fields will only include this specified language. If not provided, will take language from the Accept-Language header.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="sort" type="string" required=false %}
@@ -49,7 +49,7 @@ Sort document. This allows you to sort your records. More about sorting follow t
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="projection" type="string" required=false %}
-Projection document. This allows you to specify what fields to return decreasing the amount of data transferred. This is applied to **Meta** field. More about projections follow the link below.
+Projection document. This allows you to specify what fields to return decreasing the amount of data transferred. This is applied to the **Meta** field. More about projections follow the link below.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="pageSize" type="integer" required=false %}
@@ -61,7 +61,7 @@ The page to return. More about paging follow the link below.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="includeTaxonomy" type="boolean" required=false %}
-Includes taxonomy to response.
+Includes taxonomy to the response.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="excludeCulture" type="boolean" required=false %}
