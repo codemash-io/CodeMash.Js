@@ -32,7 +32,7 @@ var emailService = new CodeMashEmailService(client);
 
 ## Example
 
-The following are the examples of email notifications SDK using different languages and frameworks.
+The following are examples of email notifications SDK using different languages and frameworks.
 
 {% tabs %}
 {% tab title=".NET" %}

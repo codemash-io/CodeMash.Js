@@ -1,12 +1,12 @@
 # Push Notifications
 
-CodeMash **Push Notifications** service allows you to push mobile notifications to your users. All notifications queuing and management is accessible through the dashboard. Using API methods you can register devices, push messages and more.
+CodeMash **Push Notifications** service allows you to push mobile notifications to your users. All notifications queuing and management is accessible through the dashboard. Using API methods you can register devices, push messages, and more.
 
-To start using push notifications service and it's API methods, you firstly need to enable push notifications service in your CodeMash dashboard.
+To start using the push notifications service and it's API methods, you firstly need to enable push notifications service in your CodeMash dashboard.
 
 ## Using SDK
 
-If you decide to use one of our provided SDK, the following code shows how to initialize notifications service.
+If you decide to use one of our provided SDK, the following code shows how to initialize the notifications service.
 
 {% tabs %}
 {% tab title=".NET" %}
@@ -28,7 +28,7 @@ var pushService = new CodeMashPushService(client);
 
 ## Example
 
-The following are the examples of push notifications SDK using different languages and frameworks.
+The following are examples of push notifications SDK using different languages and frameworks.
 
 {% tabs %}
 {% tab title=".NET" %}

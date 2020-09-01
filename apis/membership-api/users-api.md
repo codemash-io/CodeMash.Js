@@ -17,17 +17,17 @@ Register a new user to a particular project.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-A version of API endpoint.
+A version of the API endpoint.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
 {% api-method-headers %}
 {% api-method-parameter name="Authorization" type="string" required=true %}
-Secret API key which belongs to your project or user. Not required if using cookies with session ID.
+Secret API key which belongs to your project or user. Not required if using cookies with a session ID.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
@@ -53,15 +53,15 @@ User's last name.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="roles" type="array" required=false %}
-Roles to give to newly created user \(don't provide any to use default role from settings\).
+Roles to give to the newly created user \(don't provide any to use default role from settings\).
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="autoLogin" type="boolean" required=false %}
-Should the user be logged in after registering. Default is **true**.
+Should the user be logged in after registering? The default is **true**.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="meta" type="string" required=false %}
-User's meta details as JSON object.
+User's meta details as a JSON object.
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
 {% endapi-method-request %}
@@ -110,8 +110,8 @@ membershipService.RegisterUser(new RegisterUserRequest
 
 There are some settings for user registration inside your dashboard under sections **Registration** and **Verification**.
 
-* **User registers as** - if you don't provide roles during registration, user will be given selected role in the settings.
-* **Verification by email needed** - if this is checked, user will be unverified until verified through email. Email service needs to be enabled for this option. Also in your template you have to set a token named **@Model.ValidationToken** which will be replaced by verification token.
+* **User registers as** - if you don't provide roles during registration, the user will be given a selected role in the settings.
+* **Verification by email needed** - if this is checked, the user will be unverified until verified through email. Email service needs to be enabled for this option. Also in your template, you have to set a token named **@Model.ValidationToken** which will be replaced by a verification token.
 {% endhint %}
 
 {% api-method method="post" host="https://api.codemash.io" path="/:version/membership/users/invite" %}
@@ -120,24 +120,24 @@ Invite User
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Invites user to a particular project.
+Invites an user to a particular project.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-A version of API endpoint.
+A version of the API endpoint.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
 {% api-method-headers %}
 {% api-method-parameter name="Authorization" type="string" required=true %}
-Secret API key which belongs to your project or user. Not required if using cookies with session ID.
+Secret API key which belongs to your project or user. Not required if using cookies with a session ID.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
@@ -159,11 +159,11 @@ User's last name.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="roles" type="array" required=false %}
-Roles to give to newly created user \(don't provide any to use default role from settings\).
+Roles to give to the newly created user \(don't provide any to use default role from settings\).
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="meta" type="string" required=false %}
-User's meta details as JSON object.
+User's meta details as a JSON object.
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
 {% endapi-method-request %}
@@ -210,8 +210,8 @@ membershipService.InviteUserAsync(new InviteUserRequest
 
 There are some settings for user invitation inside your dashboard under sections **Registration** and **Invitation**.
 
-* **User registers as** - if you don't provide roles during registration, user will be given selected role.
-* **Allow invite users** - this **MUST** be checked for invitations to work. Email service needs to be enabled for this option. Also in your template you have to set a token named **@Model.ValidationToken** which will be replaced by invitation token.
+* **User registers as** - if you don't provide roles during registration, the user will be given a selected role.
+* **Allow invite users** - this **MUST** be checked for invitations to work. Email service needs to be enabled for this option. Also in your template, you have to set a token named **@Model.ValidationToken** which will be replaced by an invitation token.
 {% endhint %}
 
 {% api-method method="get" host="https://api.codemash.io" path="/:version/membership/users" %}
@@ -227,31 +227,31 @@ Gets a list of project users.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-A version of API endpoint.
+A version of the API endpoint.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
 {% api-method-headers %}
 {% api-method-parameter name="Authorization" type="string" required=true %}
-Secret API key which belongs to your project or user. Not required if using cookies with session ID.
+Secret API key which belongs to your project or user. Not required if using cookies with a session ID.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
 {% api-method-query-parameters %}
 {% api-method-parameter name="includePermissions" type="boolean" required=false %}
-Includes permissions to response.
+Includes permissions to the response.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="includeDevices" type="boolean" required=false %}
-Includes devices to response.
+Includes devices to the response.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="includeMeta" type="boolean" required=false %}
-Includes meta to response.
+Includes meta to the response.
 {% endapi-method-parameter %}
 {% endapi-method-query-parameters %}
 {% endapi-method-request %}
@@ -308,7 +308,7 @@ Gets a project user.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-A version of API endpoint.
+A version of the API endpoint.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="id" type="string" required=true %}
@@ -318,11 +318,11 @@ User's ID.
 
 {% api-method-headers %}
 {% api-method-parameter name="Authorization" type="string" required=true %}
-Secret API key which belongs to your project or user. Not required if using cookies with session ID.
+Secret API key which belongs to your project or user. Not required if using cookies with a session ID.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
@@ -332,15 +332,15 @@ Includes unread push notifications count.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="includePermissions" type="boolean" required=false %}
-Includes permissions to response.
+Includes permissions to the response.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="includeDevices" type="boolean" required=false %}
-Includes devices to response.
+Includes devices to the response.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="includeMeta" type="boolean" required=false %}
-Includes meta to response.
+Includes meta to the response.
 {% endapi-method-parameter %}
 {% endapi-method-query-parameters %}
 {% endapi-method-request %}
@@ -402,17 +402,17 @@ Gets a project user by email.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-A version of API endpoint.
+A version of the API endpoint.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
 {% api-method-headers %}
 {% api-method-parameter name="Authorization" type="string" required=true %}
-Secret API key which belongs to your project or user. Not required if using cookies with session ID.
+Secret API key which belongs to your project or user. Not required if using cookies with a session ID.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
@@ -422,15 +422,15 @@ Includes unread push notifications count.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="includePermissions" type="boolean" required=false %}
-Includes permissions to response.
+Includes permissions to the response.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="includeDevices" type="boolean" required=false %}
-Includes devices to response.
+Includes devices to the response.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="includeMeta" type="boolean" required=false %}
-Includes meta to response.
+Includes meta to the response.
 {% endapi-method-parameter %}
 {% endapi-method-query-parameters %}
 {% endapi-method-request %}
@@ -479,34 +479,34 @@ Update profile
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Updates user's profile with given parameters. Only provided values are updated. This request does not update user roles.
+Updates the user's profile with given parameters. Only the provided values are updated. This request does not update user roles.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-A version of API endpoint.
+A version of the API endpoint.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
 {% api-method-headers %}
 {% api-method-parameter name="Authorization" type="string" required=true %}
-Secret API key which belongs to your project or user. Not required if using cookies with session ID.
+Secret API key which belongs to your project or user. Not required if using cookies with a session ID.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
 {% api-method-parameter name="unsubscribedNewsTags" type="array" required=false %}
-Marketing email types to unsubscribe from. If value not provided then it's not updated. To delete, pass empty array.
+Marketing email types to unsubscribe from. If value not provided then it's not updated. To delete, pass an empty array.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="subscribeToNews" type="boolean" required=false %}
-Should user receive marketing emails. If value not provided then it's not updated.
+Should a user receive marketing emails? If value not provided then it's not updated.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="timeZone" type="string" required=false %}
@@ -572,14 +572,14 @@ Update user
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Updates user with given parameters. Only provided values are updated. This request allows updating user  roles.
+Updates user with given parameters. Only the provided values are updated. This request allows us to update user roles.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-A version of API endpoint.
+A version of the API endpoint.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="id" type="string" required=true %}
@@ -589,21 +589,21 @@ User's ID.
 
 {% api-method-headers %}
 {% api-method-parameter name="Authorization" type="string" required=true %}
-Secret API key which belongs to your project or user. Not required if using cookies with session ID.
+Secret API key which belongs to your project or user. Not required if using cookies with a session ID.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
 {% api-method-parameter name="unsubscribedNewsTags" type="array" required=false %}
-Marketing email types to unsubscribe from. If value not provided then it's not updated. To delete, pass empty array.
+Marketing email types to unsubscribe from. If value not provided then it's not updated. To delete, pass an empty array.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="subscribeToNews" type="boolean" required=false %}
-Should user receive marketing emails. If value not provided then it's not updated.
+Should user receive marketing emails? If value not provided then it's not updated.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="timeZone" type="string" required=false %}
@@ -686,7 +686,7 @@ Deletes a project user.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-A version of API endpoint.
+A version of the API endpoint.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="id" type="string" required=true %}
@@ -696,11 +696,11 @@ User's ID.
 
 {% api-method-headers %}
 {% api-method-parameter name="Authorization" type="string" required=true %}
-Secret API key which belongs to your project or user. Not required if using cookies with session ID.
+Secret API key which belongs to your project or user. Not required if using cookies with a session ID.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 {% endapi-method-request %}
@@ -747,14 +747,14 @@ Block user
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Blocks user from calling any authenticated requests.
+Blocks users from calling any authenticated requests.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-A version of API endpoint.
+A version of the API endpoint.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="id" type="string" required=true %}
@@ -764,11 +764,11 @@ User's ID.
 
 {% api-method-headers %}
 {% api-method-parameter name="Authorization" type="string" required=true %}
-Secret API key which belongs to your project or user. Not required if using cookies with session ID.
+Secret API key which belongs to your project or user. Not required if using cookies with a session ID.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 {% endapi-method-request %}
@@ -822,7 +822,7 @@ Unblocks user allowing to call authenticated calls.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-A version of API endpoint.
+A version of the API endpoint.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="id" type="string" required=true %}
@@ -832,11 +832,11 @@ User's ID.
 
 {% api-method-headers %}
 {% api-method-parameter name="Authorization" type="string" required=true %}
-Secret API key which belongs to your project or user. Not required if using cookies with session ID.
+Secret API key which belongs to your project or user. Not required if using cookies with a session ID.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 {% endapi-method-request %}

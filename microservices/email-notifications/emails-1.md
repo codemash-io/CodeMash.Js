@@ -14,7 +14,7 @@ Cc and Bcc recipients will be added for each email. That means, if you are sendi
 
 ## Emails API
 
-Exposed API email methods allows sending emails. All other email management operations are done through the dashboard.
+Exposed API email methods allow sending emails. All other email management operations are done through the dashboard.
 
 {% page-ref page="emails.md" %}
 

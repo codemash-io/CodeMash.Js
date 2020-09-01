@@ -9,9 +9,9 @@ Meta keys:
 | key | value |
 | :--- | :--- |
 | data | data to be encoded |
-| outputDirectory | \(Optional\) will override output directory set in function config. By default will create in temp folder \(leave it as empty to set into temp folder if later want to add to record\). |
+| outputDirectory | \(Optional\) will override output directory set in function config. By default will create in a temp folder \(leave it as empty to set into temp folder if later want to add to record\). |
 | outputName | \(Optional\) created image name. By default will have ID as name. |
-| text | \(Optional\) text shown near barcode. If empty, data will be set as text. |
+| text | \(Optional\) text that will be visible near the barcode. If empty, data will be set as text. |
 
 Config:
 

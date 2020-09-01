@@ -10,20 +10,20 @@ Credentials authentication
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Authenticate a user using an email password pair. Also supports **GET** method with body parameters in query string.
+Authenticate a user using an email password pair. Also supports **GET** method with body parameters in a query string.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-A version of API endpoint.
+A version of the API endpoint.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
 {% api-method-headers %}
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
@@ -78,26 +78,26 @@ Microsoft authentication
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Authenticate a user using Microsoft. Also supports **GET** method with body parameters in query string.
+Authenticate a user using Microsoft. Also supports **GET** method with body parameters in a query string.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-A version of API endpoint.
+A version of the API endpoint.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
 {% api-method-headers %}
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
 {% api-method-parameter name="mode" type="string" required=false %}
-Mode to use for authentication. If not passed, will use default.
+Mode to use for authentication. If not passed, will use the default.
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
 {% endapi-method-request %}
@@ -165,24 +165,24 @@ Check authentication
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Check if user is authenticated \(if authorization token is valid\). Also supports **GET** method.
+Check if the user is authenticated \(if authorization token is valid\). Also, supports **GET** method.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-A version of API endpoint.
+A version of the API endpoint.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
 {% api-method-headers %}
 {% api-method-parameter name="Authorization" type="string" required=true %}
-Secret API key which belongs to your project or user. Not required if using cookies with session ID.
+Secret API key which belongs to your project or user. Not required if using cookies with a session ID.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 {% endapi-method-request %}

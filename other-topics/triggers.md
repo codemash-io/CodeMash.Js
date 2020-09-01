@@ -4,13 +4,13 @@ description: Overview of triggers
 
 # Triggers
 
-Triggers are actions that are executed after a certain action was done. For example, inserting a record into collection might trigger an action to send an email message.
+Triggers are actions that are executed after a certain action was done. For example, inserting a record into a collection might trigger an action to send an email message.
 
-Triggers can be used with **collections**, **users** and **files**.
+Triggers can be used with **collections**, **users,** and **files**.
 
 ## Trigger actions
 
-Trigger can invoke one of the following actions.
+The trigger can invoke one of the following actions.
 
 1. Send an email
 2. Send a push notification

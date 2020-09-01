@@ -8,7 +8,7 @@ Push notifications internally are grouped into notification groups. Every time y
 
 ## Push Notifications API
 
-Exposed API push notification methods allows sending and managing user notifications.
+Exposed API push notification methods allow sending and managing user notifications.
 
 {% page-ref page="notifications.md" %}
 

@@ -4,7 +4,7 @@ description: Overview of user data object
 
 # User object
 
-The following displays properties of user object to use for filtering, sorting and projection.
+The following displays properties of the user object to use for filtering, sorting, and projection.
 
 ## User object
 

@@ -17,23 +17,23 @@ Send an email message.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-A version of API endpoint.
+A version of the API endpoint.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
 {% api-method-headers %}
 {% api-method-parameter name="Authorization" type="string" required=true %}
-Secret API key which belongs to your project or user. Not required if using cookies with session ID.
+Secret API key which belongs to your project or user. Not required if using cookies with a session ID.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
 {% api-method-parameter name="templateId" type="string" required=true %}
-ID of email template to use.
+The ID of the email template to use.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="cultureCode" type="string" required=false %}
@@ -41,7 +41,7 @@ Language code. If you have more than one language set in your project you can us
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="forceRequestLanguage" type="string" required=false %}
-If recipient user has a language set, user language is used to select a template language. This forces to use cultureCode parameter instead of user's language.
+If the recipient user has a language set, user language is used to select a template language. This forces us to use cultureCode parameter instead of user's language.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="roles" type="array" required=false %}
@@ -49,31 +49,31 @@ Roles of users to be set as recipients.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="emails" type="array" required=false %}
-Array of emails to be set as recipients.
+An array of emails to be set as recipients.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="users" type="array" required=false %}
-Array of user IDs to be set as recipients.
+An array of user IDs to be set as recipients.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="ccEmails" type="array" required=false %}
-Array of emails to be set as CC recipients.
+An array of emails to be set as CC recipients.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="ccUsers" type="array" required=false %}
-Array of user IDs to be set as CC recipients.
+An array of user IDs to be set as CC recipients.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="bccEmails" type="array" required=false %}
-Array of emails to be set as BCC recipients.
+An array of emails to be set as BCC recipients.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="bccUsers" type="array" required=false %}
-Array of user IDs to be set as BCC recipients.
+An array of user IDs to be set as BCC recipients.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="tokens" type="object" required=false %}
-Key value pair \(string: string\) object of custom tokens.
+Key-value pair \(string: string\) object of custom tokens.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="postpone" type="integer" required=false %}
@@ -81,7 +81,7 @@ Amount of milliseconds to postpone sending the email.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="respectTimeZone" type="boolean" required=false %}
-If creating a postponed email and recipient of an email has timezone set, then postpones according to recipients timezone.
+If creating a postponed email and the recipient of an email has a timezone set, then postpones according to the recipient's timezone.
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
 {% endapi-method-request %}

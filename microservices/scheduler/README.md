@@ -1,8 +1,8 @@
 # Scheduler
 
-CodeMash **Scheduler** service allows to schedule tasks to be executed. Every task requires a function from **Code** service which the task calls.
+CodeMash **Scheduler** service allows us to schedule tasks to be executed. Every task requires a function from **Code** service which the task calls.
 
-Currently there are no API methods exposed to be used with a scheduler service. All of the management is done through the dashboard.
+Currently, there are no API methods exposed to be used with a scheduler service. All of the management is done through the dashboard.
 
 ## Working with Scheduler Service
 

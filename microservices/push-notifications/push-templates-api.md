@@ -17,11 +17,11 @@ Gets a push notification template.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-The version of API endpoint. Current latest **v1**.
+The version of the API endpoint. Current latest **v1**.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="id" type="string" required=true %}
-ID of a template to get.
+The ID of a template to get.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
@@ -31,7 +31,7 @@ Your project's secret key.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 {% endapi-method-request %}
@@ -107,7 +107,7 @@ Gets many push notification templates.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-The version of API endpoint. Current latest **v1**.
+The version of the API endpoint. Current latest **v1**.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
@@ -117,7 +117,7 @@ Your project's secret key.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 {% endapi-method-request %}

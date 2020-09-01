@@ -17,7 +17,7 @@ Send a mobile notification message.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-The version of API endpoint. Current latest **v1**.
+The version of the API endpoint. Current latest **v1**.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
@@ -27,13 +27,13 @@ Your project's secret key.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
 {% api-method-parameter name="templateId" type="string" required=true %}
-ID of push notification template to use.
+The ID of push notification template to use.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="roles" type="array" required=false %}
@@ -41,19 +41,19 @@ Roles of users to set as recipients.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="users" type="array" required=false %}
-Array of user IDs to be set as recipients.
+An array of user IDs to be set as recipients.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="devices" type="array" required=false %}
-Array of device IDs to be set as recipients.
+An array of device IDs to be set as recipients.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="isNonPushable" type="boolean" required=false %}
-If set as true, creates a silent notification without popping up at recipient's device.
+If set as true, creates a silent notification without popping up at the recipient's device.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="tokens" type="object" required=false %}
-Key value pair \(string: string\) object of custom tokens.
+Key-value pair \(string: string\) object of custom tokens.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="postpone" type="integer" required=false %}
@@ -61,7 +61,7 @@ Amount of milliseconds to postpone sending the notification.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="respectTimeZone" type="boolean" required=false %}
-If creating a postponed notification and recipient's devices has timezone set, then postpones according to device's timezone.
+If creating a postponed notification and the recipient's devices have timezone set, then postpones according to the device's timezone.
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
 {% endapi-method-request %}
@@ -138,11 +138,11 @@ Gets a push notification.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-The version of API endpoint. Current latest **v1**.
+The version of the API endpoint. Current latest **v1**.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="id" type="string" required=true %}
-ID of a notification to get.
+The ID of a notification to get.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
@@ -152,7 +152,7 @@ Your project's secret key.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 {% endapi-method-request %}
@@ -228,7 +228,7 @@ Gets many push notifications.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-The version of API endpoint. Current latest **v1**.
+The version of the API endpoint. Current latest **v1**.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
@@ -238,17 +238,17 @@ Your project's secret key.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
 {% api-method-query-parameters %}
 {% api-method-parameter name="userId" type="string" required=false %}
-ID of a user whose notifications to get.
+The ID of a user whose notifications to get.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="deviceId" type="string" required=false %}
-ID of a device whose notifications to get.
+The ID of a device whose notifications to get.
 {% endapi-method-parameter %}
 {% endapi-method-query-parameters %}
 {% endapi-method-request %}
@@ -306,7 +306,7 @@ var response = await pushService.GetNotificationsAsync(
 {% endtabs %}
 
 {% hint style="warning" %}
-If you do not specify user ID or device ID, method will return notifications directed to calling user. To get any user's or device's notifications, the calling user need's to have appropriate permission for that.
+If you do not specify user ID or device ID, the method will return notifications directed to the calling user. To get any user's or device's notifications, the calling user need's to have the appropriate permission for that.
 {% endhint %}
 
 {% api-method method="get" host="https://api.codemash.io" path="/:version/notifications/push/count" %}
@@ -322,7 +322,7 @@ Gets total and total unread notifications.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-The version of API endpoint. Current latest **v1**.
+The version of the API endpoint. Current latest **v1**.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
@@ -332,17 +332,17 @@ Your project's secret key.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
 {% api-method-query-parameters %}
 {% api-method-parameter name="userId" type="string" required=false %}
-ID of a user whose notifications to get.
+The ID of a user whose notifications to get.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="deviceId" type="string" required=false %}
-ID of a device whose notifications to get.
+The ID of a device whose notifications to get.
 {% endapi-method-parameter %}
 {% endapi-method-query-parameters %}
 {% endapi-method-request %}
@@ -403,7 +403,7 @@ var response = await pushService.GetNotificationsCountAsync(
 {% endtabs %}
 
 {% hint style="warning" %}
-If you do not specify user ID or device ID, method will return notifications directed to calling user. To get any user's or device's notifications, the calling user need's to have appropriate permission for that.
+If you do not specify user ID or device ID, the method will return notifications directed to the calling user. To get any user's or device's notifications, the calling user need's to have the appropriate permission for that.
 {% endhint %}
 
 {% api-method method="patch" host="https://api.codemash.io" path="/:version/notifications/push/:notificationId/read" %}
@@ -419,11 +419,11 @@ Marks a particular push notification as read.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-The version of API endpoint. Current latest **v1**.
+The version of the API endpoint. Current latest **v1**.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="id" type="string" required=true %}
-ID of a notification to delete.
+The ID of a notification to delete.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
@@ -433,21 +433,21 @@ Your project's secret key.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
 {% api-method-parameter name="notificationId" type="string" required=true %}
-ID of notification to mark as read.
+The ID of notification to mark as read.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="userId" type="string" required=false %}
-ID of user at which this notification was directed.
+The ID of the user at which this notification was directed.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="deviceId" type="string" required=false %}
-ID of device at which this notification was directed.
+The ID of device at which this notification was directed.
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
 {% endapi-method-request %}
@@ -505,7 +505,7 @@ var response = await pushService.ReadNotificationAsync(
 {% endtabs %}
 
 {% hint style="warning" %}
-If you do not specify user ID or device ID, method will assume that notification was directed to a calling user. If you want to set other user's notification as read, you need to have appropriate permission for that.
+If you do not specify user ID or device ID, the method will assume that notification was directed to a calling user. If you want to set other user's notification as read, you need to have the appropriate permission for that.
 {% endhint %}
 
 {% api-method method="delete" host="https://api.codemash.io" path="/:version/notifications/push/:id" %}
@@ -521,11 +521,11 @@ Deletes a particular push notification.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-The version of API endpoint. Current latest **v1**.
+The version of the API endpoint. Current latest **v1**.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="id" type="string" required=true %}
-ID of a notification to delete.
+The ID of a notification to delete.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
@@ -535,7 +535,7 @@ Your project's secret key.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 {% endapi-method-request %}

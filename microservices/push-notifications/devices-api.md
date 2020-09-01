@@ -17,7 +17,7 @@ Registers a device without a token. Devices without a token won't receive push n
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-The version of API endpoint. Current latest **v1**.
+The version of the API endpoint. Current latest **v1**.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
@@ -27,21 +27,21 @@ Your project's secret key.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
 {% api-method-parameter name="userId" type="string" required=false %}
-ID of a user.
+The ID of a user.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="timeZone" type="string" required=false %}
-Timezone of a device in a tz database format.
+The timezone of a device in a tz database format.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="meta" type="object" required=false %}
-Key value pair \(string: string\) object for custom data.
+Key-value pair \(string: string\) object for custom data.
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
 {% endapi-method-request %}
@@ -108,14 +108,14 @@ Register Expo Token
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Registers a device with a Expo token and creates a device if not yet created. 
+Registers a device with an Expo token and creates a device if not yet created. 
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-The version of API endpoint. Current latest **v1**.
+The version of the API endpoint. Current latest **v1**.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
@@ -125,29 +125,29 @@ Your project's secret key.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
 {% api-method-parameter name="token" type="string" required=true %}
-Token of a device provided by Expo.
+Token of a device provided by the Expo.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="deviceId" type="string" required=false %}
-ID of a device. If not provided, a new device will be added.
+The ID of a device. If not provided, a new device will be added.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="userId" type="string" required=false %}
-ID of a user.
+The ID of a user.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="timeZone" type="string" required=false %}
-Timezone of a device in a tz database format.
+The timezone of a device in a tz database format.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="meta" type="object" required=false %}
-Key value pair \(string: string\) object for custom data.
+Key-value pair \(string: string\) object for custom data.
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
 {% endapi-method-request %}
@@ -222,11 +222,11 @@ Gets a device.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-The version of API endpoint. Current latest **v1**.
+The version of the API endpoint. Current latest **v1**.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="id" type="string" required=true %}
-ID of a device to get.
+The ID of a device to get.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
@@ -236,7 +236,7 @@ Your project's secret key.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 {% endapi-method-request %}
@@ -306,7 +306,7 @@ Gets many devices.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-The version of API endpoint. Current latest **v1**.
+The version of the API endpoint. Current latest **v1**.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
@@ -316,7 +316,7 @@ Your project's secret key.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 {% endapi-method-request %}
@@ -383,11 +383,11 @@ Deletes a particular device.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-The version of API endpoint. Current latest **v1**.
+The version of the API endpoint. Current latest **v1**.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="id" type="string" required=true %}
-ID of a device to delete.
+The ID of a device to delete.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
@@ -397,7 +397,7 @@ Your project's secret key.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 {% endapi-method-request %}
@@ -460,18 +460,18 @@ Delete Device Token
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Deletes a token of particular device.
+Deletes a token of a particular device.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-The version of API endpoint. Current latest **v1**.
+The version of the API endpoint. Current latest **v1**.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="id" type="string" required=true %}
-ID of a device.
+The ID of a device.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
@@ -481,7 +481,7 @@ Your project's secret key.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 {% endapi-method-request %}
@@ -544,18 +544,18 @@ Update Device Meta
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Updates a meta information of a particular device.
+Updates a meta-information of a particular device.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-The version of API endpoint. Current latest **v1**.
+The version of the API endpoint. Current latest **v1**.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="id" type="string" required=true %}
-ID of a device to update.
+The ID of a device to update.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
@@ -565,13 +565,13 @@ Your project's secret key.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
 {% api-method-parameter name="meta" type="string" required=false %}
-Key value pair \(string: string\) object of custom data.
+Key-value pair \(string: string\) object of custom data.
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
 {% endapi-method-request %}
@@ -645,11 +645,11 @@ Updates a timezone of a particular device.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-The version of API endpoint. Current latest **v1**.
+The version of the API endpoint. Current latest **v1**.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="id" type="string" required=true %}
-ID of a device to update.
+The ID of a device to update.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
@@ -659,13 +659,13 @@ Your project's secret key.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
 {% api-method-parameter name="timezone" type="string" required=false %}
-Timezone of a device in a tz database format.
+The timezone of a device in a tz database format.
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
 {% endapi-method-request %}
@@ -736,11 +736,11 @@ Updates a user of a particular device.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-The version of API endpoint. Current latest **v1**.
+The version of the API endpoint. Current latest **v1**.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="id" type="string" required=true %}
-ID of a device to update.
+The ID of a device to update.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
@@ -750,13 +750,13 @@ Your project's secret key.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="x-cm-projectid" type="string" required=true %}
-Your project's ID. Can be passed as query parameter.
+Your project's ID. Can be passed as a query parameter.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
 {% api-method-parameter name="userId" type="string" required=false %}
-ID of a new user.
+The ID of a new user.
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
 {% endapi-method-request %}
