@@ -1,16 +1,19 @@
 ---
-description: Overview of projects
+description: >-
+  Regarding your license you own on CodeMash, you can create from one to many
+  projects on CodeMash. Each project can represent either a single mobile
+  application or a web app or even both of them.
 ---
 
 # About Projects
 
-The first thing to do before you can start using CodeMash services - creating a new project. Project is a collective of resources used for a specific application. For every new application we recommend creating a new project.
+The first thing to do before you can start using CodeMash services - creating a new project. The project is a collective of resources used for a specific application. For every new application, we recommend creating a new project.
 
-Project, just like other microservices, exposes some of the API methods to use and it's own SDK methods.
+The project, just like other microservices, exposes some of the [API](https://docs.codemash.io/sdks) methods to use and it's own [SDK](https://docs.codemash.io/sdks) methods.
 
 ## Using SDK
 
-If you decide to use one of our provided SDK, the following code shows how to initialize project service.
+If you decide to use one of [our provided SDK](https://docs.codemash.io/sdks), the following code shows how to initialize the project service.
 
 {% tabs %}
 {% tab title=".NET" %}
@@ -32,7 +35,7 @@ var projectService = new CodeMashProjectService(client);
 
 ## Example
 
-The following are the examples of project SDK using different languages and frameworks.
+The following are examples of project [SDK](https://docs.codemash.io/sdks) using different languages and frameworks.
 
 {% tabs %}
 {% tab title=".NET" %}
