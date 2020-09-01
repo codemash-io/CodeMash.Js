@@ -4,7 +4,7 @@ description: Overview of logs service
 
 # Logs Service
 
-CodeMash **Logs** service logs all the requests and errors in your project. All the logs can be reached in dashboard. In addition, you can create your custom logs from your own application.
+CodeMash **Logs** service logs all the requests and errors in your project. All the logs can be reached on the dashboard. In addition, you can create your custom logs from your own application.
 
 To start using logs services and API methods you firstly need to enable logs service in your CodeMash dashboard.
 
@@ -36,7 +36,7 @@ var logsService = new CodeMashLogsService(client);
 
 ## Example
 
-The following are the examples of logs SDK using different languages and frameworks.
+The following are examples of logs SDK using different languages and frameworks.
 
 {% tabs %}
 {% tab title=".NET" %}
