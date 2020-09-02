@@ -2,7 +2,8 @@ export const CONFIG = {
   ACCOUNT: {
     LOGIN: (username, password) => `/v2/auth/credentials?username=${username}&password=${password}`,
     CHECK_AUTH: '/v2/auth',
-    REGISTER: '/v2/membership/users/register'
+    REGISTER: '/v2/membership/users/register',
+    LOGOUT: '/auth/logout'
   },
   PROJECT: {
     DATABASE: {
