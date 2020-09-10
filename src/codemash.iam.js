@@ -4,7 +4,7 @@ import { CONFIG as Endpoints } from '../routes';
 import { objectOrStringToString } from '../utils/utils';
 
 export async function register ({
-  email, password, displayName, firstName, lastName,
+  secretKey, email, password, displayName, firstName, lastName,
   autoLogin = true, meta, language, timeZone, subscribeToNews, country, countryCode,
   area, city, address, address2, phone, fax, company, postalCode, gender, birthday, roles
 }) {
@@ -13,7 +13,7 @@ export async function register ({
       method: 'POST',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -47,7 +47,7 @@ export async function register ({
 }
 
 export async function invite ({
-  email, displayName, firstName, lastName,
+  secretKey, email, displayName, firstName, lastName,
   meta, language, timeZone, subscribeToNews, country, countryCode,
   area, city, address, address2, phone, fax, company, postalCode, gender, birthday, roles
 }) {
@@ -56,7 +56,7 @@ export async function invite ({
       method: 'POST',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -88,7 +88,7 @@ export async function invite ({
 }
 
 export async function updateUser ({
-  id, displayName, firstName, lastName,
+  secretKey, id, displayName, firstName, lastName,
   meta, language, timeZone, subscribeToNews, unsubscribedNewsTags, country, countryCode,
   area, city, address, address2, phone, fax, company, postalCode, gender, birthday, roles
 }) {
@@ -97,7 +97,7 @@ export async function updateUser ({
       method: 'PATCH',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -168,13 +168,13 @@ export async function updateProfile ({
   return response;
 }
 
-export async function getUsers ({ pageNumber, pageSize, filter, sort, includePermissions, includeDevices, includeMeta }) {
+export async function getUsers ({ secretKey, pageNumber, pageSize, filter, sort, includePermissions, includeDevices, includeMeta }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.GET_ALL}`,
     {
       method: 'POST',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -191,7 +191,7 @@ export async function getUsers ({ pageNumber, pageSize, filter, sort, includePer
   return response;
 }
 
-export async function getUser ({ id, provider, includePermissions, includeDevices, includeMeta, includeUnreadNotifications }) {
+export async function getUser ({ secretKey, id, provider, includePermissions, includeDevices, includeMeta, includeUnreadNotifications }) {
   let url = `${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.GET(id)}`;
   const queries = [];
 
@@ -210,7 +210,7 @@ export async function getUser ({ id, provider, includePermissions, includeDevice
       method: 'GET',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -219,7 +219,7 @@ export async function getUser ({ id, provider, includePermissions, includeDevice
   return response.result;
 }
 
-export async function getUserByEmail ({ email, provider, includePermissions, includeDevices, includeMeta, includeUnreadNotifications }) {
+export async function getUserByEmail ({ secretKey, email, provider, includePermissions, includeDevices, includeMeta, includeUnreadNotifications }) {
   let url = `${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.GET_BY_EMAIL}`;
   const queries = [];
 
@@ -239,7 +239,7 @@ export async function getUserByEmail ({ email, provider, includePermissions, inc
       method: 'GET',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -275,13 +275,13 @@ export async function getProfile ({ secretKey, includePermissions, includeDevice
   return response.result;
 }
 
-export async function deleteUser ({ id }) {
+export async function deleteUser ({ secretKey, id }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.DELETE(id)}`,
     {
       method: 'DELETE',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -290,13 +290,13 @@ export async function deleteUser ({ id }) {
   return response;
 }
 
-export async function blockUser ({ id }) {
+export async function blockUser ({ secretKey, id }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.BLOCK(id)}`,
     {
       method: 'PUT',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -305,13 +305,13 @@ export async function blockUser ({ id }) {
   return response;
 }
 
-export async function unblockUser ({ id }) {
+export async function unblockUser ({ secretKey, id }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.UNBLOCK(id)}`,
     {
       method: 'PUT',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -340,13 +340,13 @@ export async function updatePassword ({ secretKey, userId, currentPassword, pass
   return response;
 }
 
-export async function createPasswordReset ({ email }) {
+export async function createPasswordReset ({ secretKey, email }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.CREATE_PASSWORD_RESET}`,
     {
       method: 'POST',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -355,13 +355,13 @@ export async function createPasswordReset ({ email }) {
   return response;
 }
 
-export async function checkPasswordReset ({ token }) {
+export async function checkPasswordReset ({ secretKey, token }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.CHECK_PASSWORD_RESET}?token=${token}`,
     {
       method: 'GET',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -370,13 +370,13 @@ export async function checkPasswordReset ({ token }) {
   return response;
 }
 
-export async function resetPassword ({ token, password, repeatedPassword }) {
+export async function resetPassword ({ secretKey, token, password, repeatedPassword }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.RESET_PASSWORD}`,
     {
       method: 'POST',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -385,13 +385,13 @@ export async function resetPassword ({ token, password, repeatedPassword }) {
   return response;
 }
 
-export async function verifyRegistration ({ token }) {
+export async function verifyRegistration ({ secretKey, token }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.VERIFY_REGISTRATION}`,
     {
       method: 'POST',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -400,13 +400,13 @@ export async function verifyRegistration ({ token }) {
   return response;
 }
 
-export async function checkInvitationToken ({ token }) {
+export async function checkInvitationToken ({ secretKey, token }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.CHECK_INVITATION_TOKEN}?token=${token}`,
     {
       method: 'GET',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -415,13 +415,13 @@ export async function checkInvitationToken ({ token }) {
   return response;
 }
 
-export async function verifyInvitation ({ token, password, repeatedPassword }) {
+export async function verifyInvitation ({ secretKey, token, password, repeatedPassword }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.VERIFY_INVITATION}`,
     {
       method: 'POST',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -436,7 +436,7 @@ export async function login ({ username, password }) {
       method: 'POST',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${Config.secretKey}`,
+        // Authorization: `Bearer ${Config.secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       }
@@ -450,7 +450,21 @@ export async function checkAuthentication ({ secretKey }) {
       method: 'GET',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${secretKey || Config.secretKey}`,
+        Authorization: `Bearer ${secretKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+  return response ? response.result : null;
+}
+
+export async function logout ({ secretKey, mode, provider }) {
+  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.ACCOUNT.LOGOUT}?mode=${mode}&provide=${provider}`,
+    {
+      method: 'POST',
+      headers: {
+        'X-CM-ProjectId': Config.projectId,
+        Authorization: `Bearer ${secretKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       }
