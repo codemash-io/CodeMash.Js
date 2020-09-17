@@ -105,7 +105,8 @@ export const CONFIG = {
         CREATE: '/v2/payments/orders'
       },
       TRANSACTIONS: {
-        CREATE_PAYSERA: (orderId) => `/v2/payments/orders/${orderId}/paysera/pay`
+        CREATE_PAYSERA: (orderId) => `/v2/payments/orders/${orderId}/paysera/pay`,
+        CREATE_STRIPE: (orderId) => `/v2/payments/orders/${orderId}/stripe/pay`
       },
       CUSTOMERS: {
         CREATE: '/v2/payments/customers',
