@@ -86,6 +86,25 @@ export async function createPayseraTransaction ({ secretKey, orderId, mode }) {
   return response;
 }
 
+export async function createStripeTransaction ({ secretKey, orderId, paymentMethodId, customerId }) {
+  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.TRANSACTIONS.CREATE_STRIPE(orderId)}`,
+    {
+      method: 'POST',
+      headers: {
+        'X-CM-ProjectId': Config.projectId,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        paymentMethodId,
+        customerId
+      })
+    });
+
+  return response;
+}
+
 export async function createCustomer ({
   secretKey, accountId, userId, name, email, description, phone, countryCode, city,
   address, address2, postalCode, area, meta
@@ -152,7 +171,7 @@ export async function updateCustomer ({
 
 export async function getCustomers ({ secretKey, userId, pageNumber, pageSize, filter, sort }) {
   const request = {
-    userId: '5a9c84c0-0d3d-40b8-a254-e967407bb17a',
+    userId,
     pageSize: pageSize || Config.tablePageSize,
     pageNumber: pageNumber || 0,
     filter: objectOrStringToString(filter),
@@ -222,7 +241,7 @@ export async function getPaymentMethodSetup ({ secretKey, accountId, usage }) {
   return response;
 }
 
-export async function attachPaymentMethod ({ secretKey, customerId, setupId, setupClientSecret, asDefault }) {
+export async function attachPaymentMethod ({ secretKey, customerId, setupId, setupClientSecret, asDefault, detachOthers }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.METHODS.ATTACH}`,
     {
       method: 'POST',
@@ -236,7 +255,8 @@ export async function attachPaymentMethod ({ secretKey, customerId, setupId, set
         customerId,
         setupId,
         setupClientSecret,
-        asDefault
+        asDefault,
+        detachOthers
       })
     });
 
