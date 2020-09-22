@@ -49,13 +49,16 @@ export const CONFIG = {
       PUSH: {
         REGISTER_TOKEN: '/v2/notifications/push/devices/token',
         DELETE_DEVICE_TOKEN: (id) => `/v2/notifications/push/devices/${id}/token`,
+        GET_DEVICE: (id) => `/v2/notifications/push/devices/${id}`,
+        GET_DEVICES: '/v2/notifications/push/devices',
+        UPDATE_DEVICE: (id) => `/v2/notifications/push/devices/${id}`,
+        DELETE_DEVICE: (id) => `/v2/notifications/push/devices/${id}`,
         GET_ALL: '/v2/notifications/push',
         GET: (id) => `/v2/notifications/push/${id}`,
         MARK_NOTIFICATION_AS_READ: (id) => `/v2/notifications/push/${id}/read`,
         MARK_NOTIFICATIONS_AS_READ: '/v2/notifications/push/read',
         GET_NOTIFICATIONS_COUNT: (userId, deviceId) => `/v2/notifications/push/count?userId=${userId}&deviceId=${deviceId}`,
-        SEND: '/v2/notifications/push',
-        DELETE_DEVICE: (id) => `/v2/notifications/push/devices/${id}`
+        SEND: '/v2/notifications/push'
       },
       EMAIL: {
         BASE_URL: '/v2/notifications/email',

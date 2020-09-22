@@ -50,6 +50,86 @@ export async function deleteDeviceToken ({ secretKey, deviceId }) {
   return response;
 }
 
+export async function getDevice ({ secretKey, id }) {
+  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET_DEVICE(id)}`,
+    {
+      method: 'GET',
+      headers: {
+        'X-CM-ProjectId': Config.projectId,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: null
+    });
+  return response;
+}
+
+export async function getDevices ({ secretKey, userId, pageNumber, pageSize, filter, sort }) {
+  const request = {
+    userId,
+    pageSize: pageSize || Config.tablePageSize,
+    pageNumber: pageNumber || 0,
+    filter: objectOrStringToString(filter),
+    sort: objectOrStringToString(sort)
+  };
+  const requestUrl = `${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET_DEVICES}?${toQueryString(request)}`;
+
+  const response = await server.loadJson(`${Config.apiUrl}${requestUrl}`,
+    {
+      method: 'GET',
+      headers: {
+        'X-CM-ProjectId': Config.projectId,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: null
+    });
+  return response;
+}
+
+export async function updateDevice ({
+  secretKey, id, operatingSystem, brand, deviceName, timeZone, language, locale, meta
+}) {
+  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.UPDATE_DEVICE(id)}`,
+    {
+      method: 'PATCH',
+      headers: {
+        'X-CM-ProjectId': Config.projectId,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        operatingSystem,
+        brand,
+        deviceName,
+        timeZone,
+        language,
+        locale,
+        meta
+      })
+    });
+
+  return response;
+}
+
+export async function deleteDevice ({ secretKey, id }) {
+  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.DELETE_DEVICE(id)}`,
+    {
+      method: 'DELETE',
+      headers: {
+        'X-CM-ProjectId': Config.projectId,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: null
+    });
+  return response;
+}
+
 export async function getNotifications ({ secretKey, userId, deviceId, pageNumber, pageSize, filter, sort }) {
   const request = {
     userId,
@@ -80,21 +160,6 @@ export async function getNotification ({ secretKey, id }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET(id)}`,
     {
       method: 'GET',
-      headers: {
-        'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${secretKey || Config.secretKey}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: null
-    });
-  return response;
-}
-
-export async function deleteDevice ({ secretKey, id }) {
-  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.DELETE_DEVICE(id)}`,
-    {
-      method: 'DELETE',
       headers: {
         'X-CM-ProjectId': Config.projectId,
         Authorization: `Bearer ${secretKey || Config.secretKey}`,
