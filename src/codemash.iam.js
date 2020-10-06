@@ -471,3 +471,48 @@ export async function logout ({ secretKey, mode, provider }) {
     });
   return response ? response.result : null;
 }
+
+export async function createDeactivationRequest ({ secretKey }) {
+  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.CREATE_DEACTIVATION}`,
+    {
+      method: 'POST',
+      headers: {
+        'X-CM-ProjectId': Config.projectId,
+        Authorization: `Bearer ${secretKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: null
+    });
+  return response;
+}
+
+export async function checkDeactivationToken ({ secretKey, token }) {
+  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.CHECK_PASSWORD_RESET}?token=${token}`,
+    {
+      method: 'GET',
+      headers: {
+        'X-CM-ProjectId': Config.projectId,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: null
+    });
+  return response;
+}
+
+export async function deactivateAccount ({ secretKey, token, password }) {
+  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.RESET_PASSWORD}`,
+    {
+      method: 'POST',
+      headers: {
+        'X-CM-ProjectId': Config.projectId,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ token, password })
+    });
+  return response;
+}
