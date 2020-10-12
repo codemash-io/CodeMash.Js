@@ -125,6 +125,12 @@ export const CONFIG = {
         GET_SETUP: '/v2/payments/methods/setup',
         ATTACH: '/v2/payments/methods/attach',
         DETACH: '/v2/payments/methods/detach'
+      },
+      SUBSCRIPTIONS: {
+        CREATE: (customerId) => `/v2/payments/customers/${customerId}/subscriptions`,
+        UPDATE: (customerId, id) => `/v2/payments/customers/${customerId}/subscriptions/${id}`,
+        CHANGE: (customerId, id) => `/v2/payments/customers/${customerId}/subscriptions/${id}`,
+        CANCEL: (customerId, id) => `/v2/payments/customers/${customerId}/subscriptions/${id}`
       }
     }
   },
