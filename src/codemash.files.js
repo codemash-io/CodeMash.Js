@@ -36,7 +36,9 @@ export async function getFileUrl ({ secretKey, fileId, optimization }) {
       method: 'GET',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${secretKey || Config.secretKey}`
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
       },
       body: null
     });
@@ -44,16 +46,20 @@ export async function getFileUrl ({ secretKey, fileId, optimization }) {
   return response;
 }
 
-export async function uploadFile ({ secretKey, fileUri, path, base64, fileType, fileName }) {
+// Pass either fileUri (local file location), file or base64 string
+export async function uploadFile ({ secretKey, path, fileUri, file, base64, fileType, fileName }) {
   if (base64) {
     const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.FILES.UPLOAD}`,
       {
         method: 'POST',
         headers: {
           'X-CM-ProjectId': Config.projectId,
-          Authorization: `Bearer ${secretKey || Config.secretKey}`
+          Authorization: `Bearer ${secretKey || Config.secretKey}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
         },
         body: JSON.stringify({
+          path,
           base64File: { data: base64, contentType: fileType, fileName }
         })
       });
@@ -66,21 +72,24 @@ export async function uploadFile ({ secretKey, fileUri, path, base64, fileType, 
     formData.append('path', path);
   }
 
-  const filename = fileUri.substring(fileUri.lastIndexOf('/') + 1);
+  if (fileUri) {
+    const filename = fileUri.substring(fileUri.lastIndexOf('/') + 1);
 
-  formData.append('file', {
-    uri: fileUri,
-    name: filename,
-    type: fileType
-  });
+    formData.append('file', {
+      uri: fileUri,
+      name: filename,
+      type: fileType
+    });
+  } else {
+    formData.append('file', file);
+  }
 
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.FILES.UPLOAD}`,
     {
       method: 'POST',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${secretKey || Config.secretKey}`,
-        'Content-Type': 'multipart/form-data'
+        Authorization: `Bearer ${secretKey || Config.secretKey}`
       },
       body: formData
     });
@@ -88,14 +97,16 @@ export async function uploadFile ({ secretKey, fileUri, path, base64, fileType, 
   return response;
 }
 
-export async function uploadRecordFile ({ secretKey, fileUri, base64, fileType, fileName, collectionName, recordId, uniqueFieldName }) {
+export async function uploadRecordFile ({ secretKey, fileUri, file, base64, fileType, fileName, collectionName, recordId, uniqueFieldName }) {
   if (base64) {
     const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.FILES.UPLOAD(collectionName)}`,
       {
         method: 'POST',
         headers: {
           'X-CM-ProjectId': Config.projectId,
-          Authorization: `Bearer ${secretKey || Config.secretKey}`
+          Authorization: `Bearer ${secretKey || Config.secretKey}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
         },
         body: JSON.stringify({
           recordId,
@@ -116,21 +127,24 @@ export async function uploadRecordFile ({ secretKey, fileUri, base64, fileType, 
     formData.append('recordId', recordId);
   }
 
-  const filename = fileUri.substring(fileUri.lastIndexOf('/') + 1);
+  if (fileUri) {
+    const filename = fileUri.substring(fileUri.lastIndexOf('/') + 1);
 
-  formData.append('file', {
-    uri: fileUri,
-    name: filename,
-    type: fileType
-  });
+    formData.append('file', {
+      uri: fileUri,
+      name: filename,
+      type: fileType
+    });
+  } else {
+    formData.append('file', file);
+  }
 
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.FILES.UPLOAD(collectionName)}`,
     {
       method: 'POST',
       headers: {
         'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${secretKey || Config.secretKey}`,
-        'Content-Type': 'multipart/form-data'
+        Authorization: `Bearer ${secretKey || Config.secretKey}`
       },
       body: formData
     });

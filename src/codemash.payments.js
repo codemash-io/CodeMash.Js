@@ -277,3 +277,78 @@ export async function detachPaymentMethod ({ secretKey, id, customerId }) {
 
   return response;
 }
+
+export async function createSubscription ({ secretKey, customerId, planId, paymentMethodId, coupon }) {
+  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.SUBSCRIPTIONS.CREATE(customerId)}`,
+    {
+      method: 'POST',
+      headers: {
+        'X-CM-ProjectId': Config.projectId,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        planId,
+        paymentMethodId,
+        coupon
+      })
+    });
+
+  return response;
+}
+
+export async function updateSubscription ({ secretKey, id, customerId, paymentMethodId, coupon }) {
+  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.SUBSCRIPTIONS.UPDATE(customerId, id)}`,
+    {
+      method: 'PATCH',
+      headers: {
+        'X-CM-ProjectId': Config.projectId,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        paymentMethodId,
+        coupon
+      })
+    });
+
+  return response;
+}
+
+export async function changeSubscription ({ secretKey, id, customerId, newPlanId, paymentMethodId, coupon }) {
+  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.SUBSCRIPTIONS.CHANGE(customerId, id)}`,
+    {
+      method: 'PUT',
+      headers: {
+        'X-CM-ProjectId': Config.projectId,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        newPlanId,
+        paymentMethodId,
+        coupon
+      })
+    });
+
+  return response;
+}
+
+export async function cancelSubscription ({ secretKey, id, customerId }) {
+  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.SUBSCRIPTIONS.CANCEL(customerId, id)}`,
+    {
+      method: 'DELETE',
+      headers: {
+        'X-CM-ProjectId': Config.projectId,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: null
+    });
+
+  return response;
+}
