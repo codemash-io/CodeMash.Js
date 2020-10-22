@@ -4,7 +4,7 @@ description: Overview of project tokens
 
 # Project Tokens
 
-Project has it's own default tokens which will be by default injected into your templates. The following shows what these tokens are and where can they be used.
+The project has its own default tokens which will be by default injected into your templates. The following shows what these tokens are and where can they be used.
 
 You can also add your own custom tokens in your project settings. Then just like with default project tokens, your defined custom tokens will be by default injected into your templates.
 
@@ -25,5 +25,5 @@ These tokens can be used in the following places:
 * Email templates
 * Notification templates
 
-In triggers you can select different token names for these token values.
+In triggers, you can select different token names for these token values.
 

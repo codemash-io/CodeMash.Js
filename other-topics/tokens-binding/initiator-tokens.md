@@ -4,9 +4,9 @@ description: Overview of initiator tokens
 
 # Initiator Tokens
 
-Initiator tokens are specific tokens of the user who has triggered an action. Initiator can be either project user or dashboard user.
+Initiator tokens are specific tokens of the user who has triggered action. The initiator can be either a project user or a dashboard user.
 
-The tokens will be by default injected into your templates. The following shows what these tokens are, where can they be used and who is initiator in every scenario.
+The tokens will be by default injected into your templates. The following shows what these tokens are, where can they be used, and who is the initiator in every scenario.
 
 ## Tokens
 
@@ -25,15 +25,15 @@ These tokens can be used in the following places:
 * Email templates
 * Notification templates
 
-In triggers you can select different token names for these token values.
+In triggers, you can select different token names for these token values.
 
 ## How initiator is selected
 
-In general, initiator is always the one who triggers some kind of action.
+In general, the initiator is always the one who triggers some kind of action.
 
-* Database email, notification triggers - initiator is the one who inserts, updates or deletes a record.
-* User email, notification triggers - initiator is the one who registers, invites, updates or deletes the user.  On verified trigger does not have an initiator.
+* Database email, notification triggers - initiator is the one who inserts, updates, or deletes a record.
+* User email, notification triggers - initiator is the one who registers, invites, updates, or deletes the user.  On verified trigger does not have an initiator.
 * Welcome email - initiator is the one who registers the user.
 * File email, notification triggers - initiator is the one who stores or deletes a file.
-* Sending email, pushing notifications - initiator is the one who creates this send request.
+* Sending an email, push notifications - initiator is the one who creates this send request.
 
