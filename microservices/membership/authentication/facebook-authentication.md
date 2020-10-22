@@ -24,9 +24,9 @@ You will need a Facebook project to connect to CodeMash.
 
 ![](../../../.gitbook/assets/screenshot-2020-10-22-at-13.02.30.png)
 
-* You will be asked to enter the **Site URL.** Press the Save button. Other wizard topics are not important and covered by CodeMash.  
+* You will be asked to enter the **Site URL**, just enter [https://api.codemash.io/auth/facebook](https://api.codemash.io/auth/facebook) and ****press the **Save** button. Other wizard topics are not important and covered by CodeMash.  
 
-![](../../../.gitbook/assets/screenshot-2020-10-22-at-13.17.27.png)
+![](../../../.gitbook/assets/screenshot-2020-10-22-at-13.35.40.png)
 
 * Press the **Settings -&gt; Basic** menu item under left side menu
 
