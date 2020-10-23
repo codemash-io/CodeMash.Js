@@ -219,7 +219,7 @@ export async function insertManyRecords ({ secretKey, collectionName, documents,
       })
     });
 
-  return response && response.result ? JSON.parse(response.result) : null;
+  return response.result;
 }
 
 export async function updateRecord ({ secretKey, collectionName, id, update, waitForFileUpload, bypassDocumentValidation, ignoreTriggers, isUpsert }) {
