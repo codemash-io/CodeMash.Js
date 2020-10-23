@@ -298,7 +298,7 @@ export async function createSubscription ({ secretKey, customerId, planId, payme
   return response;
 }
 
-export async function updateSubscription ({ secretKey, id, customerId, paymentMethodId, coupon }) {
+export async function updateSubscription ({ secretKey, id, customerId, paymentMethodId, coupon, renewCanceled }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.SUBSCRIPTIONS.UPDATE(customerId, id)}`,
     {
       method: 'PATCH',
@@ -310,7 +310,8 @@ export async function updateSubscription ({ secretKey, id, customerId, paymentMe
       },
       body: JSON.stringify({
         paymentMethodId,
-        coupon
+        coupon,
+        renewCanceled
       })
     });
 
