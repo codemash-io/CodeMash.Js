@@ -230,9 +230,9 @@ export async function deleteCustomer({ secretKey, id }) {
   return response;
 }
 
-export async function getPaymentMethodSetup({ secretKey, accountId, usage }) {
+export async function getPaymentMethodSetup({ secretKey, accountId, allowOffline }) {
   const request = {
-    accountId, usage
+    accountId, allowOffline
   };
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.METHODS.GET_SETUP}?${toQueryString(request)}`,
     {
