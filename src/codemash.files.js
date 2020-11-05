@@ -2,7 +2,7 @@ import * as server from '../server/server';
 import Config from '../config/config';
 import { CONFIG as Endpoints } from '../routes';
 
-export async function downloadFile ({ secretKey, fileId, optimization, asBase64 }) {
+export async function downloadFile({ secretKey, fileId, optimization, asBase64 }) {
   let route = `${Config.apiUrl}${Endpoints.PROJECT.FILES.DOWNLOAD(fileId)}`;
 
   if (optimization) {
@@ -26,7 +26,7 @@ export async function downloadFile ({ secretKey, fileId, optimization, asBase64 
   return result;
 }
 
-export async function getFileUrl ({ secretKey, fileId, optimization }) {
+export async function getFileUrl({ secretKey, fileId, optimization }) {
   const route = optimization
     ? `${Config.apiUrl}${Endpoints.PROJECT.FILES.GET_URL_OPTIMIZED(fileId, optimization)}`
     : `${Config.apiUrl}${Endpoints.PROJECT.FILES.GET_URL(fileId)}`;
@@ -47,7 +47,7 @@ export async function getFileUrl ({ secretKey, fileId, optimization }) {
 }
 
 // Pass either fileUri (local file location), file or base64 string
-export async function uploadFile ({ secretKey, path, fileUri, file, base64, fileType, fileName }) {
+export async function uploadFile({ secretKey, path, fileUri, file, base64, fileType, fileName }) {
   if (base64) {
     const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.FILES.UPLOAD}`,
       {
@@ -73,11 +73,11 @@ export async function uploadFile ({ secretKey, path, fileUri, file, base64, file
   }
 
   if (fileUri) {
-    const filename = fileUri.substring(fileUri.lastIndexOf('/') + 1);
+    const finalFilename = fileName || fileUri.substring(fileUri.lastIndexOf('/') + 1);
 
     formData.append('file', {
       uri: fileUri,
-      name: filename,
+      name: finalFilename,
       type: fileType
     });
   } else {
@@ -97,7 +97,7 @@ export async function uploadFile ({ secretKey, path, fileUri, file, base64, file
   return response;
 }
 
-export async function uploadRecordFile ({ secretKey, fileUri, file, base64, fileType, fileName, collectionName, recordId, uniqueFieldName }) {
+export async function uploadRecordFile({ secretKey, fileUri, file, base64, fileType, fileName, collectionName, recordId, uniqueFieldName }) {
   if (base64) {
     const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.FILES.UPLOAD(collectionName)}`,
       {
@@ -128,11 +128,11 @@ export async function uploadRecordFile ({ secretKey, fileUri, file, base64, file
   }
 
   if (fileUri) {
-    const filename = fileUri.substring(fileUri.lastIndexOf('/') + 1);
+    const finalFilename = fileName || fileUri.substring(fileUri.lastIndexOf('/') + 1);
 
     formData.append('file', {
       uri: fileUri,
-      name: filename,
+      name: finalFilename,
       type: fileType
     });
   } else {
@@ -152,6 +152,6 @@ export async function uploadRecordFile ({ secretKey, fileUri, file, base64, file
   return response;
 }
 
-export function getFilePath (directory, fileName) {
+export function getFilePath(directory, fileName) {
   return `${Config.baseFilePath}/${directory}/${fileName}`;
 }
