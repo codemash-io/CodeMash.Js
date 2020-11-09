@@ -6,6 +6,7 @@ module.exports = {
     es6: true
   },
   rules: {
-    semi: [2, 'always']
+    semi: [2, 'always'],
+    'space-before-function-paren': 0
   }
 };

@@ -3,7 +3,7 @@ import Config from '../config/config';
 import { CONFIG as Endpoints } from '../routes';
 import { objectOrStringToString } from '../utils/utils';
 
-export async function getRecords ({
+export async function getRecords({
   secretKey, collectionName, pageNumber, pageSize, sort, filter, projection, language,
   includeUserNames, includeRoleNames, includeCollectionNames, includeTermNames,
   referencedFields, addReferencesFirst, excludeCulture
@@ -41,7 +41,7 @@ export async function getRecords ({
   };
 }
 
-export async function getRecord ({
+export async function getRecord({
   secretKey, collectionName, id, projection, includeUserNames, includeRoleNames, includeCollectionNames,
   includeTermNames, referencedFields, addReferencesFirst, excludeCulture, language
 }) {
@@ -70,7 +70,7 @@ export async function getRecord ({
   return response && response.result ? JSON.parse(response.result) : null;
 }
 
-export async function getRecordWithFilter ({
+export async function getRecordWithFilter({
   secretKey, collectionName, filter, projection, includeUserNames, includeRoleNames, includeCollectionNames,
   includeTermNames, referencedFields, addReferencesFirst, excludeCulture, language
 }) {
@@ -100,7 +100,7 @@ export async function getRecordWithFilter ({
   return response && response.result ? JSON.parse(response.result) : null;
 }
 
-export async function deleteRecord ({ secretKey, collectionName, id, ignoreTriggers }) {
+export async function deleteRecord({ secretKey, collectionName, id, ignoreTriggers }) {
   let url = `${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.DELETE(collectionName, id)}`;
   const queries = [];
   if (ignoreTriggers) queries.push(`ignoreTriggers=${true}`);
@@ -124,7 +124,7 @@ export async function deleteRecord ({ secretKey, collectionName, id, ignoreTrigg
   return response;
 }
 
-export async function deleteRecordWithFilter ({ secretKey, collectionName, filter, ignoreTriggers }) {
+export async function deleteRecordWithFilter({ secretKey, collectionName, filter, ignoreTriggers }) {
   let url = `${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.DELETE_BY_FILTER(collectionName)}`;
   const queries = [];
   if (ignoreTriggers) queries.push(`ignoreTriggers=${true}`);
@@ -149,7 +149,7 @@ export async function deleteRecordWithFilter ({ secretKey, collectionName, filte
   return response;
 }
 
-export async function deleteManyRecords ({ secretKey, collectionName, filter, ignoreTriggers }) {
+export async function deleteManyRecords({ secretKey, collectionName, filter, ignoreTriggers }) {
   let url = `${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.DELETE_MANY(collectionName)}`;
   const queries = [];
   if (ignoreTriggers) queries.push(`ignoreTriggers=${true}`);
@@ -174,7 +174,7 @@ export async function deleteManyRecords ({ secretKey, collectionName, filter, ig
   return response;
 }
 
-export async function insertRecord ({ secretKey, collectionName, document, bypassDocumentValidation, waitForFileUpload, ignoreTriggers }) {
+export async function insertRecord({ secretKey, collectionName, document, bypassDocumentValidation, waitForFileUpload, ignoreTriggers }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.CREATE(collectionName)}`,
     {
       method: 'POST',
@@ -195,7 +195,7 @@ export async function insertRecord ({ secretKey, collectionName, document, bypas
   return response && response.result ? JSON.parse(response.result) : null;
 }
 
-export async function insertManyRecords ({ secretKey, collectionName, documents, bypassDocumentValidation, ignoreTriggers }) {
+export async function insertManyRecords({ secretKey, collectionName, documents, bypassDocumentValidation, ignoreTriggers }) {
   const stringDocs = [];
   if (documents && Array.isArray(documents)) {
     documents.forEach((doc) => {
@@ -222,7 +222,7 @@ export async function insertManyRecords ({ secretKey, collectionName, documents,
   return response.result;
 }
 
-export async function updateRecord ({ secretKey, collectionName, id, update, waitForFileUpload, bypassDocumentValidation, ignoreTriggers, isUpsert }) {
+export async function updateRecord({ secretKey, collectionName, id, update, waitForFileUpload, bypassDocumentValidation, ignoreTriggers, isUpsert }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.PATCH(collectionName, id)}`,
     {
       method: 'PATCH',
@@ -244,7 +244,7 @@ export async function updateRecord ({ secretKey, collectionName, id, update, wai
   return response ? response.result : null;
 }
 
-export async function updateRecordWithFilter ({ secretKey, collectionName, filter, update, waitForFileUpload, bypassDocumentValidation, ignoreTriggers, isUpsert }) {
+export async function updateRecordWithFilter({ secretKey, collectionName, filter, update, waitForFileUpload, bypassDocumentValidation, ignoreTriggers, isUpsert }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.PATCH_BY_FILTER(collectionName)}`,
     {
       method: 'PATCH',
@@ -267,7 +267,7 @@ export async function updateRecordWithFilter ({ secretKey, collectionName, filte
   return response ? response.result : null;
 }
 
-export async function updateManyRecords ({ secretKey, collectionName, filter, update, bypassDocumentValidation, ignoreTriggers, isUpsert }) {
+export async function updateManyRecords({ secretKey, collectionName, filter, update, bypassDocumentValidation, ignoreTriggers, isUpsert }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.PATCH_MANY(collectionName)}`,
     {
       method: 'PATCH',
@@ -289,7 +289,7 @@ export async function updateManyRecords ({ secretKey, collectionName, filter, up
   return response ? response.result : null;
 }
 
-export async function replaceRecord ({ secretKey, collectionName, id, document, waitForFileUpload, bypassDocumentValidation, ignoreTriggers, isUpsert }) {
+export async function replaceRecord({ secretKey, collectionName, id, document, waitForFileUpload, bypassDocumentValidation, ignoreTriggers, isUpsert }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.UPDATE(collectionName)}`,
     {
       method: 'PUT',
@@ -312,7 +312,7 @@ export async function replaceRecord ({ secretKey, collectionName, id, document, 
   return response ? response.result : null;
 }
 
-export async function replaceRecordWithFilter ({ secretKey, collectionName, filter, document, waitForFileUpload, bypassDocumentValidation, ignoreTriggers, isUpsert }) {
+export async function replaceRecordWithFilter({ secretKey, collectionName, filter, document, waitForFileUpload, bypassDocumentValidation, ignoreTriggers, isUpsert }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.UPDATE(collectionName)}`,
     {
       method: 'PUT',
@@ -335,7 +335,7 @@ export async function replaceRecordWithFilter ({ secretKey, collectionName, filt
   return response ? response.result : null;
 }
 
-export async function executeAggregate ({ secretKey, collectionName, id, pipeline, tokens }) {
+export async function executeAggregate({ secretKey, collectionName, id, pipeline, tokens }) {
   const url = pipeline
     ? `${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.AGGREGATES.GET_CUSTOM(collectionName)}`
     : `${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.AGGREGATES.GET(collectionName, id)}`;
@@ -357,7 +357,7 @@ export async function executeAggregate ({ secretKey, collectionName, id, pipelin
   return response && response.result ? JSON.parse(response.result) : null;
 }
 
-export async function count ({ secretKey, collectionName, filter, limit, skip }) {
+export async function count({ secretKey, collectionName, filter, limit, skip }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.COUNT(collectionName)}`,
     {
       method: 'POST',
@@ -377,7 +377,7 @@ export async function count ({ secretKey, collectionName, filter, limit, skip })
   return response ? response.result : null;
 }
 
-export async function distinct ({ secretKey, collectionName, filter, field }) {
+export async function distinct({ secretKey, collectionName, filter, field }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.DISTINCT(collectionName)}`,
     {
       method: 'POST',
@@ -396,7 +396,7 @@ export async function distinct ({ secretKey, collectionName, filter, field }) {
   return response ? response.result : null;
 }
 
-export async function getTerms ({
+export async function getTerms({
   secretKey, taxonomyName, language, pageNumber, pageSize, sort, filter, projection,
   excludeCulture
 }) {

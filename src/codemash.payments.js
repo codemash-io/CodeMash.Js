@@ -3,8 +3,14 @@ import Config from '../config/config';
 import { CONFIG as Endpoints } from '../routes';
 import { objectOrStringToString, toQueryString } from '../utils/utils';
 
-export async function getOrder ({ secretKey, id }) {
-  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.ORDERS.GET(id)}`,
+export async function getOrder({ secretKey, id, includePaidTransactions }) {
+  const request = {
+    includePaidTransactions
+  };
+
+  const requestUrl = `${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.ORDERS.GET(id)}?${toQueryString(request)}`;
+
+  const response = await server.loadJson(requestUrl,
     {
       method: 'GET',
       headers: {
@@ -18,9 +24,10 @@ export async function getOrder ({ secretKey, id }) {
   return response;
 }
 
-export async function getOrders ({ secretKey, pageNumber, pageSize, sort, filter, userId }) {
+export async function getOrders({ secretKey, pageNumber, pageSize, sort, filter, userId, includePaidTransactions }) {
   const request = {
     userId,
+    includePaidTransactions,
     pageSize: pageSize || Config.tablePageSize,
     pageNumber: pageNumber || 0,
     filter: objectOrStringToString(filter),
@@ -43,7 +50,7 @@ export async function getOrders ({ secretKey, pageNumber, pageSize, sort, filter
   return response;
 }
 
-export async function createOrder ({ secretKey, accountId, orderSchemaId, userId, lines, asGuest, customerDetails, isTest, meta }) {
+export async function createOrder({ secretKey, accountId, orderSchemaId, userId, lines, asGuest, customerDetails, isTest, meta }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.ORDERS.CREATE}`,
     {
       method: 'POST',
@@ -68,7 +75,7 @@ export async function createOrder ({ secretKey, accountId, orderSchemaId, userId
   return response;
 }
 
-export async function createPayseraTransaction ({ secretKey, orderId, mode }) {
+export async function createPayseraTransaction({ secretKey, orderId, mode }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.TRANSACTIONS.CREATE_PAYSERA(orderId)}`,
     {
       method: 'POST',
@@ -86,7 +93,7 @@ export async function createPayseraTransaction ({ secretKey, orderId, mode }) {
   return response;
 }
 
-export async function createStripeTransaction ({ secretKey, orderId, paymentMethodId, customerId }) {
+export async function createStripeTransaction({ secretKey, orderId, paymentMethodId, customerId }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.TRANSACTIONS.CREATE_STRIPE(orderId)}`,
     {
       method: 'POST',
@@ -105,7 +112,7 @@ export async function createStripeTransaction ({ secretKey, orderId, paymentMeth
   return response;
 }
 
-export async function createCustomer ({
+export async function createCustomer({
   secretKey, accountId, userId, name, email, description, phone, countryCode, city,
   address, address2, postalCode, area, meta
 }) {
@@ -138,7 +145,7 @@ export async function createCustomer ({
   return response;
 }
 
-export async function updateCustomer ({
+export async function updateCustomer({
   secretKey, id, name, email, description, phone, countryCode, city,
   address, address2, postalCode, area, meta
 }) {
@@ -169,7 +176,7 @@ export async function updateCustomer ({
   return response;
 }
 
-export async function getCustomers ({ secretKey, userId, pageNumber, pageSize, filter, sort }) {
+export async function getCustomers({ secretKey, userId, pageNumber, pageSize, filter, sort }) {
   const request = {
     userId,
     pageSize: pageSize || Config.tablePageSize,
@@ -193,7 +200,7 @@ export async function getCustomers ({ secretKey, userId, pageNumber, pageSize, f
   return response;
 }
 
-export async function getCustomer ({ secretKey, id }) {
+export async function getCustomer({ secretKey, id }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.CUSTOMERS.GET(id)}`,
     {
       method: 'GET',
@@ -208,7 +215,7 @@ export async function getCustomer ({ secretKey, id }) {
   return response ? response.result : null;
 }
 
-export async function deleteCustomer ({ secretKey, id }) {
+export async function deleteCustomer({ secretKey, id }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.CUSTOMERS.DELETE(id)}`,
     {
       method: 'DELETE',
@@ -223,7 +230,7 @@ export async function deleteCustomer ({ secretKey, id }) {
   return response;
 }
 
-export async function getPaymentMethodSetup ({ secretKey, accountId, allowOffline }) {
+export async function getPaymentMethodSetup({ secretKey, accountId, allowOffline }) {
   const request = {
     accountId, allowOffline
   };
@@ -241,7 +248,7 @@ export async function getPaymentMethodSetup ({ secretKey, accountId, allowOfflin
   return response;
 }
 
-export async function attachPaymentMethod ({ secretKey, customerId, setupId, setupClientSecret, asDefault, detachOthers }) {
+export async function attachPaymentMethod({ secretKey, customerId, setupId, setupClientSecret, asDefault, detachOthers }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.METHODS.ATTACH}`,
     {
       method: 'POST',
@@ -263,7 +270,7 @@ export async function attachPaymentMethod ({ secretKey, customerId, setupId, set
   return response;
 }
 
-export async function detachPaymentMethod ({ secretKey, id, customerId }) {
+export async function detachPaymentMethod({ secretKey, id, customerId }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.METHODS.DETACH}?paymentMethodId=${id}&customerId=${customerId}`,
     {
       method: 'DELETE',
@@ -278,7 +285,7 @@ export async function detachPaymentMethod ({ secretKey, id, customerId }) {
   return response;
 }
 
-export async function createSubscription ({ secretKey, customerId, planId, paymentMethodId, coupon }) {
+export async function createSubscription({ secretKey, customerId, planId, paymentMethodId, coupon }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.SUBSCRIPTIONS.CREATE(customerId)}`,
     {
       method: 'POST',
@@ -298,7 +305,7 @@ export async function createSubscription ({ secretKey, customerId, planId, payme
   return response;
 }
 
-export async function updateSubscription ({ secretKey, id, customerId, paymentMethodId, coupon, renewCanceled }) {
+export async function updateSubscription({ secretKey, id, customerId, paymentMethodId, coupon, renewCanceled }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.SUBSCRIPTIONS.UPDATE(customerId, id)}`,
     {
       method: 'PATCH',
@@ -318,7 +325,7 @@ export async function updateSubscription ({ secretKey, id, customerId, paymentMe
   return response;
 }
 
-export async function changeSubscription ({ secretKey, id, customerId, newPlanId, paymentMethodId, coupon }) {
+export async function changeSubscription({ secretKey, id, customerId, newPlanId, paymentMethodId, coupon }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.SUBSCRIPTIONS.CHANGE(customerId, id)}`,
     {
       method: 'PUT',
@@ -338,7 +345,7 @@ export async function changeSubscription ({ secretKey, id, customerId, newPlanId
   return response;
 }
 
-export async function cancelSubscription ({ secretKey, id, customerId }) {
+export async function cancelSubscription({ secretKey, id, customerId }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.SUBSCRIPTIONS.CANCEL(customerId, id)}`,
     {
       method: 'DELETE',

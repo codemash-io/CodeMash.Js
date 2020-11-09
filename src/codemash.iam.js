@@ -3,7 +3,7 @@ import Config from '../config/config';
 import { CONFIG as Endpoints } from '../routes';
 import { objectOrStringToString } from '../utils/utils';
 
-export async function register ({
+export async function register({
   secretKey, email, password, displayName, firstName, lastName,
   autoLogin = true, meta, language, timeZone, subscribeToNews, country, countryCode,
   area, city, address, address2, phone, fax, company, postalCode, gender, birthday, roles
@@ -46,7 +46,7 @@ export async function register ({
   return response;
 }
 
-export async function invite ({
+export async function invite({
   secretKey, email, displayName, firstName, lastName,
   meta, language, timeZone, subscribeToNews, country, countryCode,
   area, city, address, address2, phone, fax, company, postalCode, gender, birthday, roles
@@ -87,7 +87,7 @@ export async function invite ({
   return response;
 }
 
-export async function updateUser ({
+export async function updateUser({
   secretKey, id, displayName, firstName, lastName,
   meta, language, timeZone, subscribeToNews, unsubscribedNewsTags, country, countryCode,
   area, city, address, address2, phone, fax, company, postalCode, gender, birthday, roles
@@ -128,7 +128,7 @@ export async function updateUser ({
   return response;
 }
 
-export async function updateProfile ({
+export async function updateProfile({
   secretKey, displayName, firstName, lastName,
   meta, language, timeZone, subscribeToNews, unsubscribedNewsTags, country, countryCode,
   area, city, address, address2, phone, fax, company, postalCode, gender, birthday
@@ -168,7 +168,7 @@ export async function updateProfile ({
   return response;
 }
 
-export async function getUsers ({ secretKey, pageNumber, pageSize, filter, sort, includePermissions, includeDevices, includeMeta }) {
+export async function getUsers({ secretKey, pageNumber, pageSize, filter, sort, includePermissions, includeDevices, includeMeta }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.GET_ALL}`,
     {
       method: 'POST',
@@ -191,7 +191,7 @@ export async function getUsers ({ secretKey, pageNumber, pageSize, filter, sort,
   return response;
 }
 
-export async function getUser ({ secretKey, id, provider, includePermissions, includeDevices, includeMeta, includeUnreadNotifications }) {
+export async function getUser({ secretKey, id, provider, includePermissions, includeDevices, includeMeta, includeUnreadNotifications }) {
   let url = `${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.GET(id)}`;
   const queries = [];
 
@@ -219,7 +219,7 @@ export async function getUser ({ secretKey, id, provider, includePermissions, in
   return response.result;
 }
 
-export async function getUserByEmail ({ secretKey, email, provider, includePermissions, includeDevices, includeMeta, includeUnreadNotifications }) {
+export async function getUserByEmail({ secretKey, email, provider, includePermissions, includeDevices, includeMeta, includeUnreadNotifications }) {
   let url = `${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.GET_BY_EMAIL}`;
   const queries = [];
 
@@ -248,7 +248,7 @@ export async function getUserByEmail ({ secretKey, email, provider, includePermi
   return response.result;
 }
 
-export async function getProfile ({ secretKey, includePermissions, includeDevices, includeMeta, includeUnreadNotifications }) {
+export async function getProfile({ secretKey, includePermissions, includeDevices, includeMeta, includeUnreadNotifications }) {
   let url = `${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.GET_PROFILE}`;
   const queries = [];
 
@@ -275,7 +275,7 @@ export async function getProfile ({ secretKey, includePermissions, includeDevice
   return response.result;
 }
 
-export async function deleteUser ({ secretKey, id }) {
+export async function deleteUser({ secretKey, id }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.DELETE(id)}`,
     {
       method: 'DELETE',
@@ -290,7 +290,7 @@ export async function deleteUser ({ secretKey, id }) {
   return response;
 }
 
-export async function blockUser ({ secretKey, id }) {
+export async function blockUser({ secretKey, id }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.BLOCK(id)}`,
     {
       method: 'PUT',
@@ -305,7 +305,7 @@ export async function blockUser ({ secretKey, id }) {
   return response;
 }
 
-export async function unblockUser ({ secretKey, id }) {
+export async function unblockUser({ secretKey, id }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.UNBLOCK(id)}`,
     {
       method: 'PUT',
@@ -320,7 +320,7 @@ export async function unblockUser ({ secretKey, id }) {
   return response;
 }
 
-export async function updatePassword ({ secretKey, userId, currentPassword, password, repeatedPassword }) {
+export async function updatePassword({ secretKey, userId, currentPassword, password, repeatedPassword }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.UPDATE_PASSWORD}`,
     {
       method: 'PATCH',
@@ -340,7 +340,7 @@ export async function updatePassword ({ secretKey, userId, currentPassword, pass
   return response;
 }
 
-export async function createPasswordReset ({ secretKey, email }) {
+export async function createPasswordReset({ secretKey, email }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.CREATE_PASSWORD_RESET}`,
     {
       method: 'POST',
@@ -355,7 +355,7 @@ export async function createPasswordReset ({ secretKey, email }) {
   return response;
 }
 
-export async function checkPasswordReset ({ secretKey, token }) {
+export async function checkPasswordReset({ secretKey, token }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.CHECK_PASSWORD_RESET}?token=${token}`,
     {
       method: 'GET',
@@ -370,7 +370,7 @@ export async function checkPasswordReset ({ secretKey, token }) {
   return response;
 }
 
-export async function resetPassword ({ secretKey, token, password, repeatedPassword }) {
+export async function resetPassword({ secretKey, token, password, repeatedPassword }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.RESET_PASSWORD}`,
     {
       method: 'POST',
@@ -385,7 +385,7 @@ export async function resetPassword ({ secretKey, token, password, repeatedPassw
   return response;
 }
 
-export async function verifyRegistration ({ secretKey, token }) {
+export async function verifyRegistration({ secretKey, token }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.VERIFY_REGISTRATION}`,
     {
       method: 'POST',
@@ -400,7 +400,7 @@ export async function verifyRegistration ({ secretKey, token }) {
   return response;
 }
 
-export async function checkInvitationToken ({ secretKey, token }) {
+export async function checkInvitationToken({ secretKey, token }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.CHECK_INVITATION_TOKEN}?token=${token}`,
     {
       method: 'GET',
@@ -415,7 +415,7 @@ export async function checkInvitationToken ({ secretKey, token }) {
   return response;
 }
 
-export async function verifyInvitation ({ secretKey, token, password, repeatedPassword }) {
+export async function verifyInvitation({ secretKey, token, password, repeatedPassword }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.VERIFY_INVITATION}`,
     {
       method: 'POST',
@@ -430,7 +430,7 @@ export async function verifyInvitation ({ secretKey, token, password, repeatedPa
   return response;
 }
 
-export async function login ({ username, password }) {
+export async function login({ username, password }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.ACCOUNT.LOGIN(username, password)}`,
     {
       method: 'POST',
@@ -444,7 +444,7 @@ export async function login ({ username, password }) {
   return response ? response.result : null;
 }
 
-export async function checkAuthentication ({ secretKey }) {
+export async function checkAuthentication({ secretKey }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.ACCOUNT.CHECK_AUTH}`,
     {
       method: 'GET',
@@ -458,7 +458,7 @@ export async function checkAuthentication ({ secretKey }) {
   return response ? response.result : null;
 }
 
-export async function logout ({ secretKey, mode, provider }) {
+export async function logout({ secretKey, mode, provider }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.ACCOUNT.LOGOUT}?mode=${mode}&provide=${provider}`,
     {
       method: 'POST',
@@ -472,7 +472,7 @@ export async function logout ({ secretKey, mode, provider }) {
   return response ? response.result : null;
 }
 
-export async function createDeactivationRequest ({ secretKey }) {
+export async function createDeactivationRequest({ secretKey }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.CREATE_DEACTIVATION}`,
     {
       method: 'POST',
@@ -487,7 +487,7 @@ export async function createDeactivationRequest ({ secretKey }) {
   return response;
 }
 
-export async function checkDeactivationToken ({ secretKey, token }) {
+export async function checkDeactivationToken({ secretKey, token }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.CHECK_PASSWORD_RESET}?token=${token}`,
     {
       method: 'GET',
@@ -502,7 +502,7 @@ export async function checkDeactivationToken ({ secretKey, token }) {
   return response;
 }
 
-export async function deactivateAccount ({ secretKey, token, password }) {
+export async function deactivateAccount({ secretKey, token, password }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.RESET_PASSWORD}`,
     {
       method: 'POST',

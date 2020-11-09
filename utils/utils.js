@@ -1,11 +1,11 @@
-export function objectOrStringToString (filter) {
+export function objectOrStringToString(filter) {
   const stringifiedFilter = filter !== undefined && typeof filter === 'object' && filter !== null ? JSON.stringify(filter) : filter;
   if (!stringifiedFilter) return undefined;
   return stringifiedFilter;
 };
 
-export function toQueryString (object) {
-  if (typeof (data) === 'string') return object;
+export function toQueryString(object) {
+  if (typeof object === 'string') return object;
 
   const query = [];
 

@@ -3,7 +3,7 @@ import Config from '../config/config';
 import { CONFIG as Endpoints } from '../routes';
 import { objectOrStringToString, toQueryString } from '../utils/utils';
 
-export async function registerDeviceToken ({
+export async function registerDeviceToken({
   secretKey, provider, token, userId, deviceId,
   operatingSystem, brand, deviceName, timeZone, language, locale, meta
 }) {
@@ -34,7 +34,7 @@ export async function registerDeviceToken ({
   return response;
 }
 
-export async function deleteDeviceToken ({ secretKey, deviceId }) {
+export async function deleteDeviceToken({ secretKey, deviceId }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.DELETE_DEVICE_TOKEN(deviceId)}`,
     {
       method: 'POST',
@@ -50,7 +50,7 @@ export async function deleteDeviceToken ({ secretKey, deviceId }) {
   return response;
 }
 
-export async function getDevice ({ secretKey, id }) {
+export async function getDevice({ secretKey, id }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET_DEVICE(id)}`,
     {
       method: 'GET',
@@ -65,7 +65,7 @@ export async function getDevice ({ secretKey, id }) {
   return response;
 }
 
-export async function getDevices ({ secretKey, userId, pageNumber, pageSize, filter, sort }) {
+export async function getDevices({ secretKey, userId, pageNumber, pageSize, filter, sort }) {
   const request = {
     userId,
     pageSize: pageSize || Config.tablePageSize,
@@ -89,7 +89,7 @@ export async function getDevices ({ secretKey, userId, pageNumber, pageSize, fil
   return response;
 }
 
-export async function updateDevice ({
+export async function updateDevice({
   secretKey, id, operatingSystem, brand, deviceName, timeZone, language, locale, meta
 }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.UPDATE_DEVICE(id)}`,
@@ -115,7 +115,7 @@ export async function updateDevice ({
   return response;
 }
 
-export async function deleteDevice ({ secretKey, id }) {
+export async function deleteDevice({ secretKey, id }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.DELETE_DEVICE(id)}`,
     {
       method: 'DELETE',
@@ -130,7 +130,7 @@ export async function deleteDevice ({ secretKey, id }) {
   return response;
 }
 
-export async function getNotifications ({ secretKey, userId, deviceId, pageNumber, pageSize, filter, sort }) {
+export async function getNotifications({ secretKey, userId, deviceId, pageNumber, pageSize, filter, sort }) {
   const request = {
     userId,
     deviceId,
@@ -141,7 +141,6 @@ export async function getNotifications ({ secretKey, userId, deviceId, pageNumbe
   };
 
   const requestUrl = `${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET_ALL}?${toQueryString(request)}`;
-
   const response = await server.loadJson(`${Config.apiUrl}${requestUrl}`,
     {
       method: 'GET',
@@ -156,7 +155,7 @@ export async function getNotifications ({ secretKey, userId, deviceId, pageNumbe
   return response;
 }
 
-export async function getNotification ({ secretKey, id }) {
+export async function getNotification({ secretKey, id }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET(id)}`,
     {
       method: 'GET',
@@ -171,7 +170,7 @@ export async function getNotification ({ secretKey, id }) {
   return response;
 }
 
-export async function sendPushNotification ({
+export async function sendPushNotification({
   secretKey, templateId, users, devices, roles, tokens, postpone, respectTimeZone, isNonPushable, forceRequestLanguage
 }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.SEND}`,
@@ -198,7 +197,7 @@ export async function sendPushNotification ({
   return response;
 }
 
-export async function markNotificationAsRead ({ secretKey, id, userId, deviceId }) {
+export async function markNotificationAsRead({ secretKey, id, userId, deviceId }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.MARK_NOTIFICATION_AS_READ(id)}`,
     {
       method: 'PATCH',
@@ -217,7 +216,7 @@ export async function markNotificationAsRead ({ secretKey, id, userId, deviceId 
   return response;
 }
 
-export async function markNotificationsAsRead ({ secretKey, userId, deviceId }) {
+export async function markNotificationsAsRead({ secretKey, userId, deviceId, filter }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.MARK_NOTIFICATIONS_AS_READ}`,
     {
       method: 'PATCH',
@@ -229,15 +228,24 @@ export async function markNotificationsAsRead ({ secretKey, userId, deviceId }) 
       },
       body: JSON.stringify({
         userId,
-        deviceId
+        deviceId,
+        filter: objectOrStringToString(filter)
       })
     });
 
   return response;
 }
 
-export async function getNotificationsCount ({ secretKey, userId, deviceId }) {
-  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET_NOTIFICATIONS_COUNT(userId, deviceId)}`,
+export async function getNotificationsCount({ secretKey, userId, deviceId, filter, groupBy }) {
+  const request = {
+    userId,
+    deviceId,
+    filter,
+    groupBy
+  };
+
+  const requestUrl = `${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET_NOTIFICATIONS_COUNT}?${toQueryString(request)}`;
+  const response = await server.loadJson(requestUrl,
     {
       method: 'GET',
       headers: {
