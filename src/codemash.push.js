@@ -240,7 +240,7 @@ export async function getNotificationsCount({ secretKey, userId, deviceId, filte
   const request = {
     userId,
     deviceId,
-    filter,
+    filter: objectOrStringToString(filter),
     groupBy
   };
 
