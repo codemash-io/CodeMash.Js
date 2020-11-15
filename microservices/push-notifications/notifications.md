@@ -123,6 +123,40 @@ var response = await pushService.SendPushNotificationAsync(
 
 ```
 {% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashPushNotification;
+
+class CodemashService
+{
+    protected CodemashPushNotification $codemashPushNotification;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $codemashPushNotification = new CodemashPushNotification($client);
+    }
+    
+    public function sendPushNotification()
+    {
+        $responseData = $this->codemashPushNotification->sendNotification([
+            'templateId' => '{TEMPLATE_ID}',
+            'users' => [
+                '{USER_ID}',
+                '{USER_ID}',
+                '{USER_ID}',
+            ],
+        ]);
+    }
+    
+}
+```
+{% endtab %}
 {% endtabs %}
 
 {% api-method method="get" host="https://api.codemash.io" path="/:version/notifications/push/:id" %}
@@ -213,6 +247,35 @@ var response = await pushService.GetNotificationAsync(
 
 ```
 {% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashPushNotification;
+
+class CodemashService
+{
+    protected CodemashPushNotification $codemashPushNotification;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $codemashPushNotification = new CodemashPushNotification($client);
+    }
+    
+    public function getNotification()
+    {
+        $responseData = $this->codemashPushNotification->getNotification([
+            'id' => '{NOTIFICATION_ID}',
+        ]);
+    }
+    
+}
+```
+{% endtab %}
 {% endtabs %}
 
 {% api-method method="get" host="https://api.codemash.io" path="/:version/notifications/push" %}
@@ -301,6 +364,41 @@ var response = await pushService.GetNotificationsAsync(
         UserId = "{USER_ID}"
     }
 );
+```
+{% endtab %}
+
+{% tab title="Node" %}
+```
+
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashPushNotification;
+
+class CodemashService
+{
+    protected CodemashPushNotification $codemashPushNotification;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $codemashPushNotification = new CodemashPushNotification($client);
+    }
+    
+    public function getNotifications()
+    {
+        $responseData = $this->codemashPushNotification->getNotifications([
+            'userId' => '{USER_ID}',
+        ]);
+    }
+    
+}
 ```
 {% endtab %}
 {% endtabs %}
@@ -398,6 +496,41 @@ var response = await pushService.GetNotificationsCountAsync(
         UserId = "{USER_ID}"
     }
 );
+```
+{% endtab %}
+
+{% tab title="Node" %}
+```
+
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashPushNotification;
+
+class CodemashService
+{
+    protected CodemashPushNotification $codemashPushNotification;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $codemashPushNotification = new CodemashPushNotification($client);
+    }
+    
+    public function getNotificationsCount()
+    {
+        $responseData = $this->codemashPushNotification->getNotificationCount([
+            'userId' => '{USER_ID}',
+        ]);
+    }
+    
+}
 ```
 {% endtab %}
 {% endtabs %}
@@ -502,6 +635,41 @@ var response = await pushService.ReadNotificationAsync(
 );
 ```
 {% endtab %}
+
+{% tab title="Node" %}
+```
+
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashPushNotification;
+
+class CodemashService
+{
+    protected CodemashPushNotification $codemashPushNotification;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $codemashPushNotification = new CodemashPushNotification($client);
+    }
+    
+    public function readNotification()
+    {
+        $responseData = $codemashPushNotification->readNotification([
+            'id' => '{NOTIFICATION_ID}',
+        ]);
+    }
+    
+}
+```
+{% endtab %}
 {% endtabs %}
 
 {% hint style="warning" %}
@@ -588,6 +756,41 @@ var response = await pushService.DeleteNotificationAsync(
         Id = "{NOTIFICATION_ID}"
     }
 );
+```
+{% endtab %}
+
+{% tab title="Node" %}
+```
+
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashPushNotification;
+
+class CodemashService
+{
+    protected CodemashPushNotification $codemashPushNotification;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $codemashPushNotification = new CodemashPushNotification($client);
+    }
+    
+    public function deleteNotification()
+    {
+        $responseData = $codemashPushNotification->deleteNotification([
+            'id' => '{NOTIFICATION_ID}',
+        ]);
+    }
+    
+}
 ```
 {% endtab %}
 {% endtabs %}
