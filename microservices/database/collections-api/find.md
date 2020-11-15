@@ -179,7 +179,7 @@ class CodemashService
 
     public function find()
     {
-        $responseData = $codemashDb->findMany([
+        $responseData = $this->codemashDb->findMany([
         	'collectionName' => 'employees',
         	'filter' => [
         		'address' => 'New York',
