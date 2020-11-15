@@ -30,6 +30,28 @@ var codeService = new CodeMashCodeService(client);
 
 ```
 {% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashCode;
+
+class CodemashService
+{
+    protected CodemashCode $codemashCode;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $this->codemashCode = new CodemashAuth($client);
+    }
+
+}
+```
+{% endtab %}
 {% endtabs %}
 
 ## Example
@@ -74,6 +96,34 @@ namespace ConsoleApplication
 {% tab title="Node" %}
 ```
 
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashCode;
+
+class CodemashService
+{
+    protected CodemashCode $codemashCode;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $this->codemashCode = new CodemashAuth($client);
+    }
+
+    public function executeFunction()
+    {
+        $responseData = $this->codemashCode->executeFunction([
+            'id' => '{YOUR_FUNCTION_ID}',
+        ]);
+    }
+}
 ```
 {% endtab %}
 {% endtabs %}
