@@ -49,6 +49,16 @@ Here `UniqueName` is an attribute that is used to set the unique name of a field
 import { db } from 'codemash';
 ```
 {% endtab %}
+
+{% tab title="PHP" %}
+```
+$secretKey = '{YOUR_SECRET_KEY}';
+$projectId = '{YOUR_PROJECT_ID}';
+
+$client = new CodemashClient($secretKey, $projectId);
+$codemashDb = new CodemashDb($client);
+```
+{% endtab %}
 {% endtabs %}
 
 The following are examples of database [SDK](https://docs.codemash.io/sdks) using different languages and frameworks.
@@ -106,6 +116,41 @@ export async function getHolidaysOfEmployee(userId) {
         await db.getRecords('holidays', 0, 100, { start: -1 }, filter);
     
     return response;
+}
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```
+use Codemash\CodemashClient;
+use Codemash\CodemashDb;
+
+class CodemashService
+{
+    protected CodemashDb $codemashDb;
+    protected string $collectionName = '{YOUR_COLLECTION_NAME}';
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $this->codemashDb = new CodemashDb($client);
+    }
+
+    public function getEmployees()
+    {
+        $client = new CodemashClient('{YOUR_SECRET_KEY}', '{YOUR_PROJECT_ID}');
+        $codemashDb = new CodemashDb($client);
+
+        $responseData = $codemashDb->findMany([
+        	'collectionName' => 'employees',
+        	'filter' => [
+        		'address' => 'New York',
+        	],
+        ]);
+    }
 }
 ```
 {% endtab %}
