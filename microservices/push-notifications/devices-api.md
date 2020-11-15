@@ -100,6 +100,44 @@ var response = await pushService.RegisterDeviceAsync(
     }
 ```
 {% endtab %}
+
+{% tab title="Node" %}
+```
+
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashPushNotification;
+
+class CodemashService
+{
+    protected CodemashPushNotification $codemashPushNotification;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $codemashPushNotification = new CodemashPushNotification($client);
+    }
+    
+    public function registerDevice()
+    {
+        $responseData = $this->codemashPushNotification->registerDevice([
+            'userId' => '{USER_ID}',
+            'timeZone' => 'Etc/UTC',
+            'meta' => [
+                'Brand' => 'Apple'
+            ]
+    }
+    
+}
+```
+{% endtab %}
 {% endtabs %}
 
 {% api-method method="post" host="https://api.codemash.io" path="/:version/notifications/push/token/expo" %}
@@ -207,6 +245,46 @@ var response = await pushService.RegisterExpoTokenAsync(
     }
 ```
 {% endtab %}
+
+{% tab title="Node" %}
+```
+
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashPushNotification;
+
+class CodemashService
+{
+    protected CodemashPushNotification $codemashPushNotification;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $codemashPushNotification = new CodemashPushNotification($client);
+    }
+    
+    public function registerExpoToken()
+    {
+        $responseData = $this->codemashPushNotification->registerExpoToken([
+            'userId' => '{USER_ID}',
+            'timeZone' => 'Etc/UTC',
+            'meta' => [
+                'Brand' => 'Apple'
+            ],
+            'token' => 'ExponentPushToken[**********************]',
+        ]);
+    }
+    
+}
+```
+{% endtab %}
 {% endtabs %}
 
 {% api-method method="get" host="https://api.codemash.io" path="/:version/notifications/push/devices/:id" %}
@@ -291,6 +369,41 @@ var response = await pushService.GetDeviceAsync(
 );
 ```
 {% endtab %}
+
+{% tab title="Node" %}
+```
+
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashPushNotification;
+
+class CodemashService
+{
+    protected CodemashPushNotification $codemashPushNotification;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $codemashPushNotification = new CodemashPushNotification($client);
+    }
+    
+    public function getDevice()
+    {
+        $responseData = $this->codemashPushNotification->getDevice([
+            'id' => '{DEVICE_ID}',
+        ]);
+    }
+    
+}
+```
+{% endtab %}
 {% endtabs %}
 
 {% api-method method="get" host="https://api.codemash.io" path="/:version/notifications/push/devices" %}
@@ -366,6 +479,36 @@ var pushService = new CodeMashPushService(client);
 var response = await pushService.GetDevicesAsync(
     new GetDevicesRequest()
 );
+```
+{% endtab %}
+
+{% tab title="Node" %}
+```
+
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+class CodemashService
+{
+    protected CodemashPushNotification $codemashPushNotification;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $codemashPushNotification = new CodemashPushNotification($client);
+    }
+    
+    public function getDevices()
+    {
+        $responseData = $this->codemashPushNotification->getDevices();
+    }
+    
+}
 ```
 {% endtab %}
 {% endtabs %}
@@ -452,6 +595,38 @@ var response = await pushService.DeleteDeviceAsync(
 );
 ```
 {% endtab %}
+
+{% tab title="Node" %}
+```
+
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+class CodemashService
+{
+    protected CodemashPushNotification $codemashPushNotification;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $codemashPushNotification = new CodemashPushNotification($client);
+    }
+    
+    public function deleteDevice()
+    {
+        $responseData = $this->codemashPushNotification->deleteDevice([
+            'id' => '{DEVICE_ID}',
+        ]);
+    }
+    
+}
+```
+{% endtab %}
 {% endtabs %}
 
 {% api-method method="delete" host="https://api.codemash.io" path="/:version/notifications/push/devices/:id/token" %}
@@ -534,6 +709,38 @@ var response = await pushService.DeleteTokenAsync(
         Id = "{DEVICE_ID}"
     }
 );
+```
+{% endtab %}
+
+{% tab title="Node" %}
+```
+
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+class CodemashService
+{
+    protected CodemashPushNotification $codemashPushNotification;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $codemashPushNotification = new CodemashPushNotification($client);
+    }
+    
+    public function deleteDeviceToken()
+    {
+        $responseData = $this->codemashPushNotification->deleteDeviceToken([
+            'id' => '{DEVICE_ID}',
+        ]);
+    }
+    
+}
 ```
 {% endtab %}
 {% endtabs %}
@@ -630,6 +837,39 @@ var response = await pushService.UpdateDeviceMetaAsync(
 );
 ```
 {% endtab %}
+
+{% tab title="Node" %}
+```
+
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+class CodemashService
+{
+    protected CodemashPushNotification $codemashPushNotification;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $codemashPushNotification = new CodemashPushNotification($client);
+    }
+    
+    public function updateDeviceMeta()
+    {
+        $responseData = $this->codemashPushNotification->updateDeviceMeta([
+            'id' => '{DEVICE_ID}',
+            'meta' => ['Brand' => 'Apple'],
+        ]);
+    }
+    
+}
+```
+{% endtab %}
 {% endtabs %}
 
 {% api-method method="patch" host="https://api.codemash.io" path="/:version/notifications/push/devices/:id/timezone" %}
@@ -721,6 +961,39 @@ var response = await pushService.UpdateDeviceTimeZoneAsync(
 );
 ```
 {% endtab %}
+
+{% tab title="Node" %}
+```
+
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+class CodemashService
+{
+    protected CodemashPushNotification $codemashPushNotification;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $codemashPushNotification = new CodemashPushNotification($client);
+    }
+    
+    public function updateDeviceTimezone()
+    {
+        $responseData = $this->codemashPushNotification->updateDeviceTimezone([
+            'id' => '{DEVICE_ID}',
+            'timezone' => 'ETC/UTC',
+        ]);
+    }
+    
+}
+```
+{% endtab %}
 {% endtabs %}
 
 {% api-method method="patch" host="https://api.codemash.io" path="/:version/notifications/push/devices/:id/timezone" %}
@@ -810,6 +1083,39 @@ var response = await pushService.UpdateDeviceUserRequest(
         UserId = Guid.Parse("{USER_ID}"),
     }
 );
+```
+{% endtab %}
+
+{% tab title="Node" %}
+```
+
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+class CodemashService
+{
+    protected CodemashPushNotification $codemashPushNotification;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $codemashPushNotification = new CodemashPushNotification($client);
+    }
+    
+    public function updateDeviceUser()
+    {
+        $responseData = $this->codemashPushNotification->updateDeviceUser([
+            'id' => '{DEVICE_ID}',
+            'userId' => '{USER_ID}',
+        ]);
+    }
+    
+}
 ```
 {% endtab %}
 {% endtabs %}
