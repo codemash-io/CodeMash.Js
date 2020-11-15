@@ -84,6 +84,36 @@ var aggregateResult = await service.AggregateAsync<PersonProjection>(
 
 ```
 {% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashDb;
+
+class CodemashService
+{
+    protected CodemashDb $codemashDb;
+    protected string $collectionName = '{YOUR_COLLECTION_NAME}';
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $this->codemashDb = new CodemashDb($client);
+    }
+
+    public function aggregate    ()
+    {
+        $responseData = $codemashDb->getAggregate([
+        	'collectionName' => 'employees',
+        	'id' => '{AGGREGATE_ID}',
+        ]);
+    }
+}
+```
+{% endtab %}
 {% endtabs %}
 
 {% hint style="info" %}
