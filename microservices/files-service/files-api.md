@@ -100,6 +100,36 @@ using (var fsSource = new FileStream(path, FileMode.Open, FileAccess.Read))
 
 ```
 {% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashFile;
+
+class CodemashService
+{
+    protected CodemashFile $codemashFile;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $this->codemashFile = new CodemashFile($client);
+    }
+
+    public function uploadFile()
+    {
+        $responseData = $this->codemashFile->uploadFile([
+            'path' => 'folder1',
+            'fileUri' => '{YOUR_FILE_PATH}',
+            'fileName' => '{YOUR_FILE_NAME}',
+        ]);
+    }
+}
+```
+{% endtab %}
 {% endtabs %}
 
 {% api-method method="post" host="https://api.codemash.io" path="/:version/db/:collectionName/files" %}
@@ -207,6 +237,38 @@ using (var fsSource = new FileStream(path, FileMode.Open, FileAccess.Read))
 
 ```
 {% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashFile;
+
+class CodemashService
+{
+    protected CodemashFile $codemashFile;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $this->codemashFile = new CodemashFile($client);
+    }
+
+    public function uploadRecordFile()
+    {
+        $responseData = $this->codemashFile->uploadRecordFile([
+            'fileUri' => '{YOUR_FILE_PATH}',
+            'fileName' => '{YOUR_FILE_NAME}',
+            'collectionName' => '{COLLECTION_NAME}',
+            'recordId' => '{RECORD_ID}',
+            'uniqueFieldName' => 'file_field_name',
+        ]);
+    }
+}
+```
+{% endtab %}
 {% endtabs %}
 
 {% api-method method="post" host="https://api.codemash.io" path="/:version/membership/users/files" %}
@@ -301,6 +363,43 @@ using (var fsSource = new FileStream(path, FileMode.Open, FileAccess.Read))
             MetaFieldName = "file_field_name"
         }
     );
+}
+```
+{% endtab %}
+
+{% tab title="Node" %}
+```
+
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashFile;
+
+class CodemashService
+{
+    protected CodemashFile $codemashFile;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $this->codemashFile = new CodemashFile($client);
+    }
+
+    public function uploadRecordFile()
+    {
+        $responseData = $codemashFile->uploadUserFile([
+            'fileUri' => '{YOUR_FILE_PATH}',
+            'fileName' => '{YOUR_FILE_NAME}',
+            'userId' => '{USER_ID}',
+            'metaFieldName' => 'file_field_name',
+        ]);
+    }
 }
 ```
 {% endtab %}
