@@ -106,7 +106,7 @@ class CodemashService
 
     public function aggregate()
     {
-        $responseData = $codemashDb->getAggregate([
+        $responseData = $this->codemashDb->getAggregate([
         	'collectionName' => 'employees',
         	'id' => '{AGGREGATE_ID}',
         ]);
