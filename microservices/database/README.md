@@ -51,7 +51,7 @@ import { db } from 'codemash';
 {% endtab %}
 
 {% tab title="PHP" %}
-```
+```php
 $secretKey = '{YOUR_SECRET_KEY}';
 $projectId = '{YOUR_PROJECT_ID}';
 
@@ -121,7 +121,7 @@ export async function getHolidaysOfEmployee(userId) {
 {% endtab %}
 
 {% tab title="PHP" %}
-```
+```php
 use Codemash\CodemashClient;
 use Codemash\CodemashDb;
 
@@ -141,10 +141,7 @@ class CodemashService
 
     public function getEmployees()
     {
-        $client = new CodemashClient('{YOUR_SECRET_KEY}', '{YOUR_PROJECT_ID}');
-        $codemashDb = new CodemashDb($client);
-
-        $responseData = $codemashDb->findMany([
+        $responseData = $this->codemashDb->findMany([
         	'collectionName' => 'employees',
         	'filter' => [
         		'address' => 'New York',
