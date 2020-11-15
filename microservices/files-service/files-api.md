@@ -393,7 +393,7 @@ class CodemashService
 
     public function uploadUserFile()
     {
-        $responseData = $codemashFile->uploadUserFile([
+        $responseData = $this->codemashFile->uploadUserFile([
             'fileUri' => '{YOUR_FILE_PATH}',
             'fileName' => '{YOUR_FILE_NAME}',
             'userId' => '{USER_ID}',

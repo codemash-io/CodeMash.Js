@@ -32,6 +32,29 @@ var logsService = new CodeMashLogsService(client);
 
 ```
 {% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashLog;
+
+class CodemashService
+{
+    protected CodemashLog $codemashLog;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $this->codemashLog = new CodemashLog($client);
+    }
+
+    
+}
+```
+{% endtab %}
 {% endtabs %}
 
 ## Example
@@ -77,6 +100,36 @@ namespace ConsoleApplication
 {% tab title="Node" %}
 ```
 
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashLog;
+
+class CodemashService
+{
+    protected CodemashLog $codemashLog;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $this->codemashLog = new CodemashLog($client);
+    }
+
+    public function log() 
+    {
+        $responseData = $this->codemashLog->create([
+            'message' => 'Custom log',
+            'level' => 'Warning'
+        ]);
+    }
+    
+}
 ```
 {% endtab %}
 {% endtabs %}
