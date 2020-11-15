@@ -110,6 +110,36 @@ export async function getEmployeeDetails(id) {
 }
 ```
 {% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashDb;
+
+class CodemashService
+{
+    protected CodemashDb $codemashDb;
+    protected string $collectionName = '{YOUR_COLLECTION_NAME}';
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $this->codemashDb = new CodemashDb($client);
+    }
+
+    public function findOneById()
+    {
+        $responseData = $this->codemashDb->get([
+        	'collectionName' => 'employees',
+        	'id' => '{EMPLOYEE_ID}',
+        ]);
+    }
+}
+```
+{% endtab %}
 {% endtabs %}
 
 {% hint style="info" %}
@@ -222,6 +252,38 @@ export async function getEmployeeByUserId(id) {
     return await db.getRecordWithFilter(collectionName, filter, null);
 }
 
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashDb;
+
+class CodemashService
+{
+    protected CodemashDb $codemashDb;
+    protected string $collectionName = '{YOUR_COLLECTION_NAME}';
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $this->codemashDb = new CodemashDb($client);
+    }
+
+    public function findOneByFilter()
+    {
+        $responseData = $this->codemashDb->findOne([
+        	'collectionName' => 'employees',
+        	'filter' => [
+        		'address' => 'Los Angeles',
+        	],
+        ]);
+    }
+}
 ```
 {% endtab %}
 {% endtabs %}
