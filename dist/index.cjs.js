@@ -2,6 +2,8 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
+const fetch = require('node-fetch');
+
 class HttpError extends Error {
   constructor(response, responseBody) {
     super(`${response.status} for ${response.url}`);
