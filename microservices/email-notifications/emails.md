@@ -121,6 +121,39 @@ var response = await emailService.SendEmailAsync(new SendEmailRequest
 
 ```
 {% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashEmail;
+
+class CodemashService
+{
+    protected CodemashEmail $codemashEmail;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $this->codemashEmail = new CodemashEmail($client);
+    }
+
+    public function sendEmail()
+    {
+        $responseData = $this->codemashEmail->send([
+            'templateId' => '{TEMPLATE_ID}',
+            'emails' => [
+                'test1@example.com',
+                'test2@example.com',
+                'test3@example.com',
+            ],
+        ]);
+    }
+}
+```
+{% endtab %}
 {% endtabs %}
 
 {% hint style="info" %}
