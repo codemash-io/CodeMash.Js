@@ -391,7 +391,7 @@ class CodemashService
         $this->codemashFile = new CodemashFile($client);
     }
 
-    public function uploadRecordFile()
+    public function uploadUserFile()
     {
         $responseData = $codemashFile->uploadUserFile([
             'fileUri' => '{YOUR_FILE_PATH}',
