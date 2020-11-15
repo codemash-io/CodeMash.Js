@@ -109,6 +109,44 @@ export async function replaceEmployeeInformation(id, employee) {
 }
 ```
 {% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashDb;
+
+class CodemashService
+{
+    protected CodemashDb $codemashDb;
+    protected string $collectionName = '{YOUR_COLLECTION_NAME}';
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $this->codemashDb = new CodemashDb($client);
+    }
+
+    public function replaceOne()
+    {
+        $responseData = $this->codemashDb->replaceOne([
+        	'collectionName' => 'employees',
+        	'filter' => [
+        		'name' => 'Peter',
+        		'email' => 'peter@example.com',
+        	],
+        	'document' => [
+        		'name' => 'Peter Smith',
+        		'email' => 'peter.smith@example.com',
+        		'address' => 'Miami',
+        	],
+        ]);
+    }
+}
+```
+{% endtab %}
 {% endtabs %}
 
 {% hint style="info" %}
@@ -223,6 +261,41 @@ export async function activateEmployee(id) {
         { $set: { 'is_active' : 1 }});
 }
 
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashDb;
+
+class CodemashService
+{
+    protected CodemashDb $codemashDb;
+    protected string $collectionName = '{YOUR_COLLECTION_NAME}';
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $this->codemashDb = new CodemashDb($client);
+    }
+
+    public function updateOne()
+    {
+        $responseData = $this->codemashDb->updateOne([
+        	'collectionName' => 'employees',
+        	'id' => '{EMPLOYEE_ID}',
+        	'update' => [
+        		'$set' => [
+        			'address' => 'Chicago',
+        		],
+        	],
+        ]);
+    }
+}
 ```
 {% endtab %}
 {% endtabs %}
