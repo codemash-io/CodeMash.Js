@@ -86,6 +86,38 @@ export async function deleteEmployee(id) {
 }
 ```
 {% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashDb;
+
+class CodemashService
+{
+    protected CodemashDb $codemashDb;
+    protected string $collectionName = '{YOUR_COLLECTION_NAME}';
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $this->codemashDb = new CodemashDb($client);
+    }
+
+    public function deleteOne()
+    {
+        $responseData = $this->codemashDb->deleteOneWithFilter([
+        	'collectionName' => 'employees',
+        	'filter' => [
+        		'email' => 'john@example.com',
+        	],
+        ]);
+    }
+}
+```
+{% endtab %}
 {% endtabs %}
 
 {% hint style="info" %}
@@ -163,6 +195,47 @@ await service.DeleteManyAsync(
 {% hint style="info" %}
 Check the information about [entities](entities.md) on how your filter parameters are mapped.
 {% endhint %}
+{% endtab %}
+
+{% tab title="Node" %}
+```text
+
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashDb;
+
+class CodemashService
+{
+    protected CodemashDb $codemashDb;
+    protected string $collectionName = '{YOUR_COLLECTION_NAME}';
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $this->codemashDb = new CodemashDb($client);
+    }
+
+    public function deleteMany()
+    {
+        $client = new CodemashClient('{YOUR_SECRET_KEY}', '{YOUR_PROJECT_ID}');
+        $codemashDb = new CodemashDb($client);
+        
+        $responseData = $this->codemashDb->deleteMany([
+        	'collectionName' => 'employees',
+        	'filter' => [
+        		'address' => 'New York',
+        	],
+        ]);
+    }
+}
+```
 {% endtab %}
 {% endtabs %}
 

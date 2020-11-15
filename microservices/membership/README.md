@@ -33,6 +33,27 @@ var membershipService = new CodeMashMembershipService(client);
 
 ```
 {% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashDb;
+
+class CodemashService
+{
+    protected CodemashDb $codemashAuth;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient('{YOUR_SECRET_KEY}', '{YOUR_PROJECT_ID}');
+        $codemashAuth = new CodemashAuth($client);
+    }
+}
+```
+{% endtab %}
 {% endtabs %}
 
 ## Example
@@ -78,6 +99,35 @@ namespace ConsoleApplication
 {% tab title="Node" %}
 ```
 
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashAuth;
+
+class CodemashService
+{
+    protected CodemashAuth $codemashAuth;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $this->codemashAuth = new CodemashAuth($client);
+    }
+
+    public function login()
+    {
+        $responseData = $this->codemashAuth->authenticate([
+        	'userName' => 'test@email.com',
+        	'password' => 'password123',
+        ]);
+    }
+}
 ```
 {% endtab %}
 {% endtabs %}

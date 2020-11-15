@@ -70,6 +70,35 @@ await membershipService.AuthenticateCredentialsAsync(
 
 ```
 {% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashAuth;
+
+class CodemashService
+{
+    protected CodemashAuth $codemashAuth;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $this->codemashAuth = new CodemashAuth($client);
+    }
+
+    public function login()
+    {
+        $responseData = $codemashAuth->authenticate([
+        	'userName' => 'test@email.com',
+        	'password' => 'password123',
+        ]);
+    }
+}
+```
+{% endtab %}
 {% endtabs %}
 
 {% api-method method="post" host="https://api.codemash.io" path="/{version}/auth/aad" %}
@@ -157,6 +186,40 @@ var membershipService = new CodeMashMembershipService(client);
 await membershipService.LogoutAsync("{BEARER_TOKEN}");
 ```
 {% endtab %}
+
+{% tab title="Node" %}
+```
+
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashAuth;
+
+class CodemashService
+{
+    protected CodemashAuth $codemashAuth;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $this->codemashAuth = new CodemashAuth($client);
+    }
+
+    public function logout()
+    {
+        $responseData = $this->codemashAuth->logout([
+        	'bearerToken' => '{BEARER_TOKEN},
+        ]);
+    }
+}
+```
+{% endtab %}
 {% endtabs %}
 
 {% api-method method="post" host="https://api.codemash.io" path="/:version/auth" %}
@@ -211,6 +274,38 @@ await membershipService.AuthenticateCredentialsAsync(
     "test@email.com", 
     "password123"
 );
+```
+{% endtab %}
+
+{% tab title="Node" %}
+```
+
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashAuth;
+
+class CodemashService
+{
+    protected CodemashAuth $codemashAuth;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $this->codemashAuth = new CodemashAuth($client);
+    }
+
+    public function isAuthenticated()
+    {
+        $responseData = $this->codemashAuth->checkAuth();
+    }
+}
 ```
 {% endtab %}
 {% endtabs %}
