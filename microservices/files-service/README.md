@@ -32,6 +32,27 @@ var filesService = new CodeMashFilesService(client);
 
 ```
 {% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashFile;
+
+class CodemashService
+{
+    protected CodemashFile $codemashFile;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $this->codemashFile = new CodemashFile($client);
+    }
+}
+```
+{% endtab %}
 {% endtabs %}
 
 ## Example
@@ -91,6 +112,38 @@ namespace ConsoleApplication
 {% tab title="Node" %}
 ```
 
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashFile;
+
+class CodemashService
+{
+    protected CodemashFile $codemashFile;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $this->codemashFile = new CodemashFile($client);
+    }
+
+    public function uploadFile()
+    {
+        $responseData = $codemashFile->uploadRecordFile([
+            'fileUri' => '{YOUR_FILE_PATH}',
+            'fileName' => '{YOUR_FILE_NAME}',
+            'collectionName' => '{COLLECTION_NAME}',
+            'recordId' => '{RECORD_ID}',
+            'uniqueFieldName' => 'file_field_name',
+        ]);
+    }
+}
 ```
 {% endtab %}
 {% endtabs %}
