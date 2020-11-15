@@ -100,6 +100,40 @@ export async function saveHolidaysRequest(request) {
 
 ```
 {% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashDb;
+
+class CodemashService
+{
+    protected CodemashDb $codemashDb;
+    protected string $collectionName = '{YOUR_COLLECTION_NAME}';
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $this->codemashDb = new CodemashDb($client);
+    }
+
+    public function insertEmployee()
+    {
+        $responseData = $this->codemashDb->insertOne([
+        	'collectionName' => 'employees',
+        	'document' => [
+        		'name' => 'John',
+        		'email' => 'john@example.com',
+        		'address' => 'New York',
+        	],
+        ]);
+    }
+}
+```
+{% endtab %}
 {% endtabs %}
 
 {% api-method method="post" host="https://api.codemash.io" path="/:version/db/:collectionName/bulk" %}
@@ -182,6 +216,40 @@ Check the information about [entities](entities.md) on how your class objects ar
 {% tab title="Node" %}
 ```
 
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashDb;
+
+class CodemashService
+{
+    protected CodemashDb $codemashDb;
+    protected string $collectionName = '{YOUR_COLLECTION_NAME}';
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $this->codemashDb = new CodemashDb($client);
+    }
+
+    public function insertEmployees()
+    {
+        $employees = [];
+        $employees[] = ['name' => 'John', 'email' => 'john@example.com', 'address' => 'New York'];
+        $employees[] = ['name' => 'Peter', 'email' => 'peter@example.com', 'address' => 'Los Angeles'];
+        
+        $responseData = $this->codemashDb->insertMany([
+        	'collectionName' => 'employees',
+        	'documents' => $employees,
+        ]);
+    }
+}
 ```
 {% endtab %}
 {% endtabs %}
