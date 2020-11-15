@@ -24,6 +24,27 @@ var pushService = new CodeMashPushService(client);
 
 ```
 {% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashPushNotification;
+
+class CodemashService
+{
+    protected CodemashPushNotification $codemashPushNotification;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $codemashPushNotification = new CodemashPushNotification($client);
+    }
+}
+```
+{% endtab %}
 {% endtabs %}
 
 ## Example
@@ -71,6 +92,40 @@ namespace ConsoleApplication
 {% tab title="Node" %}
 ```
 
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+use Codemash\CodemashClient;
+use Codemash\CodemashPushNotification;
+
+class CodemashService
+{
+    protected CodemashPushNotification $codemashPushNotification;
+
+    public function __construct()
+    {
+        $secretKey = '{YOUR_SECRET_KEY}';
+        $projectId = '{YOUR_PROJECT_ID}';
+
+        $client = new CodemashClient($secretKey, $projectId);
+        $codemashPushNotification = new CodemashPushNotification($client);
+    }
+    
+    public function sendPushNotification()
+    {
+        $responseData = $this->codemashPushNotification->sendNotification([
+            'templateId' => '{TEMPLATE_ID}',
+            'users' => [
+                '{USER_ID}',
+                '{USER_ID}',
+                '{USER_ID}',
+            ],
+        ]);
+    }
+    
+}
 ```
 {% endtab %}
 {% endtabs %}
