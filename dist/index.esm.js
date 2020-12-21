@@ -230,12 +230,14 @@ async function getRecords({
   includeTermNames,
   referencedFields,
   addReferencesFirst,
-  excludeCulture
+  excludeCulture,
+  cluster
 }) {
   const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.DATABASE.COLLECTION.RECORD.GET_ALL(collectionName)}`, {
     method: 'POST',
     headers: {
       'X-CM-ProjectId': APP.projectId,
+      'X-CM-Cluster': cluster,
       Authorization: `Bearer ${secretKey || APP.secretKey}`,
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -274,12 +276,14 @@ async function getRecord({
   referencedFields,
   addReferencesFirst,
   excludeCulture,
-  language
+  language,
+  cluster
 }) {
   const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.DATABASE.COLLECTION.RECORD.GET(collectionName, id)}`, {
     method: 'POST',
     headers: {
       'X-CM-ProjectId': APP.projectId,
+      'X-CM-Cluster': cluster,
       Authorization: `Bearer ${secretKey || APP.secretKey}`,
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -310,12 +314,14 @@ async function getRecordWithFilter({
   referencedFields,
   addReferencesFirst,
   excludeCulture,
-  language
+  language,
+  cluster
 }) {
   const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.DATABASE.COLLECTION.RECORD.GET_WITH_FILTER(collectionName)}`, {
     method: 'POST',
     headers: {
       'X-CM-ProjectId': APP.projectId,
+      'X-CM-Cluster': cluster,
       Authorization: `Bearer ${secretKey || APP.secretKey}`,
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -339,7 +345,8 @@ async function deleteRecord({
   secretKey,
   collectionName,
   id,
-  ignoreTriggers
+  ignoreTriggers,
+  cluster
 }) {
   let url = `${APP.apiUrl}${CONFIG.PROJECT.DATABASE.COLLECTION.RECORD.DELETE(collectionName, id)}`;
   const queries = [];
@@ -353,6 +360,7 @@ async function deleteRecord({
     method: 'DELETE',
     headers: {
       'X-CM-ProjectId': APP.projectId,
+      'X-CM-Cluster': cluster,
       Authorization: `Bearer ${secretKey || APP.secretKey}`,
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -365,7 +373,8 @@ async function deleteRecordWithFilter({
   secretKey,
   collectionName,
   filter,
-  ignoreTriggers
+  ignoreTriggers,
+  cluster
 }) {
   let url = `${APP.apiUrl}${CONFIG.PROJECT.DATABASE.COLLECTION.RECORD.DELETE_BY_FILTER(collectionName)}`;
   const queries = [];
@@ -380,6 +389,7 @@ async function deleteRecordWithFilter({
     method: 'DELETE',
     headers: {
       'X-CM-ProjectId': APP.projectId,
+      'X-CM-Cluster': cluster,
       Authorization: `Bearer ${secretKey || APP.secretKey}`,
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -392,7 +402,8 @@ async function deleteManyRecords({
   secretKey,
   collectionName,
   filter,
-  ignoreTriggers
+  ignoreTriggers,
+  cluster
 }) {
   let url = `${APP.apiUrl}${CONFIG.PROJECT.DATABASE.COLLECTION.RECORD.DELETE_MANY(collectionName)}`;
   const queries = [];
@@ -407,6 +418,7 @@ async function deleteManyRecords({
     method: 'DELETE',
     headers: {
       'X-CM-ProjectId': APP.projectId,
+      'X-CM-Cluster': cluster,
       Authorization: `Bearer ${secretKey || APP.secretKey}`,
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -421,12 +433,14 @@ async function insertRecord({
   document,
   bypassDocumentValidation,
   waitForFileUpload,
-  ignoreTriggers
+  ignoreTriggers,
+  cluster
 }) {
   const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.DATABASE.COLLECTION.RECORD.CREATE(collectionName)}`, {
     method: 'POST',
     headers: {
       'X-CM-ProjectId': APP.projectId,
+      'X-CM-Cluster': cluster,
       Authorization: `Bearer ${secretKey || APP.secretKey}`,
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -445,7 +459,8 @@ async function insertManyRecords({
   collectionName,
   documents,
   bypassDocumentValidation,
-  ignoreTriggers
+  ignoreTriggers,
+  cluster
 }) {
   const stringDocs = [];
 
@@ -459,6 +474,7 @@ async function insertManyRecords({
     method: 'POST',
     headers: {
       'X-CM-ProjectId': APP.projectId,
+      'X-CM-Cluster': cluster,
       Authorization: `Bearer ${secretKey || APP.secretKey}`,
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -479,12 +495,13 @@ async function updateRecord({
   waitForFileUpload,
   bypassDocumentValidation,
   ignoreTriggers,
-  isUpsert
+  cluster
 }) {
   const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.DATABASE.COLLECTION.RECORD.PATCH(collectionName, id)}`, {
     method: 'PATCH',
     headers: {
       'X-CM-ProjectId': APP.projectId,
+      'X-CM-Cluster': cluster,
       Authorization: `Bearer ${secretKey || APP.secretKey}`,
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -493,8 +510,7 @@ async function updateRecord({
       update: objectOrStringToString(update),
       waitForFileUpload,
       bypassDocumentValidation,
-      ignoreTriggers,
-      isUpsert
+      ignoreTriggers
     })
   });
   return response ? response.result : null;
@@ -507,12 +523,13 @@ async function updateRecordWithFilter({
   waitForFileUpload,
   bypassDocumentValidation,
   ignoreTriggers,
-  isUpsert
+  cluster
 }) {
   const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.DATABASE.COLLECTION.RECORD.PATCH_BY_FILTER(collectionName)}`, {
     method: 'PATCH',
     headers: {
       'X-CM-ProjectId': APP.projectId,
+      'X-CM-Cluster': cluster,
       Authorization: `Bearer ${secretKey || APP.secretKey}`,
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -522,8 +539,7 @@ async function updateRecordWithFilter({
       update: objectOrStringToString(update),
       waitForFileUpload,
       bypassDocumentValidation,
-      ignoreTriggers,
-      isUpsert
+      ignoreTriggers
     })
   });
   return response ? response.result : null;
@@ -535,12 +551,13 @@ async function updateManyRecords({
   update,
   bypassDocumentValidation,
   ignoreTriggers,
-  isUpsert
+  cluster
 }) {
   const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.DATABASE.COLLECTION.RECORD.PATCH_MANY(collectionName)}`, {
     method: 'PATCH',
     headers: {
       'X-CM-ProjectId': APP.projectId,
+      'X-CM-Cluster': cluster,
       Authorization: `Bearer ${secretKey || APP.secretKey}`,
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -549,8 +566,7 @@ async function updateManyRecords({
       filter: objectOrStringToString(filter),
       update: objectOrStringToString(update),
       bypassDocumentValidation,
-      ignoreTriggers,
-      isUpsert
+      ignoreTriggers
     })
   });
   return response ? response.result : null;
@@ -563,12 +579,14 @@ async function replaceRecord({
   waitForFileUpload,
   bypassDocumentValidation,
   ignoreTriggers,
-  isUpsert
+  isUpsert,
+  cluster
 }) {
   const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.DATABASE.COLLECTION.RECORD.UPDATE(collectionName)}`, {
     method: 'PUT',
     headers: {
       'X-CM-ProjectId': APP.projectId,
+      'X-CM-Cluster': cluster,
       Authorization: `Bearer ${secretKey || APP.secretKey}`,
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -594,12 +612,14 @@ async function replaceRecordWithFilter({
   waitForFileUpload,
   bypassDocumentValidation,
   ignoreTriggers,
-  isUpsert
+  isUpsert,
+  cluster
 }) {
   const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.DATABASE.COLLECTION.RECORD.UPDATE(collectionName)}`, {
     method: 'PUT',
     headers: {
       'X-CM-ProjectId': APP.projectId,
+      'X-CM-Cluster': cluster,
       Authorization: `Bearer ${secretKey || APP.secretKey}`,
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -620,13 +640,15 @@ async function executeAggregate({
   collectionName,
   id,
   pipeline,
-  tokens
+  tokens,
+  cluster
 }) {
   const url = pipeline ? `${APP.apiUrl}${CONFIG.PROJECT.DATABASE.COLLECTION.AGGREGATES.GET_CUSTOM(collectionName)}` : `${APP.apiUrl}${CONFIG.PROJECT.DATABASE.COLLECTION.AGGREGATES.GET(collectionName, id)}`;
   const response = await loadJson(url, {
     method: 'POST',
     headers: {
       'X-CM-ProjectId': APP.projectId,
+      'X-CM-Cluster': cluster,
       Authorization: `Bearer ${secretKey || APP.secretKey}`,
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -642,12 +664,14 @@ async function count({
   collectionName,
   filter,
   limit,
-  skip
+  skip,
+  cluster
 }) {
   const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.DATABASE.COLLECTION.RECORD.COUNT(collectionName)}`, {
     method: 'POST',
     headers: {
       'X-CM-ProjectId': APP.projectId,
+      'X-CM-Cluster': cluster,
       Authorization: `Bearer ${secretKey || APP.secretKey}`,
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -664,12 +688,14 @@ async function distinct({
   secretKey,
   collectionName,
   filter,
-  field
+  field,
+  cluster
 }) {
   const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.DATABASE.COLLECTION.RECORD.DISTINCT(collectionName)}`, {
     method: 'POST',
     headers: {
       'X-CM-ProjectId': APP.projectId,
+      'X-CM-Cluster': cluster,
       Authorization: `Bearer ${secretKey || APP.secretKey}`,
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -690,12 +716,14 @@ async function getTerms({
   sort,
   filter,
   projection,
-  excludeCulture
+  excludeCulture,
+  cluster
 }) {
   const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.DATABASE.TAXONOMY.TERM.GET_ALL(taxonomyName)}`, {
     method: 'POST',
     headers: {
       'X-CM-ProjectId': APP.projectId,
+      'X-CM-Cluster': cluster,
       Authorization: `Bearer ${secretKey || APP.secretKey}`,
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -850,7 +878,8 @@ async function uploadRecordFile({
   fileName,
   collectionName,
   recordId,
-  uniqueFieldName
+  uniqueFieldName,
+  cluster
 }) {
   if (base64) {
     const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.DATABASE.COLLECTION.FILES.UPLOAD(collectionName)}`, {
@@ -864,6 +893,7 @@ async function uploadRecordFile({
       body: JSON.stringify({
         recordId,
         uniqueFieldName,
+        cluster,
         base64File: {
           data: base64,
           contentType: fileType,
@@ -1960,11 +1990,13 @@ async function getOrders({
   sort,
   filter,
   userId,
-  includePaidTransactions
+  includePaidTransactions,
+  cluster
 }) {
   const request = {
     userId,
     includePaidTransactions,
+    cluster,
     pageSize: pageSize || APP.tablePageSize,
     pageNumber: pageNumber || 0,
     filter: objectOrStringToString(filter),
