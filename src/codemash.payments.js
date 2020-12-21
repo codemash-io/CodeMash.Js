@@ -24,10 +24,11 @@ export async function getOrder({ secretKey, id, includePaidTransactions }) {
   return response;
 }
 
-export async function getOrders({ secretKey, pageNumber, pageSize, sort, filter, userId, includePaidTransactions }) {
+export async function getOrders({ secretKey, pageNumber, pageSize, sort, filter, userId, includePaidTransactions, cluster }) {
   const request = {
     userId,
     includePaidTransactions,
+    cluster,
     pageSize: pageSize || Config.tablePageSize,
     pageNumber: pageNumber || 0,
     filter: objectOrStringToString(filter),

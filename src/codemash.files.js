@@ -97,7 +97,10 @@ export async function uploadFile({ secretKey, path, fileUri, file, base64, fileT
   return response;
 }
 
-export async function uploadRecordFile({ secretKey, fileUri, file, base64, fileType, fileName, collectionName, recordId, uniqueFieldName }) {
+export async function uploadRecordFile({
+  secretKey, fileUri, file, base64, fileType, fileName, collectionName,
+  recordId, uniqueFieldName, cluster
+}) {
   if (base64) {
     const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.FILES.UPLOAD(collectionName)}`,
       {
@@ -111,6 +114,7 @@ export async function uploadRecordFile({ secretKey, fileUri, file, base64, fileT
         body: JSON.stringify({
           recordId,
           uniqueFieldName,
+          cluster,
           base64File: { data: base64, contentType: fileType, fileName }
         })
       });
