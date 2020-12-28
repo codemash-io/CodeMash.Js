@@ -363,10 +363,8 @@ export async function replaceRecordWithFilter({
   return response ? response.result : null;
 }
 
-export async function executeAggregate({ secretKey, collectionName, id, pipeline, tokens, cluster }) {
-  const url = pipeline
-    ? `${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.AGGREGATES.GET_CUSTOM(collectionName)}`
-    : `${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.AGGREGATES.GET(collectionName, id)}`;
+export async function executeAggregate({ secretKey, collectionName, id, tokens, cluster }) {
+  const url = `${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.AGGREGATES.GET(collectionName, id)}`;
 
   const response = await server.loadJson(url,
     {
