@@ -54,6 +54,7 @@ export const CONFIG = {
         DELETE_DEVICE: (id) => `/v2/notifications/push/devices/${id}`,
         GET_ALL: '/v2/notifications/push',
         GET: (id) => `/v2/notifications/push/${id}`,
+        DELETE: (id) => `/v2/notifications/push/${id}`,
         MARK_NOTIFICATION_AS_READ: (id) => `/v2/notifications/push/${id}/read`,
         MARK_NOTIFICATIONS_AS_READ: '/v2/notifications/push/read',
         GET_NOTIFICATIONS_COUNT: '/v2/notifications/push/count',

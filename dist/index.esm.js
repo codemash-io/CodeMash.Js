@@ -88,8 +88,7 @@ const CONFIG = {
           UPLOAD: collectionName => `/v2/db/${collectionName}/files`
         },
         AGGREGATES: {
-          GET: (collectionName, id) => `/v2/db/${collectionName}/aggregate/${id}`,
-          GET_CUSTOM: collectionName => `/v2/db/${collectionName}/aggregate/pipeline`
+          GET: (collectionName, id) => `/v2/db/${collectionName}/aggregate/${id}`
         }
       },
       TAXONOMY: {
@@ -114,6 +113,7 @@ const CONFIG = {
         DELETE_DEVICE: id => `/v2/notifications/push/devices/${id}`,
         GET_ALL: '/v2/notifications/push',
         GET: id => `/v2/notifications/push/${id}`,
+        DELETE: id => `/v2/notifications/push/${id}`,
         MARK_NOTIFICATION_AS_READ: id => `/v2/notifications/push/${id}/read`,
         MARK_NOTIFICATIONS_AS_READ: '/v2/notifications/push/read',
         GET_NOTIFICATIONS_COUNT: '/v2/notifications/push/count',
@@ -639,11 +639,10 @@ async function executeAggregate({
   secretKey,
   collectionName,
   id,
-  pipeline,
   tokens,
   cluster
 }) {
-  const url = pipeline ? `${APP.apiUrl}${CONFIG.PROJECT.DATABASE.COLLECTION.AGGREGATES.GET_CUSTOM(collectionName)}` : `${APP.apiUrl}${CONFIG.PROJECT.DATABASE.COLLECTION.AGGREGATES.GET(collectionName, id)}`;
+  const url = `${APP.apiUrl}${CONFIG.PROJECT.DATABASE.COLLECTION.AGGREGATES.GET(collectionName, id)}`;
   const response = await loadJson(url, {
     method: 'POST',
     headers: {
@@ -967,7 +966,6 @@ async function register({
   address,
   address2,
   phone,
-  fax,
   company,
   postalCode,
   gender,
@@ -1000,12 +998,65 @@ async function register({
       address,
       address2,
       phone,
-      fax,
       company,
       postalCode,
       gender,
       birthday,
       roles
+    })
+  });
+  return response;
+}
+async function registerGuest({
+  secretKey,
+  email,
+  displayName,
+  firstName,
+  lastName,
+  meta,
+  language,
+  timeZone,
+  subscribeToNews,
+  country,
+  countryCode,
+  area,
+  city,
+  address,
+  address2,
+  phone,
+  company,
+  postalCode,
+  gender,
+  birthday
+}) {
+  const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.MEMBERSHIP.USERS.REGISTER}`, {
+    method: 'POST',
+    headers: {
+      'X-CM-ProjectId': APP.projectId,
+      Authorization: `Bearer ${secretKey || APP.secretKey}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      email,
+      displayName,
+      firstName,
+      lastName,
+      meta: objectOrStringToString(meta),
+      language,
+      timeZone,
+      subscribeToNews,
+      country,
+      countryCode,
+      area,
+      city,
+      address,
+      address2,
+      phone,
+      company,
+      postalCode,
+      gender,
+      birthday
     })
   });
   return response;
@@ -1027,7 +1078,6 @@ async function invite({
   address,
   address2,
   phone,
-  fax,
   company,
   postalCode,
   gender,
@@ -1058,7 +1108,6 @@ async function invite({
       address,
       address2,
       phone,
-      fax,
       company,
       postalCode,
       gender,
@@ -1086,7 +1135,6 @@ async function updateUser({
   address,
   address2,
   phone,
-  fax,
   company,
   postalCode,
   gender,
@@ -1117,7 +1165,6 @@ async function updateUser({
       address,
       address2,
       phone,
-      fax,
       company,
       postalCode,
       gender,
@@ -1144,7 +1191,6 @@ async function updateProfile({
   address,
   address2,
   phone,
-  fax,
   company,
   postalCode,
   gender,
@@ -1174,7 +1220,6 @@ async function updateProfile({
       address,
       address2,
       phone,
-      fax,
       company,
       postalCode,
       gender,
@@ -1594,6 +1639,7 @@ async function deactivateAccount({
 var iamService = /*#__PURE__*/Object.freeze({
   __proto__: null,
   register: register,
+  registerGuest: registerGuest,
   invite: invite,
   updateUser: updateUser,
   updateProfile: updateProfile,
@@ -1659,10 +1705,15 @@ async function registerDeviceToken({
 }
 async function deleteDeviceToken({
   secretKey,
-  deviceId
+  deviceId,
+  deviceKey
 }) {
-  const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.NOTIFICATIONS.PUSH.DELETE_DEVICE_TOKEN(deviceId)}`, {
-    method: 'POST',
+  const request = {
+    deviceKey
+  };
+  const requestUrl = `${CONFIG.PROJECT.NOTIFICATIONS.PUSH.DELETE_DEVICE_TOKEN(deviceId)}?${toQueryString(request)}`;
+  const response = await loadJson(`${APP.apiUrl}${requestUrl}`, {
+    method: 'DELETE',
     headers: {
       'X-CM-ProjectId': APP.projectId,
       Authorization: `Bearer ${secretKey || APP.secretKey}`,
@@ -1675,9 +1726,9 @@ async function deleteDeviceToken({
 }
 async function getDevice({
   secretKey,
-  id
+  idOrKey
 }) {
-  const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.NOTIFICATIONS.PUSH.GET_DEVICE(id)}`, {
+  const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.NOTIFICATIONS.PUSH.GET_DEVICE(idOrKey)}`, {
     method: 'GET',
     headers: {
       'X-CM-ProjectId': APP.projectId,
@@ -1719,7 +1770,7 @@ async function getDevices({
 }
 async function updateDevice({
   secretKey,
-  id,
+  idOrKey,
   operatingSystem,
   brand,
   deviceName,
@@ -1728,7 +1779,7 @@ async function updateDevice({
   locale,
   meta
 }) {
-  const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.NOTIFICATIONS.PUSH.UPDATE_DEVICE(id)}`, {
+  const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.NOTIFICATIONS.PUSH.UPDATE_DEVICE(idOrKey)}`, {
     method: 'PATCH',
     headers: {
       'X-CM-ProjectId': APP.projectId,
@@ -1750,9 +1801,9 @@ async function updateDevice({
 }
 async function deleteDevice({
   secretKey,
-  id
+  idOrKey
 }) {
-  const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.NOTIFICATIONS.PUSH.DELETE_DEVICE(id)}`, {
+  const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.NOTIFICATIONS.PUSH.DELETE_DEVICE(idOrKey)}`, {
     method: 'DELETE',
     headers: {
       'X-CM-ProjectId': APP.projectId,
@@ -1771,7 +1822,8 @@ async function getNotifications({
   pageNumber,
   pageSize,
   filter,
-  sort
+  sort,
+  deviceKey
 }) {
   const request = {
     userId,
@@ -1779,7 +1831,8 @@ async function getNotifications({
     pageSize: pageSize || APP.tablePageSize,
     pageNumber: pageNumber || 0,
     filter: objectOrStringToString(filter),
-    sort: objectOrStringToString(sort)
+    sort: objectOrStringToString(sort),
+    deviceKey
   };
   const requestUrl = `${CONFIG.PROJECT.NOTIFICATIONS.PUSH.GET_ALL}?${toQueryString(request)}`;
   const response = await loadJson(`${APP.apiUrl}${requestUrl}`, {
@@ -1796,9 +1849,14 @@ async function getNotifications({
 }
 async function getNotification({
   secretKey,
-  id
+  id,
+  deviceKey
 }) {
-  const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.NOTIFICATIONS.PUSH.GET(id)}`, {
+  const request = {
+    deviceKey
+  };
+  const requestUrl = `${CONFIG.PROJECT.NOTIFICATIONS.PUSH.GET(id)}?${toQueryString(request)}`;
+  const response = await loadJson(`${APP.apiUrl}${requestUrl}`, {
     method: 'GET',
     headers: {
       'X-CM-ProjectId': APP.projectId,
@@ -1848,7 +1906,8 @@ async function markNotificationAsRead({
   secretKey,
   id,
   userId,
-  deviceId
+  deviceId,
+  deviceKey
 }) {
   const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.NOTIFICATIONS.PUSH.MARK_NOTIFICATION_AS_READ(id)}`, {
     method: 'PATCH',
@@ -1861,7 +1920,8 @@ async function markNotificationAsRead({
     body: JSON.stringify({
       userId,
       deviceId,
-      notificationId: id
+      notificationId: id,
+      deviceKey
     })
   });
   return response;
@@ -1870,7 +1930,8 @@ async function markNotificationsAsRead({
   secretKey,
   userId,
   deviceId,
-  filter
+  filter,
+  deviceKey
 }) {
   const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.NOTIFICATIONS.PUSH.MARK_NOTIFICATIONS_AS_READ}`, {
     method: 'PATCH',
@@ -1883,7 +1944,8 @@ async function markNotificationsAsRead({
     body: JSON.stringify({
       userId,
       deviceId,
-      filter: objectOrStringToString(filter)
+      filter: objectOrStringToString(filter),
+      deviceKey
     })
   });
   return response;
@@ -1893,17 +1955,40 @@ async function getNotificationsCount({
   userId,
   deviceId,
   filter,
-  groupBy
+  groupBy,
+  deviceKey
 }) {
   const request = {
     userId,
     deviceId,
     filter: objectOrStringToString(filter),
-    groupBy
+    groupBy,
+    deviceKey
   };
   const requestUrl = `${APP.apiUrl}${CONFIG.PROJECT.NOTIFICATIONS.PUSH.GET_NOTIFICATIONS_COUNT}?${toQueryString(request)}`;
   const response = await loadJson(requestUrl, {
     method: 'GET',
+    headers: {
+      'X-CM-ProjectId': APP.projectId,
+      Authorization: `Bearer ${secretKey || APP.secretKey}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: null
+  });
+  return response;
+}
+async function deleteNotification({
+  secretKey,
+  id,
+  deviceKey
+}) {
+  const request = {
+    deviceKey
+  };
+  const requestUrl = `${APP.apiUrl}${CONFIG.PROJECT.NOTIFICATIONS.PUSH.DELETE(id)}?${toQueryString(request)}`;
+  const response = await loadJson(requestUrl, {
+    method: 'DELETE',
     headers: {
       'X-CM-ProjectId': APP.projectId,
       Authorization: `Bearer ${secretKey || APP.secretKey}`,
@@ -1928,7 +2013,8 @@ var notificationsService = /*#__PURE__*/Object.freeze({
   sendPushNotification: sendPushNotification,
   markNotificationAsRead: markNotificationAsRead,
   markNotificationsAsRead: markNotificationsAsRead,
-  getNotificationsCount: getNotificationsCount
+  getNotificationsCount: getNotificationsCount,
+  deleteNotification: deleteNotification
 });
 
 async function executeFunction({

@@ -6,7 +6,7 @@ import { objectOrStringToString } from '../utils/utils';
 export async function register({
   secretKey, email, password, displayName, firstName, lastName,
   autoLogin = true, meta, language, timeZone, subscribeToNews, country, countryCode,
-  area, city, address, address2, phone, fax, company, postalCode, gender, birthday, roles
+  area, city, address, address2, phone, company, postalCode, gender, birthday, roles
 }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.REGISTER}`,
     {
@@ -35,7 +35,6 @@ export async function register({
         address,
         address2,
         phone,
-        fax,
         company,
         postalCode,
         gender,
@@ -46,10 +45,49 @@ export async function register({
   return response;
 }
 
+export async function registerGuest({
+  secretKey, email, displayName, firstName, lastName,
+  meta, language, timeZone, subscribeToNews, country, countryCode,
+  area, city, address, address2, phone, company, postalCode, gender, birthday
+}) {
+  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.REGISTER}`,
+    {
+      method: 'POST',
+      headers: {
+        'X-CM-ProjectId': Config.projectId,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email,
+        displayName,
+        firstName,
+        lastName,
+        meta: objectOrStringToString(meta),
+        language,
+        timeZone,
+        subscribeToNews,
+        country,
+        countryCode,
+        area,
+        city,
+        address,
+        address2,
+        phone,
+        company,
+        postalCode,
+        gender,
+        birthday
+      })
+    });
+  return response;
+}
+
 export async function invite({
   secretKey, email, displayName, firstName, lastName,
   meta, language, timeZone, subscribeToNews, country, countryCode,
-  area, city, address, address2, phone, fax, company, postalCode, gender, birthday, roles
+  area, city, address, address2, phone, company, postalCode, gender, birthday, roles
 }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.INVITE}`,
     {
@@ -76,7 +114,6 @@ export async function invite({
         address,
         address2,
         phone,
-        fax,
         company,
         postalCode,
         gender,
@@ -90,7 +127,7 @@ export async function invite({
 export async function updateUser({
   secretKey, id, displayName, firstName, lastName,
   meta, language, timeZone, subscribeToNews, unsubscribedNewsTags, country, countryCode,
-  area, city, address, address2, phone, fax, company, postalCode, gender, birthday, roles
+  area, city, address, address2, phone, company, postalCode, gender, birthday, roles
 }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.UPDATE(id)}`,
     {
@@ -117,7 +154,6 @@ export async function updateUser({
         address,
         address2,
         phone,
-        fax,
         company,
         postalCode,
         gender,
@@ -131,7 +167,7 @@ export async function updateUser({
 export async function updateProfile({
   secretKey, displayName, firstName, lastName,
   meta, language, timeZone, subscribeToNews, unsubscribedNewsTags, country, countryCode,
-  area, city, address, address2, phone, fax, company, postalCode, gender, birthday
+  area, city, address, address2, phone, company, postalCode, gender, birthday
 }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.UPDATE_PROFILE}`,
     {
@@ -158,7 +194,6 @@ export async function updateProfile({
         address,
         address2,
         phone,
-        fax,
         company,
         postalCode,
         gender,
