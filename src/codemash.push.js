@@ -34,10 +34,15 @@ export async function registerDeviceToken({
   return response;
 }
 
-export async function deleteDeviceToken({ secretKey, deviceId }) {
-  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.DELETE_DEVICE_TOKEN(deviceId)}`,
+export async function deleteDeviceToken({ secretKey, deviceId, deviceKey }) {
+  const request = {
+    deviceKey
+  };
+
+  const requestUrl = `${Endpoints.PROJECT.NOTIFICATIONS.PUSH.DELETE_DEVICE_TOKEN(deviceId)}?${toQueryString(request)}`;
+  const response = await server.loadJson(`${Config.apiUrl}${requestUrl}`,
     {
-      method: 'POST',
+      method: 'DELETE',
       headers: {
         'X-CM-ProjectId': Config.projectId,
         Authorization: `Bearer ${secretKey || Config.secretKey}`,
@@ -50,8 +55,8 @@ export async function deleteDeviceToken({ secretKey, deviceId }) {
   return response;
 }
 
-export async function getDevice({ secretKey, id }) {
-  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET_DEVICE(id)}`,
+export async function getDevice({ secretKey, idOrKey }) {
+  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET_DEVICE(idOrKey)}`,
     {
       method: 'GET',
       headers: {
@@ -90,9 +95,9 @@ export async function getDevices({ secretKey, userId, pageNumber, pageSize, filt
 }
 
 export async function updateDevice({
-  secretKey, id, operatingSystem, brand, deviceName, timeZone, language, locale, meta
+  secretKey, idOrKey, operatingSystem, brand, deviceName, timeZone, language, locale, meta
 }) {
-  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.UPDATE_DEVICE(id)}`,
+  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.UPDATE_DEVICE(idOrKey)}`,
     {
       method: 'PATCH',
       headers: {
@@ -115,8 +120,8 @@ export async function updateDevice({
   return response;
 }
 
-export async function deleteDevice({ secretKey, id }) {
-  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.DELETE_DEVICE(id)}`,
+export async function deleteDevice({ secretKey, idOrKey }) {
+  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.DELETE_DEVICE(idOrKey)}`,
     {
       method: 'DELETE',
       headers: {
@@ -130,14 +135,15 @@ export async function deleteDevice({ secretKey, id }) {
   return response;
 }
 
-export async function getNotifications({ secretKey, userId, deviceId, pageNumber, pageSize, filter, sort }) {
+export async function getNotifications({ secretKey, userId, deviceId, pageNumber, pageSize, filter, sort, deviceKey }) {
   const request = {
     userId,
     deviceId,
     pageSize: pageSize || Config.tablePageSize,
     pageNumber: pageNumber || 0,
     filter: objectOrStringToString(filter),
-    sort: objectOrStringToString(sort)
+    sort: objectOrStringToString(sort),
+    deviceKey
   };
 
   const requestUrl = `${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET_ALL}?${toQueryString(request)}`;
@@ -155,8 +161,13 @@ export async function getNotifications({ secretKey, userId, deviceId, pageNumber
   return response;
 }
 
-export async function getNotification({ secretKey, id }) {
-  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET(id)}`,
+export async function getNotification({ secretKey, id, deviceKey }) {
+  const request = {
+    deviceKey
+  };
+
+  const requestUrl = `${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET(id)}?${toQueryString(request)}`;
+  const response = await server.loadJson(`${Config.apiUrl}${requestUrl}`,
     {
       method: 'GET',
       headers: {
@@ -197,7 +208,7 @@ export async function sendPushNotification({
   return response;
 }
 
-export async function markNotificationAsRead({ secretKey, id, userId, deviceId }) {
+export async function markNotificationAsRead({ secretKey, id, userId, deviceId, deviceKey }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.MARK_NOTIFICATION_AS_READ(id)}`,
     {
       method: 'PATCH',
@@ -210,13 +221,14 @@ export async function markNotificationAsRead({ secretKey, id, userId, deviceId }
       body: JSON.stringify({
         userId,
         deviceId,
-        notificationId: id
+        notificationId: id,
+        deviceKey
       })
     });
   return response;
 }
 
-export async function markNotificationsAsRead({ secretKey, userId, deviceId, filter }) {
+export async function markNotificationsAsRead({ secretKey, userId, deviceId, filter, deviceKey }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.MARK_NOTIFICATIONS_AS_READ}`,
     {
       method: 'PATCH',
@@ -229,25 +241,47 @@ export async function markNotificationsAsRead({ secretKey, userId, deviceId, fil
       body: JSON.stringify({
         userId,
         deviceId,
-        filter: objectOrStringToString(filter)
+        filter: objectOrStringToString(filter),
+        deviceKey
       })
     });
 
   return response;
 }
 
-export async function getNotificationsCount({ secretKey, userId, deviceId, filter, groupBy }) {
+export async function getNotificationsCount({ secretKey, userId, deviceId, filter, groupBy, deviceKey }) {
   const request = {
     userId,
     deviceId,
-    filter,
-    groupBy
+    filter: objectOrStringToString(filter),
+    groupBy,
+    deviceKey
   };
 
   const requestUrl = `${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.GET_NOTIFICATIONS_COUNT}?${toQueryString(request)}`;
   const response = await server.loadJson(requestUrl,
     {
       method: 'GET',
+      headers: {
+        'X-CM-ProjectId': Config.projectId,
+        Authorization: `Bearer ${secretKey || Config.secretKey}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: null
+    });
+  return response;
+}
+
+export async function deleteNotification({ secretKey, id, deviceKey }) {
+  const request = {
+    deviceKey
+  };
+
+  const requestUrl = `${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.DELETE(id)}?${toQueryString(request)}`;
+  const response = await server.loadJson(requestUrl,
+    {
+      method: 'DELETE',
       headers: {
         'X-CM-ProjectId': Config.projectId,
         Authorization: `Bearer ${secretKey || Config.secretKey}`,

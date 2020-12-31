@@ -1,5 +1,7 @@
+const fetch = require('node-fetch');
+
 export class HttpError extends Error {
-  constructor (response, responseBody) {
+  constructor(response, responseBody) {
     super(`${response.status} for ${response.url}`);
 
     if (responseBody && responseBody.responseStatus) {
@@ -16,7 +18,7 @@ export class HttpError extends Error {
   }
 }
 
-export async function loadText (url, requestInfo, mimeType = 'image/png') {
+export async function loadText(url, requestInfo, mimeType = 'image/png') {
   const response = await fetch(url, requestInfo);
   if (response.status === 200) {
     return response.text().then(text => {
@@ -30,7 +32,7 @@ export async function loadText (url, requestInfo, mimeType = 'image/png') {
   }
 }
 
-export async function loadJson (url, requestInfo) {
+export async function loadJson(url, requestInfo) {
   const response = await fetch(url, requestInfo);
 
   if (response.status >= 200 && response.status < 300) {

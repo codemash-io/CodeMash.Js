@@ -1,11 +1,21 @@
 {
   "name": "codemash",
-  "version": "1.2.32",
-  "description": "CodeMash tools for Node and javascript  developers. Access codemash.io tools from npm",
-  "main": "index.js",
+  "version": "1.2.33",
+  "description": "CodeMash tools for Node and javascript developers. Access codemash.io tools from npm",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
   "scripts": {
-    "test": "test"
+    "build": "rollup -c"
   },
+  "files": [
+    "dist/*",
+    "src/*",
+    "config/*",
+    "server/*",
+    "utils/*",
+    "index.js",
+    "routes.js"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codemash-io/CodeMash.Js.git"
@@ -20,11 +30,21 @@
   },
   "homepage": "https://codemash.io",
   "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "@rollup/plugin-babel": "^5.2.1",
+    "@rollup/plugin-node-resolve": "^10.0.0",
+    "@rollup/plugin-replace": "^2.3.4",
     "eslint": "^7.3.1",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.21.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1"
+    "eslint-plugin-standard": "^4.0.1",
+    "rollup": "^2.33.1",
+    "rollup-plugin-terser": "^7.0.2"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.1"
   }
 }

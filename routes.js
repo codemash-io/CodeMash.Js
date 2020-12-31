@@ -29,8 +29,7 @@ export const CONFIG = {
           UPLOAD: (collectionName) => `/v2/db/${collectionName}/files`
         },
         AGGREGATES: {
-          GET: (collectionName, id) => `/v2/db/${collectionName}/aggregate/${id}`,
-          GET_CUSTOM: (collectionName) => `/v2/db/${collectionName}/aggregate/pipeline`
+          GET: (collectionName, id) => `/v2/db/${collectionName}/aggregate/${id}`
         }
       },
       TAXONOMY: {
@@ -55,6 +54,7 @@ export const CONFIG = {
         DELETE_DEVICE: (id) => `/v2/notifications/push/devices/${id}`,
         GET_ALL: '/v2/notifications/push',
         GET: (id) => `/v2/notifications/push/${id}`,
+        DELETE: (id) => `/v2/notifications/push/${id}`,
         MARK_NOTIFICATION_AS_READ: (id) => `/v2/notifications/push/${id}/read`,
         MARK_NOTIFICATIONS_AS_READ: '/v2/notifications/push/read',
         GET_NOTIFICATIONS_COUNT: '/v2/notifications/push/count',
