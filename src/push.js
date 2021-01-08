@@ -1,7 +1,7 @@
-import * as server from '../server/server';
-import Config from '../config/config';
-import { CONFIG as Endpoints } from '../routes';
-import { objectOrStringToString, toQueryString } from '../utils/utils';
+import * as server from './server';
+import Config from './config';
+import { CONFIG as Endpoints } from './routes';
+import { objectOrStringToString, toQueryString } from './utils';
 
 export async function registerDeviceToken({
   secretKey, provider, token, userId, deviceId,
