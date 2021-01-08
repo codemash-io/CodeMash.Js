@@ -9,3 +9,6 @@ jobs:
       run: yarn install
     - name: Run tests
       run: yarn test
+      env:
+        CODEMASH_PROJECT_ID: ${{ secrets.CODEMASH_PROJECT_ID }}
+        CODEMASH_SECRET_KEY: ${{ secrets.CODEMASH_SECRET_KEY }}
