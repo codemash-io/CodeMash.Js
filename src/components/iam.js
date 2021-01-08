@@ -1,7 +1,7 @@
-import * as server from './server';
-import Config from './config';
-import { CONFIG as Endpoints } from './routes';
-import { objectOrStringToString } from './utils';
+import * as server from '../server';
+import Config from '../config';
+import { CONFIG as Endpoints } from '../routes';
+import { objectOrStringToString } from '../utils';
 
 export async function register({
   secretKey, email, password, displayName, firstName, lastName,

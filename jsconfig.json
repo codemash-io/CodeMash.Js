@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",
-    "jsx": "react"
+    "baseUrl": "src"
   },
   "include": ["src/**/*"],
   "typeAcquisition": {

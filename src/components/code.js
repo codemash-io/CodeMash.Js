@@ -1,6 +1,6 @@
-import * as server from './server';
-import Config from './config';
-import { CONFIG as Endpoints } from './routes';
+import * as server from '../server';
+import Config from '../config';
+import { CONFIG as Endpoints } from '../routes';
 
 export async function executeFunction({ secretKey, functionId, data, qualifier, meta, tokens }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.CODE.EXECUTE(functionId)}`,

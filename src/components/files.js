@@ -1,6 +1,6 @@
-import * as server from './server';
-import Config from './config';
-import { CONFIG as Endpoints } from './routes';
+import * as server from '../server';
+import Config from '../config';
+import { CONFIG as Endpoints } from '../routes';
 
 export async function downloadFile({ secretKey, fileId, optimization, asBase64 }) {
   let route = `${Config.apiUrl}${Endpoints.PROJECT.FILES.DOWNLOAD(fileId)}`;
@@ -47,7 +47,7 @@ export async function getFileUrl({ secretKey, fileId, optimization }) {
 }
 
 // Pass either fileUri (local file location), file or base64 string
-export async function uploadFile({ secretKey, path, fileUri, file, base64, fileType, fileName }) {
+export async function uploadFile({ secretKey, path, fileUri, file, base64, fileType, fileName, formDataTest }) {
   if (base64) {
     const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.FILES.UPLOAD}`,
       {
@@ -66,8 +66,10 @@ export async function uploadFile({ secretKey, path, fileUri, file, base64, fileT
 
     return response;
   }
+  let formData = null;
 
-  const formData = new FormData();
+  if (formDataTest) { formData = formDataTest; } else { formData = new FormData(); }
+
   if (path != null && path !== undefined) {
     formData.append('path', path);
   }
@@ -83,6 +85,8 @@ export async function uploadFile({ secretKey, path, fileUri, file, base64, fileT
   } else {
     formData.append('file', file);
   }
+
+  console.log(formData);
 
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.FILES.UPLOAD}`,
     {
