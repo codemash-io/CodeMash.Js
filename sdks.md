@@ -20,9 +20,23 @@ The following table displays currently available API method versions.
 | v1 | 2019-10-21 |
 | v2 | 2020-05-18 |
 
+## API & Postman Client
+
+If you are working with the [Postman Client](https://www.postman.com/product/api-client/) tool to send requests, inspect the response, and easily debug your API, you can do so with CodeMash API as well. Go ahead to [https://api.codemash.io/metadata](https://api.codemash.io/metadata) and scroll down until you see the **Plugins** section as shown below.
+
+![](.gitbook/assets/screenshot-2021-01-08-at-10.54.25.png)
+
+Press **Postman Metadata** link. It will refer you to the page [https://api.codemash.io/postman](https://api.codemash.io/postman) that is filled in with metadata required by Postman. On the **Postman Client** side, press the **Import** button on the left upper corner, press tab **Link,** and enter [https://api.codemash.io/postman](https://api.codemash.io/postman) URL. 
+
+![](.gitbook/assets/screenshot-2021-01-08-at-10.59.15.png)
+
+When API collection is imported now you can test each REST API action separately.
+
+![](.gitbook/assets/screenshot-2021-01-08-at-11.04.53.png)
+
 ## SDKs
 
-The database and other services we do provide has REST API on top of it. So each interaction and much more are available using our robust API. Even though, work with API can be less joyful, than having a well-prepared SDK \(Software Development Kit\) for your programming language. For such reason, we provide ready to production SDKs which allows you to handle your tedious tasks very quickly and focus more on your app.
+The database and other services we do provide has REST API on top of it. So each interaction and much more are available using our robust API. Even though, work with API can be less joyful, than having a well-prepared SDK \(Software Development Kit\) for your programming language. For such reason, we provide ready to production SDKs that allows you to handle your tedious tasks very quickly and focus more on your app.
 
 Currently, we do support:
 
