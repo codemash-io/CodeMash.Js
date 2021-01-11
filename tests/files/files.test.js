@@ -18,7 +18,7 @@ test('upload file as base 64', async () => {
   console.log(txtFile);
   const request =
   {
-    collectionName: 'scans',
+    collectionName: 'js_employees',
     base64: txtFile
   };
 
@@ -32,7 +32,7 @@ test('upload file', async () => {
 
   const request =
   {
-    collectionName: 'scans',
+    collectionName: 'js_employees',
     formDataTest: new FormData(),
     file: txtFile
   };
