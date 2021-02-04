@@ -182,7 +182,7 @@ export async function deleteManyRecords({ secretKey, collectionName, filter, ign
 
 export async function insertRecord({
   secretKey, collectionName, document, bypassDocumentValidation, waitForFileUpload, ignoreTriggers,
-  cluster
+  cluster, resolveProviderFiles
 }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.CREATE(collectionName)}`,
     {
@@ -198,14 +198,15 @@ export async function insertRecord({
         document: objectOrStringToString(document),
         bypassDocumentValidation,
         waitForFileUpload,
-        ignoreTriggers
+        ignoreTriggers,
+        resolveProviderFiles
       })
     });
 
   return response && response.result ? JSON.parse(response.result) : null;
 }
 
-export async function insertManyRecords({ secretKey, collectionName, documents, bypassDocumentValidation, ignoreTriggers, cluster }) {
+export async function insertManyRecords({ secretKey, collectionName, documents, bypassDocumentValidation, ignoreTriggers, cluster, resolveProviderFiles }) {
   const stringDocs = [];
   if (documents && Array.isArray(documents)) {
     documents.forEach((doc) => {
@@ -226,7 +227,8 @@ export async function insertManyRecords({ secretKey, collectionName, documents, 
       body: JSON.stringify({
         documents: stringDocs,
         bypassDocumentValidation,
-        ignoreTriggers
+        ignoreTriggers,
+        resolveProviderFiles
       })
     });
 
@@ -235,7 +237,7 @@ export async function insertManyRecords({ secretKey, collectionName, documents, 
 
 export async function updateRecord({
   secretKey, collectionName, id, update, waitForFileUpload, bypassDocumentValidation,
-  ignoreTriggers, cluster
+  ignoreTriggers, cluster, resolveProviderFiles
 }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.PATCH(collectionName, id)}`,
     {
@@ -251,7 +253,8 @@ export async function updateRecord({
         update: objectOrStringToString(update),
         waitForFileUpload,
         bypassDocumentValidation,
-        ignoreTriggers
+        ignoreTriggers,
+        resolveProviderFiles
       })
     });
 
@@ -260,7 +263,7 @@ export async function updateRecord({
 
 export async function updateRecordWithFilter({
   secretKey, collectionName, filter, update, waitForFileUpload, bypassDocumentValidation,
-  ignoreTriggers, cluster
+  ignoreTriggers, cluster, resolveProviderFiles
 }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.PATCH_BY_FILTER(collectionName)}`,
     {
@@ -277,7 +280,8 @@ export async function updateRecordWithFilter({
         update: objectOrStringToString(update),
         waitForFileUpload,
         bypassDocumentValidation,
-        ignoreTriggers
+        ignoreTriggers,
+        resolveProviderFiles
       })
     });
 
@@ -286,7 +290,7 @@ export async function updateRecordWithFilter({
 
 export async function updateManyRecords({
   secretKey, collectionName, filter, update, bypassDocumentValidation,
-  ignoreTriggers, cluster
+  ignoreTriggers, cluster, resolveProviderFiles
 }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.PATCH_MANY(collectionName)}`,
     {
@@ -302,7 +306,8 @@ export async function updateManyRecords({
         filter: objectOrStringToString(filter),
         update: objectOrStringToString(update),
         bypassDocumentValidation,
-        ignoreTriggers
+        ignoreTriggers,
+        resolveProviderFiles
       })
     });
 
@@ -311,7 +316,7 @@ export async function updateManyRecords({
 
 export async function replaceRecord({
   secretKey, collectionName, id, document, waitForFileUpload, bypassDocumentValidation,
-  ignoreTriggers, isUpsert, cluster
+  ignoreTriggers, isUpsert, cluster, resolveProviderFiles
 }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.UPDATE(collectionName)}`,
     {
@@ -329,7 +334,8 @@ export async function replaceRecord({
         waitForFileUpload,
         bypassDocumentValidation,
         ignoreTriggers,
-        isUpsert
+        isUpsert,
+        resolveProviderFiles
       })
     });
 
@@ -338,7 +344,7 @@ export async function replaceRecord({
 
 export async function replaceRecordWithFilter({
   secretKey, collectionName, filter, document, waitForFileUpload,
-  bypassDocumentValidation, ignoreTriggers, isUpsert, cluster
+  bypassDocumentValidation, ignoreTriggers, isUpsert, cluster, resolveProviderFiles
 }) {
   const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.UPDATE(collectionName)}`,
     {
@@ -356,7 +362,8 @@ export async function replaceRecordWithFilter({
         waitForFileUpload,
         bypassDocumentValidation,
         ignoreTriggers,
-        isUpsert
+        isUpsert,
+        resolveProviderFiles
       })
     });
 
