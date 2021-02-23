@@ -3,7 +3,10 @@ on:
   push:
     branches: [master]
 jobs:
-  build:
+  build-deploy:
+    env:
+      CODEMASH_PROJECT_ID: ${{ secrets.CODEMASH_PROJECT_ID }}
+      CODEMASH_SECRET_KEY: ${{ secrets.CODEMASH_SECRET_KEY }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -38,10 +41,7 @@ jobs:
           name: code-coverage
           path: coverage
       - name: Build Project
-        run: CI='' npm run build
-        env:
-          CODEMASH_PROJECT_ID: ${{ secrets.CODEMASH_PROJECT_ID }}
-          CODEMASH_SECRET_KEY: ${{ secrets.CODEMASH_SECRET_KEY }}
+        run: CI='' npm run build        
       - name: Upload build folder
         uses: actions/upload-artifact@v1
         with:
