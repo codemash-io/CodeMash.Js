@@ -1,3 +1,5 @@
+const fetch = require('node-fetch');
+
 class HttpError extends Error {
   constructor(response, responseBody) {
     super(`${response.status} for ${response.url}`);
@@ -434,7 +436,8 @@ async function insertRecord({
   bypassDocumentValidation,
   waitForFileUpload,
   ignoreTriggers,
-  cluster
+  cluster,
+  resolveProviderFiles
 }) {
   const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.DATABASE.COLLECTION.RECORD.CREATE(collectionName)}`, {
     method: 'POST',
@@ -449,7 +452,8 @@ async function insertRecord({
       document: objectOrStringToString(document),
       bypassDocumentValidation,
       waitForFileUpload,
-      ignoreTriggers
+      ignoreTriggers,
+      resolveProviderFiles
     })
   });
   return response && response.result ? JSON.parse(response.result) : null;
@@ -460,7 +464,8 @@ async function insertManyRecords({
   documents,
   bypassDocumentValidation,
   ignoreTriggers,
-  cluster
+  cluster,
+  resolveProviderFiles
 }) {
   const stringDocs = [];
 
@@ -482,7 +487,8 @@ async function insertManyRecords({
     body: JSON.stringify({
       documents: stringDocs,
       bypassDocumentValidation,
-      ignoreTriggers
+      ignoreTriggers,
+      resolveProviderFiles
     })
   });
   return response.result;
@@ -495,7 +501,8 @@ async function updateRecord({
   waitForFileUpload,
   bypassDocumentValidation,
   ignoreTriggers,
-  cluster
+  cluster,
+  resolveProviderFiles
 }) {
   const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.DATABASE.COLLECTION.RECORD.PATCH(collectionName, id)}`, {
     method: 'PATCH',
@@ -510,7 +517,8 @@ async function updateRecord({
       update: objectOrStringToString(update),
       waitForFileUpload,
       bypassDocumentValidation,
-      ignoreTriggers
+      ignoreTriggers,
+      resolveProviderFiles
     })
   });
   return response ? response.result : null;
@@ -523,7 +531,8 @@ async function updateRecordWithFilter({
   waitForFileUpload,
   bypassDocumentValidation,
   ignoreTriggers,
-  cluster
+  cluster,
+  resolveProviderFiles
 }) {
   const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.DATABASE.COLLECTION.RECORD.PATCH_BY_FILTER(collectionName)}`, {
     method: 'PATCH',
@@ -539,7 +548,8 @@ async function updateRecordWithFilter({
       update: objectOrStringToString(update),
       waitForFileUpload,
       bypassDocumentValidation,
-      ignoreTriggers
+      ignoreTriggers,
+      resolveProviderFiles
     })
   });
   return response ? response.result : null;
@@ -551,7 +561,8 @@ async function updateManyRecords({
   update,
   bypassDocumentValidation,
   ignoreTriggers,
-  cluster
+  cluster,
+  resolveProviderFiles
 }) {
   const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.DATABASE.COLLECTION.RECORD.PATCH_MANY(collectionName)}`, {
     method: 'PATCH',
@@ -566,7 +577,8 @@ async function updateManyRecords({
       filter: objectOrStringToString(filter),
       update: objectOrStringToString(update),
       bypassDocumentValidation,
-      ignoreTriggers
+      ignoreTriggers,
+      resolveProviderFiles
     })
   });
   return response ? response.result : null;
@@ -580,7 +592,8 @@ async function replaceRecord({
   bypassDocumentValidation,
   ignoreTriggers,
   isUpsert,
-  cluster
+  cluster,
+  resolveProviderFiles
 }) {
   const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.DATABASE.COLLECTION.RECORD.UPDATE(collectionName)}`, {
     method: 'PUT',
@@ -599,7 +612,8 @@ async function replaceRecord({
       waitForFileUpload,
       bypassDocumentValidation,
       ignoreTriggers,
-      isUpsert
+      isUpsert,
+      resolveProviderFiles
     })
   });
   return response ? response.result : null;
@@ -613,7 +627,8 @@ async function replaceRecordWithFilter({
   bypassDocumentValidation,
   ignoreTriggers,
   isUpsert,
-  cluster
+  cluster,
+  resolveProviderFiles
 }) {
   const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.DATABASE.COLLECTION.RECORD.UPDATE(collectionName)}`, {
     method: 'PUT',
@@ -630,7 +645,8 @@ async function replaceRecordWithFilter({
       waitForFileUpload,
       bypassDocumentValidation,
       ignoreTriggers,
-      isUpsert
+      isUpsert,
+      resolveProviderFiles
     })
   });
   return response ? response.result : null;
@@ -745,24 +761,24 @@ async function getTerms({
 }
 
 var databaseService = /*#__PURE__*/Object.freeze({
-  __proto__: null,
-  getRecords: getRecords,
-  getRecord: getRecord,
-  getRecordWithFilter: getRecordWithFilter,
-  deleteRecord: deleteRecord,
-  deleteRecordWithFilter: deleteRecordWithFilter,
-  deleteManyRecords: deleteManyRecords,
-  insertRecord: insertRecord,
-  insertManyRecords: insertManyRecords,
-  updateRecord: updateRecord,
-  updateRecordWithFilter: updateRecordWithFilter,
-  updateManyRecords: updateManyRecords,
-  replaceRecord: replaceRecord,
-  replaceRecordWithFilter: replaceRecordWithFilter,
-  executeAggregate: executeAggregate,
-  count: count,
-  distinct: distinct,
-  getTerms: getTerms
+	__proto__: null,
+	getRecords: getRecords,
+	getRecord: getRecord,
+	getRecordWithFilter: getRecordWithFilter,
+	deleteRecord: deleteRecord,
+	deleteRecordWithFilter: deleteRecordWithFilter,
+	deleteManyRecords: deleteManyRecords,
+	insertRecord: insertRecord,
+	insertManyRecords: insertManyRecords,
+	updateRecord: updateRecord,
+	updateRecordWithFilter: updateRecordWithFilter,
+	updateManyRecords: updateManyRecords,
+	replaceRecord: replaceRecord,
+	replaceRecordWithFilter: replaceRecordWithFilter,
+	executeAggregate: executeAggregate,
+	count: count,
+	distinct: distinct,
+	getTerms: getTerms
 });
 
 async function downloadFile({
@@ -818,7 +834,8 @@ async function uploadFile({
   file,
   base64,
   fileType,
-  fileName
+  fileName,
+  formDataTest
 }) {
   if (base64) {
     const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.FILES.UPLOAD}`, {
@@ -841,7 +858,13 @@ async function uploadFile({
     return response;
   }
 
-  const formData = new FormData();
+  let formData = null;
+
+  if (formDataTest) {
+    formData = formDataTest;
+  } else {
+    formData = new FormData();
+  }
 
   if (path != null && path !== undefined) {
     formData.append('path', path);
@@ -858,6 +881,7 @@ async function uploadFile({
     formData.append('file', file);
   }
 
+  console.log(formData);
   const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.FILES.UPLOAD}`, {
     method: 'POST',
     headers: {
@@ -939,12 +963,12 @@ function getFilePath(directory, fileName) {
 }
 
 var filesService = /*#__PURE__*/Object.freeze({
-  __proto__: null,
-  downloadFile: downloadFile,
-  getFileUrl: getFileUrl,
-  uploadFile: uploadFile,
-  uploadRecordFile: uploadRecordFile,
-  getFilePath: getFilePath
+	__proto__: null,
+	downloadFile: downloadFile,
+	getFileUrl: getFileUrl,
+	uploadFile: uploadFile,
+	uploadRecordFile: uploadRecordFile,
+	getFilePath: getFilePath
 });
 
 async function register({
@@ -1637,32 +1661,32 @@ async function deactivateAccount({
 }
 
 var iamService = /*#__PURE__*/Object.freeze({
-  __proto__: null,
-  register: register,
-  registerGuest: registerGuest,
-  invite: invite,
-  updateUser: updateUser,
-  updateProfile: updateProfile,
-  getUsers: getUsers,
-  getUser: getUser,
-  getUserByEmail: getUserByEmail,
-  getProfile: getProfile,
-  deleteUser: deleteUser,
-  blockUser: blockUser,
-  unblockUser: unblockUser,
-  updatePassword: updatePassword,
-  createPasswordReset: createPasswordReset,
-  checkPasswordReset: checkPasswordReset,
-  resetPassword: resetPassword,
-  verifyRegistration: verifyRegistration,
-  checkInvitationToken: checkInvitationToken,
-  verifyInvitation: verifyInvitation,
-  login: login,
-  checkAuthentication: checkAuthentication,
-  logout: logout,
-  createDeactivationRequest: createDeactivationRequest,
-  checkDeactivationToken: checkDeactivationToken,
-  deactivateAccount: deactivateAccount
+	__proto__: null,
+	register: register,
+	registerGuest: registerGuest,
+	invite: invite,
+	updateUser: updateUser,
+	updateProfile: updateProfile,
+	getUsers: getUsers,
+	getUser: getUser,
+	getUserByEmail: getUserByEmail,
+	getProfile: getProfile,
+	deleteUser: deleteUser,
+	blockUser: blockUser,
+	unblockUser: unblockUser,
+	updatePassword: updatePassword,
+	createPasswordReset: createPasswordReset,
+	checkPasswordReset: checkPasswordReset,
+	resetPassword: resetPassword,
+	verifyRegistration: verifyRegistration,
+	checkInvitationToken: checkInvitationToken,
+	verifyInvitation: verifyInvitation,
+	login: login,
+	checkAuthentication: checkAuthentication,
+	logout: logout,
+	createDeactivationRequest: createDeactivationRequest,
+	checkDeactivationToken: checkDeactivationToken,
+	deactivateAccount: deactivateAccount
 });
 
 async function registerDeviceToken({
@@ -2001,20 +2025,20 @@ async function deleteNotification({
 }
 
 var notificationsService = /*#__PURE__*/Object.freeze({
-  __proto__: null,
-  registerDeviceToken: registerDeviceToken,
-  deleteDeviceToken: deleteDeviceToken,
-  getDevice: getDevice,
-  getDevices: getDevices,
-  updateDevice: updateDevice,
-  deleteDevice: deleteDevice,
-  getNotifications: getNotifications,
-  getNotification: getNotification,
-  sendPushNotification: sendPushNotification,
-  markNotificationAsRead: markNotificationAsRead,
-  markNotificationsAsRead: markNotificationsAsRead,
-  getNotificationsCount: getNotificationsCount,
-  deleteNotification: deleteNotification
+	__proto__: null,
+	registerDeviceToken: registerDeviceToken,
+	deleteDeviceToken: deleteDeviceToken,
+	getDevice: getDevice,
+	getDevices: getDevices,
+	updateDevice: updateDevice,
+	deleteDevice: deleteDevice,
+	getNotifications: getNotifications,
+	getNotification: getNotification,
+	sendPushNotification: sendPushNotification,
+	markNotificationAsRead: markNotificationAsRead,
+	markNotificationsAsRead: markNotificationsAsRead,
+	getNotificationsCount: getNotificationsCount,
+	deleteNotification: deleteNotification
 });
 
 async function executeFunction({
@@ -2044,8 +2068,8 @@ async function executeFunction({
 }
 
 var codeService = /*#__PURE__*/Object.freeze({
-  __proto__: null,
-  executeFunction: executeFunction
+	__proto__: null,
+	executeFunction: executeFunction
 });
 
 async function getOrder({
@@ -2463,24 +2487,24 @@ async function cancelSubscription({
 }
 
 var paymentsService = /*#__PURE__*/Object.freeze({
-  __proto__: null,
-  getOrder: getOrder,
-  getOrders: getOrders,
-  createOrder: createOrder,
-  createPayseraTransaction: createPayseraTransaction,
-  createStripeTransaction: createStripeTransaction,
-  createCustomer: createCustomer,
-  updateCustomer: updateCustomer,
-  getCustomers: getCustomers,
-  getCustomer: getCustomer,
-  deleteCustomer: deleteCustomer,
-  getPaymentMethodSetup: getPaymentMethodSetup,
-  attachPaymentMethod: attachPaymentMethod,
-  detachPaymentMethod: detachPaymentMethod,
-  createSubscription: createSubscription,
-  updateSubscription: updateSubscription,
-  changeSubscription: changeSubscription,
-  cancelSubscription: cancelSubscription
+	__proto__: null,
+	getOrder: getOrder,
+	getOrders: getOrders,
+	createOrder: createOrder,
+	createPayseraTransaction: createPayseraTransaction,
+	createStripeTransaction: createStripeTransaction,
+	createCustomer: createCustomer,
+	updateCustomer: updateCustomer,
+	getCustomers: getCustomers,
+	getCustomer: getCustomer,
+	deleteCustomer: deleteCustomer,
+	getPaymentMethodSetup: getPaymentMethodSetup,
+	attachPaymentMethod: attachPaymentMethod,
+	detachPaymentMethod: detachPaymentMethod,
+	createSubscription: createSubscription,
+	updateSubscription: updateSubscription,
+	changeSubscription: changeSubscription,
+	cancelSubscription: cancelSubscription
 });
 
 const db = databaseService;

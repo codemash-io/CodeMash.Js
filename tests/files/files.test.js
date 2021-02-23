@@ -15,27 +15,26 @@ beforeEach(() => {
 	);
 });
 
-test('upload file as base 64', async () => {
+/*test('upload file as base 64', async () => {
 	const txtFile = fs.readFileSync('tests/files/uploads/document.txt', {
 		encoding: 'base64',
 	});
 
-	console.log(txtFile);
 	const request = {
-		collectionName: 'js_employees',
+		collectionName: 'applicants',
 		base64: txtFile,
 	};
 
 	const response = await uploadFile(request);
 	console.log(response);
 	expect(response).not.toBeNull();
-});
+});*/
 
 test('upload file', async () => {
 	const txtFile = fs.createReadStream('tests/files/uploads/document.txt');
 
 	const request = {
-		collectionName: 'js_employees',
+		collectionName: 'applicants',
 		formDataTest: new FormData(),
 		file: txtFile,
 	};

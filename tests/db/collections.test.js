@@ -14,7 +14,7 @@ beforeEach(() => {
 });
 
 test('do search and find records', async () => {
-	const request = {collectionName: 'scans'};
+	const request = {collectionName: 'contacts'};
 	const response = await getRecords(request);
 	expect(response.totalCount).toBe(2);
 });
