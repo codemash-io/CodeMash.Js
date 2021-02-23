@@ -1,24 +1,33 @@
 import * as server from '../server';
 import Config from '../config';
-import { CONFIG as Endpoints } from '../routes';
+import {CONFIG as Endpoints} from '../routes';
 
-export async function executeFunction({ secretKey, functionId, data, qualifier, meta, tokens }) {
-  const response = await server.loadJson(`${Config.apiUrl}${Endpoints.PROJECT.CODE.EXECUTE(functionId)}`,
-    {
-      method: 'POST',
-      headers: {
-        'X-CM-ProjectId': Config.projectId,
-        Authorization: `Bearer ${secretKey || Config.secretKey}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        data: JSON.stringify(data),
-        qualifier: qualifier,
-        meta: meta,
-        tokens: tokens
-      })
-    });
+export async function executeFunction({
+	secretKey,
+	functionId,
+	data,
+	qualifier,
+	meta,
+	tokens,
+}) {
+	const response = await server.loadJson(
+		`${Config.apiUrl}${Endpoints.PROJECT.CODE.EXECUTE(functionId)}`,
+		{
+			method: 'POST',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				data: JSON.stringify(data),
+				qualifier: qualifier,
+				meta: meta,
+				tokens: tokens,
+			}),
+		}
+	);
 
-  return response.result ? JSON.parse(response.result) : null;
+	return response.result ? JSON.parse(response.result) : null;
 }

@@ -1,19 +1,24 @@
 export function objectOrStringToString(filter) {
-  const stringifiedFilter = filter !== undefined && typeof filter === 'object' && filter !== null ? JSON.stringify(filter) : filter;
-  if (!stringifiedFilter) return undefined;
-  return stringifiedFilter;
-};
+	const stringifiedFilter =
+		filter !== undefined && typeof filter === 'object' && filter !== null
+			? JSON.stringify(filter)
+			: filter;
+	if (!stringifiedFilter) return undefined;
+	return stringifiedFilter;
+}
 
 export function toQueryString(object) {
-  if (typeof object === 'string') return object;
+	if (typeof object === 'string') return object;
 
-  const query = [];
+	const query = [];
 
-  for (const key in object) {
-    if (object[key] !== undefined && object[key] !== null) {
-      query.push(encodeURIComponent(key) + '=' + encodeURIComponent(object[key]));
-    }
-  }
+	for (const key in object) {
+		if (object[key] !== undefined && object[key] !== null) {
+			query.push(
+				encodeURIComponent(key) + '=' + encodeURIComponent(object[key])
+			);
+		}
+	}
 
-  return query.join('&');
-};
+	return query.join('&');
+}
