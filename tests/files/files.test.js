@@ -10,9 +10,7 @@ beforeEach(() => {
 		{
 			secretKey: process.env.CODEMASH_SECRET_KEY,
 			projectId: process.env.CODEMASH_PROJECT_ID,
-		},
-		process.env.NODE_ENV
-	);
+		});
 });
 
 /*test('upload file as base 64', async () => {
