@@ -4,11 +4,10 @@ import config from 'Config';
 require('dotenv').config();
 
 beforeEach(() => {
-	config.init(
-		{
-			secretKey: process.env.CODEMASH_SECRET_KEY,
-			projectId: process.env.CODEMASH_PROJECT_ID,
-		});
+	config.init({
+		secretKey: process.env.CODEMASH_SECRET_KEY,
+		projectId: process.env.CODEMASH_PROJECT_ID,
+	});
 });
 
 test('do search and find records', async () => {

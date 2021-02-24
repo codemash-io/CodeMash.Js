@@ -6,11 +6,10 @@ var FormData = require('form-data');
 const fs = require('fs');
 
 beforeEach(() => {
-	config.init(
-		{
-			secretKey: process.env.CODEMASH_SECRET_KEY,
-			projectId: process.env.CODEMASH_PROJECT_ID,
-		});
+	config.init({
+		secretKey: process.env.CODEMASH_SECRET_KEY,
+		projectId: process.env.CODEMASH_PROJECT_ID,
+	});
 });
 
 /*test('upload file as base 64', async () => {
