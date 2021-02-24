@@ -29,13 +29,11 @@ jobs:
         with:
           node-version: "12.x"
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Check code format
         run: npm run format:check
       - name: Run tests
-        run: npm test -- --coverage
-        env:
-          CI: true
+        run: npm test
       - name: Upload test coverage
         uses: actions/upload-artifact@v1
         with:

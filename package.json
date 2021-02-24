@@ -6,7 +6,7 @@
   "module": "dist/index.esm.js",
   "scripts": {
     "build": "rollup -c",
-    "test": "jest",
+    "test": "jest --collectCoverage --",
     "format:check": "prettier --check \"**/*.{js,jsx,yml,yaml,json.css}\"",
     "format": "prettier --write \"**/*.{js,jsx,yml,yaml,json.css}\""
   },
