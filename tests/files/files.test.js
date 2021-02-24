@@ -1,15 +1,19 @@
 import {uploadFile} from 'Components/files';
 import config from 'Config';
 
-require('dotenv').config();
+if (process.env.NODE_ENV == 'test') require('dotenv').config()
+
 var FormData = require('form-data');
 const fs = require('fs');
 
 beforeEach(() => {
-	config.init({
-		secretKey: process.env.CODEMASH_SECRET_KEY,
-		projectId: process.env.CODEMASH_PROJECT_ID,
-	});
+	config.init(
+		{
+			secretKey: process.env.CODEMASH_SECRET_KEY,
+			projectId: process.env.CODEMASH_PROJECT_ID,
+		},
+		process.env.NODE_ENV
+	);
 });
 
 /*test('upload file as base 64', async () => {
