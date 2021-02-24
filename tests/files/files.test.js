@@ -1,7 +1,7 @@
 import {uploadFile} from 'Components/files';
 import config from 'Config';
 
-if (process.env.NODE_ENV == 'test') require('dotenv').config()
+if (process.env.NODE_ENV == 'test') require('dotenv').config();
 
 var FormData = require('form-data');
 const fs = require('fs');

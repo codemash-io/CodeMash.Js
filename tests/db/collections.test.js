@@ -1,7 +1,7 @@
 import {getRecords} from 'Components/db';
 import config from 'Config';
 
-if (process.env.NODE_ENV == 'test') require('dotenv').config()
+if (process.env.NODE_ENV == 'test') require('dotenv').config();
 
 beforeEach(() => {
 	config.init(
