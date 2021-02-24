@@ -32,13 +32,13 @@ jobs:
         run: npm ci
       - name: Check code format
         run: npm run format:check
-      - name: Run tests
-        run: npm test
-      - name: Upload test coverage
-        uses: actions/upload-artifact@v1
-        with:
-          name: code-coverage
-          path: coverage
+      # - name: Run tests
+      #   run: npm test
+      # - name: Upload test coverage
+      #   uses: actions/upload-artifact@v1
+      #   with:
+      #     name: code-coverage
+      #     path: coverage
       - name: Build Project
         run: CI='' npm run build        
       - name: Upload build folder
