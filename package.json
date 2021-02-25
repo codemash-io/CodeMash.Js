@@ -42,10 +42,13 @@
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
+    "@commitlint/cli": "^12.0.0",
+    "@commitlint/config-conventional": "^12.0.0",
     "@rollup/plugin-babel": "^5.2.1",
     "@rollup/plugin-node-resolve": "^10.0.0",
     "@rollup/plugin-replace": "^2.3.4",
     "babel-jest": "^26.6.3",
+    "cz-conventional-changelog": "^3.3.0",
     "dotenv": "^8.2.0",
     "eslint": "^7.3.1",
     "eslint-config-standard": "^14.1.1",
@@ -60,6 +63,18 @@
     "semantic-release": "^17.3.9"
   },
   "dependencies": {
+    "husky": "^5.1.1",
     "node-fetch": "^2.6.1"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

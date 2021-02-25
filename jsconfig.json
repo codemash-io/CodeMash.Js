@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "src"
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "release.config.js"],
   "typeAcquisition": {
     "include": ["jest"]
   }
