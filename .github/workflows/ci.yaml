@@ -7,7 +7,6 @@ jobs:
     env:
       CODEMASH_PROJECT_ID: ${{ secrets.CODEMASH_PROJECT_ID }}
       CODEMASH_SECRET_KEY: ${{ secrets.CODEMASH_SECRET_KEY }}
-      NODE_ENV: DEV
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -33,7 +32,9 @@ jobs:
       - name: Check code format
         run: npm run format:check
       - name: Run tests
-        run: npm test
+        run: |
+          echo $NODE_ENV
+          npm test
       - name: Upload test coverage
         uses: actions/upload-artifact@v1
         with:
