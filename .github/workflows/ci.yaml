@@ -35,6 +35,8 @@ jobs:
         run: |
           echo $NODE_ENV
           npm test
+        env:
+          NODE_ENV: test
       - name: Upload test coverage
         uses: actions/upload-artifact@v1
         with:
