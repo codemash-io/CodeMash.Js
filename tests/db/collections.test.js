@@ -11,8 +11,8 @@ beforeEach(() => {
 
 	config.init(
 		{
-			secretKey: process.env.CODEMASH_SECRET_KEY,
-			projectId: process.env.CODEMASH_PROJECT_ID,
+			secretKey: 'fe964bc0-3475-4ac2-81a9-2a3abdaf614b',
+			projectId: 'GGzMupRM7upe9HPsZnrtWeOx-0AMF9UI',
 		},
 		process.env.NODE_ENV
 	);
