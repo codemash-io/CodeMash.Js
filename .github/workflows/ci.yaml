@@ -32,11 +32,7 @@ jobs:
       - name: Check code format
         run: npm run format:check
       - name: Run tests
-        run: |
-          echo $NODE_ENV          
-          echo $CODEMASH_PROJECT_ID
-          echo $CODEMASH_SECRET_KEY
-          npm test
+        run: npm test
         env:
           NODE_ENV: test          
       - name: Upload test coverage
@@ -55,3 +51,7 @@ jobs:
         uses: actions/download-artifact@v2
         # with:
         #   name: codemash-js-artifact
+      - name: Create a release
+        run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
