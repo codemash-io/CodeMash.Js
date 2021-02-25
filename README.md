@@ -1,3 +1,5 @@
+![](https://github.com/codemash-io/CodeMash.Js/workflows/CI/badge.svg?branch=master&event=push)
+
 # CodeMash.Js
 
 CodeMash for javascript developers. All the documentation can be found [here](https://docs.codemash.io)
