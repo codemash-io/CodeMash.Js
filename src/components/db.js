@@ -3,6 +3,7 @@ import Config from '../config';
 import {CONFIG as Endpoints} from '../routes';
 import {objectOrStringToString} from '../utils';
 
+// some comment
 export async function getRecords({
 	secretKey,
 	collectionName,
