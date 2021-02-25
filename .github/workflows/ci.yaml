@@ -35,8 +35,10 @@ jobs:
         run: |
           echo $NODE_ENV
           npm test
+          echo $CODEMASH_PROJECT_ID
+          echo $CODEMASH_SECRET_KEY
         env:
-          NODE_ENV: test
+          NODE_ENV: test          
       - name: Upload test coverage
         uses: actions/upload-artifact@v1
         with:
