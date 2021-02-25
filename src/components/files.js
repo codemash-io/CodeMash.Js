@@ -111,8 +111,6 @@ export async function uploadFile({
 		formData.append('file', file);
 	}
 
-	console.log(formData);
-
 	const response = await server.loadJson(
 		`${Config.apiUrl}${Endpoints.PROJECT.FILES.UPLOAD}`,
 		{
