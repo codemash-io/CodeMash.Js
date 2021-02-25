@@ -8,7 +8,8 @@
     "build": "rollup -c",
     "test": "jest --collectCoverage --",
     "format:check": "prettier --check \"**/*.{js,jsx,yml,yaml,json.css}\"",
-    "format": "prettier --write \"**/*.{js,jsx,yml,yaml,json.css}\""
+    "format": "prettier --write \"**/*.{js,jsx,yml,yaml,json.css}\"",
+    "commit": "cz"
   },
   "files": [
     "dist/*",
