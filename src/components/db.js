@@ -658,3 +658,46 @@ export async function getTerms({
 		result: response.result,
 	};
 }
+
+export async function getChildrenOfTerms({
+	taxonomyName,
+	language,
+	pageNumber,
+	pageSize,
+	sort,
+	filter,
+	projection,
+	excludeCulture,
+	cluster,
+}) {
+	const response = await server.loadJson(
+		`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.TAXONOMY.TERM.GET_CHILDREN(
+			taxonomyName
+		)}`,
+		{
+			method: 'POST',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				'X-CM-Cluster': cluster,
+				Authorization: `Bearer ${Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				'Accept-Language': language || 'en',
+			},
+			body: JSON.stringify({
+				pageSize: pageSize || Config.tablePageSize,
+				pageNumber: pageNumber || 0,
+				projection: objectOrStringToString(projection),
+				filter: objectOrStringToString(filter),
+				sort: objectOrStringToString(sort),
+				excludeCulture,
+			}),
+		}
+	);
+
+	if (!response) return null;
+	return {
+		totalCount: response.totalCount,
+		result: response.result,
+	};
+}

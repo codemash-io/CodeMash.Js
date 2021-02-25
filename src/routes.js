@@ -41,6 +41,8 @@ export const CONFIG = {
 				TERM: {
 					GET: (id) => `/v2/db/terms/${id}`,
 					GET_ALL: (taxonomyName) => `/v2/db/taxonomies/${taxonomyName}/terms`,
+					GET_CHILDREN: (taxonomyName) =>
+						`/db/taxonomies/${taxonomyName}/terms/children`,
 				},
 				SYSTEM: {
 					GET_TERMS: (taxonomyName) => `/v2/taxonomies/${taxonomyName}/terms`,
