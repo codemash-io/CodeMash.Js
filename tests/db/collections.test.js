@@ -5,7 +5,7 @@ if (process.env.NODE_ENV == 'test') require('dotenv').config();
 
 describe('db tests', () => {
 	test('do search and find records', async () => {
-    console.log(process.env);
+		console.log(process.env);
 		console.log(process.env.CODEMASH_SECRET_KEY);
 		console.log(process.env.CODEMASH_PROJECT_ID);
 
