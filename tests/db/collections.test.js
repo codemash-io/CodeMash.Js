@@ -3,27 +3,20 @@ import config from 'Config';
 
 if (process.env.NODE_ENV == 'test') require('dotenv').config();
 
-const OLD_ENV = process.env;
+describe('db tests', () => {
+	test('do search and find records', async () => {
+		console.log(process.env.CODEMASH_SECRET_KEY);
+		console.log(process.env.CODEMASH_PROJECT_ID);
 
-beforeEach(() => {
-	jest.resetModules(); // Most important - it clears the cache
-	process.env = {...OLD_ENV}; // Make a copy
-
-	config.init(
-		{
-			secretKey: 'fe964bc0-3475-4ac2-81a9-2a3abdaf614b',
-			projectId: 'GGzMupRM7upe9HPsZnrtWeOx-0AMF9UI',
-		},
-		process.env.NODE_ENV
-	);
-});
-
-afterAll(() => {
-	process.env = OLD_ENV; // Restore old environment
-});
-
-test('do search and find records', async () => {
-	const request = {collectionName: 'contacts'};
-	const response = await getRecords(request);
-	expect(response.totalCount).toBe(2);
+		config.init(
+			{
+				secretKey: 'GGzMupRM7upe9HPsZnrtWeOx-0AMF9UI',
+				projectId: 'fe964bc0-3475-4ac2-81a9-2a3abdaf614b',
+			},
+			process.env.NODE_ENV
+		);
+		const request = {collectionName: 'contacts'};
+		const response = await getRecords(request);
+		expect(response.totalCount).toBe(2);
+	});
 });
