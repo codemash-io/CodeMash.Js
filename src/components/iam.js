@@ -25,7 +25,7 @@ export async function register({
 	company,
 	postalCode,
 	gender,
-	birthdate,
+	birthDate,
 	roles,
 }) {
 	const response = await server.loadJson(
@@ -59,7 +59,7 @@ export async function register({
 				company,
 				postalCode,
 				gender,
-				birthdate,
+				birthDate,
 				roles,
 			}),
 		}
@@ -87,7 +87,7 @@ export async function registerGuest({
 	company,
 	postalCode,
 	gender,
-	birthdate,
+	birthDate,
 }) {
 	const response = await server.loadJson(
 		`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.REGISTER}`,
@@ -118,7 +118,7 @@ export async function registerGuest({
 				company,
 				postalCode,
 				gender,
-				birthdate,
+				birthDate,
 			}),
 		}
 	);
@@ -145,7 +145,7 @@ export async function invite({
 	company,
 	postalCode,
 	gender,
-	birthdate,
+	birthDate,
 	roles,
 }) {
 	const response = await server.loadJson(
@@ -177,7 +177,7 @@ export async function invite({
 				company,
 				postalCode,
 				gender,
-				birthdate,
+				birthDate,
 				roles,
 			}),
 		}
@@ -206,7 +206,7 @@ export async function updateUser({
 	company,
 	postalCode,
 	gender,
-	birthdate,
+	birthDate,
 	roles,
 }) {
 	const response = await server.loadJson(
@@ -238,7 +238,7 @@ export async function updateUser({
 				company,
 				postalCode,
 				gender,
-				birthdate,
+				birthDate,
 				roles,
 			}),
 		}
@@ -266,7 +266,7 @@ export async function updateProfile({
 	company,
 	postalCode,
 	gender,
-	birthdate,
+	birthDate,
 }) {
 	const response = await server.loadJson(
 		`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.UPDATE_PROFILE}`,
@@ -297,7 +297,7 @@ export async function updateProfile({
 				company,
 				postalCode,
 				gender,
-				birthdate,
+				birthDate,
 			}),
 		}
 	);
