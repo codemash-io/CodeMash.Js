@@ -25,7 +25,7 @@ export async function register({
 	company,
 	postalCode,
 	gender,
-	birthday,
+	birthdate,
 	roles,
 }) {
 	const response = await server.loadJson(
@@ -59,7 +59,7 @@ export async function register({
 				company,
 				postalCode,
 				gender,
-				birthday,
+				birthdate,
 				roles,
 			}),
 		}
@@ -87,7 +87,7 @@ export async function registerGuest({
 	company,
 	postalCode,
 	gender,
-	birthday,
+	birthdate,
 }) {
 	const response = await server.loadJson(
 		`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.REGISTER}`,
@@ -118,7 +118,7 @@ export async function registerGuest({
 				company,
 				postalCode,
 				gender,
-				birthday,
+				birthdate,
 			}),
 		}
 	);
@@ -145,7 +145,7 @@ export async function invite({
 	company,
 	postalCode,
 	gender,
-	birthday,
+	birthdate,
 	roles,
 }) {
 	const response = await server.loadJson(
@@ -177,7 +177,7 @@ export async function invite({
 				company,
 				postalCode,
 				gender,
-				birthday,
+				birthdate,
 				roles,
 			}),
 		}
@@ -206,7 +206,7 @@ export async function updateUser({
 	company,
 	postalCode,
 	gender,
-	birthday,
+	birthdate,
 	roles,
 }) {
 	const response = await server.loadJson(
@@ -238,7 +238,7 @@ export async function updateUser({
 				company,
 				postalCode,
 				gender,
-				birthday,
+				birthdate,
 				roles,
 			}),
 		}
@@ -266,7 +266,7 @@ export async function updateProfile({
 	company,
 	postalCode,
 	gender,
-	birthday,
+	birthdate,
 }) {
 	const response = await server.loadJson(
 		`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.UPDATE_PROFILE}`,
@@ -297,7 +297,7 @@ export async function updateProfile({
 				company,
 				postalCode,
 				gender,
-				birthday,
+				birthdate,
 			}),
 		}
 	);
@@ -729,6 +729,39 @@ export async function deactivateAccount({secretKey, token, password}) {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({token, password}),
+		}
+	);
+	return response;
+}
+
+
+export async function appleSignIn({
+	identityToken,
+	authorizationCode,
+	fullName,
+}) {
+
+	const givenName = fullName?.givenName !== null || false ? fullName?.givenName : '';
+    const familyName = fullName?.familyName !== null || false ? fullName?.familyName : '';
+
+	const response = await server.loadJson(
+		`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.SIGN_WITH_APPLE}?authorizationCode=${authorizationCode}&givenName=${givenName}&familyName=${familyName}`,
+		{
+			method: 'POST',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				provider: 'apple',
+				accessToken: identityToken,
+				meta: { authorizationCode: authorizationCode,
+				  givenName: givenName,
+				  familyName: familyName,
+				},
+			  }),
 		}
 	);
 	return response;

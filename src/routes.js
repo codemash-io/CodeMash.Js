@@ -95,6 +95,7 @@ export const CONFIG = {
 				CREATE_DEACTIVATION: '/v2/membership/users/deactivate/token',
 				CHECK_DEACTIVATION: '/v2/membership/users/deactivate/token',
 				DEACTIVATE_ACCOUNT: '/v2/membership/users/deactivate',
+				SIGN_WITH_APPLE: '/v2/auth/apple'
 			},
 		},
 		FILES: {
