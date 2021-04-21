@@ -734,15 +734,15 @@ export async function deactivateAccount({secretKey, token, password}) {
 	return response;
 }
 
-
 export async function appleSignIn({
 	identityToken,
 	authorizationCode,
 	fullName,
 }) {
-
-	const givenName = fullName?.givenName !== null || false ? fullName?.givenName : '';
-    const familyName = fullName?.familyName !== null || false ? fullName?.familyName : '';
+	const givenName =
+		fullName?.givenName !== null || false ? fullName?.givenName : '';
+	const familyName =
+		fullName?.familyName !== null || false ? fullName?.familyName : '';
 
 	const response = await server.loadJson(
 		`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.SIGN_WITH_APPLE}?authorizationCode=${authorizationCode}&givenName=${givenName}&familyName=${familyName}`,
@@ -757,11 +757,12 @@ export async function appleSignIn({
 			body: JSON.stringify({
 				provider: 'apple',
 				accessToken: identityToken,
-				meta: { authorizationCode: authorizationCode,
-				  givenName: givenName,
-				  familyName: familyName,
+				meta: {
+					authorizationCode: authorizationCode,
+					givenName: givenName,
+					familyName: familyName,
 				},
-			  }),
+			}),
 		}
 	);
 	return response;
