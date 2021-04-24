@@ -932,7 +932,7 @@ async function uploadRecordFile({
   }
 
   const formData = new FormData();
-
+  
   if (uniqueFieldName != null && uniqueFieldName !== undefined) {
     formData.append('uniqueFieldName', uniqueFieldName);
   }
@@ -956,6 +956,7 @@ async function uploadRecordFile({
     method: 'POST',
     headers: {
       'X-CM-ProjectId': APP.projectId,
+      'X-CM-Cluster': cluster || '',
       Authorization: `Bearer ${secretKey || APP.secretKey}`
     },
     body: formData
