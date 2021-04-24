@@ -118,7 +118,6 @@ export async function uploadFile({
 			headers: {
 				'X-CM-ProjectId': Config.projectId,
 				Authorization: `Bearer ${secretKey || Config.secretKey}`,
-				'X-CM-Cluster': cluster || '',
 			},
 			body: formData,
 		}
