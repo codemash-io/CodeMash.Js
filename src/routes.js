@@ -124,6 +124,13 @@ export const CONFIG = {
 					`/v2/payments/orders/${orderId}/paysera/pay`,
 				CREATE_STRIPE: (orderId) => `/v2/payments/orders/${orderId}/stripe/pay`,
 			},
+			DISCOUNTS: {
+				CREATE_DISCOUNT: '/v2/payments/discounts',
+				GET_APPLICABLE_COUPONS: '/v2/payments/discounts/coupon',
+				GET_APPLICABLE_DISCOUNTS: '/v2/payments/discounts/applicable',
+				DELETE_DISCOUNT: (id) => `/v2/payments/discounts/${id}`,
+				UPDATE_DISCOUNT: (id) => `/v2/payments/discounts/${id}`,
+			},
 			CUSTOMERS: {
 				CREATE: '/v2/payments/customers',
 				GET: (customerId) => `/v2/payments/customers/${customerId}`,
