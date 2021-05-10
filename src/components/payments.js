@@ -72,6 +72,7 @@ export async function createOrder({
 	customerDetails,
 	isTest,
 	meta,
+	coupons,
 }) {
 	const response = await server.loadJson(
 		`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.ORDERS.CREATE}`,
@@ -92,6 +93,7 @@ export async function createOrder({
 				customerDetails,
 				isTest,
 				meta,
+				coupons,
 			}),
 		}
 	);
@@ -490,6 +492,66 @@ export async function cancelSubscription({secretKey, id, customerId}) {
 				'Content-Type': 'application/json',
 			},
 			body: null,
+		}
+	);
+
+	return response;
+}
+
+export async function getApplicableCoupons({
+	secretKey,
+	codes,
+	orderSchemaId,
+	userId,
+	lines,
+	asGuest,
+}) {
+	const response = await server.loadJson(
+		`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.DISCOUNTS.GET_APPLICABLE_COUPONS}`,
+		{
+			method: 'POST',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				codes,
+				orderSchemaId,
+				userId,
+				lines,
+				asGuest,
+			}),
+		}
+	);
+
+	return response;
+}
+
+export async function getApplicableDiscounts({
+	secretKey,
+	orderSchemaId,
+	userId,
+	lines,
+	asGuest,
+}) {
+	const response = await server.loadJson(
+		`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.DISCOUNTS.GET_APPLICABLE_DISCOUNTS}`,
+		{
+			method: 'POST',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				orderSchemaId,
+				userId,
+				lines,
+				asGuest,
+			}),
 		}
 	);
 
