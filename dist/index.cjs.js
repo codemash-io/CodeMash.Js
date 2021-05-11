@@ -102,7 +102,8 @@ const CONFIG = {
         GET: taxonomyName => `/v2/db/taxonomies/${taxonomyName}`,
         TERM: {
           GET: id => `/v2/db/terms/${id}`,
-          GET_ALL: taxonomyName => `/v2/db/taxonomies/${taxonomyName}/terms`
+          GET_ALL: taxonomyName => `/v2/db/taxonomies/${taxonomyName}/terms`,
+          GET_CHILDREN: taxonomyName => `/db/taxonomies/${taxonomyName}/terms/children`
         },
         SYSTEM: {
           GET_TERMS: taxonomyName => `/v2/taxonomies/${taxonomyName}/terms`
@@ -134,6 +135,7 @@ const CONFIG = {
       BASE_URL: '/v2/membership',
       USERS: {
         REGISTER: '/v2/membership/users/register',
+        REGISTER_GUEST: '/v2/membership/users/register/guest',
         INVITE: '/v2/membership/users/invite',
         UPDATE: id => `/v2/membership/users/${id}`,
         UPDATE_PROFILE: '/v2/membership/users/profile',
@@ -153,7 +155,8 @@ const CONFIG = {
         CHECK_INVITATION_TOKEN: '/v2/membership/users/invitation/token',
         CREATE_DEACTIVATION: '/v2/membership/users/deactivate/token',
         CHECK_DEACTIVATION: '/v2/membership/users/deactivate/token',
-        DEACTIVATE_ACCOUNT: '/v2/membership/users/deactivate'
+        DEACTIVATE_ACCOUNT: '/v2/membership/users/deactivate',
+        SIGN_WITH_APPLE: '/v2/auth/apple'
       }
     },
     FILES: {
@@ -178,6 +181,13 @@ const CONFIG = {
       TRANSACTIONS: {
         CREATE_PAYSERA: orderId => `/v2/payments/orders/${orderId}/paysera/pay`,
         CREATE_STRIPE: orderId => `/v2/payments/orders/${orderId}/stripe/pay`
+      },
+      DISCOUNTS: {
+        CREATE_DISCOUNT: '/v2/payments/discounts',
+        GET_APPLICABLE_COUPONS: '/v2/payments/discounts/coupon',
+        GET_APPLICABLE_DISCOUNTS: '/v2/payments/discounts/applicable',
+        DELETE_DISCOUNT: id => `/v2/payments/discounts/${id}`,
+        UPDATE_DISCOUNT: id => `/v2/payments/discounts/${id}`
       },
       CUSTOMERS: {
         CREATE: '/v2/payments/customers',
@@ -763,6 +773,42 @@ async function getTerms({
     result: response.result
   };
 }
+async function getChildrenOfTerms({
+  taxonomyName,
+  language,
+  pageNumber,
+  pageSize,
+  sort,
+  filter,
+  projection,
+  excludeCulture,
+  cluster
+}) {
+  const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.DATABASE.TAXONOMY.TERM.GET_CHILDREN(taxonomyName)}`, {
+    method: 'POST',
+    headers: {
+      'X-CM-ProjectId': APP.projectId,
+      'X-CM-Cluster': cluster,
+      Authorization: `Bearer ${APP.secretKey}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'Accept-Language': language || 'en'
+    },
+    body: JSON.stringify({
+      pageSize: pageSize || APP.tablePageSize,
+      pageNumber: pageNumber || 0,
+      projection: objectOrStringToString(projection),
+      filter: objectOrStringToString(filter),
+      sort: objectOrStringToString(sort),
+      excludeCulture
+    })
+  });
+  if (!response) return null;
+  return {
+    totalCount: response.totalCount,
+    result: response.result
+  };
+}
 
 var databaseService = /*#__PURE__*/Object.freeze({
 	__proto__: null,
@@ -782,7 +828,8 @@ var databaseService = /*#__PURE__*/Object.freeze({
 	executeAggregate: executeAggregate,
 	count: count,
 	distinct: distinct,
-	getTerms: getTerms
+	getTerms: getTerms,
+	getChildrenOfTerms: getChildrenOfTerms
 });
 
 async function downloadFile({
@@ -885,7 +932,6 @@ async function uploadFile({
     formData.append('file', file);
   }
 
-  console.log(formData);
   const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.FILES.UPLOAD}`, {
     method: 'POST',
     headers: {
@@ -932,7 +978,7 @@ async function uploadRecordFile({
   }
 
   const formData = new FormData();
-  
+
   if (uniqueFieldName != null && uniqueFieldName !== undefined) {
     formData.append('uniqueFieldName', uniqueFieldName);
   }
@@ -956,8 +1002,8 @@ async function uploadRecordFile({
     method: 'POST',
     headers: {
       'X-CM-ProjectId': APP.projectId,
-      'X-CM-Cluster': cluster || '',
-      Authorization: `Bearer ${secretKey || APP.secretKey}`
+      Authorization: `Bearer ${secretKey || APP.secretKey}`,
+      'X-CM-Cluster': cluster || ''
     },
     body: formData
   });
@@ -996,9 +1042,10 @@ async function register({
   address2,
   phone,
   company,
+  companyCode,
   postalCode,
   gender,
-  birthday,
+  birthDate,
   roles
 }) {
   const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.MEMBERSHIP.USERS.REGISTER}`, {
@@ -1028,9 +1075,10 @@ async function register({
       address2,
       phone,
       company,
+      companyCode,
       postalCode,
       gender,
-      birthday,
+      birthDate,
       roles
     })
   });
@@ -1054,11 +1102,12 @@ async function registerGuest({
   address2,
   phone,
   company,
+  companyCode,
   postalCode,
   gender,
-  birthday
+  birthDate
 }) {
-  const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.MEMBERSHIP.USERS.REGISTER}`, {
+  const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.MEMBERSHIP.USERS.REGISTER_GUEST}`, {
     method: 'POST',
     headers: {
       'X-CM-ProjectId': APP.projectId,
@@ -1083,9 +1132,10 @@ async function registerGuest({
       address2,
       phone,
       company,
+      companyCode,
       postalCode,
       gender,
-      birthday
+      birthDate
     })
   });
   return response;
@@ -1110,7 +1160,7 @@ async function invite({
   company,
   postalCode,
   gender,
-  birthday,
+  birthDate,
   roles
 }) {
   const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.MEMBERSHIP.USERS.INVITE}`, {
@@ -1140,7 +1190,7 @@ async function invite({
       company,
       postalCode,
       gender,
-      birthday,
+      birthDate,
       roles
     })
   });
@@ -1167,7 +1217,7 @@ async function updateUser({
   company,
   postalCode,
   gender,
-  birthday,
+  birthDate,
   roles
 }) {
   const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.MEMBERSHIP.USERS.UPDATE(id)}`, {
@@ -1197,7 +1247,7 @@ async function updateUser({
       company,
       postalCode,
       gender,
-      birthday,
+      birthDate,
       roles
     })
   });
@@ -1223,7 +1273,7 @@ async function updateProfile({
   company,
   postalCode,
   gender,
-  birthday
+  birthDate
 }) {
   const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.MEMBERSHIP.USERS.UPDATE_PROFILE}`, {
     method: 'PATCH',
@@ -1252,7 +1302,7 @@ async function updateProfile({
       company,
       postalCode,
       gender,
-      birthday
+      birthDate
     })
   });
   return response;
@@ -1664,6 +1714,33 @@ async function deactivateAccount({
   });
   return response;
 }
+async function appleSignIn({
+  identityToken,
+  authorizationCode,
+  fullName
+}) {
+  const givenName = fullName?.givenName !== null || false ? fullName?.givenName : '';
+  const familyName = fullName?.familyName !== null || false ? fullName?.familyName : '';
+  const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.MEMBERSHIP.USERS.SIGN_WITH_APPLE}?authorizationCode=${authorizationCode}&givenName=${givenName}&familyName=${familyName}`, {
+    method: 'POST',
+    headers: {
+      'X-CM-ProjectId': APP.projectId,
+      Authorization: `Bearer ${APP.secretKey}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      provider: 'apple',
+      accessToken: identityToken,
+      meta: {
+        authorizationCode: authorizationCode,
+        givenName: givenName,
+        familyName: familyName
+      }
+    })
+  });
+  return response;
+}
 
 var iamService = /*#__PURE__*/Object.freeze({
 	__proto__: null,
@@ -1691,7 +1768,8 @@ var iamService = /*#__PURE__*/Object.freeze({
 	logout: logout,
 	createDeactivationRequest: createDeactivationRequest,
 	checkDeactivationToken: checkDeactivationToken,
-	deactivateAccount: deactivateAccount
+	deactivateAccount: deactivateAccount,
+	appleSignIn: appleSignIn
 });
 
 async function registerDeviceToken({
@@ -2132,6 +2210,7 @@ async function getOrders({
 }
 async function createOrder({
   secretKey,
+  coupons,
   accountId,
   orderSchemaId,
   userId,
@@ -2150,6 +2229,7 @@ async function createOrder({
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
+      coupons,
       accountId,
       orderSchemaId,
       userId,
@@ -2490,6 +2570,56 @@ async function cancelSubscription({
   });
   return response;
 }
+async function getApplicableCoupons({
+  secretKey,
+  codes,
+  orderSchemaId,
+  userId,
+  lines,
+  asGuest
+}) {
+  const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.PAYMENTS.DISCOUNTS.GET_APPLICABLE_COUPONS}`, {
+    method: 'POST',
+    headers: {
+      'X-CM-ProjectId': APP.projectId,
+      Authorization: `Bearer ${secretKey || APP.secretKey}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      codes,
+      orderSchemaId,
+      userId,
+      lines,
+      asGuest
+    })
+  });
+  return response;
+}
+async function getApplicableDiscounts({
+  secretKey,
+  orderSchemaId,
+  userId,
+  lines,
+  asGuest
+}) {
+  const response = await loadJson(`${APP.apiUrl}${CONFIG.PROJECT.PAYMENTS.DISCOUNTS.GET_APPLICABLE_DISCOUNTS}`, {
+    method: 'POST',
+    headers: {
+      'X-CM-ProjectId': APP.projectId,
+      Authorization: `Bearer ${secretKey || APP.secretKey}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      orderSchemaId,
+      userId,
+      lines,
+      asGuest
+    })
+  });
+  return response;
+}
 
 var paymentsService = /*#__PURE__*/Object.freeze({
 	__proto__: null,
@@ -2509,7 +2639,9 @@ var paymentsService = /*#__PURE__*/Object.freeze({
 	createSubscription: createSubscription,
 	updateSubscription: updateSubscription,
 	changeSubscription: changeSubscription,
-	cancelSubscription: cancelSubscription
+	cancelSubscription: cancelSubscription,
+	getApplicableCoupons: getApplicableCoupons,
+	getApplicableDiscounts: getApplicableDiscounts
 });
 
 const db = databaseService;

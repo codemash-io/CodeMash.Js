@@ -192,6 +192,7 @@ export async function invite({
 export async function updateUser({
 	secretKey,
 	id,
+	email,
 	displayName,
 	firstName,
 	lastName,
@@ -224,6 +225,7 @@ export async function updateUser({
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
+				email,
 				displayName,
 				firstName,
 				lastName,
@@ -252,6 +254,7 @@ export async function updateUser({
 
 export async function updateProfile({
 	secretKey,
+	email,
 	displayName,
 	firstName,
 	lastName,
@@ -283,6 +286,7 @@ export async function updateProfile({
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
+				email,
 				displayName,
 				firstName,
 				lastName,
