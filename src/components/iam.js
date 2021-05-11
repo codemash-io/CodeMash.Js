@@ -23,6 +23,7 @@ export async function register({
 	address2,
 	phone,
 	company,
+	companyCode,
 	postalCode,
 	gender,
 	birthDate,
@@ -57,6 +58,7 @@ export async function register({
 				address2,
 				phone,
 				company,
+				companyCode,
 				postalCode,
 				gender,
 				birthDate,
@@ -85,12 +87,13 @@ export async function registerGuest({
 	address2,
 	phone,
 	company,
+	companyCode,
 	postalCode,
 	gender,
 	birthDate,
 }) {
 	const response = await server.loadJson(
-		`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.REGISTER}`,
+		`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.REGISTER_GUEST}`,
 		{
 			method: 'POST',
 			headers: {
@@ -116,6 +119,7 @@ export async function registerGuest({
 				address2,
 				phone,
 				company,
+				companyCode,
 				postalCode,
 				gender,
 				birthDate,

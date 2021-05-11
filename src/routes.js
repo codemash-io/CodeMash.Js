@@ -75,6 +75,7 @@ export const CONFIG = {
 			BASE_URL: '/v2/membership',
 			USERS: {
 				REGISTER: '/v2/membership/users/register',
+				REGISTER_GUEST: '/v2/membership/users/register/guest',
 				INVITE: '/v2/membership/users/invite',
 				UPDATE: (id) => `/v2/membership/users/${id}`,
 				UPDATE_PROFILE: '/v2/membership/users/profile',
