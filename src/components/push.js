@@ -157,6 +157,32 @@ export async function updateDevice({
 	return response;
 }
 
+export async function updateDeviceUser({
+	secretKey,
+	idOrKey,
+	userId,
+}) {
+	const response = await server.loadJson(
+		`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.UPDATE_DEVICE_USER(
+			idOrKey
+		)}`,
+		{
+			method: 'PATCH',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				userId
+			}),
+		}
+	);
+
+	return response;
+}
+
 export async function deleteDevice({secretKey, idOrKey}) {
 	const response = await server.loadJson(
 		`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.DELETE_DEVICE(
