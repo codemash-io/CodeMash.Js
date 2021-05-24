@@ -57,6 +57,7 @@ export const CONFIG = {
 				GET_DEVICE: (id) => `/v2/notifications/push/devices/${id}`,
 				GET_DEVICES: '/v2/notifications/push/devices',
 				UPDATE_DEVICE: (id) => `/v2/notifications/push/devices/${id}`,
+				UPDATE_DEVICE_USER: (id) => `/v2/notifications/push/devices/${id}/user`,
 				DELETE_DEVICE: (id) => `/v2/notifications/push/devices/${id}`,
 				GET_ALL: '/v2/notifications/push',
 				GET: (id) => `/v2/notifications/push/${id}`,
