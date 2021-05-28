@@ -413,6 +413,34 @@ export async function createSubscription({
 	return response;
 }
 
+export async function createAppStoreSubscription({
+	secretKey,
+	customerId,
+	planId,
+	receipt,
+}) {
+	const response = await server.loadJson(
+		`${
+			Config.apiUrl
+		}${Endpoints.PROJECT.PAYMENTS.SUBSCRIPTIONS.CREATE_APP_STORE(customerId)}`,
+		{
+			method: 'POST',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				planId,
+				receipt,
+			}),
+		}
+	);
+
+	return response;
+}
+
 export async function updateSubscription({
 	secretKey,
 	id,
