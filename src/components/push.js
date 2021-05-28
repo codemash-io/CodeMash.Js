@@ -157,11 +157,7 @@ export async function updateDevice({
 	return response;
 }
 
-export async function updateDeviceUser({
-	secretKey,
-	idOrKey,
-	userId,
-}) {
+export async function updateDeviceUser({secretKey, idOrKey, userId}) {
 	const response = await server.loadJson(
 		`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.PUSH.UPDATE_DEVICE_USER(
 			idOrKey
@@ -175,7 +171,7 @@ export async function updateDeviceUser({
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
-				userId
+				userId,
 			}),
 		}
 	);
