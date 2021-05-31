@@ -3,6 +3,7 @@ import Config from '../config';
 import {CONFIG as Endpoints} from '../routes';
 import {objectOrStringToString, toQueryString} from '../utils';
 
+// Payments
 export async function getOrder({secretKey, id, includePaidTransactions}) {
 	const request = {
 		includePaidTransactions,
