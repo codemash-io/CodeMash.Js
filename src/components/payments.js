@@ -369,7 +369,7 @@ export async function attachPaymentMethod({
 
 export async function detachPaymentMethod({secretKey, id, customerId}) {
 	const response = await server.loadJson(
-		`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.METHODS.DETACH}?paymentMethodId=${id}&customerId=${customerId}`,
+		`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.METHODS.DETACH(id)}?customerId=${customerId}`,
 		{
 			method: 'DELETE',
 			headers: {
@@ -378,6 +378,52 @@ export async function detachPaymentMethod({secretKey, id, customerId}) {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
 			},
+		}
+	);
+
+	return response;
+}
+
+export async function updatePaymentMethod({
+	secretKey,
+	customerId,
+	id,
+	phone,
+	name,
+	description,
+	email,
+	city,
+	countryCode,
+	address,
+	address2,
+	postalCode,
+	area,
+	meta,
+}) {
+	const response = await server.loadJson(
+		`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.METHODS.UPDATE(id)}`,
+		{
+			method: 'PATCH',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				customerId,
+				phone,
+				name,
+				description,
+				email,
+				city,
+				countryCode,
+				address,
+				address2,
+				postalCode,
+				area,
+				meta,
+			}),
 		}
 	);
 
