@@ -143,8 +143,8 @@ export const CONFIG = {
 			METHODS: {
 				GET_SETUP: '/v2/payments/methods/setup',
 				ATTACH: '/v2/payments/methods/attach',
-				DETACH: (id) =>  `/v2/payments/methods/${id}`,
-				UPDATE: (id) =>  `/v2/payments/methods/${id}`,
+				DETACH: (id) => `/v2/payments/methods/${id}`,
+				UPDATE: (id) => `/v2/payments/methods/${id}`,
 			},
 			SUBSCRIPTIONS: {
 				CREATE: (customerId) =>

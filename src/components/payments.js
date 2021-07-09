@@ -369,7 +369,9 @@ export async function attachPaymentMethod({
 
 export async function detachPaymentMethod({secretKey, id, customerId}) {
 	const response = await server.loadJson(
-		`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.METHODS.DETACH(id)}?customerId=${customerId}`,
+		`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.METHODS.DETACH(
+			id
+		)}?customerId=${customerId}`,
 		{
 			method: 'DELETE',
 			headers: {
