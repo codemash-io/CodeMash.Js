@@ -467,7 +467,6 @@ export async function verifyAppStoreSubscription({
 	customerId,
 	planId,
 	receipt,
-	originalOrderId,
 }) {
 	const response = await server.loadJson(
 		`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.SUBSCRIPTIONS.VERIFY_APP_STORE}`,
@@ -483,7 +482,33 @@ export async function verifyAppStoreSubscription({
 				customerId,
 				planId,
 				receipt,
-				originalOrderId,
+			}),
+		}
+	);
+
+	return response;
+}
+
+export async function verifyPlayStoreSubscription({
+	secretKey,
+	customerId,
+	planId,
+	receipt,
+}) {
+	const response = await server.loadJson(
+		`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.SUBSCRIPTIONS.VERIFY_PLAY_STORE}`,
+		{
+			method: 'POST',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				customerId,
+				planId,
+				receipt,
 			}),
 		}
 	);

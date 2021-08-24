@@ -150,6 +150,7 @@ export const CONFIG = {
 				CREATE: (customerId) =>
 					`/v2/payments/customers/${customerId}/subscriptions`,
 				VERIFY_APP_STORE: '/v2/payments/customers/subscriptions/apple',
+				VERIFY_PLAY_STORE: '/v2/payments/customers/subscriptions/google',
 				UPDATE: (customerId, id) =>
 					`/v2/payments/customers/${customerId}/subscriptions/${id}`,
 				CHANGE: (customerId, id) =>
