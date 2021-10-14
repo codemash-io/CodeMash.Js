@@ -6,6 +6,7 @@ import {objectOrStringToString} from '../utils';
 export async function register({
 	secretKey,
 	email,
+	userName,
 	password,
 	displayName,
 	firstName,
@@ -41,6 +42,7 @@ export async function register({
 			},
 			body: JSON.stringify({
 				email,
+				userName,
 				password,
 				displayName,
 				firstName,
