@@ -263,6 +263,7 @@ export async function insertRecord({
 	ignoreTriggers,
 	cluster,
 	resolveProviderFiles,
+	responsibleUserId,
 }) {
 	const response = await server.loadJson(
 		`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.CREATE(
@@ -283,6 +284,7 @@ export async function insertRecord({
 				waitForFileUpload,
 				ignoreTriggers,
 				resolveProviderFiles,
+				responsibleUserId,
 			}),
 		}
 	);
@@ -298,6 +300,7 @@ export async function insertManyRecords({
 	ignoreTriggers,
 	cluster,
 	resolveProviderFiles,
+	responsibleUserId,
 }) {
 	const stringDocs = [];
 	if (documents && Array.isArray(documents)) {
@@ -324,6 +327,7 @@ export async function insertManyRecords({
 				bypassDocumentValidation,
 				ignoreTriggers,
 				resolveProviderFiles,
+				responsibleUserId,
 			}),
 		}
 	);
