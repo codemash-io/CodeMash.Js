@@ -3,11 +3,12 @@ import resolve from '@rollup/plugin-node-resolve';
 import babel from '@rollup/plugin-babel';
 import replace from '@rollup/plugin-replace';
 import {terser} from 'rollup-plugin-terser';
+import typescript from 'rollup-plugin-typescript2';
 
-const extensions = ['.js'];
+const extensions = ['.ts'];
 export default [
 	{
-		input: 'index.js',
+		input: 'src/index.ts',
 		output: [
 			{
 				file: './dist/index.min.js',
@@ -17,13 +18,14 @@ export default [
 			},
 		],
 		plugins: [
+			resolve({
+				extensions,
+			}),
+			typescript(),
 			replace({
 				"const fetch = require('node-fetch');": '',
 				delimiters: ['', ''],
 				include: ['./server/server.js'],
-			}),
-			resolve({
-				extensions,
 			}),
 			terser(),
 			babel({
@@ -48,6 +50,7 @@ export default [
 			}),
 		],
 	},
+	// ES
 	{
 		input: 'index.js',
 		output: [
@@ -57,13 +60,14 @@ export default [
 			},
 		],
 		plugins: [
+			resolve({
+				extensions,
+			}),
+			typescript(),
 			replace({
 				"const fetch = require('node-fetch');": '',
 				delimiters: ['', ''],
 				include: ['./server/server.js'],
-			}),
-			resolve({
-				extensions,
 			}),
 			babel({
 				exclude: 'node_modules/**',
@@ -72,8 +76,9 @@ export default [
 			}),
 		],
 	},
+	// CommonJS
 	{
-		input: 'index.js',
+		input: 'src/index.ts',
 		output: [
 			{
 				file: pkg.main,
@@ -84,6 +89,7 @@ export default [
 			resolve({
 				extensions,
 			}),
+			typescript(),
 			babel({
 				exclude: 'node_modules/**',
 				extensions,
