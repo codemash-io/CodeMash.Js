@@ -12,6 +12,12 @@ Use the package manager [codemash](https://docs.codemash.io/get-started/install-
 npm install codemash
 ```
 
+or 
+
+```
+yarn add codemash
+```
+
 ## Configuration
 
 ```js
