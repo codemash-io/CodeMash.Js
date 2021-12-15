@@ -8,14 +8,14 @@
     "skipLibCheck": false,
     "lib": ["dom", "ES2017"],
     "declaration": true,
-    // "declarationDir": "./types",
+    "declarationDir": "./src/types",
     // "sourceMap": true,
     "outDir": "dist",
     "removeComments": false,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "baseUrl": "./",
-    "typeRoots": ["./node_modules/@types", "./src/@types"]
+    // "noUnusedLocals": true,
+    // "noUnusedParameters": true,
+    "baseUrl": "./src",
+    "typeRoots": ["./node_modules/@types"]
   },
   "include": [
     "src/**/*"

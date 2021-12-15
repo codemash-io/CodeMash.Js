@@ -4,6 +4,7 @@
   "description": "CodeMash tools for Node and javascript developers. Access codemash.io tools from npm",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "rollup -c",
     "test": "jest --collectCoverage --",
@@ -13,10 +14,8 @@
   },
   "files": [
     "dist/*",
-    "src/*",
-    "index.js"
+    "src/*"
   ],
-  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codemash-io/CodeMash.Js.git"
@@ -69,6 +68,7 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
+    "cross-fetch": "^3.1.4",
     "husky": "^5.1.1",
     "node-fetch": "^2.6.1"
   },

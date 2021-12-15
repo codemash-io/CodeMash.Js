@@ -38,30 +38,33 @@ See full documentation [here](https://docs.codemash.io/get-started/set-up-api-ke
 
 ### Get Data:
 
-```js
-import {db} from 'codemash';
+```ts
+import { db } from 'codemash';
 
 // gets all first 100 employees
 export async function getEmployees() {
-	return await db.getRecords('emplpyees', 0, 100);
+	return await db.getRecords<Accounts[]>({ collection: 'employees', pageNumber: 0, pageSize: 100 });
 }
 
 // gets all first 100 active employees
 // get only first name and last name - projection
 // sort out by created on date in DESC order.
 export async function getActiveEmployees() {
-	const filter = JSON.stringify({is_active: true});
-
-	const response = await db.getRecords(
-		'employees',
-		0,
-		100,
-		{first_name: 1, last_name: 1},
-		filter,
-		{created_on: -1}
-	);
-
-	return response;
+  return await db.getRecords<Accounts[]>({
+    collection: 'employees',
+    pageNumber: 0,
+    pageSize: 100,
+    filters: {
+      is_active: true
+    },
+    projection: {
+      first_name: 1,
+      last_name: 1
+    },
+    sort: {
+      created_on: -1
+    }
+  });
 }
 ```
 

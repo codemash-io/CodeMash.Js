@@ -1,5 +1,3 @@
-const fetch = require('node-fetch');
-
 export class HttpError extends Error {
 	constructor(response, responseBody) {
 		super(`${response.status} for ${response.url}`);

@@ -1,14 +1,16 @@
 import pkg from './package.json';
 import resolve from '@rollup/plugin-node-resolve';
 import babel from '@rollup/plugin-babel';
-import replace from '@rollup/plugin-replace';
+// import replace from '@rollup/plugin-replace';
 import {terser} from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript2';
 
-const extensions = ['.ts'];
+const extensions = ['.ts', '.js'];
+const input = 'src/index.ts';
+
 export default [
 	{
-		input: 'src/index.ts',
+		input,
 		output: [
 			{
 				file: './dist/index.min.js',
@@ -21,12 +23,12 @@ export default [
 			resolve({
 				extensions,
 			}),
+			// replace({
+			// 	"const fetch = require('node-fetch');": '',
+			// 	delimiters: ['', ''],
+			// 	include: ['./server/server.js'],
+			// }),
 			typescript(),
-			replace({
-				"const fetch = require('node-fetch');": '',
-				delimiters: ['', ''],
-				include: ['./server/server.js'],
-			}),
 			terser(),
 			babel({
 				exclude: 'node_modules/**',
@@ -52,7 +54,7 @@ export default [
 	},
 	// ES
 	{
-		input: 'index.js',
+		input,
 		output: [
 			{
 				file: pkg.module,
@@ -64,11 +66,11 @@ export default [
 				extensions,
 			}),
 			typescript(),
-			replace({
-				"const fetch = require('node-fetch');": '',
-				delimiters: ['', ''],
-				include: ['./server/server.js'],
-			}),
+			// replace({
+			// 	"const fetch = require('node-fetch');": '',
+			// 	delimiters: ['', ''],
+			// 	include: ['./server/server.js'],
+			// }),
 			babel({
 				exclude: 'node_modules/**',
 				extensions,
@@ -78,7 +80,7 @@ export default [
 	},
 	// CommonJS
 	{
-		input: 'src/index.ts',
+		input,
 		output: [
 			{
 				file: pkg.main,
