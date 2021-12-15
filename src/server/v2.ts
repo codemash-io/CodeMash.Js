@@ -28,7 +28,7 @@ export class HttpError extends Error {
 }
 
 async function base<T>(path, request: RequestInit): Promise<T> {
-  const response = await fetch({ url: BASE + path });
+  const response = await fetch(path, request);
 
   if(response.status !== 200) {
     throw new HttpError(response, response.json());
@@ -37,11 +37,11 @@ async function base<T>(path, request: RequestInit): Promise<T> {
   return response.json().catch(() => {});
 }
 
-async function get<T, U>(path: string, body: T, config?: RequestInit): Promise<U> {
-  return await base<U>(path, {
+async function get<T, U = unknown>(path: string, body: U, config?: RequestInit): Promise<T> {
+  return await base<T>(path, {
+    ...config,
     method: 'GET',
     body: JSON.stringify(body),
-    ...config
   })
 }
 

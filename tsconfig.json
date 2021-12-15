@@ -1,26 +1,24 @@
 {
-  "compilerOptions": {
-    "strict": false,
-    "module": "ESNext",
-    "target": "ESNext",
-    "esModuleInterop": true,
-    "moduleResolution": "node",
-    "skipLibCheck": false,
-    "lib": ["dom", "ES2017"],
-    "declaration": true,
-    "declarationDir": "./src/types",
-    // "sourceMap": true,
-    "outDir": "dist",
-    "removeComments": false,
-    // "noUnusedLocals": true,
-    // "noUnusedParameters": true,
-    "baseUrl": "./src",
-    "typeRoots": ["./node_modules/@types"]
-  },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules", "dist"
-  ]
+	"compilerOptions": {
+		"strict": false,
+		"module": "ESNext",
+		"target": "ESNext",
+		"esModuleInterop": true,
+		"moduleResolution": "node",
+		"isolatedModules": true,
+		"skipLibCheck": false,
+		"allowJs": true,
+		"lib": ["dom", "ES2017"],
+		"declaration": true,
+		"declarationDir": "./src/types",
+		// "sourceMap": true,
+		"outDir": "dist",
+		"removeComments": false,
+		// "noUnusedLocals": true,
+		// "noUnusedParameters": true,
+		"baseUrl": "src",
+		"typeRoots": ["./node_modules/@types"]
+	},
+	"include": ["src"],
+	"exclude": ["node_modules", "dist"]
 }
