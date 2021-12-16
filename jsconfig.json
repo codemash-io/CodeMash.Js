@@ -1,9 +1,9 @@
 {
-  "compilerOptions": {
-    "baseUrl": "src"
-  },
-  "include": ["src/**/*", "release.config.js"],
-  "typeAcquisition": {
-    "include": ["jest"]
-  }
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"app/*": ["./build/*"]
+		}
+	},
+	"exclude": ["node_modules"]
 }

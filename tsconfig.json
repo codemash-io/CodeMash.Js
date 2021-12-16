@@ -1,24 +1,14 @@
 {
+	"extends": "./tsconfig.base.json",
 	"compilerOptions": {
-		"strict": false,
-		"module": "ESNext",
-		"target": "ESNext",
-		"esModuleInterop": true,
-		"moduleResolution": "node",
-		"isolatedModules": true,
-		"skipLibCheck": false,
-		"allowJs": true,
-		"lib": ["dom", "ES2017"],
-		"declaration": true,
-		"declarationDir": "./src/types",
-		// "sourceMap": true,
-		"outDir": "dist",
-		"removeComments": false,
-		// "noUnusedLocals": true,
-		// "noUnusedParameters": true,
-		"baseUrl": "src",
-		"typeRoots": ["./node_modules/@types"]
+		"baseUrl": "./src",
+		"paths": {
+			"app/*": ["*"]
+		}
 	},
-	"include": ["src"],
-	"exclude": ["node_modules", "dist"]
+	"include": ["./src/**/*"],
+	"linterOptions": {
+		"exclude": ["docs"]
+	},
+	"exclude": ["**/test", "docs", "node_modules"]
 }

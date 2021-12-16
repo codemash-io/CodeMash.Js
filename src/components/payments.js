@@ -1,4 +1,4 @@
-import * as server from '../server';
+import * as server from '../client';
 import Config from '../config';
 import {CONFIG as Endpoints} from '../routes';
 import {objectOrStringToString, toQueryString} from '../utils';

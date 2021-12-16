@@ -1,10 +1,16 @@
-import { get } from "server/v2";
-import { ICodeMashDbListRequestBase, ICodeMashDbRequestBase, IFindRequest } from "../types/database";
+import {CMConfig} from 'app/config';
+import {RestClient} from 'app/client';
+import {FindRequest, FindResponse} from 'app/types/codemash.dtos';
 
-interface IGetRecordsRequest extends ICodeMashDbRequestBase, ICodeMashDbListRequestBase, IFindRequest {}
+export async function getRecords(
+	request: FindRequest
+): Promise<FindResponse | undefined> {
+	var client = RestClient.Json(new CMConfig());
 
-export async function getRecords<T>(options: IGetRecordsRequest) {
-  const response = await get<typeof options, T>('/v2/db/SDK/find', options);
-  return response;
+	try {
+		const response = await client.post(request);
+		return response;
+	} catch (e: any) {
+		console.log('Failed to get results: ', e.responseStatus);
+	}
 }
-
