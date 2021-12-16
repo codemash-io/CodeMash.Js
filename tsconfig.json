@@ -10,5 +10,5 @@
 	"linterOptions": {
 		"exclude": ["docs"]
 	},
-	"exclude": ["**/test", "docs", "node_modules"]
+	"exclude": ["**/tests", "docs", "node_modules"]
 }

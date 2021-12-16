@@ -11,7 +11,8 @@ describe('getRecords', () => {
 		});
 	});
 
-	test('should get all records', async () => {
+	it('should get all records', async () => {
+		console.log('test');
 		const request = new FindRequest({collectionName: 'contacts'});
 		const response = await getRecords(request);
 		expect(response).to.be.not.null;
