@@ -1,9 +1,10 @@
 import {ICMConfig} from 'config/cmConfig';
 
+export type TValidCMClientConfig = Required<Pick<ICMConfig, 'apiUrl' | 'apiKey' | 'cluster' | 'projectId'>>; 
 export class ConfigValidator {
 	constructor() {}
 
-	private ValidateCM(config: ICMConfig) {
+	public ValidateCM(config: ICMConfig) {
 		if (config.apiKey === undefined || config.apiKey === '') {
 			throw new Error('CodeMash config is not valid, check CODEMASH_API_URL');
 		}
@@ -15,7 +16,7 @@ export class ConfigValidator {
 		}
 	}
 
-	public static AssertCMConfig(config: ICMConfig): void {
+	public static AssertCMConfig(config: ICMConfig) {
 		const validator = new ConfigValidator();
 		validator.ValidateCM(config);
 	}

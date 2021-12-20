@@ -12,6 +12,12 @@ export class RestClient {
 	}
 
 	public get client(): JsonServiceClient {
-		return new JsonServiceClient(this.config.apiUrl);
+    const serviceClient = new JsonServiceClient(this.config.apiUrl);
+    if(this.config.isValid()) {
+      serviceClient.headers.set('X-CM-Cluster', this.config.cluster);
+      serviceClient.headers.set('Authorization', `Bearer ${this.config.apiKey}`);
+      serviceClient.headers.set('X-CM-ProjectId', this.config.projectId);
+    }
+		return serviceClient;
 	}
 }

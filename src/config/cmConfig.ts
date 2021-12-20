@@ -1,23 +1,24 @@
 import {ConfigValidator} from 'app/utils/configValidator';
-import {IValidateConfig, Config} from './config';
+import {IValidateConfig, Config, TValidCMClientConfig} from './config';
 import {STATICS} from './statics';
 
 export interface ICMConfig extends IValidateConfig {
-	apiUrl: string | undefined;
-	apiKey: string | undefined;
-	projectId: string | undefined;
-	cluster: string | undefined;
-	baseFilePath: string | undefined;
-	region: string | undefined;
+	apiUrl?: string;
+	apiKey?: string;
+	projectId?: string;
+	cluster?: string;
+	baseFilePath?: string;
+	region?: string;
 }
 
+
 export class CMConfig extends Config implements ICMConfig {
-	public apiUrl: string | undefined;
-	public apiKey: string | undefined;
-	public projectId: string | undefined;
-	public cluster: string | undefined;
-	public baseFilePath: string | undefined;
-	public region: string | undefined;
+	public apiUrl?: string;
+	public apiKey?: string;
+	public projectId?: string;
+	public cluster?: string;
+	public baseFilePath?: string;
+	public region?: string;
 
 	constructor() {
 		super();
@@ -28,6 +29,10 @@ export class CMConfig extends Config implements ICMConfig {
 		this.baseFilePath = process.env.CODEMASH_BASE_FILE_PATH;
 		this.region = process.env.CODEMASH_REGION;
 	}
+
+  public isValid(): this is TValidCMClientConfig {
+    return typeof this.apiKey === 'string' && typeof this.cluster === 'string' && typeof this.projectId === 'string';    
+  }
 
 	public Validate(): void {
 		ConfigValidator.AssertCMConfig(this);
