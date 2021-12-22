@@ -1,12 +1,13 @@
-import {ICMConfig} from '../config';
 import {JsonServiceClient} from '@servicestack/client';
+
+import {ICMConfig} from '../config';
 
 export class RestClient {
 	constructor(private config: ICMConfig) {}
 
 	public static Json(config: ICMConfig): JsonServiceClient {
 		const rcpClient = new RestClient(config);
-		let jsonClient = rcpClient.client;
+		const jsonClient = rcpClient.client;
 		jsonClient.bearerToken = config.apiKey!;
 		return rcpClient.client;
 	}

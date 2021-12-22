@@ -1,5 +1,6 @@
 import {ConfigValidator} from 'app/utils/configValidator';
-import {IValidateConfig, Config, TValidCMClientConfig} from './config';
+
+import {Config, IValidateConfig, TValidCMClientConfig} from './config';
 import {STATICS} from './statics';
 
 export interface ICMConfig extends IValidateConfig {
@@ -14,10 +15,15 @@ export interface ICMConfig extends IValidateConfig {
 
 export class CMConfig extends Config implements ICMConfig {
 	public apiUrl?: string;
+
 	public apiKey?: string;
+
 	public projectId?: string;
+
 	public cluster?: string;
+
 	public baseFilePath?: string;
+
 	public region?: string;
 
 	constructor() {

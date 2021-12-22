@@ -22,26 +22,22 @@ async function loadText(url, requestInfo, mimeType = 'image/png') {
   const response = await fetch(url, requestInfo);
 
   if (response.status === 200) {
-    return response.text().then(text => {
-      return {
+    return response.text().then(text => ({
         contentType: mimeType,
         raw: text
-      };
-    });
-  } else {
+      }));
+  } 
     throw new HttpError(response);
-  }
+  
 }
 async function loadJson(url, requestInfo) {
   const response = await fetch(url, requestInfo);
 
   if (response.status >= 200 && response.status < 300) {
-    return response.text().then(text => {
-      return text ? JSON.parse(text) : {};
-    });
-  } else {
+    return response.text().then(text => text ? JSON.parse(text) : {});
+  } 
     throw new HttpError(response, await response.json());
-  }
+  
 }
 
 class Config {
@@ -57,7 +53,7 @@ class Config {
 
 }
 
-var APP = new Config();
+const APP = new Config();
 
 const CONFIG = {
   ACCOUNT: {
@@ -220,7 +216,7 @@ function toQueryString(object) {
 
   for (const key in object) {
     if (object[key] !== undefined && object[key] !== null) {
-      query.push(encodeURIComponent(key) + '=' + encodeURIComponent(object[key]));
+      query.push(`${encodeURIComponent(key)  }=${  encodeURIComponent(object[key])}`);
     }
   }
 
@@ -261,7 +257,7 @@ async function getRecords({
       projection: objectOrStringToString(projection),
       filter: objectOrStringToString(filter),
       sort: objectOrStringToString(sort),
-      referencedFields: referencedFields,
+      referencedFields,
       includeUserNames,
       includeRoleNames,
       includeCollectionNames,
@@ -303,7 +299,7 @@ async function getRecord({
     },
     body: JSON.stringify({
       projection: objectOrStringToString(projection),
-      referencedFields: referencedFields,
+      referencedFields,
       includeUserNames,
       includeRoleNames,
       includeCollectionNames,
@@ -342,7 +338,7 @@ async function getRecordWithFilter({
     body: JSON.stringify({
       filter: objectOrStringToString(filter),
       projection: objectOrStringToString(projection),
-      referencedFields: referencedFields,
+      referencedFields,
       includeUserNames,
       includeRoleNames,
       includeCollectionNames,
@@ -806,26 +802,26 @@ async function getChildrenOfTerms({
   };
 }
 
-var databaseService = /*#__PURE__*/Object.freeze({
+const databaseService = /* #__PURE__ */Object.freeze({
 	__proto__: null,
-	getRecords: getRecords,
-	getRecord: getRecord,
-	getRecordWithFilter: getRecordWithFilter,
-	deleteRecord: deleteRecord,
-	deleteRecordWithFilter: deleteRecordWithFilter,
-	deleteManyRecords: deleteManyRecords,
-	insertRecord: insertRecord,
-	insertManyRecords: insertManyRecords,
-	updateRecord: updateRecord,
-	updateRecordWithFilter: updateRecordWithFilter,
-	updateManyRecords: updateManyRecords,
-	replaceRecord: replaceRecord,
-	replaceRecordWithFilter: replaceRecordWithFilter,
-	executeAggregate: executeAggregate,
-	count: count,
-	distinct: distinct,
-	getTerms: getTerms,
-	getChildrenOfTerms: getChildrenOfTerms
+	getRecords,
+	getRecord,
+	getRecordWithFilter,
+	deleteRecord,
+	deleteRecordWithFilter,
+	deleteManyRecords,
+	insertRecord,
+	insertManyRecords,
+	updateRecord,
+	updateRecordWithFilter,
+	updateManyRecords,
+	replaceRecord,
+	replaceRecordWithFilter,
+	executeAggregate,
+	count,
+	distinct,
+	getTerms,
+	getChildrenOfTerms
 });
 
 async function downloadFile({
@@ -1009,13 +1005,13 @@ function getFilePath(directory, fileName) {
   return `${APP.baseFilePath}/${directory}/${fileName}`;
 }
 
-var filesService = /*#__PURE__*/Object.freeze({
+const filesService = /* #__PURE__ */Object.freeze({
 	__proto__: null,
-	downloadFile: downloadFile,
-	getFileUrl: getFileUrl,
-	uploadFile: uploadFile,
-	uploadRecordFile: uploadRecordFile,
-	getFilePath: getFilePath
+	downloadFile,
+	getFileUrl,
+	uploadFile,
+	uploadRecordFile,
+	getFilePath
 });
 
 async function register({
@@ -1729,43 +1725,43 @@ async function appleSignIn({
       provider: 'apple',
       accessToken: identityToken,
       meta: {
-        authorizationCode: authorizationCode,
-        givenName: givenName,
-        familyName: familyName
+        authorizationCode,
+        givenName,
+        familyName
       }
     })
   });
   return response;
 }
 
-var iamService = /*#__PURE__*/Object.freeze({
+const iamService = /* #__PURE__ */Object.freeze({
 	__proto__: null,
-	register: register,
-	registerGuest: registerGuest,
-	invite: invite,
-	updateUser: updateUser,
-	updateProfile: updateProfile,
-	getUsers: getUsers,
-	getUser: getUser,
-	getUserByEmail: getUserByEmail,
-	getProfile: getProfile,
-	deleteUser: deleteUser,
-	blockUser: blockUser,
-	unblockUser: unblockUser,
-	updatePassword: updatePassword,
-	createPasswordReset: createPasswordReset,
-	checkPasswordReset: checkPasswordReset,
-	resetPassword: resetPassword,
-	verifyRegistration: verifyRegistration,
-	checkInvitationToken: checkInvitationToken,
-	verifyInvitation: verifyInvitation,
-	login: login,
-	checkAuthentication: checkAuthentication,
-	logout: logout,
-	createDeactivationRequest: createDeactivationRequest,
-	checkDeactivationToken: checkDeactivationToken,
-	deactivateAccount: deactivateAccount,
-	appleSignIn: appleSignIn
+	register,
+	registerGuest,
+	invite,
+	updateUser,
+	updateProfile,
+	getUsers,
+	getUser,
+	getUserByEmail,
+	getProfile,
+	deleteUser,
+	blockUser,
+	unblockUser,
+	updatePassword,
+	createPasswordReset,
+	checkPasswordReset,
+	resetPassword,
+	verifyRegistration,
+	checkInvitationToken,
+	verifyInvitation,
+	login,
+	checkAuthentication,
+	logout,
+	createDeactivationRequest,
+	checkDeactivationToken,
+	deactivateAccount,
+	appleSignIn
 });
 
 async function registerDeviceToken({
@@ -2103,21 +2099,21 @@ async function deleteNotification({
   return response;
 }
 
-var notificationsService = /*#__PURE__*/Object.freeze({
+const notificationsService = /* #__PURE__ */Object.freeze({
 	__proto__: null,
-	registerDeviceToken: registerDeviceToken,
-	deleteDeviceToken: deleteDeviceToken,
-	getDevice: getDevice,
-	getDevices: getDevices,
-	updateDevice: updateDevice,
-	deleteDevice: deleteDevice,
-	getNotifications: getNotifications,
-	getNotification: getNotification,
-	sendPushNotification: sendPushNotification,
-	markNotificationAsRead: markNotificationAsRead,
-	markNotificationsAsRead: markNotificationsAsRead,
-	getNotificationsCount: getNotificationsCount,
-	deleteNotification: deleteNotification
+	registerDeviceToken,
+	deleteDeviceToken,
+	getDevice,
+	getDevices,
+	updateDevice,
+	deleteDevice,
+	getNotifications,
+	getNotification,
+	sendPushNotification,
+	markNotificationAsRead,
+	markNotificationsAsRead,
+	getNotificationsCount,
+	deleteNotification
 });
 
 async function executeFunction({
@@ -2138,17 +2134,17 @@ async function executeFunction({
     },
     body: JSON.stringify({
       data: JSON.stringify(data),
-      qualifier: qualifier,
-      meta: meta,
-      tokens: tokens
+      qualifier,
+      meta,
+      tokens
     })
   });
   return response.result ? JSON.parse(response.result) : null;
 }
 
-var codeService = /*#__PURE__*/Object.freeze({
+const codeService = /* #__PURE__ */Object.freeze({
 	__proto__: null,
-	executeFunction: executeFunction
+	executeFunction
 });
 
 async function getOrder({
@@ -2617,27 +2613,27 @@ async function getApplicableDiscounts({
   return response;
 }
 
-var paymentsService = /*#__PURE__*/Object.freeze({
+const paymentsService = /* #__PURE__ */Object.freeze({
 	__proto__: null,
-	getOrder: getOrder,
-	getOrders: getOrders,
-	createOrder: createOrder,
-	createPayseraTransaction: createPayseraTransaction,
-	createStripeTransaction: createStripeTransaction,
-	createCustomer: createCustomer,
-	updateCustomer: updateCustomer,
-	getCustomers: getCustomers,
-	getCustomer: getCustomer,
-	deleteCustomer: deleteCustomer,
-	getPaymentMethodSetup: getPaymentMethodSetup,
-	attachPaymentMethod: attachPaymentMethod,
-	detachPaymentMethod: detachPaymentMethod,
-	createSubscription: createSubscription,
-	updateSubscription: updateSubscription,
-	changeSubscription: changeSubscription,
-	cancelSubscription: cancelSubscription,
-	getApplicableCoupons: getApplicableCoupons,
-	getApplicableDiscounts: getApplicableDiscounts
+	getOrder,
+	getOrders,
+	createOrder,
+	createPayseraTransaction,
+	createStripeTransaction,
+	createCustomer,
+	updateCustomer,
+	getCustomers,
+	getCustomer,
+	deleteCustomer,
+	getPaymentMethodSetup,
+	attachPaymentMethod,
+	detachPaymentMethod,
+	createSubscription,
+	updateSubscription,
+	changeSubscription,
+	cancelSubscription,
+	getApplicableCoupons,
+	getApplicableDiscounts
 });
 
 const db = databaseService;

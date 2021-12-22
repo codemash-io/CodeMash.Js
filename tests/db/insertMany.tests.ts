@@ -1,6 +1,8 @@
-import dotenv from 'dotenv';
 import path from 'path';
+
 import {expect} from 'chai';
+import dotenv from 'dotenv';
+
 import {deleteMany, insertMany} from '../../src/modules/database';
 import {
   DeleteManyRequest,

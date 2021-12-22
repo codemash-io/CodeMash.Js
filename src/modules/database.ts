@@ -1,5 +1,6 @@
-import {CMConfig} from 'app/config';
+import {ApiResult} from '@servicestack/client';
 import {RestClient} from 'app/client';
+import {CMConfig} from 'app/config';
 import {
   AggregateRequest,
   CountRequest,
@@ -17,7 +18,6 @@ import {
   UpdateManyRequest,
   UpdateOneRequest,
 } from 'app/types/codemash.dtos';
-import {ApiResult} from '@servicestack/client';
 
 const isJsonResponse = (value: any): value is string => typeof value === 'string';
 interface ICMDbResult {

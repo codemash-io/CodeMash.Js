@@ -1,8 +1,10 @@
-import dotenv from 'dotenv';
 import path from 'path';
+
 import { expect } from 'chai';
-import { AggregateRequest, DeleteManyRequest, InsertManyRequest } from '../../src/types/codemash.dtos';
+import dotenv from 'dotenv';
+
 import { aggregate, deleteMany, insertMany } from '../../src/modules/database';
+import { AggregateRequest, DeleteManyRequest, InsertManyRequest } from '../../src/types/codemash.dtos';
 
 const RECORD_COUNT = 5;
 const MATCH_NAME = 'DummyName';
@@ -31,7 +33,7 @@ describe('aggregate', () => {
       collectionName: 'employees',
       id: AGGREGATION_ID,
       tokens: {
-        "FirstName": MATCH_NAME
+        'FirstName': MATCH_NAME
       }
     });
     const result = await aggregate(request);

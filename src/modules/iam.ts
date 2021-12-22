@@ -1,6 +1,6 @@
-import { CMConfig } from 'app/config';
 import { RestClient } from 'app/client';
-import { GetUsersResponse, GetUsersRequest } from 'app/types/codemash.dtos';
+import { CMConfig } from 'app/config';
+import { GetUsersRequest,GetUsersResponse } from 'app/types/codemash.dtos';
 
 export async function getUsers(
 	request: GetUsersRequest

@@ -1,4 +1,4 @@
-import { ICMConfig } from ".";
+import { ICMConfig } from '.';
 
 export interface IValidateConfig {
 	Validate(): void;
@@ -8,5 +8,6 @@ export interface IValidateConfig {
 export type TValidCMClientConfig = Required<Pick<ICMConfig, 'apiUrl' | 'apiKey' | 'cluster' | 'projectId'>>; 
 export abstract class Config implements IValidateConfig {
 	abstract Validate(): void;
+
   abstract isValid(): this is TValidCMClientConfig;
 }

@@ -768,9 +768,9 @@ export async function appleSignIn({
 				provider: 'apple',
 				accessToken: identityToken,
 				meta: {
-					authorizationCode: authorizationCode,
-					givenName: givenName,
-					familyName: familyName,
+					authorizationCode,
+					givenName,
+					familyName,
 				},
 			}),
 		}
