@@ -23,19 +23,21 @@ const isJsonResponse = (value: any): value is string =>
   typeof value === 'string';
 interface ICMDbResult {
   response: any;
-  responseStatus?: ResponseStatus;
   isSuccess: boolean;
   isError: boolean;
+  responseStatus?: ResponseStatus;
+  errorStatus?: ResponseStatus;
 }
 
 const transformApiResult = (target: ApiResult<any>): ICMDbResult => {
   // transform given api string result to a js object.
-  const { isSuccess, response, isError } = target;
+  const { isSuccess, response, isError, errorStatus } = target;
   const { responseStatus, result } = response || {};
 
   return {
     isSuccess,
     isError,
+    errorStatus,
     responseStatus,
     response: isJsonResponse(result) ? JSON.parse(result) : response,
   };
