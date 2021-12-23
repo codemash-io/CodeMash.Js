@@ -1,9 +1,10 @@
-import pkg from './package.json';
-import resolve from '@rollup/plugin-node-resolve';
 import babel from '@rollup/plugin-babel';
+import resolve from '@rollup/plugin-node-resolve';
 // import replace from '@rollup/plugin-replace';
 import {terser} from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript2';
+
+import pkg from './package.json';
 
 const extensions = ['.ts', '.js'];
 const input = 'src/index.ts';

@@ -1,4 +1,4 @@
-import * as databaseService from 'app/modules/database';
+import * as databaseService from 'modules/database';
 // import * as filesService from './components/files';
 // import * as iamService from './components/iam';
 // import * as notificationsService from './components/push';

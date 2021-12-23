@@ -42,7 +42,7 @@ export async function getRecords({
 				projection: objectOrStringToString(projection),
 				filter: objectOrStringToString(filter),
 				sort: objectOrStringToString(sort),
-				referencedFields: referencedFields,
+				referencedFields,
 				includeUserNames,
 				includeRoleNames,
 				includeCollectionNames,
@@ -92,7 +92,7 @@ export async function getRecord({
 			},
 			body: JSON.stringify({
 				projection: objectOrStringToString(projection),
-				referencedFields: referencedFields,
+				referencedFields,
 				includeUserNames,
 				includeRoleNames,
 				includeCollectionNames,
@@ -140,7 +140,7 @@ export async function getRecordWithFilter({
 			body: JSON.stringify({
 				filter: objectOrStringToString(filter),
 				projection: objectOrStringToString(projection),
-				referencedFields: referencedFields,
+				referencedFields,
 				includeUserNames,
 				includeRoleNames,
 				includeCollectionNames,
@@ -304,7 +304,7 @@ export async function insertManyRecords({
 }) {
 	const stringDocs = [];
 	if (documents && Array.isArray(documents)) {
-		documents.forEach((doc) => {
+		documents.forEach(doc => {
 			stringDocs.push(objectOrStringToString(doc));
 		});
 	}

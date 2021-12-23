@@ -1,7 +1,10 @@
-import dotenv from 'dotenv';
 import path from 'path';
+
 import { expect } from 'chai';
-import { CountRequest } from '../../src/types/codemash.dtos';import { count } from '../../src/modules/database';
+import dotenv from 'dotenv';
+
+import { count } from '../../src/modules/database';
+import { CountRequest } from '../../src/types/codemash.dtos';
 
 describe('count', () => {
 	beforeEach(() => {

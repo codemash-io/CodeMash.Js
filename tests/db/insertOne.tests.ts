@@ -1,6 +1,8 @@
-import dotenv from 'dotenv';
 import path from 'path';
+
 import { expect } from 'chai';
+import dotenv from 'dotenv';
+
 import { insertOne } from '../../src/modules/database';
 import { InsertOneRequest } from '../../src/types/codemash.dtos';
 
