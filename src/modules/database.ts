@@ -1,6 +1,6 @@
-import {ApiResult} from '@servicestack/client';
-import {RestClient} from 'client';
-import {CMConfig} from 'config';
+import { ApiResult } from '@servicestack/client';
+import { RestClient } from 'client';
+import { CMConfig } from 'config';
 import {
   AggregateRequest,
   CountRequest,
@@ -30,8 +30,8 @@ interface ICMDbResult {
 
 const transformApiResult = (target: ApiResult<any>): ICMDbResult => {
   // transform given api string result to a js object.
-  const {isSuccess, response, isError} = target;
-  const {responseStatus, result} = response || {};
+  const { isSuccess, response, isError } = target;
+  const { responseStatus, result } = response || {};
 
   return {
     isSuccess,

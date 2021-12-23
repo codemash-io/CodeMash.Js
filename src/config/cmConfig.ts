@@ -1,18 +1,9 @@
 import { ConfigValidator } from 'utils/configValidator';
 
-import { Config, IValidateConfig, TValidCMClientConfig } from './config';
+import { ICMConfig, TValidCMClientConfig } from './config';
 import { STATICS } from './statics';
 
-export interface ICMConfig extends IValidateConfig {
-  apiUrl?: string;
-  apiKey?: string;
-  projectId?: string;
-  cluster?: string;
-  baseFilePath?: string;
-  region?: string;
-}
-
-export class CMConfig extends Config implements ICMConfig {
+export class CMConfig implements ICMConfig {
   public apiUrl?: string;
 
   public apiKey?: string;
@@ -26,7 +17,6 @@ export class CMConfig extends Config implements ICMConfig {
   public region?: string;
 
   constructor() {
-    super();
     this.apiUrl = process.env.CODEMASH_API_URL || STATICS.CODEMASH_API_URL;
     this.apiKey = process.env.CODEMASH_API_KEY;
     this.projectId = process.env.CODEMASH_PROJECT_ID;

@@ -1,8 +1,5 @@
-import { ICMConfig } from 'config/cmConfig';
+import { ICMConfig } from 'config/config';
 
-export type TValidCMClientConfig = Required<
-  Pick<ICMConfig, 'apiUrl' | 'apiKey' | 'cluster' | 'projectId'>
->;
 export class ConfigValidator {
   constructor() {}
 

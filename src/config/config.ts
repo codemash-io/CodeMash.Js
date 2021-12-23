@@ -1,13 +1,18 @@
-import { ICMConfig } from '.';
+interface ICMConfigBase {
+  apiUrl?: string;
+  apiKey?: string;
+  projectId?: string;
+  cluster?: string;
+  baseFilePath?: string;
+  region?: string;
+}
 
+export type TValidCMClientConfig = Required<
+  Pick<ICMConfigBase, 'apiUrl' | 'apiKey' | 'cluster' | 'projectId'>
+>;
 export interface IValidateConfig {
-	Validate(): void;
+  Validate(): void;
   isValid(): this is TValidCMClientConfig;
 }
 
-export type TValidCMClientConfig = Required<Pick<ICMConfig, 'apiUrl' | 'apiKey' | 'cluster' | 'projectId'>>; 
-export abstract class Config implements IValidateConfig {
-	abstract Validate(): void;
-
-  abstract isValid(): this is TValidCMClientConfig;
-}
+export interface ICMConfig extends IValidateConfig, ICMConfigBase {}
