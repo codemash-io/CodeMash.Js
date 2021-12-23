@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
-  extends: ['airbnb-base', 'prettier', 'eslint:recommended'],
-  plugins: ['import', '@typescript-eslint', 'simple-import-sort', 'jest'],
+  extends: ['airbnb-base', 'prettier', 'eslint:recommended', 'plugin:import/typescript'],
+  plugins: ['import', '@typescript-eslint', 'simple-import-sort', 'mocha'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2018,
@@ -12,13 +12,15 @@ module.exports = {
     browser: true,
     commonjs: true,
     node: true,
-    jest: true,
+    mocha: true,
   },
   settings: {
     'import/resolver': {
       node: {
         extensions: ['.js', '.ts'],
-        paths: ['./src', './tests'],
+        paths: ['src/', 'tests/'],
+        moduleDirectory: ['node_modules', 'src/'],
+        typescript: {}
       },
     },
   },

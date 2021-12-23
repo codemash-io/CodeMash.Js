@@ -2,9 +2,6 @@
 	"extends": "./tsconfig.base.json",
 	"compilerOptions": {
 		"baseUrl": "./src",
-		"paths": {
-			"app/*": ["*"]
-		}
 	},
 	"include": ["./src/**/*"],
 	"linterOptions": {

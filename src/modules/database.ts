@@ -1,25 +1,26 @@
 import {ApiResult} from '@servicestack/client';
-import {RestClient} from 'app/client';
-import {CMConfig} from 'app/config';
+import {RestClient} from 'client';
+import {CMConfig} from 'config';
 import {
   AggregateRequest,
   CountRequest,
   DeleteManyRequest,
   DeleteOneRequest,
-	DistinctRequest,
-	FindOneRequest,
-	FindRequest,
-	FindTermsChildrenRequest,
-	FindTermsRequest,
-	InsertManyRequest,
-	InsertOneRequest,
+  DistinctRequest,
+  FindOneRequest,
+  FindRequest,
+  FindTermsChildrenRequest,
+  FindTermsRequest,
+  InsertManyRequest,
+  InsertOneRequest,
   ReplaceOneRequest,
   ResponseStatus,
   UpdateManyRequest,
   UpdateOneRequest,
-} from 'app/types/codemash.dtos';
+} from 'types/codemash.dtos';
 
-const isJsonResponse = (value: any): value is string => typeof value === 'string';
+const isJsonResponse = (value: any): value is string =>
+  typeof value === 'string';
 interface ICMDbResult {
   response: any;
   responseStatus?: ResponseStatus;
@@ -29,46 +30,38 @@ interface ICMDbResult {
 
 const transformApiResult = (target: ApiResult<any>): ICMDbResult => {
   // transform given api string result to a js object.
-  const { isSuccess, response, isError } = target;
-  const { responseStatus, result } = response || {};
+  const {isSuccess, response, isError} = target;
+  const {responseStatus, result} = response || {};
 
   return {
     isSuccess,
     isError,
     responseStatus,
-    response: isJsonResponse(result) ? JSON.parse(result) : response
-  }
-}
+    response: isJsonResponse(result) ? JSON.parse(result) : response,
+  };
+};
 
-export async function findMany(
-	request: FindRequest
-) {
-	const client = RestClient.Json(new CMConfig());
-	const result = await client.api(request);
+export async function findMany(request: FindRequest) {
+  const client = RestClient.Json(new CMConfig());
+  const result = await client.api(request);
   return transformApiResult(result);
 }
 
-export async function findOne(
-	request: FindOneRequest
-) {
-	const client = RestClient.Json(new CMConfig());
-	const result = await client.api(request);
+export async function findOne(request: FindOneRequest) {
+  const client = RestClient.Json(new CMConfig());
+  const result = await client.api(request);
   return transformApiResult(result);
 }
 
-export async function insertOne(
-	request: InsertOneRequest
-) {
-	const client = RestClient.Json(new CMConfig());
-	const result = await client.api(request);
+export async function insertOne(request: InsertOneRequest) {
+  const client = RestClient.Json(new CMConfig());
+  const result = await client.api(request);
   return transformApiResult(result);
 }
 
-export async function insertMany(
-	request: InsertManyRequest
-) {
-	const client = RestClient.Json(new CMConfig());
-	const result = await client.api(request);
+export async function insertMany(request: InsertManyRequest) {
+  const client = RestClient.Json(new CMConfig());
+  const result = await client.api(request);
   return transformApiResult(result);
 }
 
