@@ -705,3 +705,33 @@ export async function getChildrenOfTerms({
 		result: response.result,
 	};
 }
+
+export async function changeResponsibility({
+	secretKey,
+	collectionName,
+	id,
+	newResponsibleUserId,
+	cluster,
+}) {
+	const response = await server.loadJson(
+		`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.RESPONSIBILITY(
+			collectionName,
+		)}`,
+		{
+			method: 'POST',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				'X-CM-Cluster': cluster,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				id,
+				newResponsibleUserId,
+			}),
+		}
+	);
+
+	return response ? response.result : null;
+}
