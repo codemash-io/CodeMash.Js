@@ -26,6 +26,7 @@ export const CONFIG = {
 					DELETE_MANY: (collectionName) => `/v2/db/${collectionName}/bulk`,
 					COUNT: (collectionName) => `/v2/db/${collectionName}/count`,
 					DISTINCT: (collectionName) => `/v2/db/${collectionName}/distinct`,
+					RESPONSIBILITY: (collectionName) => `/v2/db/${collectionName}/responsibility`,
 				},
 				FILES: {
 					UPLOAD: (collectionName) => `/v2/db/${collectionName}/files`,
