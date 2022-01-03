@@ -714,8 +714,10 @@ export async function changeResponsibility({
 	cluster,
 }) {
 	const response = await server.loadJson(
-		`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.RESPONSIBILITY(
-			collectionName,
+		`${
+			Config.apiUrl
+		}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.RESPONSIBILITY(
+			collectionName
 		)}`,
 		{
 			method: 'POST',
