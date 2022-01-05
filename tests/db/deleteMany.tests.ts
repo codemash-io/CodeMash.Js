@@ -29,7 +29,7 @@ describe('deleteMany', () => {
       ),
     });
 
-    const rs = await insertMany(insertRequest);
+    await insertMany(insertRequest);
   });
 
   it('should delete at least inserted amount of records', async () => {
