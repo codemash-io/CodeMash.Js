@@ -39,7 +39,7 @@ describe('updateOne', () => {
       }),
     });
     const result = await updateOne(request);
-    expect(result.response?.result?.modifiedCount).to.be.greaterThanOrEqual(1);
+    expect(result.response?.result?.modifiedCount).to.be.equal(1);
   });
 
   it('should return an error for a non-existent collection', async () => {
