@@ -91,7 +91,7 @@ export async function updateMany(request: UpdateManyRequest) {
   return transformApiResult(result);
 }
 
-export async function replaceOne(request: ReplaceOneRequest) {
+export async function replace(request: ReplaceOneRequest) {
   const client = RestClient.Json(new CMConfig());
   const result = await client.api(request);
   return transformApiResult(result);
