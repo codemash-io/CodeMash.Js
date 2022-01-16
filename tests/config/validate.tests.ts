@@ -6,14 +6,13 @@ import dotenv from 'dotenv';
 import { CMConfig } from '../../src/config';
 
 describe('CMConfig', () => {
-	beforeEach(() => {
-		dotenv.config({
-			path: path.resolve(__dirname, '../data/config/.env'),
-		});
-	});
+  beforeEach(() => {
+    dotenv.config({
+      path: path.resolve(__dirname, '../data/config/.env'),
+    });
+  });
 
   it('should validate default config', () => {
-    const client = new CMConfig();
-    expect(client.Validate()).to.not.throw;
+    expect(CMConfig.getInstance().Validate()).to.not.throw;
   });
-})
+});
