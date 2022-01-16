@@ -29,11 +29,9 @@ describe('distinct', () => {
   before(async () => {
     const insertRequest = new InsertManyRequest({
       collectionName: 'employees',
-      documents: Array.from({ length: RECORD_COUNT }).map(() =>
-        JSON.stringify({
-          first_name: MATCH_NAME,
-        }),
-      ),
+      documents: Array.from({ length: RECORD_COUNT }).map(() => ({
+        first_name: MATCH_NAME,
+      })),
     });
     await insertMany(insertRequest);
   });
@@ -61,9 +59,9 @@ describe('distinct', () => {
   after(async () => {
     const deleteRequest = new DeleteManyRequest({
       collectionName: 'employees',
-      filter: JSON.stringify({
+      filter: {
         first_name: MATCH_NAME,
-      }),
+      },
     });
     await deleteMany(deleteRequest);
   });

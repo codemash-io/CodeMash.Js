@@ -23,20 +23,20 @@ describe('updateOne', () => {
   it('should update at least 1 record', async () => {
     const insert = new InsertOneRequest({
       collectionName: 'employees',
-      document: JSON.stringify({
+      document: {
         first_name: CREATE_NAME,
-      }),
+      },
     });
     const newEntry = await insertOne(insert);
 
     const request = new UpdateOneRequest({
       collectionName: 'employees',
       id: newEntry.response?._id?.$oid,
-      update: JSON.stringify({
+      update: {
         $set: {
           first_name: UPDATE_NAME,
         },
-      }),
+      },
     });
     const result = await updateOne(request);
     expect(result.response?.result?.modifiedCount).to.be.equal(1);
@@ -45,20 +45,20 @@ describe('updateOne', () => {
   it('should return an error for a non-existent collection', async () => {
     const insert = new InsertOneRequest({
       collectionName: 'employees',
-      document: JSON.stringify({
+      document: {
         first_name: CREATE_NAME,
-      }),
+      },
     });
     const newEntry = await insertOne(insert);
 
     const request = new UpdateOneRequest({
       collectionName: 'nonExistentCollection',
       id: newEntry.response?._id?.$oid,
-      update: JSON.stringify({
+      update: {
         $set: {
           first_name: UPDATE_NAME,
         },
-      }),
+      },
     });
     const response = await updateOne(request);
     expect(response).to.be.not.null;
@@ -68,7 +68,7 @@ describe('updateOne', () => {
   after(async () => {
     const request = new DeleteManyRequest({
       collectionName: 'employees',
-      filter: JSON.stringify({
+      filter: {
         $or: [
           {
             first_name: CREATE_NAME,
@@ -77,7 +77,7 @@ describe('updateOne', () => {
             first_name: UPDATE_NAME,
           },
         ],
-      }),
+      },
     });
     await deleteMany(request);
   });

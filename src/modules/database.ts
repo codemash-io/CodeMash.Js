@@ -43,86 +43,86 @@ const transformApiResult = (target: ApiResult<any>): ICMDbResult => {
   };
 };
 
-export async function findMany(request: FindRequest) {
-  const client = RestClient.Json(new CMConfig());
-  const result = await client.api(request);
+export async function find(request: FindRequest) {
+  const client = new RestClient(CMConfig.getInstance());
+  const result = await client.dbRequest(request);
   return transformApiResult(result);
 }
 
 export async function findOne(request: FindOneRequest) {
-  const client = RestClient.Json(new CMConfig());
-  const result = await client.api(request);
+  const client = new RestClient(CMConfig.getInstance());
+  const result = await client.dbRequest(request);
   return transformApiResult(result);
 }
 
 export async function insertOne(request: InsertOneRequest) {
-  const client = RestClient.Json(new CMConfig());
-  const result = await client.api(request);
+  const client = new RestClient(CMConfig.getInstance());
+  const result = await client.dbRequest(request);
   return transformApiResult(result);
 }
 
 export async function insertMany(request: InsertManyRequest) {
-  const client = RestClient.Json(new CMConfig());
-  const result = await client.api(request);
+  const client = new RestClient(CMConfig.getInstance());
+  const result = await client.dbRequest(request);
   return transformApiResult(result);
 }
 
 export async function deleteOne(request: DeleteOneRequest) {
-  const client = RestClient.Json(new CMConfig());
-  const result = await client.api(request);
+  const client = new RestClient(CMConfig.getInstance());
+  const result = await client.dbRequest(request);
   return transformApiResult(result);
 }
 
 export async function deleteMany(request: DeleteManyRequest) {
-  const client = RestClient.Json(new CMConfig());
-  const result = await client.api(request);
+  const client = new RestClient(CMConfig.getInstance());
+  const result = await client.dbRequest(request);
   return transformApiResult(result);
 }
 
 export async function updateOne(request: UpdateOneRequest) {
-  const client = RestClient.Json(new CMConfig());
-  const result = await client.api(request);
+  const client = new RestClient(CMConfig.getInstance());
+  const result = await client.dbRequest(request);
   return transformApiResult(result);
 }
 
 export async function updateMany(request: UpdateManyRequest) {
-  const client = RestClient.Json(new CMConfig());
-  const result = await client.api(request);
+  const client = new RestClient(CMConfig.getInstance());
+  const result = await client.dbRequest(request);
   return transformApiResult(result);
 }
 
-export async function replace(request: ReplaceOneRequest) {
-  const client = RestClient.Json(new CMConfig());
-  const result = await client.api(request);
+export async function replaceOne(request: ReplaceOneRequest) {
+  const client = new RestClient(CMConfig.getInstance());
+  const result = await client.dbRequest(request);
   return transformApiResult(result);
 }
 
 export async function aggregate(request: AggregateRequest) {
-  const client = RestClient.Json(new CMConfig());
-  const result = await client.api(request);
+  const client = new RestClient(CMConfig.getInstance());
+  const result = await client.dbRequest(request);
   return transformApiResult(result);
 }
 
 export async function count(request: CountRequest) {
-  const client = RestClient.Json(new CMConfig());
-  const result = await client.api(request);
+  const client = new RestClient(CMConfig.getInstance());
+  const result = await client.dbRequest(request);
   return transformApiResult(result);
 }
 
 export async function distinct(request: DistinctRequest) {
-  const client = RestClient.Json(new CMConfig());
-  const result = await client.api(request);
+  const client = new RestClient(CMConfig.getInstance());
+  const result = await client.dbRequest(request);
   return transformApiResult(result);
 }
 
 export async function findTerms(request: FindTermsRequest) {
-  const client = RestClient.Json(new CMConfig());
-  const result = await client.api(request);
+  const client = new RestClient(CMConfig.getInstance());
+  const result = await client.dbRequest(request);
   return transformApiResult(result);
 }
 
 export async function findTermsChildren(request: FindTermsChildrenRequest) {
-  const client = RestClient.Json(new CMConfig());
-  const result = await client.api(request);
+  const client = new RestClient(CMConfig.getInstance());
+  const result = await client.dbRequest(request);
   return transformApiResult(result);
 }

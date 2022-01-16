@@ -22,11 +22,9 @@ describe('deleteMany', () => {
   before(async () => {
     const insertRequest = new InsertManyRequest({
       collectionName: 'employees',
-      documents: Array.from({ length: ENTRIES_TO_INSERT }).map(() =>
-        JSON.stringify({
-          first_name: ENTRY_FIRST_NAME,
-        }),
-      ),
+      documents: Array.from({ length: ENTRIES_TO_INSERT }).map(() => ({
+        first_name: ENTRY_FIRST_NAME,
+      })),
     });
 
     await insertMany(insertRequest);
@@ -35,9 +33,9 @@ describe('deleteMany', () => {
   it('should delete at least inserted amount of records', async () => {
     const request = new DeleteManyRequest({
       collectionName: 'employees',
-      filter: JSON.stringify({
+      filter: {
         first_name: ENTRY_FIRST_NAME,
-      }),
+      },
     });
 
     const result = await deleteMany(request);

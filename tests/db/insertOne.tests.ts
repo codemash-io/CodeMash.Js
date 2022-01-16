@@ -19,9 +19,9 @@ describe('insertOne', () => {
   it('should successfully insert a new record', async () => {
     const request = new InsertOneRequest({
       collectionName: 'employees',
-      document: JSON.stringify({
+      document: {
         first_name: 'Test',
-      }),
+      },
     });
     const response = await insertOne(request);
     expect(response).to.be.not.null;
@@ -31,9 +31,9 @@ describe('insertOne', () => {
   it('should return an error for a non-existent collection', async () => {
     const request = new InsertOneRequest({
       collectionName: 'nonExistentCollection',
-      document: JSON.stringify({
+      document: {
         dummy: 'data',
-      }),
+      },
     });
     const response = await insertOne(request);
     expect(response).to.be.not.null;
@@ -43,9 +43,9 @@ describe('insertOne', () => {
   after(async () => {
     const deleteRequest = new DeleteOneRequest({
       collectionName: 'employees',
-      filter: JSON.stringify({
+      filter: {
         first_name: 'Test',
-      }),
+      },
     });
     await deleteOne(deleteRequest);
   });

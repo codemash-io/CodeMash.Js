@@ -24,24 +24,22 @@ describe('updateMany', () => {
   it('should update all created records', async () => {
     const insert = new InsertManyRequest({
       collectionName: 'employees',
-      documents: Array.from({ length: ENTRIES_TO_CREATE }).map(() =>
-        JSON.stringify({
-          first_name: CREATE_NAME,
-        }),
-      ),
+      documents: Array.from({ length: ENTRIES_TO_CREATE }).map(() => ({
+        first_name: CREATE_NAME,
+      })),
     });
     await insertMany(insert);
 
     const request = new UpdateManyRequest({
       collectionName: 'employees',
-      filter: JSON.stringify({
+      filter: {
         first_name: CREATE_NAME,
-      }),
-      update: JSON.stringify({
+      },
+      update: {
         $set: {
           first_name: UPDATE_NAME,
         },
-      }),
+      },
     });
     const result = await updateMany(request);
     expect(result.response?.result?.modifiedCount).to.be.greaterThanOrEqual(
@@ -52,24 +50,22 @@ describe('updateMany', () => {
   it('should return an error for a non-existent collection', async () => {
     const insert = new InsertManyRequest({
       collectionName: 'employees',
-      documents: Array.from({ length: ENTRIES_TO_CREATE }).map(() =>
-        JSON.stringify({
-          first_name: CREATE_NAME,
-        }),
-      ),
+      documents: Array.from({ length: ENTRIES_TO_CREATE }).map(() => ({
+        first_name: CREATE_NAME,
+      })),
     });
     await insertMany(insert);
 
     const request = new UpdateManyRequest({
       collectionName: 'nonExistentCollection',
-      filter: JSON.stringify({
+      filter: {
         first_name: CREATE_NAME,
-      }),
-      update: JSON.stringify({
+      },
+      update: {
         $set: {
           first_name: UPDATE_NAME,
         },
-      }),
+      },
     });
     const response = await updateMany(request);
     expect(response).to.be.not.null;
@@ -79,7 +75,7 @@ describe('updateMany', () => {
   after(async () => {
     const request = new DeleteManyRequest({
       collectionName: 'employees',
-      filter: JSON.stringify({
+      filter: {
         $or: [
           {
             first_name: CREATE_NAME,
@@ -88,7 +84,7 @@ describe('updateMany', () => {
             first_name: UPDATE_NAME,
           },
         ],
-      }),
+      },
     });
     await deleteMany(request);
   });

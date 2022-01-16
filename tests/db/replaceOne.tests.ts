@@ -3,7 +3,7 @@ import path from 'path';
 import { expect } from 'chai';
 import dotenv from 'dotenv';
 
-import { deleteMany, insertOne, replace } from '../../src/modules/database';
+import { deleteMany, insertOne, replaceOne } from '../../src/modules/database';
 import {
   DeleteManyRequest,
   InsertOneRequest,
@@ -13,7 +13,7 @@ import {
 const INITIAL_ENTRY_NAME = 'initial_entry';
 const REPLACE_WITH_NAME = 'replaced';
 
-describe('replace', () => {
+describe('replaceOne', () => {
   beforeEach(() => {
     dotenv.config({
       path: path.resolve(__dirname, '../data/config/.env'),
@@ -23,20 +23,20 @@ describe('replace', () => {
   it('should replace one record', async () => {
     const insertRequest = new InsertOneRequest({
       collectionName: 'employees',
-      document: JSON.stringify({
+      document: {
         first_name: INITIAL_ENTRY_NAME,
-      }),
+      },
     });
     const newEntry = await insertOne(insertRequest);
 
     const request = new ReplaceOneRequest({
       collectionName: 'employees',
       id: newEntry.response?._id?.$oid,
-      document: JSON.stringify({
+      document: {
         first_name: REPLACE_WITH_NAME,
-      }),
+      },
     });
-    const result = await replace(request);
+    const result = await replaceOne(request);
     expect(result.response?.result.matchedCount).to.be.equal(1);
   });
 
@@ -45,7 +45,7 @@ describe('replace', () => {
       collectionName: 'nonExistentCollection',
       id: 'empty',
     });
-    const response = await replace(request);
+    const response = await replaceOne(request);
     expect(response).to.be.not.null;
     expect(response.isError).to.be.true;
   });
@@ -53,7 +53,7 @@ describe('replace', () => {
   after(async () => {
     const deleteRequest = new DeleteManyRequest({
       collectionName: 'employees',
-      filter: JSON.stringify({
+      filter: {
         $or: [
           {
             first_name: INITIAL_ENTRY_NAME,
@@ -62,7 +62,7 @@ describe('replace', () => {
             first_name: REPLACE_WITH_NAME,
           },
         ],
-      }),
+      },
     });
     await deleteMany(deleteRequest);
   });

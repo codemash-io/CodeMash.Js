@@ -4,7 +4,7 @@ import { ICMConfig, TValidCMClientConfig } from './config';
 import { STATICS } from './statics';
 
 export class CMConfig implements ICMConfig {
-  public apiUrl?: string;
+  public apiUrl: string;
 
   public apiKey?: string;
 

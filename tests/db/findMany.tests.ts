@@ -3,10 +3,10 @@ import path from 'path';
 import { expect } from 'chai';
 import dotenv from 'dotenv';
 
-import { findMany } from '../../src/modules/database';
+import { find } from '../../src/modules/database';
 import { FindRequest } from '../../src/types/codemash.dtos';
 
-describe('findMany', () => {
+describe('find', () => {
   beforeEach(() => {
     dotenv.config({
       path: path.resolve(__dirname, '../data/config/.env'),
@@ -14,8 +14,10 @@ describe('findMany', () => {
   });
 
   it('should get all records', async () => {
-    const request = new FindRequest({ collectionName: 'employees' });
-    const response = await findMany(request);
+    const request = new FindRequest({
+      collectionName: 'employees',
+    });
+    const response = await find(request);
     expect(response).to.be.not.null.and.to.have.key('isSuccess');
   });
 
@@ -23,7 +25,7 @@ describe('findMany', () => {
     const request = new FindRequest({
       collectionName: 'someNonExistentCollection',
     });
-    const result = await findMany(request);
+    const result = await find(request);
     expect(result.isError).to.be.true;
   });
 });

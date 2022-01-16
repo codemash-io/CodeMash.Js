@@ -21,9 +21,9 @@ describe('deleteOne', () => {
   before(async () => {
     const insertRequest = new InsertOneRequest({
       collectionName: 'employees',
-      document: JSON.stringify({
+      document: {
         first_name: ENTRY_FIRST_NAME,
-      }),
+      },
     });
 
     await insertOne(insertRequest);
@@ -32,9 +32,9 @@ describe('deleteOne', () => {
   it('should delete 1 record', async () => {
     const request = new DeleteOneRequest({
       collectionName: 'employees',
-      filter: JSON.stringify({
+      filter: {
         first_name: ENTRY_FIRST_NAME,
-      }),
+      },
     });
 
     const result = await deleteOne(request);

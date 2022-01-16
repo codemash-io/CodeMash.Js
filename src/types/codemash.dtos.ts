@@ -15,22 +15,22 @@ AddDescriptionAsComments: True
 //DefaultImports: 
 */
 
-import {Cookie} from '@servicestack/client';
+import { Cookie } from '@servicestack/client';
 
 export interface IReturn<T> {
-	createResponse(): T;
+  createResponse(): T;
 }
 
 export interface IReturnVoid {
-	createResponse(): void;
+  createResponse(): void;
 }
 
 export interface IHasSessionId {
-	sessionId: string;
+  sessionId: string;
 }
 
 export interface IHasBearerToken {
-	bearerToken: string;
+  bearerToken: string;
 }
 
 export interface IPost {}
@@ -39,2387 +39,2387 @@ export interface IGet {}
 
 // @DataContract(Namespace="http://codemash.io/types/")
 export class RequestBase implements ICultureBasedRequest, IVersionBasedRequest {
-	// @DataMember
-	public cultureCode: string;
+  // @DataMember
+  public cultureCode: string;
 
-	// @DataMember
-	public version: string;
+  // @DataMember
+  public version: string;
 
-	public constructor(init?: Partial<RequestBase>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<RequestBase>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class CodeMashRequestBase extends RequestBase {
-	/**
-	 * ID of your project. Can be passed in a header as X-CM-ProjectId.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="ID of your project. Can be passed in a header as X-CM-ProjectId.", Name="ProjectId", ParameterType="query")
-	public projectId: string;
+  /**
+   * ID of your project. Can be passed in a header as X-CM-ProjectId.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="ID of your project. Can be passed in a header as X-CM-ProjectId.", Name="ProjectId", ParameterType="query")
+  public projectId: string;
 
-	public constructor(init?: Partial<CodeMashRequestBase>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CodeMashRequestBase>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class CodeMashDbRequestBase extends CodeMashRequestBase {
-	/**
-	 * Collection name - unique table name without whitespaces
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Collection name - unique table name without whitespaces", IsRequired=true, Name="CollectionName", ParameterType="path")
-	public collectionName: string;
+  /**
+   * Collection name - unique table name without whitespaces
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Collection name - unique table name without whitespaces", IsRequired=true, Name="CollectionName", ParameterType="path")
+  public collectionName: string;
 
-	/**
-	 * API key of your cluster. Can be passed in a header as X-CM-Cluster.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="API key of your cluster. Can be passed in a header as X-CM-Cluster.", IsRequired=true, Name="Cluster", ParameterType="query")
-	public cluster: string;
+  /**
+   * API key of your cluster. Can be passed in a header as X-CM-Cluster.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="API key of your cluster. Can be passed in a header as X-CM-Cluster.", IsRequired=true, Name="Cluster", ParameterType="query")
+  public cluster: string;
 
-	public constructor(init?: Partial<CodeMashDbRequestBase>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CodeMashDbRequestBase>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export interface ICultureBasedRequest {
-	cultureCode: string;
+  cultureCode: string;
 }
 
 export interface IVersionBasedRequest {
-	cultureCode: string;
+  cultureCode: string;
 }
 
 // @DataContract
 export class ResponseError {
-	// @DataMember(Order=1)
-	public errorCode: string;
+  // @DataMember(Order=1)
+  public errorCode: string;
 
-	// @DataMember(Order=2)
-	public fieldName: string;
+  // @DataMember(Order=2)
+  public fieldName: string;
 
-	// @DataMember(Order=3)
-	public message: string;
+  // @DataMember(Order=3)
+  public message: string;
 
-	// @DataMember(Order=4)
-	public meta: {[index: string]: string};
+  // @DataMember(Order=4)
+  public meta: { [index: string]: string };
 
-	public constructor(init?: Partial<ResponseError>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<ResponseError>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 // @DataContract
 export class ResponseStatus {
-	// @DataMember(Order=1)
-	public errorCode: string;
+  // @DataMember(Order=1)
+  public errorCode: string;
 
-	// @DataMember(Order=2)
-	public message: string;
+  // @DataMember(Order=2)
+  public message: string;
 
-	// @DataMember(Order=3)
-	public stackTrace: string;
+  // @DataMember(Order=3)
+  public stackTrace: string;
 
-	// @DataMember(Order=4)
-	public errors: ResponseError[];
+  // @DataMember(Order=4)
+  public errors: ResponseError[];
 
-	// @DataMember(Order=5)
-	public meta: {[index: string]: string};
+  // @DataMember(Order=5)
+  public meta: { [index: string]: string };
 
-	public constructor(init?: Partial<ResponseStatus>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<ResponseStatus>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class ResponseBase<T> {
-	// @DataMember
-	public responseStatus: ResponseStatus;
+  // @DataMember
+  public responseStatus: ResponseStatus;
 
-	// @DataMember(Name="result")
-	public result: T;
+  // @DataMember(Name="result")
+  public result: T;
 
-	public constructor(init?: Partial<ResponseBase<T>>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<ResponseBase<T>>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 // @DataContract
 export class DeleteResult {
-	// @DataMember(Name="deletedCount")
-	public deletedCount: number;
+  // @DataMember(Name="deletedCount")
+  public deletedCount: number;
 
-	// @DataMember(Name="isAcknowledged")
-	public isAcknowledged: boolean;
+  // @DataMember(Name="isAcknowledged")
+  public isAcknowledged: boolean;
 
-	public constructor(init?: Partial<DeleteResult>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<DeleteResult>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class ReferencingField {
-	public name: string;
+  public name: string;
 
-	public pageSize: number;
+  public pageSize: number;
 
-	public pageNumber: number;
+  public pageNumber: number;
 
-	public sort: string;
+  public sort: string;
 
-	public projection: string;
+  public projection: string;
 
-	public constructor(init?: Partial<ReferencingField>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<ReferencingField>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class CodeMashDbListRequestBase
-	extends CodeMashDbRequestBase
-	implements
-		IRequestWithPaging,
-		IRequestWithFilter,
-		IRequestWithSorting,
-		IRequestWithProjection {
-	/**
-	 * Amount of records to return
-	 */
-	// @DataMember
-	// @ApiMember(DataType="int", Description="Amount of records to return", Name="PageSize", ParameterType="query")
-	public pageSize: number;
+  extends CodeMashDbRequestBase
+  implements
+    IRequestWithPaging,
+    IRequestWithFilter,
+    IRequestWithSorting,
+    IRequestWithProjection {
+  /**
+   * Amount of records to return
+   */
+  // @DataMember
+  // @ApiMember(DataType="int", Description="Amount of records to return", Name="PageSize", ParameterType="query")
+  public pageSize: number;
 
-	/**
-	 * Page of records to return
-	 */
-	// @DataMember
-	// @ApiMember(DataType="int", Description="Page of records to return", Name="PageNumber", ParameterType="query")
-	public pageNumber: number;
+  /**
+   * Page of records to return
+   */
+  // @DataMember
+  // @ApiMember(DataType="int", Description="Page of records to return", Name="PageNumber", ParameterType="query")
+  public pageNumber: number;
 
-	/**
-	 * A query that specifies which records to return
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="A query that specifies which records to return", Name="Filter", ParameterType="query")
-	public filter: string;
+  /**
+   * A query that specifies which records to return
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="A query that specifies which records to return", Name="Filter", ParameterType="query")
+  public filter: object | string;
 
-	/**
-	 * A query that specifies how to sort filtered records
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="A query that specifies how to sort filtered records", Name="Sort", ParameterType="query")
-	public sort: string;
+  /**
+   * A query that specifies how to sort filtered records
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="A query that specifies how to sort filtered records", Name="Sort", ParameterType="query")
+  public sort: string;
 
-	/**
-	 * A query that specifies what fields in records to return
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="A query that specifies what fields in records to return", Name="Projection", ParameterType="query")
-	public projection: string;
+  /**
+   * A query that specifies what fields in records to return
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="A query that specifies what fields in records to return", Name="Projection", ParameterType="query")
+  public projection: string;
 
-	public constructor(init?: Partial<CodeMashDbListRequestBase>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CodeMashDbListRequestBase>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export interface IRequestWithPaging {
-	pageSize: number;
-	pageNumber: number;
+  pageSize: number;
+  pageNumber: number;
 }
 
 export interface IRequestWithFilter {
-	filter: string;
+  filter: object | string;
 }
 
 export interface IRequestWithSorting {
-	sort: string;
+  sort: string;
 }
 
 export interface IRequestWithProjection {
-	projection: string;
+  projection: string;
 }
 
 export class Schema {
-	public collectionNameAsTitle: string;
+  public collectionNameAsTitle: string;
 
-	public collectionName: string;
+  public collectionName: string;
 
-	public uiSchema: string;
+  public uiSchema: string;
 
-	public jsonSchema: string;
+  public jsonSchema: string;
 
-	public translatableFields: string[];
+  public translatableFields: string[];
 
-	public databaseId: string;
+  public databaseId: string;
 
-	public schemaId: string;
+  public schemaId: string;
 
-	public constructor(init?: Partial<Schema>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<Schema>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 // @DataContract
 export class ReplaceOneResult {
-	/**
-	 * A boolean acknowledged as true if the operation ran with write concern or false if write concern was disabled
-	 */
-	// @DataMember(Name="isAcknowledged")
-	// @ApiMember(DataType="bool", Description="A boolean acknowledged as true if the operation ran with write concern or false if write concern was disabled", Name="IsAcknowledged")
-	public isAcknowledged: boolean;
+  /**
+   * A boolean acknowledged as true if the operation ran with write concern or false if write concern was disabled
+   */
+  // @DataMember(Name="isAcknowledged")
+  // @ApiMember(DataType="bool", Description="A boolean acknowledged as true if the operation ran with write concern or false if write concern was disabled", Name="IsAcknowledged")
+  public isAcknowledged: boolean;
 
-	/**
-	 * Checks if modifiedCount is available
-	 */
-	// @DataMember(Name="isModifiedCountAvailable")
-	// @ApiMember(DataType="bool", Description="Checks if modifiedCount is available", Name="IsModifiedCountAvailable")
-	public isModifiedCountAvailable: boolean;
+  /**
+   * Checks if modifiedCount is available
+   */
+  // @DataMember(Name="isModifiedCountAvailable")
+  // @ApiMember(DataType="bool", Description="Checks if modifiedCount is available", Name="IsModifiedCountAvailable")
+  public isModifiedCountAvailable: boolean;
 
-	/**
-	 * matchedCount containing the number of matched documents
-	 */
-	// @DataMember(Name="matchedCount")
-	// @ApiMember(DataType="bool", Description="matchedCount containing the number of matched documents", Name="MatchedCount")
-	public matchedCount: number;
+  /**
+   * matchedCount containing the number of matched documents
+   */
+  // @DataMember(Name="matchedCount")
+  // @ApiMember(DataType="bool", Description="matchedCount containing the number of matched documents", Name="MatchedCount")
+  public matchedCount: number;
 
-	/**
-	 * modifiedCount containing the number of modified documents
-	 */
-	// @DataMember(Name="modifiedCount")
-	// @ApiMember(DataType="long", Description="modifiedCount containing the number of modified documents", Name="ModifiedCount")
-	public modifiedCount: number;
+  /**
+   * modifiedCount containing the number of modified documents
+   */
+  // @DataMember(Name="modifiedCount")
+  // @ApiMember(DataType="long", Description="modifiedCount containing the number of modified documents", Name="ModifiedCount")
+  public modifiedCount: number;
 
-	/**
-	 * upsertedId containing the _id for the upserted document
-	 */
-	// @DataMember(Name="upsertedId")
-	// @ApiMember(DataType="string", Description="upsertedId containing the _id for the upserted document", Name="UpsertedId")
-	public upsertedId: string;
+  /**
+   * upsertedId containing the _id for the upserted document
+   */
+  // @DataMember(Name="upsertedId")
+  // @ApiMember(DataType="string", Description="upsertedId containing the _id for the upserted document", Name="UpsertedId")
+  public upsertedId: string;
 
-	public constructor(init?: Partial<ReplaceOneResult>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<ReplaceOneResult>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class UpdateResult {
-	public isAcknowledged: boolean;
+  public isAcknowledged: boolean;
 
-	public matchedCount: number;
+  public matchedCount: number;
 
-	public modifiedCount: number;
+  public modifiedCount: number;
 
-	public upsertedId: string;
+  public upsertedId: string;
 
-	public constructor(init?: Partial<UpdateResult>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UpdateResult>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class Taxonomy {
-	public id: string;
+  public id: string;
 
-	public name: string;
+  public name: string;
 
-	public title: string;
+  public title: string;
 
-	public description: string;
+  public description: string;
 
-	public parentId: string;
+  public parentId: string;
 
-	public dependencies: string[];
+  public dependencies: string[];
 
-	public termsUiSchema: string;
+  public termsUiSchema: string;
 
-	public termsJsonSchema: string;
+  public termsJsonSchema: string;
 
-	public translatableFields: string[];
+  public translatableFields: string[];
 
-	public databaseId: string;
+  public databaseId: string;
 
-	public taxonomyId: string;
+  public taxonomyId: string;
 
-	public constructor(init?: Partial<Taxonomy>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<Taxonomy>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class TermMultiParent {
-	public parentId: string;
+  public parentId: string;
 
-	public taxonomyId: string;
+  public taxonomyId: string;
 
-	public name: string;
+  public name: string;
 
-	public names: {[index: string]: string};
+  public names: { [index: string]: string };
 
-	public constructor(init?: Partial<TermMultiParent>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<TermMultiParent>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class Term {
-	public taxonomyId: string;
+  public taxonomyId: string;
 
-	public taxonomyName: string;
+  public taxonomyName: string;
 
-	public id: string;
+  public id: string;
 
-	public name: string;
+  public name: string;
 
-	public description: string;
+  public description: string;
 
-	public names: {[index: string]: string};
+  public names: { [index: string]: string };
 
-	public descriptions: {[index: string]: string};
+  public descriptions: { [index: string]: string };
 
-	public parentId: string;
+  public parentId: string;
 
-	public parentName: string;
+  public parentName: string;
 
-	public parentNames: {[index: string]: string};
+  public parentNames: { [index: string]: string };
 
-	public order?: number;
+  public order?: number;
 
-	public multiParents: TermMultiParent[];
+  public multiParents: TermMultiParent[];
 
-	public meta: string;
+  public meta: string;
 
-	public constructor(init?: Partial<Term>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<Term>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 // @Flags()
 export enum CacheControl {
-	None = 0,
-	Public = 1,
-	Private = 2,
-	MustRevalidate = 4,
-	NoCache = 8,
-	NoStore = 16,
-	NoTransform = 32,
-	ProxyRevalidate = 64,
+  None = 0,
+  Public = 1,
+  Private = 2,
+  MustRevalidate = 4,
+  NoCache = 8,
+  NoStore = 16,
+  NoTransform = 32,
+  ProxyRevalidate = 64,
 }
 
 export interface IContentTypeWriter {}
 
 // @Flags()
 export enum RequestAttributes {
-	None = 0,
-	Localhost = 1,
-	LocalSubnet = 2,
-	External = 4,
-	Secure = 8,
-	InSecure = 16,
-	AnySecurityMode = 24,
-	HttpHead = 32,
-	HttpGet = 64,
-	HttpPost = 128,
-	HttpPut = 256,
-	HttpDelete = 512,
-	HttpPatch = 1024,
-	HttpOptions = 2048,
-	HttpOther = 4096,
-	AnyHttpMethod = 8160,
-	OneWay = 8192,
-	Reply = 16384,
-	AnyCallStyle = 24576,
-	Soap11 = 32768,
-	Soap12 = 65536,
-	Xml = 131072,
-	Json = 262144,
-	Jsv = 524288,
-	ProtoBuf = 1048576,
-	Csv = 2097152,
-	Html = 4194304,
-	Wire = 8388608,
-	MsgPack = 16777216,
-	FormatOther = 33554432,
-	AnyFormat = 67076096,
-	Http = 67108864,
-	MessageQueue = 134217728,
-	Tcp = 268435456,
-	Grpc = 536870912,
-	EndpointOther = 1073741824,
-	AnyEndpoint = 2080374784,
-	InProcess = -2147483648,
-	InternalNetworkAccess = -2147483645,
-	AnyNetworkAccessType = -2147483641,
-	Any = -1,
+  None = 0,
+  Localhost = 1,
+  LocalSubnet = 2,
+  External = 4,
+  Secure = 8,
+  InSecure = 16,
+  AnySecurityMode = 24,
+  HttpHead = 32,
+  HttpGet = 64,
+  HttpPost = 128,
+  HttpPut = 256,
+  HttpDelete = 512,
+  HttpPatch = 1024,
+  HttpOptions = 2048,
+  HttpOther = 4096,
+  AnyHttpMethod = 8160,
+  OneWay = 8192,
+  Reply = 16384,
+  AnyCallStyle = 24576,
+  Soap11 = 32768,
+  Soap12 = 65536,
+  Xml = 131072,
+  Json = 262144,
+  Jsv = 524288,
+  ProtoBuf = 1048576,
+  Csv = 2097152,
+  Html = 4194304,
+  Wire = 8388608,
+  MsgPack = 16777216,
+  FormatOther = 33554432,
+  AnyFormat = 67076096,
+  Http = 67108864,
+  MessageQueue = 134217728,
+  Tcp = 268435456,
+  Grpc = 536870912,
+  EndpointOther = 1073741824,
+  AnyEndpoint = 2080374784,
+  InProcess = -2147483648,
+  InternalNetworkAccess = -2147483645,
+  AnyNetworkAccessType = -2147483641,
+  Any = -1,
 }
 
 export interface IRequestPreferences {
-	acceptsGzip: boolean;
-	acceptsDeflate: boolean;
+  acceptsGzip: boolean;
+  acceptsDeflate: boolean;
 }
 
 export interface IRequest {
-	originalRequest: Object;
-	response: IResponse;
-	operationName: string;
-	verb: string;
-	requestAttributes: RequestAttributes;
-	requestPreferences: IRequestPreferences;
-	dto: Object;
-	contentType: string;
-	isLocal: boolean;
-	userAgent: string;
-	cookies: {[index: string]: Cookie};
-	responseContentType: string;
-	hasExplicitResponseContentType: boolean;
-	items: {[index: string]: Object};
-	headers: any;
-	queryString: any;
-	formData: any;
-	useBufferedStream: boolean;
-	rawUrl: string;
-	absoluteUri: string;
-	userHostAddress: string;
-	remoteIp: string;
-	authorization: string;
-	isSecureConnection: boolean;
-	acceptTypes: string[];
-	pathInfo: string;
-	originalPathInfo: string;
-	contentLength: number;
-	files: IHttpFile[];
-	urlReferrer: string;
+  originalRequest: Object;
+  response: IResponse;
+  operationName: string;
+  verb: string;
+  requestAttributes: RequestAttributes;
+  requestPreferences: IRequestPreferences;
+  dto: Object;
+  contentType: string;
+  isLocal: boolean;
+  userAgent: string;
+  cookies: { [index: string]: Cookie };
+  responseContentType: string;
+  hasExplicitResponseContentType: boolean;
+  items: { [index: string]: Object };
+  headers: any;
+  queryString: any;
+  formData: any;
+  useBufferedStream: boolean;
+  rawUrl: string;
+  absoluteUri: string;
+  userHostAddress: string;
+  remoteIp: string;
+  authorization: string;
+  isSecureConnection: boolean;
+  acceptTypes: string[];
+  pathInfo: string;
+  originalPathInfo: string;
+  contentLength: number;
+  files: IHttpFile[];
+  urlReferrer: string;
 }
 
 export interface IResponse {
-	originalResponse: Object;
-	request: IRequest;
-	statusCode: number;
-	statusDescription: string;
-	contentType: string;
-	dto: Object;
-	useBufferedStream: boolean;
-	isClosed: boolean;
-	keepAlive: boolean;
-	hasStarted: boolean;
-	items: {[index: string]: Object};
+  originalResponse: Object;
+  request: IRequest;
+  statusCode: number;
+  statusDescription: string;
+  contentType: string;
+  dto: Object;
+  useBufferedStream: boolean;
+  isClosed: boolean;
+  keepAlive: boolean;
+  hasStarted: boolean;
+  items: { [index: string]: Object };
 }
 
 export class File {
-	public id: string;
+  public id: string;
 
-	public description: string;
+  public description: string;
 
-	public modifiedOn: string;
+  public modifiedOn: string;
 
-	public createdOn: string;
+  public createdOn: string;
 
-	public uniqueName: string;
+  public uniqueName: string;
 
-	public enumerator: number;
+  public enumerator: number;
 
-	public originalName: string;
+  public originalName: string;
 
-	public directory: string;
+  public directory: string;
 
-	public contentType: string;
+  public contentType: string;
 
-	public size: number;
+  public size: number;
 
-	public isPublic: boolean;
+  public isPublic: boolean;
 
-	public isParentPublic: boolean;
+  public isParentPublic: boolean;
 
-	public publicUrl: string;
+  public publicUrl: string;
 
-	public constructor(init?: Partial<File>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<File>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class Base64FileUpload {
-	public data: string;
+  public data: string;
 
-	public contentType: string;
+  public contentType: string;
 
-	public fileName: string;
+  public fileName: string;
 
-	public constructor(init?: Partial<Base64FileUpload>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<Base64FileUpload>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export interface IOAuthRequest {
-	mode: string;
-	code: string;
-	state: string;
-	accessToken: string;
+  mode: string;
+  code: string;
+  state: string;
+  accessToken: string;
 }
 
 export class Policy {
-	public name: string;
+  public name: string;
 
-	public displayName: string;
+  public displayName: string;
 
-	public disabled: boolean;
+  public disabled: boolean;
 
-	public permissions: string[];
+  public permissions: string[];
 
-	public constructor(init?: Partial<Policy>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<Policy>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class Role {
-	public name: string;
+  public name: string;
 
-	public displayName: string;
+  public displayName: string;
 
-	public policies: Policy[];
+  public policies: Policy[];
 
-	public constructor(init?: Partial<Role>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<Role>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export interface IAuthTokens {
-	provider: string;
-	userId: string;
-	accessToken: string;
-	accessTokenSecret: string;
-	refreshToken: string;
-	refreshTokenExpiry?: string;
-	requestToken: string;
-	requestTokenSecret: string;
-	items: {[index: string]: string};
+  provider: string;
+  userId: string;
+  accessToken: string;
+  accessTokenSecret: string;
+  refreshToken: string;
+  refreshTokenExpiry?: string;
+  requestToken: string;
+  requestTokenSecret: string;
+  items: { [index: string]: string };
 }
 
 export class AuthResponse {
-	public userId: string;
+  public userId: string;
 
-	public userAuthId: string;
+  public userAuthId: string;
 
-	public userName: string;
+  public userName: string;
 
-	public displayName: string;
+  public displayName: string;
 
-	public firstName: string;
+  public firstName: string;
 
-	public lastName: string;
+  public lastName: string;
 
-	public sessionId: string;
+  public sessionId: string;
 
-	public referrerUrl: string;
+  public referrerUrl: string;
 
-	public bearerToken: string;
+  public bearerToken: string;
 
-	public email: string;
+  public email: string;
 
-	public roles: Role[];
+  public roles: Role[];
 
-	public permissions: string[];
+  public permissions: string[];
 
-	public company: string;
+  public company: string;
 
-	public phoneNumber: string;
+  public phoneNumber: string;
 
-	public birthDate?: string;
+  public birthDate?: string;
 
-	public birthDateRaw: string;
+  public birthDateRaw: string;
 
-	public address: string;
+  public address: string;
 
-	public address2: string;
+  public address2: string;
 
-	public city: string;
+  public city: string;
 
-	public country: string;
+  public country: string;
 
-	public culture: string;
+  public culture: string;
 
-	public fullName: string;
+  public fullName: string;
 
-	public gender: string;
+  public gender: string;
 
-	public language: string;
+  public language: string;
 
-	public profileUrl: string;
+  public profileUrl: string;
 
-	public tag: number;
+  public tag: number;
 
-	public authProvider: string;
+  public authProvider: string;
 
-	public mailAddress: string;
+  public mailAddress: string;
 
-	public nickname: string;
+  public nickname: string;
 
-	public postalCode: string;
+  public postalCode: string;
 
-	public timeZone: string;
+  public timeZone: string;
 
-	public createdAt: string;
+  public createdAt: string;
 
-	public lastModified: string;
+  public lastModified: string;
 
-	public status: string;
+  public status: string;
 
-	public authTokens: IAuthTokens[];
+  public authTokens: IAuthTokens[];
 
-	public meta: {[index: string]: string};
+  public meta: { [index: string]: string };
 
-	public constructor(init?: Partial<AuthResponse>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<AuthResponse>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class Token {
-	public key: string;
+  public key: string;
 
-	public value: string;
+  public value: string;
 
-	public owner: string;
+  public owner: string;
 
-	public constructor(init?: Partial<Token>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<Token>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class Project {
-	public id: string;
+  public id: string;
 
-	public tokens: Token[];
+  public tokens: Token[];
 
-	public languages: string[];
+  public languages: string[];
 
-	public defaultLanguage: string;
+  public defaultLanguage: string;
 
-	public defaultTimeZone: string;
+  public defaultTimeZone: string;
 
-	public name: string;
+  public name: string;
 
-	public description: string;
+  public description: string;
 
-	public slugifiedName: string;
+  public slugifiedName: string;
 
-	public logoUrl: string;
+  public logoUrl: string;
 
-	public constructor(init?: Partial<Project>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<Project>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class PushNotificationToken {
-	public provider: string;
+  public provider: string;
 
-	public token: string;
+  public token: string;
 
-	public accountId: string;
+  public accountId: string;
 
-	public constructor(init?: Partial<PushNotificationToken>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<PushNotificationToken>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class Device {
-	public id: string;
+  public id: string;
 
-	public createdOn: string;
+  public createdOn: string;
 
-	public token: PushNotificationToken;
+  public token: PushNotificationToken;
 
-	public userName: string;
+  public userName: string;
 
-	public userId: string;
+  public userId: string;
 
-	public operatingSystem: string;
+  public operatingSystem: string;
 
-	public brand: string;
+  public brand: string;
 
-	public deviceName: string;
+  public deviceName: string;
 
-	public timeZone: string;
+  public timeZone: string;
 
-	public language: string;
+  public language: string;
 
-	public locale: string;
+  public locale: string;
 
-	public meta: {[index: string]: string};
+  public meta: { [index: string]: string };
 
-	public totalNotifications: number;
+  public totalNotifications: number;
 
-	public deviceKey: string;
+  public deviceKey: string;
 
-	public accountId: string;
+  public accountId: string;
 
-	public constructor(init?: Partial<Device>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<Device>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class UserAuthProvider {
-	public provider: string;
+  public provider: string;
 
-	public userId: string;
+  public userId: string;
 
-	public constructor(init?: Partial<UserAuthProvider>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UserAuthProvider>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class User {
-	public id: string;
+  public id: string;
 
-	public createdOn: string;
+  public createdOn: string;
 
-	public modifiedOn: string;
+  public modifiedOn: string;
 
-	public displayName: string;
+  public displayName: string;
 
-	public firstName: string;
+  public firstName: string;
 
-	public lastName: string;
+  public lastName: string;
 
-	public email: string;
+  public email: string;
 
-	public userName: string;
+  public userName: string;
 
-	public roles: Role[];
+  public roles: Role[];
 
-	public devices: Device[];
+  public devices: Device[];
 
-	public rolesEditable: boolean;
+  public rolesEditable: boolean;
 
-	public status: string;
+  public status: string;
 
-	public type: string;
+  public type: string;
 
-	public meta: string;
+  public meta: string;
 
-	public language: string;
+  public language: string;
 
-	public timeZone: string;
+  public timeZone: string;
 
-	public country: string;
+  public country: string;
 
-	public countryCode: string;
+  public countryCode: string;
 
-	public area: string;
+  public area: string;
 
-	public city: string;
+  public city: string;
 
-	public address: string;
+  public address: string;
 
-	public address2: string;
+  public address2: string;
 
-	public phone: string;
+  public phone: string;
 
-	public company: string;
+  public company: string;
 
-	public companyCode: string;
+  public companyCode: string;
 
-	public postalCode: string;
+  public postalCode: string;
 
-	public gender: string;
+  public gender: string;
 
-	public birthDate: string;
+  public birthDate: string;
 
-	public zone: string;
+  public zone: string;
 
-	public authProviders: UserAuthProvider[];
+  public authProviders: UserAuthProvider[];
 
-	public hasCredentials: boolean;
+  public hasCredentials: boolean;
 
-	public subscribedToNews: boolean;
+  public subscribedToNews: boolean;
 
-	public unsubscribedNewsTags: string[];
+  public unsubscribedNewsTags: string[];
 
-	public unreadNotifications?: number;
+  public unreadNotifications?: number;
 
-	public constructor(init?: Partial<User>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<User>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class CodeMashListRequestBase
-	extends CodeMashRequestBase
-	implements IRequestWithPaging, IRequestWithFilter, IRequestWithSorting {
-	/**
-	 * Amount of records to return
-	 */
-	// @DataMember
-	// @ApiMember(DataType="int", Description="Amount of records to return", Name="PageSize", ParameterType="form")
-	public pageSize: number;
+  extends CodeMashRequestBase
+  implements IRequestWithPaging, IRequestWithFilter, IRequestWithSorting {
+  /**
+   * Amount of records to return
+   */
+  // @DataMember
+  // @ApiMember(DataType="int", Description="Amount of records to return", Name="PageSize", ParameterType="form")
+  public pageSize: number;
 
-	/**
-	 * Page of records to return
-	 */
-	// @DataMember
-	// @ApiMember(DataType="int", Description="Page of records to return", Name="PageNumber", ParameterType="form")
-	public pageNumber: number;
+  /**
+   * Page of records to return
+   */
+  // @DataMember
+  // @ApiMember(DataType="int", Description="Page of records to return", Name="PageNumber", ParameterType="form")
+  public pageNumber: number;
 
-	/**
-	 * A query that specifies which records to return
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="A query that specifies which records to return", Name="Filter", ParameterType="body")
-	public filter: string;
+  /**
+   * A query that specifies which records to return
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="A query that specifies which records to return", Name="Filter", ParameterType="body")
+  public filter: object | string;
 
-	/**
-	 * A query that specifies how to sort filtered records
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="A query that specifies how to sort filtered records", Name="Sort", ParameterType="body")
-	public sort: string;
+  /**
+   * A query that specifies how to sort filtered records
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="A query that specifies how to sort filtered records", Name="Sort", ParameterType="body")
+  public sort: string;
 
-	/**
-	 * A query that specifies what fields in records to return
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="A query that specifies what fields in records to return", Name="Projection", ParameterType="body")
-	public projection: string;
+  /**
+   * A query that specifies what fields in records to return
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="A query that specifies what fields in records to return", Name="Projection", ParameterType="body")
+  public projection: string;
 
-	public constructor(init?: Partial<CodeMashListRequestBase>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CodeMashListRequestBase>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class UserPolicyUpdateInput {
-	public policy: string;
+  public policy: string;
 
-	public permissions: string[];
+  public permissions: string[];
 
-	public constructor(init?: Partial<UserPolicyUpdateInput>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UserPolicyUpdateInput>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class UserRoleUpdateInput {
-	public role: string;
+  public role: string;
 
-	public policies: UserPolicyUpdateInput[];
+  public policies: UserPolicyUpdateInput[];
 
-	public constructor(init?: Partial<UserRoleUpdateInput>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UserRoleUpdateInput>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class PushNotification {
-	public id: string;
+  public id: string;
 
-	public receivedOn: string;
+  public receivedOn: string;
 
-	public status: string;
+  public status: string;
 
-	public title: string;
+  public title: string;
 
-	public body: string;
+  public body: string;
 
-	public data: string;
+  public data: string;
 
-	public subtitle: string;
+  public subtitle: string;
 
-	public meta: {[index: string]: string};
+  public meta: { [index: string]: string };
 
-	public isRead: boolean;
+  public isRead: boolean;
 
-	public userId: string;
+  public userId: string;
 
-	public deviceId: string;
+  public deviceId: string;
 
-	public senderId: string;
+  public senderId: string;
 
-	public constructor(init?: Partial<PushNotification>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<PushNotification>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class FileDetails {
-	public id: string;
+  public id: string;
 
-	public directory: string;
+  public directory: string;
 
-	public originalFileName: string;
+  public originalFileName: string;
 
-	public fileName: string;
+  public fileName: string;
 
-	public filePath: string;
+  public filePath: string;
 
-	public contentType: string;
+  public contentType: string;
 
-	public contentLength: number;
+  public contentLength: number;
 
-	public constructor(init?: Partial<FileDetails>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<FileDetails>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class PushNotificationTemplateButtons {
-	public id: string;
+  public id: string;
 
-	public text: string;
+  public text: string;
 
-	public icon: string;
+  public icon: string;
 
-	public constructor(init?: Partial<PushNotificationTemplateButtons>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<PushNotificationTemplateButtons>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class AndroidBackgroundLayout {
-	public image: string;
+  public image: string;
 
-	public headingColor: string;
+  public headingColor: string;
 
-	public contentColor: string;
+  public contentColor: string;
 
-	public constructor(init?: Partial<AndroidBackgroundLayout>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<AndroidBackgroundLayout>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class PushNotificationTemplate {
-	public id: string;
+  public id: string;
 
-	public templateName: string;
+  public templateName: string;
 
-	public accountId: string;
+  public accountId: string;
 
-	public accountName: string;
+  public accountName: string;
 
-	public title: string;
+  public title: string;
 
-	public body: string;
+  public body: string;
 
-	public code: string;
+  public code: string;
 
-	public priority: string;
+  public priority: string;
 
-	public data: string;
+  public data: string;
 
-	public ttl?: number;
+  public ttl?: number;
 
-	public url: string;
+  public url: string;
 
-	public collapseId: string;
+  public collapseId: string;
 
-	public image: FileDetails;
+  public image: FileDetails;
 
-	public fileAccountId?: string;
+  public fileAccountId?: string;
 
-	public meta: {[index: string]: string};
+  public meta: { [index: string]: string };
 
-	public buttons: PushNotificationTemplateButtons[];
+  public buttons: PushNotificationTemplateButtons[];
 
-	public subtitle: string;
+  public subtitle: string;
 
-	public iosBadge?: number;
+  public iosBadge?: number;
 
-	public iosCategory: string;
+  public iosCategory: string;
 
-	public iosContentAvailable: boolean;
+  public iosContentAvailable: boolean;
 
-	public iosSound: string;
+  public iosSound: string;
 
-	public iosAppBundleId: string;
+  public iosAppBundleId: string;
 
-	public iosGroupId: string;
+  public iosGroupId: string;
 
-	public iosPushType: string;
+  public iosPushType: string;
 
-	public iosLaunchImage: string;
+  public iosLaunchImage: string;
 
-	public iosAnalyticsLabel: string;
+  public iosAnalyticsLabel: string;
 
-	public androidGroup: string;
+  public androidGroup: string;
 
-	public androidGroupMessage: string;
+  public androidGroupMessage: string;
 
-	public restrictedPackageName: string;
+  public restrictedPackageName: string;
 
-	public androidChannelId: string;
+  public androidChannelId: string;
 
-	public androidSound: string;
+  public androidSound: string;
 
-	public androidVisibility: string;
+  public androidVisibility: string;
 
-	public androidDefaultVibration: boolean;
+  public androidDefaultVibration: boolean;
 
-	public androidVibrateTimings: string;
+  public androidVibrateTimings: string;
 
-	public androidDefaultLight: boolean;
+  public androidDefaultLight: boolean;
 
-	public androidAccentColor: string;
+  public androidAccentColor: string;
 
-	public androidLedColor: string;
+  public androidLedColor: string;
 
-	public androidLightOnDuration: string;
+  public androidLightOnDuration: string;
 
-	public androidLightOffDuration: string;
+  public androidLightOffDuration: string;
 
-	public androidSticky: boolean;
+  public androidSticky: boolean;
 
-	public androidSmallIcon: string;
+  public androidSmallIcon: string;
 
-	public androidLargeIcon: string;
+  public androidLargeIcon: string;
 
-	public androidBackground: AndroidBackgroundLayout;
+  public androidBackground: AndroidBackgroundLayout;
 
-	public androidAnalyticsLabel: string;
+  public androidAnalyticsLabel: string;
 
-	public constructor(init?: Partial<PushNotificationTemplate>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<PushNotificationTemplate>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class Subscription {
-	public id: string;
+  public id: string;
 
-	public createdOn: string;
+  public createdOn: string;
 
-	public currentPeriodStart: string;
+  public currentPeriodStart: string;
 
-	public currentPeriodEnd: string;
+  public currentPeriodEnd: string;
 
-	public canceledAt: string;
+  public canceledAt: string;
 
-	public cancelAtPeriodEnd: boolean;
+  public cancelAtPeriodEnd: boolean;
 
-	public trialStart: string;
+  public trialStart: string;
 
-	public trialEnd: string;
+  public trialEnd: string;
 
-	public status: string;
+  public status: string;
 
-	public planId: string;
+  public planId: string;
 
-	public appliedCoupon: string;
+  public appliedCoupon: string;
 
-	public paymentMethodId: string;
+  public paymentMethodId: string;
 
-	public customerId: string;
+  public customerId: string;
 
-	public constructor(init?: Partial<Subscription>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<Subscription>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class PaymentMethod {
-	public id: string;
+  public id: string;
 
-	public createdOn: string;
+  public createdOn: string;
 
-	public type: string;
+  public type: string;
 
-	public data: string;
+  public data: string;
 
-	public email: string;
+  public email: string;
 
-	public name: string;
+  public name: string;
 
-	public phone: string;
+  public phone: string;
 
-	public countryCode: string;
+  public countryCode: string;
 
-	public area: string;
+  public area: string;
 
-	public city: string;
+  public city: string;
 
-	public address: string;
+  public address: string;
 
-	public address2: string;
+  public address2: string;
 
-	public postalCode: string;
+  public postalCode: string;
 
-	public meta: {[index: string]: string};
+  public meta: { [index: string]: string };
 
-	public constructor(init?: Partial<PaymentMethod>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<PaymentMethod>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class Customer {
-	public id: string;
+  public id: string;
 
-	public createdOn: string;
+  public createdOn: string;
 
-	public provider: string;
+  public provider: string;
 
-	public providerId: string;
+  public providerId: string;
 
-	public phone: string;
+  public phone: string;
 
-	public name: string;
+  public name: string;
 
-	public description: string;
+  public description: string;
 
-	public email: string;
+  public email: string;
 
-	public city: string;
+  public city: string;
 
-	public countryCode: string;
+  public countryCode: string;
 
-	public address: string;
+  public address: string;
 
-	public address2: string;
+  public address2: string;
 
-	public postalCode: string;
+  public postalCode: string;
 
-	public area: string;
+  public area: string;
 
-	public userId: string;
+  public userId: string;
 
-	public userName: string;
+  public userName: string;
 
-	public projectId: string;
+  public projectId: string;
 
-	public paymentAccountId: string;
+  public paymentAccountId: string;
 
-	public paymentMethods: PaymentMethod[];
+  public paymentMethods: PaymentMethod[];
 
-	public subscriptions: Subscription[];
+  public subscriptions: Subscription[];
 
-	public meta: {[index: string]: string};
+  public meta: { [index: string]: string };
 
-	public constructor(init?: Partial<Customer>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<Customer>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class PaymentDiscountBoundary {
-	public boundary: number;
+  public boundary: number;
 
-	public amount: number;
+  public amount: number;
 
-	public type: string;
+  public type: string;
 
-	public constructor(init?: Partial<PaymentDiscountBoundary>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<PaymentDiscountBoundary>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class Discount {
-	public id: string;
+  public id: string;
 
-	public createdOn: string;
+  public createdOn: string;
 
-	public modifiedOn: string;
+  public modifiedOn: string;
 
-	public type: string;
+  public type: string;
 
-	public code: string;
+  public code: string;
 
-	public displayName: string;
+  public displayName: string;
 
-	public validFrom: string;
+  public validFrom: string;
 
-	public validUntil: string;
+  public validUntil: string;
 
-	public schemaId: string;
+  public schemaId: string;
 
-	public cluster: string;
+  public cluster: string;
 
-	public restrictionType: string;
+  public restrictionType: string;
 
-	public amount?: number;
+  public amount?: number;
 
-	public boundaries: PaymentDiscountBoundary[];
+  public boundaries: PaymentDiscountBoundary[];
 
-	public targetType: string;
+  public targetType: string;
 
-	public records: string[];
+  public records: string[];
 
-	public categoryField: string;
+  public categoryField: string;
 
-	public categoryValues: string[];
+  public categoryValues: string[];
 
-	public paymentAccounts: string[];
+  public paymentAccounts: string[];
 
-	public users: string[];
+  public users: string[];
 
-	public emails: string[];
+  public emails: string[];
 
-	public userCanRedeem?: number;
+  public userCanRedeem?: number;
 
-	public totalCanRedeem?: number;
+  public totalCanRedeem?: number;
 
-	public enabled: boolean;
+  public enabled: boolean;
 
-	public combineDiscounts: boolean;
+  public combineDiscounts: boolean;
 
-	public constructor(init?: Partial<Discount>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<Discount>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class OrderLineInput {
-	public collectionName: string;
+  public collectionName: string;
 
-	public recordId: string;
+  public recordId: string;
 
-	public quantity: number;
+  public quantity: number;
 
-	public variation: string;
+  public variation: string;
 
-	public constructor(init?: Partial<OrderLineInput>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<OrderLineInput>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class DiscountIndividualLine {
-	public recordId: string;
+  public recordId: string;
 
-	public variation: string;
+  public variation: string;
 
-	public discount: number;
+  public discount: number;
 
-	public constructor(init?: Partial<DiscountIndividualLine>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<DiscountIndividualLine>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class DiscountLine {
-	public recordId: string;
+  public recordId: string;
 
-	public variation: string;
+  public variation: string;
 
-	public constructor(init?: Partial<DiscountLine>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<DiscountLine>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class DiscountCategory {
-	public category: string;
+  public category: string;
 
-	public lines: DiscountLine[];
+  public lines: DiscountLine[];
 
-	public discount: number;
+  public discount: number;
 
-	public constructor(init?: Partial<DiscountCategory>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<DiscountCategory>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class DiscountAll {
-	public lines: DiscountLine[];
+  public lines: DiscountLine[];
 
-	public discount: number;
+  public discount: number;
 
-	public constructor(init?: Partial<DiscountAll>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<DiscountAll>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class ApplicableDiscount {
-	public id: string;
+  public id: string;
 
-	public code: string;
+  public code: string;
 
-	public createdOn: string;
+  public createdOn: string;
 
-	public validFrom: string;
+  public validFrom: string;
 
-	public validUntil: string;
+  public validUntil: string;
 
-	public type: string;
+  public type: string;
 
-	public targetType: string;
+  public targetType: string;
 
-	public displayName: string;
+  public displayName: string;
 
-	public description: string;
+  public description: string;
 
-	public collectionName: string;
+  public collectionName: string;
 
-	public cluster: string;
+  public cluster: string;
 
-	public individualDiscounts: DiscountIndividualLine[];
+  public individualDiscounts: DiscountIndividualLine[];
 
-	public categoryDiscounts: DiscountCategory[];
+  public categoryDiscounts: DiscountCategory[];
 
-	public allDiscount: DiscountAll;
+  public allDiscount: DiscountAll;
 
-	public constructor(init?: Partial<ApplicableDiscount>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<ApplicableDiscount>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class PaymentMethodSetup {
-	public setupId: string;
+  public setupId: string;
 
-	public setupClientSecret: string;
+  public setupClientSecret: string;
 
-	public status: string;
+  public status: string;
 
-	public constructor(init?: Partial<PaymentMethodSetup>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<PaymentMethodSetup>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class OrderCustomerInput {
-	public email: string;
+  public email: string;
 
-	public firstName: string;
+  public firstName: string;
 
-	public lastName: string;
+  public lastName: string;
 
-	public phone: string;
+  public phone: string;
 
-	public company: string;
+  public company: string;
 
-	public address: string;
+  public address: string;
 
-	public address2: string;
+  public address2: string;
 
-	public country: string;
+  public country: string;
 
-	public countryCode: string;
+  public countryCode: string;
 
-	public area: string;
+  public area: string;
 
-	public city: string;
+  public city: string;
 
-	public postalCode: string;
+  public postalCode: string;
 
-	public language: string;
+  public language: string;
 
-	public constructor(init?: Partial<OrderCustomerInput>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<OrderCustomerInput>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class OrderCustomer {
-	public email: string;
+  public email: string;
 
-	public firstName: string;
+  public firstName: string;
 
-	public lastName: string;
+  public lastName: string;
 
-	public phone: string;
+  public phone: string;
 
-	public company: string;
+  public company: string;
 
-	public address: string;
+  public address: string;
 
-	public address2: string;
+  public address2: string;
 
-	public country: string;
+  public country: string;
 
-	public countryCode: string;
+  public countryCode: string;
 
-	public area: string;
+  public area: string;
 
-	public city: string;
+  public city: string;
 
-	public postalCode: string;
+  public postalCode: string;
 
-	public constructor(init?: Partial<OrderCustomer>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<OrderCustomer>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class OrderLine {
-	public schemaId: string;
+  public schemaId: string;
 
-	public collectionName: string;
+  public collectionName: string;
 
-	public recordId: string;
+  public recordId: string;
 
-	public priceFields: string[];
+  public priceFields: string[];
 
-	public variation: string;
+  public variation: string;
 
-	public recordData: string;
+  public recordData: string;
 
-	public price: number;
+  public price: number;
 
-	public quantity: number;
+  public quantity: number;
 
-	public constructor(init?: Partial<OrderLine>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<OrderLine>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class OrderFile {
-	public category: string;
+  public category: string;
 
-	public id: string;
+  public id: string;
 
-	public directory: string;
+  public directory: string;
 
-	public originalFileName: string;
+  public originalFileName: string;
 
-	public fileName: string;
+  public fileName: string;
 
-	public contentType: string;
+  public contentType: string;
 
-	public contentLength: number;
+  public contentLength: number;
 
-	public constructor(init?: Partial<OrderFile>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<OrderFile>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class OrderTransaction {
-	public id: string;
+  public id: string;
 
-	public createdOn: string;
+  public createdOn: string;
 
-	public payUntil: string;
+  public payUntil: string;
 
-	public paidOn: string;
+  public paidOn: string;
 
-	public callbackOn: string;
+  public callbackOn: string;
 
-	public provider: string;
+  public provider: string;
 
-	public eventStatus: string;
+  public eventStatus: string;
 
-	public eventUniqueId: string;
+  public eventUniqueId: string;
 
-	public type: string;
+  public type: string;
 
-	public data: string;
+  public data: string;
 
-	public payerIpCountry: string;
+  public payerIpCountry: string;
 
-	public payerCountry: string;
+  public payerCountry: string;
 
-	public payerEmail: string;
+  public payerEmail: string;
 
-	public paymentType: string;
+  public paymentType: string;
 
-	public eventAccount: string;
+  public eventAccount: string;
 
-	public payText: string;
+  public payText: string;
 
-	public eventCurrency: string;
+  public eventCurrency: string;
 
-	public eventAmount: number;
+  public eventAmount: number;
 
-	public constructor(init?: Partial<OrderTransaction>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<OrderTransaction>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class OrderDiscount {
-	public id: string;
+  public id: string;
 
-	public code: string;
+  public code: string;
 
-	public type: string;
+  public type: string;
 
-	public targetType: string;
+  public targetType: string;
 
-	public displayName: string;
+  public displayName: string;
 
-	public description: string;
+  public description: string;
 
-	public individualDiscounts: DiscountIndividualLine[];
+  public individualDiscounts: DiscountIndividualLine[];
 
-	public categoryDiscounts: DiscountCategory[];
+  public categoryDiscounts: DiscountCategory[];
 
-	public allDiscount: DiscountAll;
+  public allDiscount: DiscountAll;
 
-	public constructor(init?: Partial<OrderDiscount>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<OrderDiscount>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class Order {
-	public id: string;
+  public id: string;
 
-	public createdOn: string;
+  public createdOn: string;
 
-	public modifiedOn: string;
+  public modifiedOn: string;
 
-	public paidOn: string;
+  public paidOn: string;
 
-	public number: number;
+  public number: number;
 
-	public numberPrefix: string;
+  public numberPrefix: string;
 
-	public paymentStatus: string;
+  public paymentStatus: string;
 
-	public paymentProvider: string;
+  public paymentProvider: string;
 
-	public currency: string;
+  public currency: string;
 
-	public asGuest: boolean;
+  public asGuest: boolean;
 
-	public isTest: boolean;
+  public isTest: boolean;
 
-	public customer: OrderCustomer;
+  public customer: OrderCustomer;
 
-	public cluster: string;
+  public cluster: string;
 
-	public lines: OrderLine[];
+  public lines: OrderLine[];
 
-	public files: OrderFile[];
+  public files: OrderFile[];
 
-	public transactions: OrderTransaction[];
+  public transactions: OrderTransaction[];
 
-	public discounts: OrderDiscount[];
+  public discounts: OrderDiscount[];
 
-	public userId: string;
+  public userId: string;
 
-	public paymentAccountId: string;
+  public paymentAccountId: string;
 
-	public total: number;
+  public total: number;
 
-	public meta: {[index: string]: string};
+  public meta: { [index: string]: string };
 
-	public constructor(init?: Partial<Order>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<Order>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class StripePaymentIntent {
-	public paymentId: string;
+  public paymentId: string;
 
-	public paymentClientSecret: string;
+  public paymentClientSecret: string;
 
-	public status: string;
+  public status: string;
 
-	public amount: number;
+  public amount: number;
 
-	public transactionId: string;
+  public transactionId: string;
 
-	public constructor(init?: Partial<StripePaymentIntent>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<StripePaymentIntent>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 // @DataContract
 export class UserApiKey {
-	// @DataMember(Order=1)
-	public key: string;
+  // @DataMember(Order=1)
+  public key: string;
 
-	// @DataMember(Order=2)
-	public keyType: string;
+  // @DataMember(Order=2)
+  public keyType: string;
 
-	// @DataMember(Order=3)
-	public expiryDate?: string;
+  // @DataMember(Order=3)
+  public expiryDate?: string;
 
-	// @DataMember(Order=4)
-	public meta: {[index: string]: string};
+  // @DataMember(Order=4)
+  public meta: { [index: string]: string };
 
-	public constructor(init?: Partial<UserApiKey>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UserApiKey>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export interface IHttpFile {
-	name: string;
-	fileName: string;
-	contentLength: number;
-	contentType: string;
+  name: string;
+  fileName: string;
+  contentLength: number;
+  contentType: string;
 }
 
 export class AggregateResponse extends ResponseBase<string> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<AggregateResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<AggregateResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class CountResponse extends ResponseBase<number> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<CountResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CountResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class DeleteManyResponse extends ResponseBase<DeleteResult> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<DeleteManyResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<DeleteManyResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class DeleteOneResponse extends ResponseBase<DeleteResult> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<DeleteOneResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<DeleteOneResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class DistinctResponse extends Array<ResponseBase<Object>> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<DistinctResponse>) {
-		super();
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<DistinctResponse>) {
+    super();
+    (Object as any).assign(this, init);
+  }
 }
 
 export class FindResponse extends ResponseBase<string> {
-	public totalCount: number;
+  public totalCount: number;
 
-	public schema: Schema;
+  public schema: Schema;
 
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<FindResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<FindResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class FindOneResponse extends ResponseBase<string> {
-	public schema: Schema;
+  public schema: Schema;
 
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<FindOneResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<FindOneResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class InsertManyResponse extends Array<ResponseBase<string>> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<InsertManyResponse>) {
-		super();
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<InsertManyResponse>) {
+    super();
+    (Object as any).assign(this, init);
+  }
 }
 
 // @DataContract
 export class InsertOneResponse extends ResponseBase<string> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<InsertOneResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<InsertOneResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class ReplaceOneResponse extends ResponseBase<ReplaceOneResult> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<ReplaceOneResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<ReplaceOneResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class UpdateManyResponse extends ResponseBase<UpdateResult> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<UpdateManyResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UpdateManyResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class UpdateOneResponse extends ResponseBase<UpdateResult> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<UpdateOneResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UpdateOneResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class FindTermsResponse extends Array<ResponseBase<Term>> {
-	public totalCount: number;
+  public totalCount: number;
 
-	public taxonomy: Taxonomy;
+  public taxonomy: Taxonomy;
 
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<FindTermsResponse>) {
-		super();
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<FindTermsResponse>) {
+    super();
+    (Object as any).assign(this, init);
+  }
 }
 
 export class FindTermsChildrenResponse extends Array<ResponseBase<Term>> {
-	public totalCount: number;
+  public totalCount: number;
 
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<FindTermsChildrenResponse>) {
-		super();
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<FindTermsChildrenResponse>) {
+    super();
+    (Object as any).assign(this, init);
+  }
 }
 
 export class HttpResult {
-	public responseText: string;
+  public responseText: string;
 
-	public fileInfo: any;
+  public fileInfo: any;
 
-	public contentType: string;
+  public contentType: string;
 
-	public headers: {[index: string]: string};
+  public headers: { [index: string]: string };
 
-	public cookies: Cookie[];
+  public cookies: Cookie[];
 
-	public eTag: string;
+  public eTag: string;
 
-	public age?: string;
+  public age?: string;
 
-	public maxAge?: string;
+  public maxAge?: string;
 
-	public expires?: string;
+  public expires?: string;
 
-	public lastModified?: string;
+  public lastModified?: string;
 
-	public cacheControl: CacheControl;
+  public cacheControl: CacheControl;
 
-	public resultScope: any;
+  public resultScope: any;
 
-	public allowsPartialResponse: boolean;
+  public allowsPartialResponse: boolean;
 
-	public options: {[index: string]: string};
+  public options: { [index: string]: string };
 
-	public status: number;
+  public status: number;
 
-	public statusCode: any;
+  public statusCode: any;
 
-	public statusDescription: string;
+  public statusDescription: string;
 
-	public response: Object;
+  public response: Object;
 
-	public responseFilter: IContentTypeWriter;
+  public responseFilter: IContentTypeWriter;
 
-	public requestContext: IRequest;
+  public requestContext: IRequest;
 
-	public view: string;
+  public view: string;
 
-	public template: string;
+  public template: string;
 
-	public paddingLength: number;
+  public paddingLength: number;
 
-	public isPartialRequest: boolean;
+  public isPartialRequest: boolean;
 
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<HttpResult>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<HttpResult>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 export class GetFileResponse extends ResponseBase<string> {
-	public fileName: string;
+  public fileName: string;
 
-	public isImage: boolean;
+  public isImage: boolean;
 
-	public file: File;
+  public file: File;
 
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<GetFileResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetFileResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class UploadFileResponse extends ResponseBase<File> {
-	public key: string;
+  public key: string;
 
-	public name: string;
+  public name: string;
 
-	public uploadDate: number;
+  public uploadDate: number;
 
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<UploadFileResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UploadFileResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class UploadOrderFileResponse extends ResponseBase<File> {
-	public key: string;
+  public key: string;
 
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<UploadOrderFileResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UploadOrderFileResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class UploadRecordFileResponse extends ResponseBase<File> {
-	public key: string;
+  public key: string;
 
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<UploadRecordFileResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UploadRecordFileResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class UploadUserFileResponse extends ResponseBase<File> {
-	public key: string;
+  public key: string;
 
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<UploadUserFileResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UploadUserFileResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class CreateLogResponse extends ResponseBase<string> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<CreateLogResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CreateLogResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class AuthCheckResponse extends ResponseBase<AuthResponse> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<AuthCheckResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<AuthCheckResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class ValidateUserDeactivationTokenResponse extends ResponseBase<boolean> {
-	public project: Project;
+  public project: Project;
 
-	public hasCredentials: boolean;
+  public hasCredentials: boolean;
 
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<ValidateUserDeactivationTokenResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<ValidateUserDeactivationTokenResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class GetProfileResponse extends ResponseBase<User> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<GetProfileResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetProfileResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class GetUserResponse extends ResponseBase<User> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<GetUserResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetUserResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class GetUsersResponse extends Array<ResponseBase<User>> {
-	public totalCount: number;
+  public totalCount: number;
 
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<GetUsersResponse>) {
-		super();
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetUsersResponse>) {
+    super();
+    (Object as any).assign(this, init);
+  }
 }
 
 export class RegisterGuestUserResponse extends ResponseBase<User> {
-	public bearerToken: string;
+  public bearerToken: string;
 
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<RegisterGuestUserResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<RegisterGuestUserResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class ValidatePasswordTokenResponse extends ResponseBase<boolean> {
-	public project: Project;
+  public project: Project;
 
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<ValidatePasswordTokenResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<ValidatePasswordTokenResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class CreatePasswordResetResponse extends ResponseBase<boolean> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<CreatePasswordResetResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CreatePasswordResetResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class ValidateInvitationTokenResponse extends ResponseBase<boolean> {
-	public project: Project;
+  public project: Project;
 
-	public userId: string;
+  public userId: string;
 
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<ValidateInvitationTokenResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<ValidateInvitationTokenResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class DeleteEmailResponse extends ResponseBase<boolean> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<DeleteEmailResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<DeleteEmailResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class CreateDeviceResponse extends ResponseBase<Device> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<CreateDeviceResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CreateDeviceResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class GetDeviceResponse extends ResponseBase<Device> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<GetDeviceResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetDeviceResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class GetDevicesResponse extends Array<ResponseBase<Device>> {
-	public totalCount: number;
+  public totalCount: number;
 
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<GetDevicesResponse>) {
-		super();
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetDevicesResponse>) {
+    super();
+    (Object as any).assign(this, init);
+  }
 }
 
 export class DeleteDeviceTokenResponse extends ResponseBase<boolean> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<DeleteDeviceTokenResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<DeleteDeviceTokenResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class RegisterDeviceTokenResponse extends ResponseBase<Device> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<RegisterDeviceTokenResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<RegisterDeviceTokenResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class RegisterDeviceExpoTokenResponse extends ResponseBase<string> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<RegisterDeviceExpoTokenResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<RegisterDeviceExpoTokenResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class UpdateDeviceUserResponse extends ResponseBase<boolean> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<UpdateDeviceUserResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UpdateDeviceUserResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class UpdateDeviceMetaResponse extends ResponseBase<boolean> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<UpdateDeviceMetaResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UpdateDeviceMetaResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class DeleteDeviceMetaResponse extends ResponseBase<boolean> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<DeleteDeviceMetaResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<DeleteDeviceMetaResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class UpdateDeviceTimeZoneResponse extends ResponseBase<boolean> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<UpdateDeviceTimeZoneResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UpdateDeviceTimeZoneResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class DeleteNotificationResponse extends ResponseBase<boolean> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<DeleteNotificationResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<DeleteNotificationResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class GetNotificationResponse extends ResponseBase<PushNotification> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<GetNotificationResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetNotificationResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class GetNotificationsResponse extends Array<
-	ResponseBase<PushNotification>
+  ResponseBase<PushNotification>
 > {
-	public totalCount: number;
+  public totalCount: number;
 
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<GetNotificationsResponse>) {
-		super();
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetNotificationsResponse>) {
+    super();
+    (Object as any).assign(this, init);
+  }
 }
 
 export class MarkNotificationAsReadResponse extends ResponseBase<boolean> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<MarkNotificationAsReadResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<MarkNotificationAsReadResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class SendPushNotificationResponse extends ResponseBase<boolean> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<SendPushNotificationResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<SendPushNotificationResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class GetNotificationTemplateResponse extends ResponseBase<PushNotificationTemplate> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<GetNotificationTemplateResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetNotificationTemplateResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class GetNotificationTemplatesResponse extends Array<
-	ResponseBase<PushNotificationTemplate>
+  ResponseBase<PushNotificationTemplate>
 > {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<GetNotificationTemplatesResponse>) {
-		super();
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetNotificationTemplatesResponse>) {
+    super();
+    (Object as any).assign(this, init);
+  }
 }
 
 export class VerifyAppleAppStoreSubscriptionResponse extends Array<
-	ResponseBase<Subscription>
+  ResponseBase<Subscription>
 > {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<VerifyAppleAppStoreSubscriptionResponse>) {
-		super();
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<VerifyAppleAppStoreSubscriptionResponse>) {
+    super();
+    (Object as any).assign(this, init);
+  }
 }
 
 export class CreateCustomerResponse extends ResponseBase<Customer> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<CreateCustomerResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CreateCustomerResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class GetCustomerResponse extends ResponseBase<Customer> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<GetCustomerResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetCustomerResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class GetCustomersResponse extends Array<ResponseBase<Customer>> {
-	public totalCount: number;
+  public totalCount: number;
 
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<GetCustomersResponse>) {
-		super();
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetCustomersResponse>) {
+    super();
+    (Object as any).assign(this, init);
+  }
 }
 
 export class CreateDiscountResponse extends ResponseBase<Discount> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<CreateDiscountResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CreateDiscountResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class GetApplicableCouponsResponse extends Array<
-	ResponseBase<ApplicableDiscount>
+  ResponseBase<ApplicableDiscount>
 > {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<GetApplicableCouponsResponse>) {
-		super();
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetApplicableCouponsResponse>) {
+    super();
+    (Object as any).assign(this, init);
+  }
 }
 
 export class GetApplicableDiscountsResponse extends Array<
-	ResponseBase<ApplicableDiscount>
+  ResponseBase<ApplicableDiscount>
 > {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<GetApplicableDiscountsResponse>) {
-		super();
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetApplicableDiscountsResponse>) {
+    super();
+    (Object as any).assign(this, init);
+  }
 }
 
 export class VerifyGooglePlayStoreSubscriptionResponse extends Array<
-	ResponseBase<Subscription>
+  ResponseBase<Subscription>
 > {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(
-		init?: Partial<VerifyGooglePlayStoreSubscriptionResponse>
-	) {
-		super();
-		(Object as any).assign(this, init);
-	}
+  public constructor(
+    init?: Partial<VerifyGooglePlayStoreSubscriptionResponse>,
+  ) {
+    super();
+    (Object as any).assign(this, init);
+  }
 }
 
 export class AttachPaymentMethodResponse extends ResponseBase<PaymentMethod> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<AttachPaymentMethodResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<AttachPaymentMethodResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class GetPaymentMethodSetupResponse extends ResponseBase<PaymentMethodSetup> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<GetPaymentMethodSetupResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetPaymentMethodSetupResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class CreateOrderResponse extends ResponseBase<Order> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<CreateOrderResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CreateOrderResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class GetOrderResponse extends ResponseBase<Order> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<GetOrderResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetOrderResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class GetOrdersResponse extends Array<ResponseBase<Order>> {
-	public totalCount: number;
+  public totalCount: number;
 
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<GetOrdersResponse>) {
-		super();
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetOrdersResponse>) {
+    super();
+    (Object as any).assign(this, init);
+  }
 }
 
 export class CreatePayseraTransactionResponse extends ResponseBase<string> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<CreatePayseraTransactionResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CreatePayseraTransactionResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class CheckStripePaymentStatusResponse extends ResponseBase<string> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<CheckStripePaymentStatusResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CheckStripePaymentStatusResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class CreateStripeTransactionResponse extends ResponseBase<StripePaymentIntent> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<CreateStripeTransactionResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CreateStripeTransactionResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class CancelSubscriptionResponse extends ResponseBase<Subscription> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<CancelSubscriptionResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CancelSubscriptionResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class ChangeSubscriptionResponse extends ResponseBase<Subscription> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<ChangeSubscriptionResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<ChangeSubscriptionResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class CreateSubscriptionResponse extends ResponseBase<Subscription> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<CreateSubscriptionResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CreateSubscriptionResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class GetProjectResponse extends ResponseBase<Project> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<GetProjectResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetProjectResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 export class ExecuteFunctionResponse extends ResponseBase<string> {
-	public responseStatus: ResponseStatus;
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<ExecuteFunctionResponse>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<ExecuteFunctionResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 // @DataContract
 export class AuthenticateResponse implements IHasSessionId, IHasBearerToken {
-	// @DataMember(Order=1)
-	public userId: string;
+  // @DataMember(Order=1)
+  public userId: string;
 
-	// @DataMember(Order=2)
-	public sessionId: string;
+  // @DataMember(Order=2)
+  public sessionId: string;
 
-	// @DataMember(Order=3)
-	public userName: string;
+  // @DataMember(Order=3)
+  public userName: string;
 
-	// @DataMember(Order=4)
-	public displayName: string;
+  // @DataMember(Order=4)
+  public displayName: string;
 
-	// @DataMember(Order=5)
-	public referrerUrl: string;
+  // @DataMember(Order=5)
+  public referrerUrl: string;
 
-	// @DataMember(Order=6)
-	public bearerToken: string;
+  // @DataMember(Order=6)
+  public bearerToken: string;
 
-	// @DataMember(Order=7)
-	public refreshToken: string;
+  // @DataMember(Order=7)
+  public refreshToken: string;
 
-	// @DataMember(Order=8)
-	public profileUrl: string;
+  // @DataMember(Order=8)
+  public profileUrl: string;
 
-	// @DataMember(Order=9)
-	public roles: string[];
+  // @DataMember(Order=9)
+  public roles: string[];
 
-	// @DataMember(Order=10)
-	public permissions: string[];
+  // @DataMember(Order=10)
+  public permissions: string[];
 
-	// @DataMember(Order=11)
-	public responseStatus: ResponseStatus;
+  // @DataMember(Order=11)
+  public responseStatus: ResponseStatus;
 
-	// @DataMember(Order=12)
-	public meta: {[index: string]: string};
+  // @DataMember(Order=12)
+  public meta: { [index: string]: string };
 
-	public constructor(init?: Partial<AuthenticateResponse>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<AuthenticateResponse>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 // @DataContract
 export class GetApiKeysResponse {
-	// @DataMember(Order=1)
-	public results: UserApiKey[];
+  // @DataMember(Order=1)
+  public results: UserApiKey[];
 
-	// @DataMember(Order=2)
-	public meta: {[index: string]: string};
+  // @DataMember(Order=2)
+  public meta: { [index: string]: string };
 
-	// @DataMember(Order=3)
-	public responseStatus: ResponseStatus;
+  // @DataMember(Order=3)
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<GetApiKeysResponse>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetApiKeysResponse>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 // @DataContract
 export class RegenerateApiKeysResponse {
-	// @DataMember(Order=1)
-	public results: UserApiKey[];
+  // @DataMember(Order=1)
+  public results: UserApiKey[];
 
-	// @DataMember(Order=2)
-	public meta: {[index: string]: string};
+  // @DataMember(Order=2)
+  public meta: { [index: string]: string };
 
-	// @DataMember(Order=3)
-	public responseStatus: ResponseStatus;
+  // @DataMember(Order=3)
+  public responseStatus: ResponseStatus;
 
-	public constructor(init?: Partial<RegenerateApiKeysResponse>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<RegenerateApiKeysResponse>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -2430,34 +2430,34 @@ export class RegenerateApiKeysResponse {
 // @Api(Description="Database services")
 // @DataContract
 export class AggregateRequest
-	extends CodeMashDbRequestBase
-	implements IReturn<AggregateResponse> {
-	/**
-	 * ID of an aggregate. Required of Pipeline is empty.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="ID of an aggregate. Required of Pipeline is empty.", Name="Id", ParameterType="path")
-	public id: string;
+  extends CodeMashDbRequestBase
+  implements IReturn<AggregateResponse> {
+  /**
+   * ID of an aggregate. Required of Pipeline is empty.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="ID of an aggregate. Required of Pipeline is empty.", Name="Id", ParameterType="path")
+  public id: string;
 
-	/**
-	 * Tokens that should be injected into aggregation document
-	 */
-	// @DataMember
-	// @ApiMember(DataType="json", Description="Tokens that should be injected into aggregation document", Name="Tokens", ParameterType="query")
-	public tokens: {[index: string]: string};
+  /**
+   * Tokens that should be injected into aggregation document
+   */
+  // @DataMember
+  // @ApiMember(DataType="json", Description="Tokens that should be injected into aggregation document", Name="Tokens", ParameterType="query")
+  public tokens: { [index: string]: string };
 
-	public constructor(init?: Partial<AggregateRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<AggregateRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new AggregateResponse();
-	}
+  public createResponse() {
+    return new AggregateResponse();
+  }
 
-	public getTypeName() {
-		return 'AggregateRequest';
-	}
+  public getTypeName() {
+    return 'AggregateRequest';
+  }
 }
 
 /**
@@ -2468,41 +2468,41 @@ export class AggregateRequest
 // @Api(Description="Database services")
 // @DataContract
 export class CountRequest
-	extends CodeMashDbRequestBase
-	implements IReturn<CountResponse> {
-	/**
-	 * A query that specifies which records to count
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="A query that specifies which records to count", Name="Filter", ParameterType="query")
-	public filter: string;
+  extends CodeMashDbRequestBase
+  implements IReturn<CountResponse> {
+  /**
+   * A query that specifies which records to count
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="A query that specifies which records to count", Name="Filter", ParameterType="query")
+  public filter: object | string;
 
-	/**
-	 * The maximum number of records to count
-	 */
-	// @DataMember
-	// @ApiMember(DataType="int", Description="The maximum number of records to count", Name="Limit", ParameterType="query")
-	public limit?: number;
+  /**
+   * The maximum number of records to count
+   */
+  // @DataMember
+  // @ApiMember(DataType="int", Description="The maximum number of records to count", Name="Limit", ParameterType="query")
+  public limit?: number;
 
-	/**
-	 * The number of records to skip before counting
-	 */
-	// @DataMember
-	// @ApiMember(DataType="int", Description="The number of records to skip before counting", Name="Skip", ParameterType="query")
-	public skip?: number;
+  /**
+   * The number of records to skip before counting
+   */
+  // @DataMember
+  // @ApiMember(DataType="int", Description="The number of records to skip before counting", Name="Skip", ParameterType="query")
+  public skip?: number;
 
-	public constructor(init?: Partial<CountRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CountRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new CountResponse();
-	}
+  public createResponse() {
+    return new CountResponse();
+  }
 
-	public getTypeName() {
-		return 'CountRequest';
-	}
+  public getTypeName() {
+    return 'CountRequest';
+  }
 }
 
 /**
@@ -2513,34 +2513,34 @@ export class CountRequest
 // @Api(Description="Database services")
 // @DataContract
 export class DeleteManyRequest
-	extends CodeMashDbRequestBase
-	implements IReturn<DeleteManyResponse> {
-	/**
-	 * Specifies deletion criteria using query operators. To delete all documents in a collection, pass in an empty document "{}"
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Specifies deletion criteria using query operators. To delete all documents in a collection, pass in an empty document \"{}\"", Name="Filter", ParameterType="query")
-	public filter: string;
+  extends CodeMashDbRequestBase
+  implements IReturn<DeleteManyResponse> {
+  /**
+   * Specifies deletion criteria using query operators. To delete all documents in a collection, pass in an empty document "{}"
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Specifies deletion criteria using query operators. To delete all documents in a collection, pass in an empty document \"{}\"", Name="Filter", ParameterType="query")
+  public filter: object | string;
 
-	/**
-	 * If true, does not activate triggers
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If true, does not activate triggers", Name="IgnoreTriggers", ParameterType="query")
-	public ignoreTriggers: boolean;
+  /**
+   * If true, does not activate triggers
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If true, does not activate triggers", Name="IgnoreTriggers", ParameterType="query")
+  public ignoreTriggers: boolean;
 
-	public constructor(init?: Partial<DeleteManyRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<DeleteManyRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new DeleteManyResponse();
-	}
+  public createResponse() {
+    return new DeleteManyResponse();
+  }
 
-	public getTypeName() {
-		return 'DeleteManyRequest';
-	}
+  public getTypeName() {
+    return 'DeleteManyRequest';
+  }
 }
 
 /**
@@ -2552,41 +2552,41 @@ export class DeleteManyRequest
 // @Api(Description="Database services")
 // @DataContract
 export class DeleteOneRequest
-	extends CodeMashDbRequestBase
-	implements IReturn<DeleteOneResponse> {
-	/**
-	 * ID of a record to delete. Required if Filter is empty.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="ID of a record to delete. Required if Filter is empty.", Name="Id", ParameterType="path")
-	public id: string;
+  extends CodeMashDbRequestBase
+  implements IReturn<DeleteOneResponse> {
+  /**
+   * ID of a record to delete. Required if Filter is empty.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="ID of a record to delete. Required if Filter is empty.", Name="Id", ParameterType="path")
+  public id: string;
 
-	/**
-	 * Specifies deletion criteria using query operators. Specify an empty document "{}" to delete the first document returned in the collection. Required if Id is not set.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Specifies deletion criteria using query operators. Specify an empty document \"{}\" to delete the first document returned in the collection. Required if Id is not set.", Name="Filter", ParameterType="query")
-	public filter: string;
+  /**
+   * Specifies deletion criteria using query operators. Specify an empty document "{}" to delete the first document returned in the collection. Required if Id is not set.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Specifies deletion criteria using query operators. Specify an empty document \"{}\" to delete the first document returned in the collection. Required if Id is not set.", Name="Filter", ParameterType="query")
+  public filter: object | string;
 
-	/**
-	 * If true, does not activate triggers
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If true, does not activate triggers", Name="IgnoreTriggers", ParameterType="query")
-	public ignoreTriggers: boolean;
+  /**
+   * If true, does not activate triggers
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If true, does not activate triggers", Name="IgnoreTriggers", ParameterType="query")
+  public ignoreTriggers: boolean;
 
-	public constructor(init?: Partial<DeleteOneRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<DeleteOneRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new DeleteOneResponse();
-	}
+  public createResponse() {
+    return new DeleteOneResponse();
+  }
 
-	public getTypeName() {
-		return 'DeleteOneRequest';
-	}
+  public getTypeName() {
+    return 'DeleteOneRequest';
+  }
 }
 
 /**
@@ -2597,34 +2597,34 @@ export class DeleteOneRequest
 // @Api(Description="Database services")
 // @DataContract
 export class DistinctRequest
-	extends CodeMashDbRequestBase
-	implements IReturn<DistinctResponse> {
-	/**
-	 * The field for which to return distinct values
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="The field for which to return distinct values", IsRequired=true, Name="Field", ParameterType="query")
-	public field: string;
+  extends CodeMashDbRequestBase
+  implements IReturn<DistinctResponse> {
+  /**
+   * The field for which to return distinct values
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="The field for which to return distinct values", IsRequired=true, Name="Field", ParameterType="query")
+  public field: string;
 
-	/**
-	 * A query that specifies the documents from which to retrieve the distinct values
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="A query that specifies the documents from which to retrieve the distinct values", Name="Filter", ParameterType="query")
-	public filter: string;
+  /**
+   * A query that specifies the documents from which to retrieve the distinct values
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="A query that specifies the documents from which to retrieve the distinct values", Name="Filter", ParameterType="query")
+  public filter: object | string;
 
-	public constructor(init?: Partial<DistinctRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<DistinctRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new DistinctResponse();
-	}
+  public createResponse() {
+    return new DistinctResponse();
+  }
 
-	public getTypeName() {
-		return 'DistinctRequest';
-	}
+  public getTypeName() {
+    return 'DistinctRequest';
+  }
 }
 
 /**
@@ -2635,76 +2635,76 @@ export class DistinctRequest
 // @Api(Description="Database services")
 // @DataContract
 export class FindRequest
-	extends CodeMashDbListRequestBase
-	implements IReturn<FindResponse> {
-	/**
-	 * Includes schema in response
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Includes schema in response", Name="IncludeSchema", ParameterType="query")
-	public includeSchema: boolean;
+  extends CodeMashDbListRequestBase
+  implements IReturn<FindResponse> {
+  /**
+   * Includes schema in response
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Includes schema in response", Name="IncludeSchema", ParameterType="query")
+  public includeSchema: boolean;
 
-	/**
-	 * Includes names of referenced users
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Includes names of referenced users", Name="IncludeUserNames", ParameterType="query")
-	public includeUserNames: boolean;
+  /**
+   * Includes names of referenced users
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Includes names of referenced users", Name="IncludeUserNames", ParameterType="query")
+  public includeUserNames: boolean;
 
-	/**
-	 * Includes names of referenced roles
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Includes names of referenced roles", Name="IncludeRoleNames", ParameterType="query")
-	public includeRoleNames: boolean;
+  /**
+   * Includes names of referenced roles
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Includes names of referenced roles", Name="IncludeRoleNames", ParameterType="query")
+  public includeRoleNames: boolean;
 
-	/**
-	 * Includes names of referenced records
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Includes names of referenced records", Name="IncludeCollectionNames", ParameterType="query")
-	public includeCollectionNames: boolean;
+  /**
+   * Includes names of referenced records
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Includes names of referenced records", Name="IncludeCollectionNames", ParameterType="query")
+  public includeCollectionNames: boolean;
 
-	/**
-	 * Includes names of referenced terms
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Includes names of referenced terms", Name="IncludeTermNames", ParameterType="query")
-	public includeTermNames: boolean;
+  /**
+   * Includes names of referenced terms
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Includes names of referenced terms", Name="IncludeTermNames", ParameterType="query")
+  public includeTermNames: boolean;
 
-	/**
-	 * Prevent setting culture code from headers
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Prevent setting culture code from headers", Name="ExcludeCulture", ParameterType="query")
-	public excludeCulture: boolean;
+  /**
+   * Prevent setting culture code from headers
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Prevent setting culture code from headers", Name="ExcludeCulture", ParameterType="query")
+  public excludeCulture: boolean;
 
-	/**
-	 * Includes data of referenced records
-	 */
-	// @DataMember
-	// @ApiMember(DataType="object", Description="Includes data of referenced records", Name="ReferencedFields", ParameterType="query")
-	public referencedFields: ReferencingField[];
+  /**
+   * Includes data of referenced records
+   */
+  // @DataMember
+  // @ApiMember(DataType="object", Description="Includes data of referenced records", Name="ReferencedFields", ParameterType="query")
+  public referencedFields: ReferencingField[];
 
-	/**
-	 * If true, then references are injected before your list queries are applied
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If true, then references are injected before your list queries are applied", Name="AddReferencesFirst", ParameterType="query")
-	public addReferencesFirst: boolean;
+  /**
+   * If true, then references are injected before your list queries are applied
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If true, then references are injected before your list queries are applied", Name="AddReferencesFirst", ParameterType="query")
+  public addReferencesFirst: boolean;
 
-	public constructor(init?: Partial<FindRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<FindRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new FindResponse();
-	}
+  public createResponse() {
+    return new FindResponse();
+  }
 
-	public getTypeName() {
-		return 'FindRequest';
-	}
+  public getTypeName() {
+    return 'FindRequest';
+  }
 }
 
 /**
@@ -2717,97 +2717,97 @@ export class FindRequest
 // @Api(Description="Database services")
 // @DataContract
 export class FindOneRequest
-	extends CodeMashDbRequestBase
-	implements IReturn<FindOneResponse> {
-	/**
-	 * ID of a record. Required if filter is not set.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="ID of a record. Required if filter is not set.", Name="Id", ParameterType="path")
-	public id: string;
+  extends CodeMashDbRequestBase
+  implements IReturn<FindOneResponse> {
+  /**
+   * ID of a record. Required if filter is not set.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="ID of a record. Required if filter is not set.", Name="Id", ParameterType="path")
+  public id: string;
 
-	/**
-	 * The selection criteria for the find one operation. Required if Id is not set.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="The selection criteria for the find one operation. Required if Id is not set.", Name="Filter", ParameterType="query")
-	public filter: string;
+  /**
+   * The selection criteria for the find one operation. Required if Id is not set.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="The selection criteria for the find one operation. Required if Id is not set.", Name="Filter", ParameterType="query")
+  public filter: object | string;
 
-	/**
-	 * A query that specifies what fields in record to return
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="A query that specifies what fields in record to return", Name="Projection", ParameterType="query")
-	public projection: string;
+  /**
+   * A query that specifies what fields in record to return
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="A query that specifies what fields in record to return", Name="Projection", ParameterType="query")
+  public projection: string;
 
-	/**
-	 * By default schema is excluded in response. To get schema together with the record set this property to true.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="By default schema is excluded in response. To get schema together with the record set this property to true.", Name="ExcludeSchema", ParameterType="query")
-	public includeSchema: boolean;
+  /**
+   * By default schema is excluded in response. To get schema together with the record set this property to true.
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="By default schema is excluded in response. To get schema together with the record set this property to true.", Name="ExcludeSchema", ParameterType="query")
+  public includeSchema: boolean;
 
-	/**
-	 * Prevent setting culture code from headers
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Prevent setting culture code from headers", Name="ExcludeCulture", ParameterType="query")
-	public excludeCulture: boolean;
+  /**
+   * Prevent setting culture code from headers
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Prevent setting culture code from headers", Name="ExcludeCulture", ParameterType="query")
+  public excludeCulture: boolean;
 
-	/**
-	 * Includes names of referenced users
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Includes names of referenced users", Name="IncludeUserNames", ParameterType="query")
-	public includeUserNames: boolean;
+  /**
+   * Includes names of referenced users
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Includes names of referenced users", Name="IncludeUserNames", ParameterType="query")
+  public includeUserNames: boolean;
 
-	/**
-	 * Includes names of referenced roles
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Includes names of referenced roles", Name="IncludeRoleNames", ParameterType="query")
-	public includeRoleNames: boolean;
+  /**
+   * Includes names of referenced roles
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Includes names of referenced roles", Name="IncludeRoleNames", ParameterType="query")
+  public includeRoleNames: boolean;
 
-	/**
-	 * Includes names of referenced records
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Includes names of referenced records", Name="IncludeCollectionNames", ParameterType="query")
-	public includeCollectionNames: boolean;
+  /**
+   * Includes names of referenced records
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Includes names of referenced records", Name="IncludeCollectionNames", ParameterType="query")
+  public includeCollectionNames: boolean;
 
-	/**
-	 * Includes names of referenced terms
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Includes names of referenced terms", Name="IncludeTermNames", ParameterType="query")
-	public includeTermNames: boolean;
+  /**
+   * Includes names of referenced terms
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Includes names of referenced terms", Name="IncludeTermNames", ParameterType="query")
+  public includeTermNames: boolean;
 
-	/**
-	 * Includes data of referenced records
-	 */
-	// @DataMember
-	// @ApiMember(DataType="object", Description="Includes data of referenced records", Name="ReferencedFields", ParameterType="query")
-	public referencedFields: ReferencingField[];
+  /**
+   * Includes data of referenced records
+   */
+  // @DataMember
+  // @ApiMember(DataType="object", Description="Includes data of referenced records", Name="ReferencedFields", ParameterType="query")
+  public referencedFields: ReferencingField[];
 
-	/**
-	 * If true, then references are injected before your list queries are applied
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If true, then references are injected before your list queries are applied", Name="AddReferencesFirst", ParameterType="query")
-	public addReferencesFirst: boolean;
+  /**
+   * If true, then references are injected before your list queries are applied
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If true, then references are injected before your list queries are applied", Name="AddReferencesFirst", ParameterType="query")
+  public addReferencesFirst: boolean;
 
-	public constructor(init?: Partial<FindOneRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<FindOneRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new FindOneResponse();
-	}
+  public createResponse() {
+    return new FindOneResponse();
+  }
 
-	public getTypeName() {
-		return 'FindOneRequest';
-	}
+  public getTypeName() {
+    return 'FindOneRequest';
+  }
 }
 
 /**
@@ -2818,55 +2818,55 @@ export class FindOneRequest
 // @Api(Description="Database services")
 // @DataContract
 export class InsertManyRequest
-	extends CodeMashDbRequestBase
-	implements IReturn<InsertManyResponse> {
-	/**
-	 * Array of json records to insert
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Array", Description="Array of json records to insert", IsRequired=true, Name="Document", ParameterType="body")
-	public documents: string[];
+  extends CodeMashDbRequestBase
+  implements IReturn<InsertManyResponse> {
+  /**
+   * Array of json records to insert
+   */
+  // @DataMember
+  // @ApiMember(DataType="Array", Description="Array of json records to insert", IsRequired=true, Name="Document", ParameterType="body")
+  public documents: object[] | string[];
 
-	/**
-	 * By default records are validated before insert, set to true to prevent validation
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="By default records are validated before insert, set to true to prevent validation", Name="BypassDocumentValidation", ParameterType="body")
-	public bypassDocumentValidation: boolean;
+  /**
+   * By default records are validated before insert, set to true to prevent validation
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="By default records are validated before insert, set to true to prevent validation", Name="BypassDocumentValidation", ParameterType="body")
+  public bypassDocumentValidation: boolean;
 
-	/**
-	 * If true, does not activate triggers
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If true, does not activate triggers", Name="IgnoreTriggers", ParameterType="body")
-	public ignoreTriggers: boolean;
+  /**
+   * If true, does not activate triggers
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If true, does not activate triggers", Name="IgnoreTriggers", ParameterType="body")
+  public ignoreTriggers: boolean;
 
-	/**
-	 * When calling with full permission, can set responsible user ID
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="When calling with full permission, can set responsible user ID", Name="ResponsibleUserId", ParameterType="body")
-	public responsibleUserId?: string;
+  /**
+   * When calling with full permission, can set responsible user ID
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="When calling with full permission, can set responsible user ID", Name="ResponsibleUserId", ParameterType="body")
+  public responsibleUserId?: string;
 
-	/**
-	 * If true, file fields that are passed will expect file ids given from your storage providers.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If true, file fields that are passed will expect file ids given from your storage providers.", Name="ResolveProviderFiles", ParameterType="body")
-	public resolveProviderFiles: boolean;
+  /**
+   * If true, file fields that are passed will expect file ids given from your storage providers.
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If true, file fields that are passed will expect file ids given from your storage providers.", Name="ResolveProviderFiles", ParameterType="body")
+  public resolveProviderFiles: boolean;
 
-	public constructor(init?: Partial<InsertManyRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<InsertManyRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new InsertManyResponse();
-	}
+  public createResponse() {
+    return new InsertManyResponse();
+  }
 
-	public getTypeName() {
-		return 'InsertManyRequest';
-	}
+  public getTypeName() {
+    return 'InsertManyRequest';
+  }
 }
 
 /**
@@ -2877,62 +2877,62 @@ export class InsertManyRequest
 // @Api(Description="Database services")
 // @DataContract
 export class InsertOneRequest
-	extends CodeMashDbRequestBase
-	implements IReturn<InsertOneResponse> {
-	/**
-	 * Entity represented as json to insert
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Entity represented as json to insert", IsRequired=true, Name="Document", ParameterType="body")
-	public document: string;
+  extends CodeMashDbRequestBase
+  implements IReturn<InsertOneResponse> {
+  /**
+   * Entity represented as json to insert
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Entity represented as json to insert", IsRequired=true, Name="Document", ParameterType="body")
+  public document: object | string;
 
-	/**
-	 * By default records are validated before insert, set to true to prevent validation
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="By default records are validated before insert, set to true to prevent validation", Name="BypassDocumentValidation", ParameterType="body")
-	public bypassDocumentValidation: boolean;
+  /**
+   * By default records are validated before insert, set to true to prevent validation
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="By default records are validated before insert, set to true to prevent validation", Name="BypassDocumentValidation", ParameterType="body")
+  public bypassDocumentValidation: boolean;
 
-	/**
-	 * By default file uploads are done after the record is inserted, set to true in case you need to wait for files to be uploaded
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="By default file uploads are done after the record is inserted, set to true in case you need to wait for files to be uploaded", Name="WaitForFileUpload", ParameterType="body")
-	public waitForFileUpload: boolean;
+  /**
+   * By default file uploads are done after the record is inserted, set to true in case you need to wait for files to be uploaded
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="By default file uploads are done after the record is inserted, set to true in case you need to wait for files to be uploaded", Name="WaitForFileUpload", ParameterType="body")
+  public waitForFileUpload: boolean;
 
-	/**
-	 * If true, does not activate triggers
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If true, does not activate triggers", Name="IgnoreTriggers", ParameterType="body")
-	public ignoreTriggers: boolean;
+  /**
+   * If true, does not activate triggers
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If true, does not activate triggers", Name="IgnoreTriggers", ParameterType="body")
+  public ignoreTriggers: boolean;
 
-	/**
-	 * When calling with full permission, can set responsible user ID
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="When calling with full permission, can set responsible user ID", Name="ResponsibleUserId", ParameterType="body")
-	public responsibleUserId?: string;
+  /**
+   * When calling with full permission, can set responsible user ID
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="When calling with full permission, can set responsible user ID", Name="ResponsibleUserId", ParameterType="body")
+  public responsibleUserId?: string;
 
-	/**
-	 * If true, file fields that are passed will expect file ids given from your storage providers.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If true, file fields that are passed will expect file ids given from your storage providers.", Name="ResolveProviderFiles", ParameterType="body")
-	public resolveProviderFiles: boolean;
+  /**
+   * If true, file fields that are passed will expect file ids given from your storage providers.
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If true, file fields that are passed will expect file ids given from your storage providers.", Name="ResolveProviderFiles", ParameterType="body")
+  public resolveProviderFiles: boolean;
 
-	public constructor(init?: Partial<InsertOneRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<InsertOneRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new InsertOneResponse();
-	}
+  public createResponse() {
+    return new InsertOneResponse();
+  }
 
-	public getTypeName() {
-		return 'InsertOneRequest';
-	}
+  public getTypeName() {
+    return 'InsertOneRequest';
+  }
 }
 
 /**
@@ -2944,76 +2944,76 @@ export class InsertOneRequest
 // @Api(Description="Database services")
 // @DataContract
 export class ReplaceOneRequest
-	extends CodeMashDbRequestBase
-	implements IReturn<ReplaceOneResponse> {
-	/**
-	 * Entity represented as json to replace
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Entity represented as json to replace", IsRequired=true, Name="Document", ParameterType="body")
-	public document: string;
+  extends CodeMashDbRequestBase
+  implements IReturn<ReplaceOneResponse> {
+  /**
+   * Entity represented as json to replace
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Entity represented as json to replace", IsRequired=true, Name="Document", ParameterType="body")
+  public document: object | string;
 
-	/**
-	 * ID of a record to replace. Required if Filter is empty.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="ID of a record to replace. Required if Filter is empty.", Name="Id", ParameterType="path")
-	public id: string;
+  /**
+   * ID of a record to replace. Required if Filter is empty.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="ID of a record to replace. Required if Filter is empty.", Name="Id", ParameterType="path")
+  public id: string;
 
-	/**
-	 * The selection criteria for the update. The same query selectors as in the Find method are available. - https://docs.mongodb.org/manual/reference/method/db.collection.replaceOne/ . Specify an empty document '{}' to update the first document returned in the collection
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="The selection criteria for the update. The same query selectors as in the Find method are available. - https://docs.mongodb.org/manual/reference/method/db.collection.replaceOne/ . Specify an empty document '{}' to update the first document returned in the collection", Name="Filter", ParameterType="body")
-	public filter: string;
+  /**
+   * The selection criteria for the update. The same query selectors as in the Find method are available. - https://docs.mongodb.org/manual/reference/method/db.collection.replaceOne/ . Specify an empty document '{}' to update the first document returned in the collection
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="The selection criteria for the update. The same query selectors as in the Find method are available. - https://docs.mongodb.org/manual/reference/method/db.collection.replaceOne/ . Specify an empty document '{}' to update the first document returned in the collection", Name="Filter", ParameterType="body")
+  public filter: object | string;
 
-	/**
-	 * By default file uploads are done after the record is inserted, set to true in case you need to wait for files to be uploaded
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="By default file uploads are done after the record is inserted, set to true in case you need to wait for files to be uploaded", Name="WaitForFileUpload", ParameterType="body")
-	public waitForFileUpload: boolean;
+  /**
+   * By default file uploads are done after the record is inserted, set to true in case you need to wait for files to be uploaded
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="By default file uploads are done after the record is inserted, set to true in case you need to wait for files to be uploaded", Name="WaitForFileUpload", ParameterType="body")
+  public waitForFileUpload: boolean;
 
-	/**
-	 * If true, inserts a new record if current record not found
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If true, inserts a new record if current record not found", Name="IsUpsert", ParameterType="body")
-	public isUpsert: boolean;
+  /**
+   * If true, inserts a new record if current record not found
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If true, inserts a new record if current record not found", Name="IsUpsert", ParameterType="body")
+  public isUpsert: boolean;
 
-	/**
-	 * By default records are validated before insert, set to true to prevent validation
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="By default records are validated before insert, set to true to prevent validation", IsRequired=true, Name="BypassDocumentValidation", ParameterType="body")
-	public bypassDocumentValidation: boolean;
+  /**
+   * By default records are validated before insert, set to true to prevent validation
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="By default records are validated before insert, set to true to prevent validation", IsRequired=true, Name="BypassDocumentValidation", ParameterType="body")
+  public bypassDocumentValidation: boolean;
 
-	/**
-	 * If true, does not activate triggers
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If true, does not activate triggers", Name="IgnoreTriggers", ParameterType="body")
-	public ignoreTriggers: boolean;
+  /**
+   * If true, does not activate triggers
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If true, does not activate triggers", Name="IgnoreTriggers", ParameterType="body")
+  public ignoreTriggers: boolean;
 
-	/**
-	 * If true, file fields that are passed will expect file ids given from your storage providers.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If true, file fields that are passed will expect file ids given from your storage providers.", Name="ResolveProviderFiles", ParameterType="body")
-	public resolveProviderFiles: boolean;
+  /**
+   * If true, file fields that are passed will expect file ids given from your storage providers.
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If true, file fields that are passed will expect file ids given from your storage providers.", Name="ResolveProviderFiles", ParameterType="body")
+  public resolveProviderFiles: boolean;
 
-	public constructor(init?: Partial<ReplaceOneRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<ReplaceOneRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new ReplaceOneResponse();
-	}
+  public createResponse() {
+    return new ReplaceOneResponse();
+  }
 
-	public getTypeName() {
-		return 'ReplaceOneRequest';
-	}
+  public getTypeName() {
+    return 'ReplaceOneRequest';
+  }
 }
 
 /**
@@ -3024,55 +3024,55 @@ export class ReplaceOneRequest
 // @Api(Description="Database services")
 // @DataContract
 export class UpdateManyRequest
-	extends CodeMashDbRequestBase
-	implements IReturn<UpdateManyResponse> {
-	/**
-	 * The modifications to apply. Use Update Operators such as $set, $unset, or $rename.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="The modifications to apply. Use Update Operators such as $set, $unset, or $rename.", IsRequired=true, Name="Update", ParameterType="body")
-	public update: string;
+  extends CodeMashDbRequestBase
+  implements IReturn<UpdateManyResponse> {
+  /**
+   * The modifications to apply. Use Update Operators such as $set, $unset, or $rename.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="The modifications to apply. Use Update Operators such as $set, $unset, or $rename.", IsRequired=true, Name="Update", ParameterType="body")
+  public update: object | string;
 
-	/**
-	 * The selection criteria for the update. The same query selectors as in the Find method are available. - https://docs.mongodb.org/manual/reference/method/db.collection.updateMany/#db.collection.updateMany . Specify an empty document '{}' to update the first document returned in the collection
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="The selection criteria for the update. The same query selectors as in the Find method are available. - https://docs.mongodb.org/manual/reference/method/db.collection.updateMany/#db.collection.updateMany . Specify an empty document '{}' to update the first document returned in the collection", IsRequired=true, Name="Filter", ParameterType="body")
-	public filter: string;
+  /**
+   * The selection criteria for the update. The same query selectors as in the Find method are available. - https://docs.mongodb.org/manual/reference/method/db.collection.updateMany/#db.collection.updateMany . Specify an empty document '{}' to update the first document returned in the collection
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="The selection criteria for the update. The same query selectors as in the Find method are available. - https://docs.mongodb.org/manual/reference/method/db.collection.updateMany/#db.collection.updateMany . Specify an empty document '{}' to update the first document returned in the collection", IsRequired=true, Name="Filter", ParameterType="body")
+  public filter: object | string;
 
-	/**
-	 * By default records are validated before insert, set to true to prevent validation
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="By default records are validated before insert, set to true to prevent validation", Name="BypassDocumentValidation", ParameterType="body")
-	public bypassDocumentValidation: boolean;
+  /**
+   * By default records are validated before insert, set to true to prevent validation
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="By default records are validated before insert, set to true to prevent validation", Name="BypassDocumentValidation", ParameterType="body")
+  public bypassDocumentValidation: boolean;
 
-	/**
-	 * If true, does not activate triggers
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If true, does not activate triggers", Name="IgnoreTriggers", ParameterType="body")
-	public ignoreTriggers: boolean;
+  /**
+   * If true, does not activate triggers
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If true, does not activate triggers", Name="IgnoreTriggers", ParameterType="body")
+  public ignoreTriggers: boolean;
 
-	/**
-	 * If true, file fields that are passed will expect file ids given from your storage providers.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If true, file fields that are passed will expect file ids given from your storage providers.", Name="ResolveProviderFiles", ParameterType="body")
-	public resolveProviderFiles: boolean;
+  /**
+   * If true, file fields that are passed will expect file ids given from your storage providers.
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If true, file fields that are passed will expect file ids given from your storage providers.", Name="ResolveProviderFiles", ParameterType="body")
+  public resolveProviderFiles: boolean;
 
-	public constructor(init?: Partial<UpdateManyRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UpdateManyRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new UpdateManyResponse();
-	}
+  public createResponse() {
+    return new UpdateManyResponse();
+  }
 
-	public getTypeName() {
-		return 'UpdateManyRequest';
-	}
+  public getTypeName() {
+    return 'UpdateManyRequest';
+  }
 }
 
 /**
@@ -3085,69 +3085,69 @@ export class UpdateManyRequest
 // @Api(Description="Database services")
 // @DataContract
 export class UpdateOneRequest
-	extends CodeMashDbRequestBase
-	implements IReturn<UpdateOneResponse> {
-	/**
-	 * ID of record to update. Required if Filter is empty.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="ID of record to update. Required if Filter is empty.", Name="Id", ParameterType="path")
-	public id: string;
+  extends CodeMashDbRequestBase
+  implements IReturn<UpdateOneResponse> {
+  /**
+   * ID of record to update. Required if Filter is empty.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="ID of record to update. Required if Filter is empty.", Name="Id", ParameterType="path")
+  public id: string;
 
-	/**
-	 * The modifications to apply. Use Update Operators such as $set, $unset, or $rename.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="The modifications to apply. Use Update Operators such as $set, $unset, or $rename.", IsRequired=true, Name="Update", ParameterType="body")
-	public update: string;
+  /**
+   * The modifications to apply. Use Update Operators such as $set, $unset, or $rename.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="The modifications to apply. Use Update Operators such as $set, $unset, or $rename.", IsRequired=true, Name="Update", ParameterType="body")
+  public update: object | string;
 
-	/**
-	 * The selection criteria for the update. Required if Id is empty.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="The selection criteria for the update. Required if Id is empty.", Name="Filter", ParameterType="body")
-	public filter: string;
+  /**
+   * The selection criteria for the update. Required if Id is empty.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="The selection criteria for the update. Required if Id is empty.", Name="Filter", ParameterType="body")
+  public filter: object | string;
 
-	/**
-	 * By default file uploads are done after the record is inserted, set to true in case you need to wait for files to be uploaded
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="By default file uploads are done after the record is inserted, set to true in case you need to wait for files to be uploaded", Name="WaitForFileUpload", ParameterType="body")
-	public waitForFileUpload: boolean;
+  /**
+   * By default file uploads are done after the record is inserted, set to true in case you need to wait for files to be uploaded
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="By default file uploads are done after the record is inserted, set to true in case you need to wait for files to be uploaded", Name="WaitForFileUpload", ParameterType="body")
+  public waitForFileUpload: boolean;
 
-	/**
-	 * By default records are validated before insert, set to true to prevent validation
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="By default records are validated before insert, set to true to prevent validation", IsRequired=true, Name="BypassDocumentValidation", ParameterType="body")
-	public bypassDocumentValidation: boolean;
+  /**
+   * By default records are validated before insert, set to true to prevent validation
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="By default records are validated before insert, set to true to prevent validation", IsRequired=true, Name="BypassDocumentValidation", ParameterType="body")
+  public bypassDocumentValidation: boolean;
 
-	/**
-	 * If true, does not activate triggers
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If true, does not activate triggers", Name="IgnoreTriggers", ParameterType="body")
-	public ignoreTriggers: boolean;
+  /**
+   * If true, does not activate triggers
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If true, does not activate triggers", Name="IgnoreTriggers", ParameterType="body")
+  public ignoreTriggers: boolean;
 
-	/**
-	 * If true, file fields that are passed will expect file ids given from your storage providers.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If true, file fields that are passed will expect file ids given from your storage providers.", Name="ResolveProviderFiles", ParameterType="body")
-	public resolveProviderFiles: boolean;
+  /**
+   * If true, file fields that are passed will expect file ids given from your storage providers.
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If true, file fields that are passed will expect file ids given from your storage providers.", Name="ResolveProviderFiles", ParameterType="body")
+  public resolveProviderFiles: boolean;
 
-	public constructor(init?: Partial<UpdateOneRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UpdateOneRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new UpdateOneResponse();
-	}
+  public createResponse() {
+    return new UpdateOneResponse();
+  }
 
-	public getTypeName() {
-		return 'UpdateOneRequest';
-	}
+  public getTypeName() {
+    return 'UpdateOneRequest';
+  }
 }
 
 /**
@@ -3158,34 +3158,34 @@ export class UpdateOneRequest
 // @Api(Description="Database services")
 // @DataContract
 export class FindTermsRequest
-	extends CodeMashDbListRequestBase
-	implements IReturn<FindTermsResponse> {
-	/**
-	 * Includes taxonomy to response
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Includes taxonomy to response", Name="IncludeTaxonomy", ParameterType="query")
-	public includeTaxonomy: boolean;
+  extends CodeMashDbListRequestBase
+  implements IReturn<FindTermsResponse> {
+  /**
+   * Includes taxonomy to response
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Includes taxonomy to response", Name="IncludeTaxonomy", ParameterType="query")
+  public includeTaxonomy: boolean;
 
-	/**
-	 * Prevent setting culture code from headers
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Prevent setting culture code from headers", Name="ExcludeCulture", ParameterType="query")
-	public excludeCulture: boolean;
+  /**
+   * Prevent setting culture code from headers
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Prevent setting culture code from headers", Name="ExcludeCulture", ParameterType="query")
+  public excludeCulture: boolean;
 
-	public constructor(init?: Partial<FindTermsRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<FindTermsRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new FindTermsResponse();
-	}
+  public createResponse() {
+    return new FindTermsResponse();
+  }
 
-	public getTypeName() {
-		return 'FindTermsRequest';
-	}
+  public getTypeName() {
+    return 'FindTermsRequest';
+  }
 }
 
 /**
@@ -3198,41 +3198,41 @@ export class FindTermsRequest
 // @Api(Description="Database services")
 // @DataContract
 export class FindTermsChildrenRequest
-	extends CodeMashDbListRequestBase
-	implements IReturn<FindTermsChildrenResponse> {
-	/**
-	 * ID of a parent term. Required if filter is not set.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="ID of a parent term. Required if filter is not set.", Name="Id", ParameterType="path")
-	public id: string;
+  extends CodeMashDbListRequestBase
+  implements IReturn<FindTermsChildrenResponse> {
+  /**
+   * ID of a parent term. Required if filter is not set.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="ID of a parent term. Required if filter is not set.", Name="Id", ParameterType="path")
+  public id: string;
 
-	/**
-	 * The selection criteria for the parent terms. Required if Id is not set.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="The selection criteria for the parent terms. Required if Id is not set.", Name="ParentFilter", ParameterType="query")
-	public parentFilter: string;
+  /**
+   * The selection criteria for the parent terms. Required if Id is not set.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="The selection criteria for the parent terms. Required if Id is not set.", Name="ParentFilter", ParameterType="query")
+  public parentFilter: object | string;
 
-	/**
-	 * Prevent setting culture code from headers
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Prevent setting culture code from headers", Name="ExcludeCulture", ParameterType="query")
-	public excludeCulture: boolean;
+  /**
+   * Prevent setting culture code from headers
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Prevent setting culture code from headers", Name="ExcludeCulture", ParameterType="query")
+  public excludeCulture: boolean;
 
-	public constructor(init?: Partial<FindTermsChildrenRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<FindTermsChildrenRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new FindTermsChildrenResponse();
-	}
+  public createResponse() {
+    return new FindTermsChildrenResponse();
+  }
 
-	public getTypeName() {
-		return 'FindTermsChildrenRequest';
-	}
+  public getTypeName() {
+    return 'FindTermsChildrenRequest';
+  }
 }
 
 /**
@@ -3243,17 +3243,17 @@ export class FindTermsChildrenRequest
 // @Api(Description="File services")
 // @DataContract
 export class DeleteFileRequest extends CodeMashRequestBase {
-	/**
-	 * ID of a file to delete
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="ID of a file to delete", IsRequired=true, Name="FileId", ParameterType="path")
-	public fileId: string;
+  /**
+   * ID of a file to delete
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="ID of a file to delete", IsRequired=true, Name="FileId", ParameterType="path")
+  public fileId: string;
 
-	public constructor(init?: Partial<DeleteFileRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<DeleteFileRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -3264,34 +3264,34 @@ export class DeleteFileRequest extends CodeMashRequestBase {
 // @Api(Description="File services")
 // @DataContract
 export class DownloadFileRequest
-	extends CodeMashRequestBase
-	implements IReturn<HttpResult> {
-	/**
-	 * ID of a file to download
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="ID of a file to download", IsRequired=true, Name="FileId", ParameterType="query")
-	public fileId: string;
+  extends CodeMashRequestBase
+  implements IReturn<HttpResult> {
+  /**
+   * ID of a file to download
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="ID of a file to download", IsRequired=true, Name="FileId", ParameterType="query")
+  public fileId: string;
 
-	/**
-	 * Optimization code of optimized image
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Optimization code of optimized image", Name="Optimization", ParameterType="query")
-	public optimization: string;
+  /**
+   * Optimization code of optimized image
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Optimization code of optimized image", Name="Optimization", ParameterType="query")
+  public optimization: string;
 
-	public constructor(init?: Partial<DownloadFileRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<DownloadFileRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new HttpResult();
-	}
+  public createResponse() {
+    return new HttpResult();
+  }
 
-	public getTypeName() {
-		return 'DownloadFileRequest';
-	}
+  public getTypeName() {
+    return 'DownloadFileRequest';
+  }
 }
 
 /**
@@ -3302,34 +3302,34 @@ export class DownloadFileRequest
 // @Api(Description="File services")
 // @DataContract
 export class GetFileRequest
-	extends CodeMashRequestBase
-	implements IReturn<GetFileResponse> {
-	/**
-	 * ID of a file to download
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="ID of a file to download", IsRequired=true, Name="FileId", ParameterType="query")
-	public fileId: string;
+  extends CodeMashRequestBase
+  implements IReturn<GetFileResponse> {
+  /**
+   * ID of a file to download
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="ID of a file to download", IsRequired=true, Name="FileId", ParameterType="query")
+  public fileId: string;
 
-	/**
-	 * Optimization code of optimized image
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Optimization code of optimized image", Name="Optimization", ParameterType="query")
-	public optimization: string;
+  /**
+   * Optimization code of optimized image
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Optimization code of optimized image", Name="Optimization", ParameterType="query")
+  public optimization: string;
 
-	public constructor(init?: Partial<GetFileRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetFileRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new GetFileResponse();
-	}
+  public createResponse() {
+    return new GetFileResponse();
+  }
 
-	public getTypeName() {
-		return 'GetFileRequest';
-	}
+  public getTypeName() {
+    return 'GetFileRequest';
+  }
 }
 
 /**
@@ -3340,41 +3340,41 @@ export class GetFileRequest
 // @Api(Description="File services")
 // @DataContract
 export class UploadFileRequest
-	extends CodeMashRequestBase
-	implements IReturn<UploadFileResponse> {
-	/**
-	 * Path of directory to store the file into. Leave it as empty to store file into root directory
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Path of directory to store the file into. Leave it as empty to store file into root directory", IsRequired=true, Name="Path", ParameterType="form")
-	public path: string;
+  extends CodeMashRequestBase
+  implements IReturn<UploadFileResponse> {
+  /**
+   * Path of directory to store the file into. Leave it as empty to store file into root directory
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Path of directory to store the file into. Leave it as empty to store file into root directory", IsRequired=true, Name="Path", ParameterType="form")
+  public path: string;
 
-	/**
-	 * Alternative way to upload a file by providing a base64 encoded string
-	 */
-	// @DataMember
-	// @ApiMember(DataType="object", Description="Alternative way to upload a file by providing a base64 encoded string", Name="Base64File", ParameterType="body")
-	public base64File: Base64FileUpload;
+  /**
+   * Alternative way to upload a file by providing a base64 encoded string
+   */
+  // @DataMember
+  // @ApiMember(DataType="object", Description="Alternative way to upload a file by providing a base64 encoded string", Name="Base64File", ParameterType="body")
+  public base64File: Base64FileUpload;
 
-	/**
-	 * File account ID. If not provided, default account will be used.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="File account ID. If not provided, default account will be used.", Name="AccountId", ParameterType="body")
-	public accountId?: string;
+  /**
+   * File account ID. If not provided, default account will be used.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="File account ID. If not provided, default account will be used.", Name="AccountId", ParameterType="body")
+  public accountId?: string;
 
-	public constructor(init?: Partial<UploadFileRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UploadFileRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new UploadFileResponse();
-	}
+  public createResponse() {
+    return new UploadFileResponse();
+  }
 
-	public getTypeName() {
-		return 'UploadFileRequest';
-	}
+  public getTypeName() {
+    return 'UploadFileRequest';
+  }
 }
 
 /**
@@ -3385,41 +3385,41 @@ export class UploadFileRequest
 // @Api(Description="File services")
 // @DataContract
 export class UploadOrderFileRequest
-	extends CodeMashRequestBase
-	implements IReturn<UploadOrderFileResponse> {
-	/**
-	 * ID of an order to upload this file for.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="ID of an order to upload this file for.", IsRequired=true, Name="Id", ParameterType="form")
-	public id: string;
+  extends CodeMashRequestBase
+  implements IReturn<UploadOrderFileResponse> {
+  /**
+   * ID of an order to upload this file for.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="ID of an order to upload this file for.", IsRequired=true, Name="Id", ParameterType="form")
+  public id: string;
 
-	/**
-	 * Category of a file inside order.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Category of a file inside order.", Name="Category", ParameterType="form")
-	public category: string;
+  /**
+   * Category of a file inside order.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Category of a file inside order.", Name="Category", ParameterType="form")
+  public category: string;
 
-	/**
-	 * Alternative way to upload a file by providing a base64 encoded string
-	 */
-	// @DataMember
-	// @ApiMember(DataType="object", Description="Alternative way to upload a file by providing a base64 encoded string", Name="Base64File", ParameterType="body")
-	public base64File: Base64FileUpload;
+  /**
+   * Alternative way to upload a file by providing a base64 encoded string
+   */
+  // @DataMember
+  // @ApiMember(DataType="object", Description="Alternative way to upload a file by providing a base64 encoded string", Name="Base64File", ParameterType="body")
+  public base64File: Base64FileUpload;
 
-	public constructor(init?: Partial<UploadOrderFileRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UploadOrderFileRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new UploadOrderFileResponse();
-	}
+  public createResponse() {
+    return new UploadOrderFileResponse();
+  }
 
-	public getTypeName() {
-		return 'UploadOrderFileRequest';
-	}
+  public getTypeName() {
+    return 'UploadOrderFileRequest';
+  }
 }
 
 /**
@@ -3430,41 +3430,41 @@ export class UploadOrderFileRequest
 // @Api(Description="File services")
 // @DataContract
 export class UploadRecordFileRequest
-	extends CodeMashDbRequestBase
-	implements IReturn<UploadRecordFileResponse> {
-	/**
-	 * ID of a record to upload this file for. If empty, creates a temporary file which then can be saved during record operations.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="ID of a record to upload this file for. If empty, creates a temporary file which then can be saved during record operations.", Name="RecordId", ParameterType="form")
-	public recordId: string;
+  extends CodeMashDbRequestBase
+  implements IReturn<UploadRecordFileResponse> {
+  /**
+   * ID of a record to upload this file for. If empty, creates a temporary file which then can be saved during record operations.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="ID of a record to upload this file for. If empty, creates a temporary file which then can be saved during record operations.", Name="RecordId", ParameterType="form")
+  public recordId: string;
 
-	/**
-	 * Record file field name
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Record file field name", IsRequired=true, Name="UniqueFieldName", ParameterType="form")
-	public uniqueFieldName: string;
+  /**
+   * Record file field name
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Record file field name", IsRequired=true, Name="UniqueFieldName", ParameterType="form")
+  public uniqueFieldName: string;
 
-	/**
-	 * Alternative way to upload a file by providing a base64 encoded string
-	 */
-	// @DataMember
-	// @ApiMember(DataType="object", Description="Alternative way to upload a file by providing a base64 encoded string", Name="Base64File", ParameterType="body")
-	public base64File: Base64FileUpload;
+  /**
+   * Alternative way to upload a file by providing a base64 encoded string
+   */
+  // @DataMember
+  // @ApiMember(DataType="object", Description="Alternative way to upload a file by providing a base64 encoded string", Name="Base64File", ParameterType="body")
+  public base64File: Base64FileUpload;
 
-	public constructor(init?: Partial<UploadRecordFileRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UploadRecordFileRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new UploadRecordFileResponse();
-	}
+  public createResponse() {
+    return new UploadRecordFileResponse();
+  }
 
-	public getTypeName() {
-		return 'UploadRecordFileRequest';
-	}
+  public getTypeName() {
+    return 'UploadRecordFileRequest';
+  }
 }
 
 /**
@@ -3475,41 +3475,41 @@ export class UploadRecordFileRequest
 // @Api(Description="File services")
 // @DataContract
 export class UploadUserFileRequest
-	extends CodeMashRequestBase
-	implements IReturn<UploadUserFileResponse> {
-	/**
-	 * ID of a user to upload this file for. If empty, creates a temporary file which then can be saved during user save operations.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="ID of a user to upload this file for. If empty, creates a temporary file which then can be saved during user save operations.", Name="UserId", ParameterType="form")
-	public userId?: string;
+  extends CodeMashRequestBase
+  implements IReturn<UploadUserFileResponse> {
+  /**
+   * ID of a user to upload this file for. If empty, creates a temporary file which then can be saved during user save operations.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="ID of a user to upload this file for. If empty, creates a temporary file which then can be saved during user save operations.", Name="UserId", ParameterType="form")
+  public userId?: string;
 
-	/**
-	 * User meta file field name
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User meta file field name", IsRequired=true, Name="MetaFieldName", ParameterType="form")
-	public metaFieldName: string;
+  /**
+   * User meta file field name
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User meta file field name", IsRequired=true, Name="MetaFieldName", ParameterType="form")
+  public metaFieldName: string;
 
-	/**
-	 * Alternative way to upload a file by providing a base64 encoded string
-	 */
-	// @DataMember
-	// @ApiMember(DataType="object", Description="Alternative way to upload a file by providing a base64 encoded string", Name="Base64File", ParameterType="body")
-	public base64File: Base64FileUpload;
+  /**
+   * Alternative way to upload a file by providing a base64 encoded string
+   */
+  // @DataMember
+  // @ApiMember(DataType="object", Description="Alternative way to upload a file by providing a base64 encoded string", Name="Base64File", ParameterType="body")
+  public base64File: Base64FileUpload;
 
-	public constructor(init?: Partial<UploadUserFileRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UploadUserFileRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new UploadUserFileResponse();
-	}
+  public createResponse() {
+    return new UploadUserFileResponse();
+  }
 
-	public getTypeName() {
-		return 'UploadUserFileRequest';
-	}
+  public getTypeName() {
+    return 'UploadUserFileRequest';
+  }
 }
 
 /**
@@ -3520,41 +3520,41 @@ export class UploadUserFileRequest
 // @Api(Description="Logs")
 // @DataContract
 export class CreateLogRequest
-	extends CodeMashRequestBase
-	implements IReturn<CreateLogResponse> {
-	/**
-	 * Message to log.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Message to log.", IsRequired=true, Name="Message", ParameterType="body")
-	public message: string;
+  extends CodeMashRequestBase
+  implements IReturn<CreateLogResponse> {
+  /**
+   * Message to log.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Message to log.", IsRequired=true, Name="Message", ParameterType="body")
+  public message: string;
 
-	/**
-	 * Custom items providing information.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Dictionary", Description="Custom items providing information.", Name="Items", ParameterType="body")
-	public items: {[index: string]: string};
+  /**
+   * Custom items providing information.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Dictionary", Description="Custom items providing information.", Name="Items", ParameterType="body")
+  public items: { [index: string]: string };
 
-	/**
-	 * Severity level of the log.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Severity level of the log.", Name="Level", ParameterType="body")
-	public level: string;
+  /**
+   * Severity level of the log.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Severity level of the log.", Name="Level", ParameterType="body")
+  public level: string;
 
-	public constructor(init?: Partial<CreateLogRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CreateLogRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new CreateLogResponse();
-	}
+  public createResponse() {
+    return new CreateLogResponse();
+  }
 
-	public getTypeName() {
-		return 'CreateLogRequest';
-	}
+  public getTypeName() {
+    return 'CreateLogRequest';
+  }
 }
 
 /**
@@ -3565,40 +3565,40 @@ export class CreateLogRequest
 // @Api(Description="Authentication")
 // @DataContract
 export class AadAuthenticationRequest
-	extends CodeMashRequestBase
-	implements IOAuthRequest {
-	/**
-	 * Mode to use for authentication
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Mode to use for authentication", Name="Mode", ParameterType="query")
-	public mode: string;
+  extends CodeMashRequestBase
+  implements IOAuthRequest {
+  /**
+   * Mode to use for authentication
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Mode to use for authentication", Name="Mode", ParameterType="query")
+  public mode: string;
 
-	/**
-	 * Code received from Microsoft services
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Code received from Microsoft services", Name="Code", ParameterType="query")
-	public code: string;
+  /**
+   * Code received from Microsoft services
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Code received from Microsoft services", Name="Code", ParameterType="query")
+  public code: string;
 
-	/**
-	 * State received with a code
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="State received with a code", Name="State", ParameterType="query")
-	public state: string;
+  /**
+   * State received with a code
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="State received with a code", Name="State", ParameterType="query")
+  public state: string;
 
-	/**
-	 * When transferring access token from client app
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="When transferring access token from client app", Name="AccessToken", ParameterType="query")
-	public accessToken: string;
+  /**
+   * When transferring access token from client app
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="When transferring access token from client app", Name="AccessToken", ParameterType="query")
+  public accessToken: string;
 
-	public constructor(init?: Partial<AadAuthenticationRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<AadAuthenticationRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -3609,20 +3609,20 @@ export class AadAuthenticationRequest
 // @Api(Description="Gets one user")
 // @DataContract
 export class AuthCheckRequest
-	extends CodeMashRequestBase
-	implements IReturn<AuthCheckResponse> {
-	public constructor(init?: Partial<AuthCheckRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  extends CodeMashRequestBase
+  implements IReturn<AuthCheckResponse> {
+  public constructor(init?: Partial<AuthCheckRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new AuthCheckResponse();
-	}
+  public createResponse() {
+    return new AuthCheckResponse();
+  }
 
-	public getTypeName() {
-		return 'AuthCheckRequest';
-	}
+  public getTypeName() {
+    return 'AuthCheckRequest';
+  }
 }
 
 /**
@@ -3633,24 +3633,24 @@ export class AuthCheckRequest
 // @Api(Description="Authentication")
 // @DataContract
 export class CredentialsAuthenticationRequest extends CodeMashRequestBase {
-	/**
-	 * User's login e-mail address.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's login e-mail address.", IsRequired=true, Name="UserName", ParameterType="body")
-	public userName: string;
+  /**
+   * User's login e-mail address.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's login e-mail address.", IsRequired=true, Name="UserName", ParameterType="body")
+  public userName: string;
 
-	/**
-	 * User's login password.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's login password.", IsRequired=true, Name="Password", ParameterType="body")
-	public password: string;
+  /**
+   * User's login password.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's login password.", IsRequired=true, Name="Password", ParameterType="body")
+  public password: string;
 
-	public constructor(init?: Partial<CredentialsAuthenticationRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CredentialsAuthenticationRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -3661,40 +3661,40 @@ export class CredentialsAuthenticationRequest extends CodeMashRequestBase {
 // @Api(Description="Authentication")
 // @DataContract
 export class FacebookAuthenticationRequest
-	extends CodeMashRequestBase
-	implements IOAuthRequest {
-	/**
-	 * Mode to use for authentication
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Mode to use for authentication", Name="Mode", ParameterType="query")
-	public mode: string;
+  extends CodeMashRequestBase
+  implements IOAuthRequest {
+  /**
+   * Mode to use for authentication
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Mode to use for authentication", Name="Mode", ParameterType="query")
+  public mode: string;
 
-	/**
-	 * Code received from Facebook services
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Code received from Facebook services", Name="Code", ParameterType="query")
-	public code: string;
+  /**
+   * Code received from Facebook services
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Code received from Facebook services", Name="Code", ParameterType="query")
+  public code: string;
 
-	/**
-	 * State received with a code
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="State received with a code", Name="State", ParameterType="query")
-	public state: string;
+  /**
+   * State received with a code
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="State received with a code", Name="State", ParameterType="query")
+  public state: string;
 
-	/**
-	 * When transferring access token from client app
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="When transferring access token from client app", Name="AccessToken", ParameterType="query")
-	public accessToken: string;
+  /**
+   * When transferring access token from client app
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="When transferring access token from client app", Name="AccessToken", ParameterType="query")
+  public accessToken: string;
 
-	public constructor(init?: Partial<FacebookAuthenticationRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<FacebookAuthenticationRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -3705,40 +3705,40 @@ export class FacebookAuthenticationRequest
 // @Api(Description="Authentication")
 // @DataContract
 export class GoogleAuthenticationRequest
-	extends CodeMashRequestBase
-	implements IOAuthRequest {
-	/**
-	 * Mode to use for authentication
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Mode to use for authentication", Name="Mode", ParameterType="query")
-	public mode: string;
+  extends CodeMashRequestBase
+  implements IOAuthRequest {
+  /**
+   * Mode to use for authentication
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Mode to use for authentication", Name="Mode", ParameterType="query")
+  public mode: string;
 
-	/**
-	 * Code received from Google services
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Code received from Google services", Name="Code", ParameterType="query")
-	public code: string;
+  /**
+   * Code received from Google services
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Code received from Google services", Name="Code", ParameterType="query")
+  public code: string;
 
-	/**
-	 * State received with a code
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="State received with a code", Name="State", ParameterType="query")
-	public state: string;
+  /**
+   * State received with a code
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="State received with a code", Name="State", ParameterType="query")
+  public state: string;
 
-	/**
-	 * When transferring access token from client app
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="When transferring access token from client app", Name="AccessToken", ParameterType="query")
-	public accessToken: string;
+  /**
+   * When transferring access token from client app
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="When transferring access token from client app", Name="AccessToken", ParameterType="query")
+  public accessToken: string;
 
-	public constructor(init?: Partial<GoogleAuthenticationRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GoogleAuthenticationRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -3749,61 +3749,61 @@ export class GoogleAuthenticationRequest
 // @Api(Description="Authentication")
 // @DataContract
 export class TwitterAuthenticationRequest
-	extends CodeMashRequestBase
-	implements IOAuthRequest {
-	/**
-	 * Mode to use for authentication
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Mode to use for authentication", Name="Mode", ParameterType="query")
-	public mode: string;
+  extends CodeMashRequestBase
+  implements IOAuthRequest {
+  /**
+   * Mode to use for authentication
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Mode to use for authentication", Name="Mode", ParameterType="query")
+  public mode: string;
 
-	/**
-	 * Code received from Twitter services
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Code received from Twitter services", Name="Code", ParameterType="query")
-	public code: string;
+  /**
+   * Code received from Twitter services
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Code received from Twitter services", Name="Code", ParameterType="query")
+  public code: string;
 
-	/**
-	 * State received with a code
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="State received with a code", Name="State", ParameterType="query")
-	public state: string;
+  /**
+   * State received with a code
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="State received with a code", Name="State", ParameterType="query")
+  public state: string;
 
-	/**
-	 * When transferring access token from client app
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="When transferring access token from client app", Name="AccessToken", ParameterType="query")
-	public accessToken: string;
+  /**
+   * When transferring access token from client app
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="When transferring access token from client app", Name="AccessToken", ParameterType="query")
+  public accessToken: string;
 
-	/**
-	 * When transferring access token from client app
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="When transferring access token from client app", Name="AccessTokenSecret", ParameterType="query")
-	public accessTokenSecret: string;
+  /**
+   * When transferring access token from client app
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="When transferring access token from client app", Name="AccessTokenSecret", ParameterType="query")
+  public accessTokenSecret: string;
 
-	/**
-	 * Auth token
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Auth token", Name="OAuthToken", ParameterType="query")
-	public oAuthToken: string;
+  /**
+   * Auth token
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Auth token", Name="OAuthToken", ParameterType="query")
+  public oAuthToken: string;
 
-	/**
-	 * Auth verifier
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Auth verifier", Name="OAuthVerifier", ParameterType="query")
-	public oAuthVerifier: string;
+  /**
+   * Auth verifier
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Auth verifier", Name="OAuthVerifier", ParameterType="query")
+  public oAuthVerifier: string;
 
-	public constructor(init?: Partial<TwitterAuthenticationRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<TwitterAuthenticationRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -3814,34 +3814,34 @@ export class TwitterAuthenticationRequest
 // @Api(Description="Membership")
 // @DataContract
 export class ValidateUserDeactivationTokenRequest
-	extends RequestBase
-	implements IReturn<ValidateUserDeactivationTokenResponse> {
-	/**
-	 * Secret token received by email for user deactivation
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Secret token received by email for user deactivation", IsRequired=true, Name="Token", ParameterType="query")
-	public token: string;
+  extends RequestBase
+  implements IReturn<ValidateUserDeactivationTokenResponse> {
+  /**
+   * Secret token received by email for user deactivation
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Secret token received by email for user deactivation", IsRequired=true, Name="Token", ParameterType="query")
+  public token: string;
 
-	/**
-	 * If true, includes project details in response
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If true, includes project details in response", IsRequired=true, Name="IncludeProject", ParameterType="query")
-	public includeProject: boolean;
+  /**
+   * If true, includes project details in response
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If true, includes project details in response", IsRequired=true, Name="IncludeProject", ParameterType="query")
+  public includeProject: boolean;
 
-	public constructor(init?: Partial<ValidateUserDeactivationTokenRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<ValidateUserDeactivationTokenRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new ValidateUserDeactivationTokenResponse();
-	}
+  public createResponse() {
+    return new ValidateUserDeactivationTokenResponse();
+  }
 
-	public getTypeName() {
-		return 'ValidateUserDeactivationTokenRequest';
-	}
+  public getTypeName() {
+    return 'ValidateUserDeactivationTokenRequest';
+  }
 }
 
 /**
@@ -3852,10 +3852,10 @@ export class ValidateUserDeactivationTokenRequest
 // @Api(Description="Membership")
 // @DataContract
 export class CreateUserDeactivationRequest extends CodeMashRequestBase {
-	public constructor(init?: Partial<CreateUserDeactivationRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CreateUserDeactivationRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -3866,24 +3866,24 @@ export class CreateUserDeactivationRequest extends CodeMashRequestBase {
 // @Api(Description="Membership")
 // @DataContract
 export class DeactivateUserRequest extends RequestBase {
-	/**
-	 * Secret token received by email for deactivation
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Secret token received by email for deactivation", IsRequired=true, Name="Token", ParameterType="body")
-	public token: string;
+  /**
+   * Secret token received by email for deactivation
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Secret token received by email for deactivation", IsRequired=true, Name="Token", ParameterType="body")
+  public token: string;
 
-	/**
-	 * Password for confirmation
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Password for confirmation", IsRequired=true, Name="Password", ParameterType="body")
-	public password: string;
+  /**
+   * Password for confirmation
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Password for confirmation", IsRequired=true, Name="Password", ParameterType="body")
+  public password: string;
 
-	public constructor(init?: Partial<DeactivateUserRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<DeactivateUserRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -3894,17 +3894,17 @@ export class DeactivateUserRequest extends RequestBase {
 // @Api(Description="Blocks selected user preventing the use of authenticated actions")
 // @DataContract
 export class BlockUserRequest extends CodeMashRequestBase {
-	/**
-	 * ID of user to be blocked
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="ID of user to be blocked", IsRequired=true, Name="Id", ParameterType="body")
-	public id: string;
+  /**
+   * ID of user to be blocked
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="ID of user to be blocked", IsRequired=true, Name="Id", ParameterType="body")
+  public id: string;
 
-	public constructor(init?: Partial<BlockUserRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<BlockUserRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -3915,17 +3915,17 @@ export class BlockUserRequest extends CodeMashRequestBase {
 // @Api(Description="Deletes user")
 // @DataContract
 export class DeleteUserRequest extends CodeMashRequestBase {
-	/**
-	 * ID of user to be deleted
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="ID of user to be deleted", IsRequired=true, Name="Id", ParameterType="path")
-	public id: string;
+  /**
+   * ID of user to be deleted
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="ID of user to be deleted", IsRequired=true, Name="Id", ParameterType="path")
+  public id: string;
 
-	public constructor(init?: Partial<DeleteUserRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<DeleteUserRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -3936,48 +3936,48 @@ export class DeleteUserRequest extends CodeMashRequestBase {
 // @Api(Description="Gets one user")
 // @DataContract
 export class GetProfileRequest
-	extends CodeMashRequestBase
-	implements IReturn<GetProfileResponse> {
-	/**
-	 * Set true if permissions should be returned
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Set true if permissions should be returned", Name="IncludePermissions", ParameterType="query")
-	public includePermissions: boolean;
+  extends CodeMashRequestBase
+  implements IReturn<GetProfileResponse> {
+  /**
+   * Set true if permissions should be returned
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Set true if permissions should be returned", Name="IncludePermissions", ParameterType="query")
+  public includePermissions: boolean;
 
-	/**
-	 * Set true if user devices should be returned
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Set true if user devices should be returned", Name="IncludeDevices", ParameterType="query")
-	public includeDevices: boolean;
+  /**
+   * Set true if user devices should be returned
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Set true if user devices should be returned", Name="IncludeDevices", ParameterType="query")
+  public includeDevices: boolean;
 
-	/**
-	 * Set true if user unread notifications count should be returned
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Set true if user unread notifications count should be returned", Name="IncludeNotificationsCount", ParameterType="query")
-	public includeUnreadNotifications: boolean;
+  /**
+   * Set true if user unread notifications count should be returned
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Set true if user unread notifications count should be returned", Name="IncludeNotificationsCount", ParameterType="query")
+  public includeUnreadNotifications: boolean;
 
-	/**
-	 * Set true if user meta data should be returned
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Set true if user meta data should be returned", Name="IncludeMeta", ParameterType="query")
-	public includeMeta: boolean;
+  /**
+   * Set true if user meta data should be returned
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Set true if user meta data should be returned", Name="IncludeMeta", ParameterType="query")
+  public includeMeta: boolean;
 
-	public constructor(init?: Partial<GetProfileRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetProfileRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new GetProfileResponse();
-	}
+  public createResponse() {
+    return new GetProfileResponse();
+  }
 
-	public getTypeName() {
-		return 'GetProfileRequest';
-	}
+  public getTypeName() {
+    return 'GetProfileRequest';
+  }
 }
 
 /**
@@ -3989,69 +3989,69 @@ export class GetProfileRequest
 // @Api(Description="Gets one user")
 // @DataContract
 export class GetUserRequest
-	extends CodeMashRequestBase
-	implements IReturn<GetUserResponse> {
-	/**
-	 * User identifier ID
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="User identifier ID", IsRequired=true, Name="Id", ParameterType="path")
-	public id: string;
+  extends CodeMashRequestBase
+  implements IReturn<GetUserResponse> {
+  /**
+   * User identifier ID
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="User identifier ID", IsRequired=true, Name="Id", ParameterType="path")
+  public id: string;
 
-	/**
-	 * Email of user
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Email of user", Name="Email", ParameterType="query")
-	public email: string;
+  /**
+   * Email of user
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Email of user", Name="Email", ParameterType="query")
+  public email: string;
 
-	/**
-	 * Provider of user
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Provider of user", Name="Provider", ParameterType="query")
-	public provider: string;
+  /**
+   * Provider of user
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Provider of user", Name="Provider", ParameterType="query")
+  public provider: string;
 
-	/**
-	 * Set true if permissions should be returned
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Set true if permissions should be returned", Name="IncludePermissions", ParameterType="query")
-	public includePermissions: boolean;
+  /**
+   * Set true if permissions should be returned
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Set true if permissions should be returned", Name="IncludePermissions", ParameterType="query")
+  public includePermissions: boolean;
 
-	/**
-	 * Set true if user devices should be returned
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Set true if user devices should be returned", Name="IncludeDevices", ParameterType="query")
-	public includeDevices: boolean;
+  /**
+   * Set true if user devices should be returned
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Set true if user devices should be returned", Name="IncludeDevices", ParameterType="query")
+  public includeDevices: boolean;
 
-	/**
-	 * Set true if user unread notifications count should be returned
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Set true if user unread notifications count should be returned", Name="IncludeNotificationsCount", ParameterType="query")
-	public includeUnreadNotifications: boolean;
+  /**
+   * Set true if user unread notifications count should be returned
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Set true if user unread notifications count should be returned", Name="IncludeNotificationsCount", ParameterType="query")
+  public includeUnreadNotifications: boolean;
 
-	/**
-	 * Set true if user meta data should be returned
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Set true if user meta data should be returned", Name="IncludeMeta", ParameterType="query")
-	public includeMeta: boolean;
+  /**
+   * Set true if user meta data should be returned
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Set true if user meta data should be returned", Name="IncludeMeta", ParameterType="query")
+  public includeMeta: boolean;
 
-	public constructor(init?: Partial<GetUserRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetUserRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new GetUserResponse();
-	}
+  public createResponse() {
+    return new GetUserResponse();
+  }
 
-	public getTypeName() {
-		return 'GetUserRequest';
-	}
+  public getTypeName() {
+    return 'GetUserRequest';
+  }
 }
 
 /**
@@ -4062,41 +4062,41 @@ export class GetUserRequest
 // @Api(Description="Gets many users")
 // @DataContract
 export class GetUsersRequest
-	extends CodeMashListRequestBase
-	implements IReturn<GetUsersResponse> {
-	/**
-	 * Set true if permissions should be returned
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Set true if permissions should be returned", Name="IncludePermissions", ParameterType="path")
-	public includePermissions: boolean;
+  extends CodeMashListRequestBase
+  implements IReturn<GetUsersResponse> {
+  /**
+   * Set true if permissions should be returned
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Set true if permissions should be returned", Name="IncludePermissions", ParameterType="path")
+  public includePermissions: boolean;
 
-	/**
-	 * Set true if user devices should be returned
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Set true if user devices should be returned", Name="IncludeDevices", ParameterType="path")
-	public includeDevices: boolean;
+  /**
+   * Set true if user devices should be returned
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Set true if user devices should be returned", Name="IncludeDevices", ParameterType="path")
+  public includeDevices: boolean;
 
-	/**
-	 * Set true if user meta data should be returned
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Set true if user meta data should be returned", Name="IncludeMeta", ParameterType="path")
-	public includeMeta: boolean;
+  /**
+   * Set true if user meta data should be returned
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Set true if user meta data should be returned", Name="IncludeMeta", ParameterType="path")
+  public includeMeta: boolean;
 
-	public constructor(init?: Partial<GetUsersRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetUsersRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new GetUsersResponse();
-	}
+  public createResponse() {
+    return new GetUsersResponse();
+  }
 
-	public getTypeName() {
-		return 'GetUsersRequest';
-	}
+  public getTypeName() {
+    return 'GetUsersRequest';
+  }
 }
 
 /**
@@ -4107,17 +4107,17 @@ export class GetUsersRequest
 // @Api(Description="Unblocks blocked user")
 // @DataContract
 export class UnblockUserRequest extends CodeMashRequestBase {
-	/**
-	 * User Id
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="User Id", IsRequired=true, Name="Id", ParameterType="path")
-	public id: string;
+  /**
+   * User Id
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="User Id", IsRequired=true, Name="Id", ParameterType="path")
+  public id: string;
 
-	public constructor(init?: Partial<UnblockUserRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UnblockUserRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -4128,38 +4128,38 @@ export class UnblockUserRequest extends CodeMashRequestBase {
 // @Api(Description="Membership")
 // @DataContract
 export class UpdatePasswordRequest extends CodeMashRequestBase {
-	/**
-	 * User whose password to change.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="User whose password to change.", Name="UserId", ParameterType="body")
-	public userId?: string;
+  /**
+   * User whose password to change.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="User whose password to change.", Name="UserId", ParameterType="body")
+  public userId?: string;
 
-	/**
-	 * Current password
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Current password", Name="CurrentPassword", ParameterType="body")
-	public currentPassword: string;
+  /**
+   * Current password
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Current password", Name="CurrentPassword", ParameterType="body")
+  public currentPassword: string;
 
-	/**
-	 * New password
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="New password", IsRequired=true, Name="Password", ParameterType="body")
-	public password: string;
+  /**
+   * New password
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="New password", IsRequired=true, Name="Password", ParameterType="body")
+  public password: string;
 
-	/**
-	 * New repeated password
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="New repeated password", IsRequired=true, Name="RepeatedPassword", ParameterType="body")
-	public repeatedPassword: string;
+  /**
+   * New repeated password
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="New repeated password", IsRequired=true, Name="RepeatedPassword", ParameterType="body")
+  public repeatedPassword: string;
 
-	public constructor(init?: Partial<UpdatePasswordRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UpdatePasswordRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -4170,157 +4170,157 @@ export class UpdatePasswordRequest extends CodeMashRequestBase {
 // @Api(Description="Membership")
 // @DataContract
 export class UpdateProfileRequest extends CodeMashRequestBase {
-	/**
-	 * Guest email. Will not work for normal user.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Guest email. Will not work for normal user.", Name="Email", ParameterType="body")
-	public email: string;
+  /**
+   * Guest email. Will not work for normal user.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Guest email. Will not work for normal user.", Name="Email", ParameterType="body")
+  public email: string;
 
-	/**
-	 * Member first name
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Member first name", Name="FirstName", ParameterType="form")
-	public firstName: string;
+  /**
+   * Member first name
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Member first name", Name="FirstName", ParameterType="form")
+  public firstName: string;
 
-	/**
-	 * Member last name
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Member last name", Name="LastName", ParameterType="form")
-	public lastName: string;
+  /**
+   * Member last name
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Member last name", Name="LastName", ParameterType="form")
+  public lastName: string;
 
-	/**
-	 * Member display name
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Member display name", Name="DisplayName", ParameterType="form")
-	public displayName: string;
+  /**
+   * Member display name
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Member display name", Name="DisplayName", ParameterType="form")
+  public displayName: string;
 
-	/**
-	 * Meta details as JSON object
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Meta details as JSON object", Name="Meta", ParameterType="form")
-	public meta: string;
+  /**
+   * Meta details as JSON object
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Meta details as JSON object", Name="Meta", ParameterType="form")
+  public meta: string;
 
-	/**
-	 * Main user language
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Main user language", Name="Language", ParameterType="form")
-	public language: string;
+  /**
+   * Main user language
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Main user language", Name="Language", ParameterType="form")
+  public language: string;
 
-	/**
-	 * User's time zone
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's time zone", Name="TimeZone", ParameterType="form")
-	public timeZone: string;
+  /**
+   * User's time zone
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's time zone", Name="TimeZone", ParameterType="form")
+  public timeZone: string;
 
-	/**
-	 * Should user get marketing emails
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Should user get marketing emails", Name="SubscribeToNews", ParameterType="form")
-	public subscribeToNews?: boolean;
+  /**
+   * Should user get marketing emails
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Should user get marketing emails", Name="SubscribeToNews", ParameterType="form")
+  public subscribeToNews?: boolean;
 
-	/**
-	 * Marketing email types to unsubscribe from
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Array", Description="Marketing email types to unsubscribe from", Name="UnsubscribedNewsTags", ParameterType="form")
-	public unsubscribedNewsTags: string[];
+  /**
+   * Marketing email types to unsubscribe from
+   */
+  // @DataMember
+  // @ApiMember(DataType="Array", Description="Marketing email types to unsubscribe from", Name="UnsubscribedNewsTags", ParameterType="form")
+  public unsubscribedNewsTags: string[];
 
-	/**
-	 * User's country
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's country", Name="Country", ParameterType="body")
-	public country: string;
+  /**
+   * User's country
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's country", Name="Country", ParameterType="body")
+  public country: string;
 
-	/**
-	 * User's 2 letter country code
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's 2 letter country code", Name="CountryCode", ParameterType="body")
-	public countryCode: string;
+  /**
+   * User's 2 letter country code
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's 2 letter country code", Name="CountryCode", ParameterType="body")
+  public countryCode: string;
 
-	/**
-	 * User's state / province
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's state / province", Name="Area", ParameterType="body")
-	public area: string;
+  /**
+   * User's state / province
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's state / province", Name="Area", ParameterType="body")
+  public area: string;
 
-	/**
-	 * User's city
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's city", Name="City", ParameterType="body")
-	public city: string;
+  /**
+   * User's city
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's city", Name="City", ParameterType="body")
+  public city: string;
 
-	/**
-	 * User's street address
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's street address", Name="Address", ParameterType="body")
-	public address: string;
+  /**
+   * User's street address
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's street address", Name="Address", ParameterType="body")
+  public address: string;
 
-	/**
-	 * User's secondary street address
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's secondary street address", Name="Address2", ParameterType="body")
-	public address2: string;
+  /**
+   * User's secondary street address
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's secondary street address", Name="Address2", ParameterType="body")
+  public address2: string;
 
-	/**
-	 * User's phone number
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's phone number", Name="Phone", ParameterType="body")
-	public phone: string;
+  /**
+   * User's phone number
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's phone number", Name="Phone", ParameterType="body")
+  public phone: string;
 
-	/**
-	 * User's company
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's company", Name="Company", ParameterType="body")
-	public company: string;
+  /**
+   * User's company
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's company", Name="Company", ParameterType="body")
+  public company: string;
 
-	/**
-	 * User's company code
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's company code", Name="CompanyCode", ParameterType="body")
-	public companyCode: string;
+  /**
+   * User's company code
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's company code", Name="CompanyCode", ParameterType="body")
+  public companyCode: string;
 
-	/**
-	 * User's postal code
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's postal code", Name="PostalCode", ParameterType="body")
-	public postalCode: string;
+  /**
+   * User's postal code
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's postal code", Name="PostalCode", ParameterType="body")
+  public postalCode: string;
 
-	/**
-	 * User's gender
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's gender", Name="Gender", ParameterType="body")
-	public gender: string;
+  /**
+   * User's gender
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's gender", Name="Gender", ParameterType="body")
+  public gender: string;
 
-	/**
-	 * User's birthdate
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's birthdate", Name="BirthDate", ParameterType="body")
-	public birthDate: string;
+  /**
+   * User's birthdate
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's birthdate", Name="BirthDate", ParameterType="body")
+  public birthDate: string;
 
-	public constructor(init?: Partial<UpdateProfileRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UpdateProfileRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -4333,185 +4333,185 @@ export class UpdateProfileRequest extends CodeMashRequestBase {
 // @Api(Description="Membership")
 // @DataContract
 export class UpdateUserRequest extends CodeMashRequestBase {
-	/**
-	 * User Id
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="User Id", IsRequired=true, Name="Id", ParameterType="body")
-	public id: string;
+  /**
+   * User Id
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="User Id", IsRequired=true, Name="Id", ParameterType="body")
+  public id: string;
 
-	/**
-	 * Guest email. Will not work for normal user.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Guest email. Will not work for normal user.", Name="Email", ParameterType="body")
-	public email: string;
+  /**
+   * Guest email. Will not work for normal user.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Guest email. Will not work for normal user.", Name="Email", ParameterType="body")
+  public email: string;
 
-	/**
-	 * Member first name
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Member first name", Name="FirstName", ParameterType="body")
-	public firstName: string;
+  /**
+   * Member first name
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Member first name", Name="FirstName", ParameterType="body")
+  public firstName: string;
 
-	/**
-	 * Member last name
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Member last name", Name="LastName", ParameterType="body")
-	public lastName: string;
+  /**
+   * Member last name
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Member last name", Name="LastName", ParameterType="body")
+  public lastName: string;
 
-	/**
-	 * Member display name
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Member display name", Name="DisplayName", ParameterType="body")
-	public displayName: string;
+  /**
+   * Member display name
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Member display name", Name="DisplayName", ParameterType="body")
+  public displayName: string;
 
-	/**
-	 * Role names to be applied
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Array", Description="Role names to be applied", Name="Roles", ParameterType="body")
-	public roles: string[];
+  /**
+   * Role names to be applied
+   */
+  // @DataMember
+  // @ApiMember(DataType="Array", Description="Role names to be applied", Name="Roles", ParameterType="body")
+  public roles: string[];
 
-	/**
-	 * Full permission tree
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Array", Description="Full permission tree", Name="RolesTree", ParameterType="body")
-	public rolesTree: UserRoleUpdateInput[];
+  /**
+   * Full permission tree
+   */
+  // @DataMember
+  // @ApiMember(DataType="Array", Description="Full permission tree", Name="RolesTree", ParameterType="body")
+  public rolesTree: UserRoleUpdateInput[];
 
-	/**
-	 * Meta details as JSON object
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Meta details as JSON object", Name="Meta", ParameterType="body")
-	public meta: string;
+  /**
+   * Meta details as JSON object
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Meta details as JSON object", Name="Meta", ParameterType="body")
+  public meta: string;
 
-	/**
-	 * Main user language
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Main user language", Name="Language", ParameterType="body")
-	public language: string;
+  /**
+   * Main user language
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Main user language", Name="Language", ParameterType="body")
+  public language: string;
 
-	/**
-	 * User's time zone
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's time zone", Name="TimeZone", ParameterType="body")
-	public timeZone: string;
+  /**
+   * User's time zone
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's time zone", Name="TimeZone", ParameterType="body")
+  public timeZone: string;
 
-	/**
-	 * Should user get marketing emails
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Should user get marketing emails", Name="SubscribeToNews", ParameterType="body")
-	public subscribeToNews?: boolean;
+  /**
+   * Should user get marketing emails
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Should user get marketing emails", Name="SubscribeToNews", ParameterType="body")
+  public subscribeToNews?: boolean;
 
-	/**
-	 * Marketing email types to unsubscribe from
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Array", Description="Marketing email types to unsubscribe from", Name="UnsubscribedNewsTags", ParameterType="body")
-	public unsubscribedNewsTags: string[];
+  /**
+   * Marketing email types to unsubscribe from
+   */
+  // @DataMember
+  // @ApiMember(DataType="Array", Description="Marketing email types to unsubscribe from", Name="UnsubscribedNewsTags", ParameterType="body")
+  public unsubscribedNewsTags: string[];
 
-	/**
-	 * User's country
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's country", Name="Country", ParameterType="body")
-	public country: string;
+  /**
+   * User's country
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's country", Name="Country", ParameterType="body")
+  public country: string;
 
-	/**
-	 * User's 2 letter country code
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's 2 letter country code", Name="CountryCode", ParameterType="body")
-	public countryCode: string;
+  /**
+   * User's 2 letter country code
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's 2 letter country code", Name="CountryCode", ParameterType="body")
+  public countryCode: string;
 
-	/**
-	 * User's state / province
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's state / province", Name="Area", ParameterType="body")
-	public area: string;
+  /**
+   * User's state / province
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's state / province", Name="Area", ParameterType="body")
+  public area: string;
 
-	/**
-	 * User's city
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's city", Name="City", ParameterType="body")
-	public city: string;
+  /**
+   * User's city
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's city", Name="City", ParameterType="body")
+  public city: string;
 
-	/**
-	 * User's street address
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's street address", Name="Address", ParameterType="body")
-	public address: string;
+  /**
+   * User's street address
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's street address", Name="Address", ParameterType="body")
+  public address: string;
 
-	/**
-	 * User's secondary street address
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's secondary street address", Name="Address2", ParameterType="body")
-	public address2: string;
+  /**
+   * User's secondary street address
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's secondary street address", Name="Address2", ParameterType="body")
+  public address2: string;
 
-	/**
-	 * User's phone number
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's phone number", Name="Phone", ParameterType="body")
-	public phone: string;
+  /**
+   * User's phone number
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's phone number", Name="Phone", ParameterType="body")
+  public phone: string;
 
-	/**
-	 * User's company
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's company", Name="Company", ParameterType="body")
-	public company: string;
+  /**
+   * User's company
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's company", Name="Company", ParameterType="body")
+  public company: string;
 
-	/**
-	 * User's company code
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's company code", Name="CompanyCode", ParameterType="body")
-	public companyCode: string;
+  /**
+   * User's company code
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's company code", Name="CompanyCode", ParameterType="body")
+  public companyCode: string;
 
-	/**
-	 * User's postal code
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's postal code", Name="PostalCode", ParameterType="body")
-	public postalCode: string;
+  /**
+   * User's postal code
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's postal code", Name="PostalCode", ParameterType="body")
+  public postalCode: string;
 
-	/**
-	 * User's gender
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's gender", Name="Gender", ParameterType="body")
-	public gender: string;
+  /**
+   * User's gender
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's gender", Name="Gender", ParameterType="body")
+  public gender: string;
 
-	/**
-	 * User's birthdate
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's birthdate", Name="BirthDate", ParameterType="body")
-	public birthDate: string;
+  /**
+   * User's birthdate
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's birthdate", Name="BirthDate", ParameterType="body")
+  public birthDate: string;
 
-	/**
-	 * User's zone
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's zone", Name="Zone", ParameterType="body")
-	public zone: string;
+  /**
+   * User's zone
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's zone", Name="Zone", ParameterType="body")
+  public zone: string;
 
-	public constructor(init?: Partial<UpdateUserRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UpdateUserRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -4522,171 +4522,171 @@ export class UpdateUserRequest extends CodeMashRequestBase {
 // @Api(Description="Membership")
 // @DataContract
 export class InviteUserRequest extends CodeMashRequestBase {
-	/**
-	 * Member display name
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Member display name", Name="DisplayName", ParameterType="form")
-	public displayName: string;
+  /**
+   * Member display name
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Member display name", Name="DisplayName", ParameterType="form")
+  public displayName: string;
 
-	/**
-	 * Email address
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Email address", IsRequired=true, Name="Email", ParameterType="form")
-	public email: string;
+  /**
+   * Email address
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Email address", IsRequired=true, Name="Email", ParameterType="form")
+  public email: string;
 
-	/**
-	 * Member first name
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Member first name", Name="FirstName", ParameterType="form")
-	public firstName: string;
+  /**
+   * Member first name
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Member first name", Name="FirstName", ParameterType="form")
+  public firstName: string;
 
-	/**
-	 * Member last name
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Member last name", Name="LastName", ParameterType="form")
-	public lastName: string;
+  /**
+   * Member last name
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Member last name", Name="LastName", ParameterType="form")
+  public lastName: string;
 
-	/**
-	 * Role names to be applied
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Array", Description="Role names to be applied", Name="Roles", ParameterType="form")
-	public roles: string[];
+  /**
+   * Role names to be applied
+   */
+  // @DataMember
+  // @ApiMember(DataType="Array", Description="Role names to be applied", Name="Roles", ParameterType="form")
+  public roles: string[];
 
-	/**
-	 * Full permission tree
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Array", Description="Full permission tree", Name="RolesTree", ParameterType="body")
-	public rolesTree: UserRoleUpdateInput[];
+  /**
+   * Full permission tree
+   */
+  // @DataMember
+  // @ApiMember(DataType="Array", Description="Full permission tree", Name="RolesTree", ParameterType="body")
+  public rolesTree: UserRoleUpdateInput[];
 
-	/**
-	 * Meta details as JSON object
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Meta details as JSON object", Name="Meta", ParameterType="form")
-	public meta: string;
+  /**
+   * Meta details as JSON object
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Meta details as JSON object", Name="Meta", ParameterType="form")
+  public meta: string;
 
-	/**
-	 * Main user language
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Main user language", Name="Language", ParameterType="form")
-	public language: string;
+  /**
+   * Main user language
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Main user language", Name="Language", ParameterType="form")
+  public language: string;
 
-	/**
-	 * User's time zone
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's time zone", Name="TimeZone", ParameterType="form")
-	public timeZone: string;
+  /**
+   * User's time zone
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's time zone", Name="TimeZone", ParameterType="form")
+  public timeZone: string;
 
-	/**
-	 * Should user get marketing emails
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Should user get marketing emails", Name="SubscribeToNews", ParameterType="form")
-	public subscribeToNews?: boolean;
+  /**
+   * Should user get marketing emails
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Should user get marketing emails", Name="SubscribeToNews", ParameterType="form")
+  public subscribeToNews?: boolean;
 
-	/**
-	 * User's country
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's country", Name="Country", ParameterType="body")
-	public country: string;
+  /**
+   * User's country
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's country", Name="Country", ParameterType="body")
+  public country: string;
 
-	/**
-	 * User's 2 letter country code
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's 2 letter country code", Name="CountryCode", ParameterType="body")
-	public countryCode: string;
+  /**
+   * User's 2 letter country code
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's 2 letter country code", Name="CountryCode", ParameterType="body")
+  public countryCode: string;
 
-	/**
-	 * User's state / province
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's state / province", Name="Area", ParameterType="body")
-	public area: string;
+  /**
+   * User's state / province
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's state / province", Name="Area", ParameterType="body")
+  public area: string;
 
-	/**
-	 * User's city
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's city", Name="City", ParameterType="body")
-	public city: string;
+  /**
+   * User's city
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's city", Name="City", ParameterType="body")
+  public city: string;
 
-	/**
-	 * User's street address
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's street address", Name="Address", ParameterType="body")
-	public address: string;
+  /**
+   * User's street address
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's street address", Name="Address", ParameterType="body")
+  public address: string;
 
-	/**
-	 * User's secondary street address
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's secondary street address", Name="Address2", ParameterType="body")
-	public address2: string;
+  /**
+   * User's secondary street address
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's secondary street address", Name="Address2", ParameterType="body")
+  public address2: string;
 
-	/**
-	 * User's phone number
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's phone number", Name="Phone", ParameterType="body")
-	public phone: string;
+  /**
+   * User's phone number
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's phone number", Name="Phone", ParameterType="body")
+  public phone: string;
 
-	/**
-	 * User's company
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's company", Name="Company", ParameterType="body")
-	public company: string;
+  /**
+   * User's company
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's company", Name="Company", ParameterType="body")
+  public company: string;
 
-	/**
-	 * User's company code
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's company code", Name="CompanyCode", ParameterType="body")
-	public companyCode: string;
+  /**
+   * User's company code
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's company code", Name="CompanyCode", ParameterType="body")
+  public companyCode: string;
 
-	/**
-	 * User's postal code
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's postal code", Name="PostalCode", ParameterType="body")
-	public postalCode: string;
+  /**
+   * User's postal code
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's postal code", Name="PostalCode", ParameterType="body")
+  public postalCode: string;
 
-	/**
-	 * User's gender
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's gender", Name="Gender", ParameterType="body")
-	public gender: string;
+  /**
+   * User's gender
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's gender", Name="Gender", ParameterType="body")
+  public gender: string;
 
-	/**
-	 * User's birthdate
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's birthdate", Name="BirthDate", ParameterType="body")
-	public birthDate: string;
+  /**
+   * User's birthdate
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's birthdate", Name="BirthDate", ParameterType="body")
+  public birthDate: string;
 
-	/**
-	 * User's zone
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's zone", Name="Zone", ParameterType="body")
-	public zone: string;
+  /**
+   * User's zone
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's zone", Name="Zone", ParameterType="body")
+  public zone: string;
 
-	public constructor(init?: Partial<InviteUserRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<InviteUserRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -4697,174 +4697,174 @@ export class InviteUserRequest extends CodeMashRequestBase {
 // @Api(Description="Membership")
 // @DataContract
 export class RegisterGuestUserRequest
-	extends CodeMashRequestBase
-	implements IReturn<RegisterGuestUserResponse> {
-	/**
-	 * Member display name
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Member display name", Name="DisplayName", ParameterType="body")
-	public displayName: string;
+  extends CodeMashRequestBase
+  implements IReturn<RegisterGuestUserResponse> {
+  /**
+   * Member display name
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Member display name", Name="DisplayName", ParameterType="body")
+  public displayName: string;
 
-	/**
-	 * Email address
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Email address", IsRequired=true, Name="Email", ParameterType="body")
-	public email: string;
+  /**
+   * Email address
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Email address", IsRequired=true, Name="Email", ParameterType="body")
+  public email: string;
 
-	/**
-	 * Member first name
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Member first name", Name="FirstName", ParameterType="body")
-	public firstName: string;
+  /**
+   * Member first name
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Member first name", Name="FirstName", ParameterType="body")
+  public firstName: string;
 
-	/**
-	 * Member last name
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Member last name", Name="LastName", ParameterType="body")
-	public lastName: string;
+  /**
+   * Member last name
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Member last name", Name="LastName", ParameterType="body")
+  public lastName: string;
 
-	/**
-	 * Meta details as JSON object
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Meta details as JSON object", Name="Meta", ParameterType="body")
-	public meta: string;
+  /**
+   * Meta details as JSON object
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Meta details as JSON object", Name="Meta", ParameterType="body")
+  public meta: string;
 
-	/**
-	 * Main user language
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Main user language", Name="Language", ParameterType="body")
-	public language: string;
+  /**
+   * Main user language
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Main user language", Name="Language", ParameterType="body")
+  public language: string;
 
-	/**
-	 * User's time zone
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's time zone", Name="TimeZone", ParameterType="body")
-	public timeZone: string;
+  /**
+   * User's time zone
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's time zone", Name="TimeZone", ParameterType="body")
+  public timeZone: string;
 
-	/**
-	 * Should user get marketing emails
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Should user get marketing emails", Name="SubscribeToNews", ParameterType="body")
-	public subscribeToNews?: boolean;
+  /**
+   * Should user get marketing emails
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Should user get marketing emails", Name="SubscribeToNews", ParameterType="body")
+  public subscribeToNews?: boolean;
 
-	/**
-	 * User's country
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's country", Name="Country", ParameterType="body")
-	public country: string;
+  /**
+   * User's country
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's country", Name="Country", ParameterType="body")
+  public country: string;
 
-	/**
-	 * User's 2 letter country code
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's 2 letter country code", Name="CountryCode", ParameterType="body")
-	public countryCode: string;
+  /**
+   * User's 2 letter country code
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's 2 letter country code", Name="CountryCode", ParameterType="body")
+  public countryCode: string;
 
-	/**
-	 * User's state / province
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's state / province", Name="Area", ParameterType="body")
-	public area: string;
+  /**
+   * User's state / province
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's state / province", Name="Area", ParameterType="body")
+  public area: string;
 
-	/**
-	 * User's city
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's city", Name="City", ParameterType="body")
-	public city: string;
+  /**
+   * User's city
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's city", Name="City", ParameterType="body")
+  public city: string;
 
-	/**
-	 * User's street address
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's street address", Name="Address", ParameterType="body")
-	public address: string;
+  /**
+   * User's street address
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's street address", Name="Address", ParameterType="body")
+  public address: string;
 
-	/**
-	 * User's secondary street address
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's secondary street address", Name="Address2", ParameterType="body")
-	public address2: string;
+  /**
+   * User's secondary street address
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's secondary street address", Name="Address2", ParameterType="body")
+  public address2: string;
 
-	/**
-	 * User's phone number
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's phone number", Name="Phone", ParameterType="body")
-	public phone: string;
+  /**
+   * User's phone number
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's phone number", Name="Phone", ParameterType="body")
+  public phone: string;
 
-	/**
-	 * User's company
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's company", Name="Company", ParameterType="body")
-	public company: string;
+  /**
+   * User's company
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's company", Name="Company", ParameterType="body")
+  public company: string;
 
-	/**
-	 * User's company code
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's company code", Name="CompanyCode", ParameterType="body")
-	public companyCode: string;
+  /**
+   * User's company code
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's company code", Name="CompanyCode", ParameterType="body")
+  public companyCode: string;
 
-	/**
-	 * User's postal code
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's postal code", Name="PostalCode", ParameterType="body")
-	public postalCode: string;
+  /**
+   * User's postal code
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's postal code", Name="PostalCode", ParameterType="body")
+  public postalCode: string;
 
-	/**
-	 * User's gender
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's gender", Name="Gender", ParameterType="body")
-	public gender: string;
+  /**
+   * User's gender
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's gender", Name="Gender", ParameterType="body")
+  public gender: string;
 
-	/**
-	 * User's birthdate
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's birthdate", Name="BirthDate", ParameterType="body")
-	public birthDate: string;
+  /**
+   * User's birthdate
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's birthdate", Name="BirthDate", ParameterType="body")
+  public birthDate: string;
 
-	/**
-	 * Full permission tree
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Array", Description="Full permission tree", Name="RolesTree", ParameterType="body")
-	public rolesTree: UserRoleUpdateInput[];
+  /**
+   * Full permission tree
+   */
+  // @DataMember
+  // @ApiMember(DataType="Array", Description="Full permission tree", Name="RolesTree", ParameterType="body")
+  public rolesTree: UserRoleUpdateInput[];
 
-	/**
-	 * User's zone
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's zone", Name="Zone", ParameterType="body")
-	public zone: string;
+  /**
+   * User's zone
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's zone", Name="Zone", ParameterType="body")
+  public zone: string;
 
-	public constructor(init?: Partial<RegisterGuestUserRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<RegisterGuestUserRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new RegisterGuestUserResponse();
-	}
+  public createResponse() {
+    return new RegisterGuestUserResponse();
+  }
 
-	public getTypeName() {
-		return 'RegisterGuestUserRequest';
-	}
+  public getTypeName() {
+    return 'RegisterGuestUserRequest';
+  }
 }
 
 /**
@@ -4875,192 +4875,192 @@ export class RegisterGuestUserRequest
 // @Api(Description="Membership")
 // @DataContract
 export class RegisterUserRequest extends CodeMashRequestBase {
-	/**
-	 * Member display name
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Member display name", Name="DisplayName", ParameterType="body")
-	public displayName: string;
+  /**
+   * Member display name
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Member display name", Name="DisplayName", ParameterType="body")
+  public displayName: string;
 
-	/**
-	 * Email address
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Email address", Name="Email", ParameterType="body")
-	public email: string;
+  /**
+   * Email address
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Email address", Name="Email", ParameterType="body")
+  public email: string;
 
-	/**
-	 * Username
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Username", Name="UserName", ParameterType="body")
-	public userName: string;
+  /**
+   * Username
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Username", Name="UserName", ParameterType="body")
+  public userName: string;
 
-	/**
-	 * Member first name
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Member first name", Name="FirstName", ParameterType="body")
-	public firstName: string;
+  /**
+   * Member first name
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Member first name", Name="FirstName", ParameterType="body")
+  public firstName: string;
 
-	/**
-	 * Member last name
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Member last name", Name="LastName", ParameterType="body")
-	public lastName: string;
+  /**
+   * Member last name
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Member last name", Name="LastName", ParameterType="body")
+  public lastName: string;
 
-	/**
-	 * Password
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Password", IsRequired=true, Name="Password", ParameterType="body")
-	public password: string;
+  /**
+   * Password
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Password", IsRequired=true, Name="Password", ParameterType="body")
+  public password: string;
 
-	/**
-	 * Role names to be applied
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Array", Description="Role names to be applied", Name="Roles", ParameterType="body")
-	public roles: string[];
+  /**
+   * Role names to be applied
+   */
+  // @DataMember
+  // @ApiMember(DataType="Array", Description="Role names to be applied", Name="Roles", ParameterType="body")
+  public roles: string[];
 
-	/**
-	 * Full permission tree
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Array", Description="Full permission tree", Name="RolesTree", ParameterType="body")
-	public rolesTree: UserRoleUpdateInput[];
+  /**
+   * Full permission tree
+   */
+  // @DataMember
+  // @ApiMember(DataType="Array", Description="Full permission tree", Name="RolesTree", ParameterType="body")
+  public rolesTree: UserRoleUpdateInput[];
 
-	/**
-	 * Login immediately ?
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Login immediately ?", Name="AutoLogin", ParameterType="body")
-	public autoLogin: boolean;
+  /**
+   * Login immediately ?
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Login immediately ?", Name="AutoLogin", ParameterType="body")
+  public autoLogin: boolean;
 
-	/**
-	 * Meta details as JSON object
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Meta details as JSON object", Name="Meta", ParameterType="body")
-	public meta: string;
+  /**
+   * Meta details as JSON object
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Meta details as JSON object", Name="Meta", ParameterType="body")
+  public meta: string;
 
-	/**
-	 * Main user language
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Main user language", Name="Language", ParameterType="body")
-	public language: string;
+  /**
+   * Main user language
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Main user language", Name="Language", ParameterType="body")
+  public language: string;
 
-	/**
-	 * User's time zone
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's time zone", Name="TimeZone", ParameterType="body")
-	public timeZone: string;
+  /**
+   * User's time zone
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's time zone", Name="TimeZone", ParameterType="body")
+  public timeZone: string;
 
-	/**
-	 * Should user get marketing emails
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Should user get marketing emails", Name="SubscribeToNews", ParameterType="body")
-	public subscribeToNews?: boolean;
+  /**
+   * Should user get marketing emails
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Should user get marketing emails", Name="SubscribeToNews", ParameterType="body")
+  public subscribeToNews?: boolean;
 
-	/**
-	 * User's country
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's country", Name="Country", ParameterType="body")
-	public country: string;
+  /**
+   * User's country
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's country", Name="Country", ParameterType="body")
+  public country: string;
 
-	/**
-	 * User's 2 letter country code
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's 2 letter country code", Name="CountryCode", ParameterType="body")
-	public countryCode: string;
+  /**
+   * User's 2 letter country code
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's 2 letter country code", Name="CountryCode", ParameterType="body")
+  public countryCode: string;
 
-	/**
-	 * User's state / province
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's state / province", Name="Area", ParameterType="body")
-	public area: string;
+  /**
+   * User's state / province
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's state / province", Name="Area", ParameterType="body")
+  public area: string;
 
-	/**
-	 * User's city
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's city", Name="City", ParameterType="body")
-	public city: string;
+  /**
+   * User's city
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's city", Name="City", ParameterType="body")
+  public city: string;
 
-	/**
-	 * User's street address
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's street address", Name="Address", ParameterType="body")
-	public address: string;
+  /**
+   * User's street address
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's street address", Name="Address", ParameterType="body")
+  public address: string;
 
-	/**
-	 * User's secondary street address
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's secondary street address", Name="Address2", ParameterType="body")
-	public address2: string;
+  /**
+   * User's secondary street address
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's secondary street address", Name="Address2", ParameterType="body")
+  public address2: string;
 
-	/**
-	 * User's phone number
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's phone number", Name="Phone", ParameterType="body")
-	public phone: string;
+  /**
+   * User's phone number
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's phone number", Name="Phone", ParameterType="body")
+  public phone: string;
 
-	/**
-	 * User's company
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's company", Name="Company", ParameterType="body")
-	public company: string;
+  /**
+   * User's company
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's company", Name="Company", ParameterType="body")
+  public company: string;
 
-	/**
-	 * User's company code
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's company code", Name="CompanyCode", ParameterType="body")
-	public companyCode: string;
+  /**
+   * User's company code
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's company code", Name="CompanyCode", ParameterType="body")
+  public companyCode: string;
 
-	/**
-	 * User's postal code
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's postal code", Name="PostalCode", ParameterType="body")
-	public postalCode: string;
+  /**
+   * User's postal code
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's postal code", Name="PostalCode", ParameterType="body")
+  public postalCode: string;
 
-	/**
-	 * User's gender
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's gender", Name="Gender", ParameterType="body")
-	public gender: string;
+  /**
+   * User's gender
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's gender", Name="Gender", ParameterType="body")
+  public gender: string;
 
-	/**
-	 * User's birthdate
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's birthdate", Name="BirthDate", ParameterType="body")
-	public birthDate: string;
+  /**
+   * User's birthdate
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's birthdate", Name="BirthDate", ParameterType="body")
+  public birthDate: string;
 
-	/**
-	 * User's zone
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User's zone", Name="Zone", ParameterType="body")
-	public zone: string;
+  /**
+   * User's zone
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User's zone", Name="Zone", ParameterType="body")
+  public zone: string;
 
-	public constructor(init?: Partial<RegisterUserRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<RegisterUserRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -5071,34 +5071,34 @@ export class RegisterUserRequest extends CodeMashRequestBase {
 // @Api(Description="Membership")
 // @DataContract
 export class ValidatePasswordTokenRequest
-	extends RequestBase
-	implements IReturn<ValidatePasswordTokenResponse> {
-	/**
-	 * Secret token received by email for password reset
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Secret token received by email for password reset", IsRequired=true, Name="Token", ParameterType="query")
-	public token: string;
+  extends RequestBase
+  implements IReturn<ValidatePasswordTokenResponse> {
+  /**
+   * Secret token received by email for password reset
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Secret token received by email for password reset", IsRequired=true, Name="Token", ParameterType="query")
+  public token: string;
 
-	/**
-	 * If true, includes project details in response
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If true, includes project details in response", IsRequired=true, Name="IncludeProject", ParameterType="query")
-	public includeProject: boolean;
+  /**
+   * If true, includes project details in response
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If true, includes project details in response", IsRequired=true, Name="IncludeProject", ParameterType="query")
+  public includeProject: boolean;
 
-	public constructor(init?: Partial<ValidatePasswordTokenRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<ValidatePasswordTokenRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new ValidatePasswordTokenResponse();
-	}
+  public createResponse() {
+    return new ValidatePasswordTokenResponse();
+  }
 
-	public getTypeName() {
-		return 'ValidatePasswordTokenRequest';
-	}
+  public getTypeName() {
+    return 'ValidatePasswordTokenRequest';
+  }
 }
 
 /**
@@ -5109,27 +5109,27 @@ export class ValidatePasswordTokenRequest
 // @Api(Description="Membership")
 // @DataContract
 export class CreatePasswordResetRequest
-	extends CodeMashRequestBase
-	implements IReturn<CreatePasswordResetResponse> {
-	/**
-	 * User login email
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="User login email", IsRequired=true, Name="Email", ParameterType="body")
-	public email: string;
+  extends CodeMashRequestBase
+  implements IReturn<CreatePasswordResetResponse> {
+  /**
+   * User login email
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="User login email", IsRequired=true, Name="Email", ParameterType="body")
+  public email: string;
 
-	public constructor(init?: Partial<CreatePasswordResetRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CreatePasswordResetRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new CreatePasswordResetResponse();
-	}
+  public createResponse() {
+    return new CreatePasswordResetResponse();
+  }
 
-	public getTypeName() {
-		return 'CreatePasswordResetRequest';
-	}
+  public getTypeName() {
+    return 'CreatePasswordResetRequest';
+  }
 }
 
 /**
@@ -5140,31 +5140,31 @@ export class CreatePasswordResetRequest
 // @Api(Description="Membership")
 // @DataContract
 export class ResetPasswordRequest extends RequestBase {
-	/**
-	 * Secret token received by email for password reset
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Secret token received by email for password reset", IsRequired=true, Name="Token", ParameterType="body")
-	public token: string;
+  /**
+   * Secret token received by email for password reset
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Secret token received by email for password reset", IsRequired=true, Name="Token", ParameterType="body")
+  public token: string;
 
-	/**
-	 * New user password
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="New user password", IsRequired=true, Name="Password", ParameterType="body")
-	public password: string;
+  /**
+   * New user password
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="New user password", IsRequired=true, Name="Password", ParameterType="body")
+  public password: string;
 
-	/**
-	 * New repeated user password
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="New repeated user password", IsRequired=true, Name="RepeatedPassword", ParameterType="body")
-	public repeatedPassword: string;
+  /**
+   * New repeated user password
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="New repeated user password", IsRequired=true, Name="RepeatedPassword", ParameterType="body")
+  public repeatedPassword: string;
 
-	public constructor(init?: Partial<ResetPasswordRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<ResetPasswordRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -5175,34 +5175,34 @@ export class ResetPasswordRequest extends RequestBase {
 // @Api(Description="Membership")
 // @DataContract
 export class ValidateInvitationTokenRequest
-	extends RequestBase
-	implements IReturn<ValidateInvitationTokenResponse> {
-	/**
-	 * Secret token received by email for invitation
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Secret token received by email for invitation", IsRequired=true, Name="Token", ParameterType="query")
-	public token: string;
+  extends RequestBase
+  implements IReturn<ValidateInvitationTokenResponse> {
+  /**
+   * Secret token received by email for invitation
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Secret token received by email for invitation", IsRequired=true, Name="Token", ParameterType="query")
+  public token: string;
 
-	/**
-	 * If true, includes project details in response
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If true, includes project details in response", IsRequired=true, Name="IncludeProject", ParameterType="query")
-	public includeProject: boolean;
+  /**
+   * If true, includes project details in response
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If true, includes project details in response", IsRequired=true, Name="IncludeProject", ParameterType="query")
+  public includeProject: boolean;
 
-	public constructor(init?: Partial<ValidateInvitationTokenRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<ValidateInvitationTokenRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new ValidateInvitationTokenResponse();
-	}
+  public createResponse() {
+    return new ValidateInvitationTokenResponse();
+  }
 
-	public getTypeName() {
-		return 'ValidateInvitationTokenRequest';
-	}
+  public getTypeName() {
+    return 'ValidateInvitationTokenRequest';
+  }
 }
 
 /**
@@ -5213,17 +5213,17 @@ export class ValidateInvitationTokenRequest
 // @Api(Description="Membership")
 // @DataContract
 export class VerifyUserRequest extends RequestBase {
-	/**
-	 * Secret token received by email for registration confirmation
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Secret token received by email for registration confirmation", IsRequired=true, Name="Token", ParameterType="body")
-	public token: string;
+  /**
+   * Secret token received by email for registration confirmation
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Secret token received by email for registration confirmation", IsRequired=true, Name="Token", ParameterType="body")
+  public token: string;
 
-	public constructor(init?: Partial<VerifyUserRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<VerifyUserRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -5234,31 +5234,31 @@ export class VerifyUserRequest extends RequestBase {
 // @Api(Description="Membership")
 // @DataContract
 export class VerifyUserInvitationRequest extends RequestBase {
-	/**
-	 * Secret token received by email for invitation confirmation
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Secret token received by email for invitation confirmation", IsRequired=true, Name="Token", ParameterType="body")
-	public token: string;
+  /**
+   * Secret token received by email for invitation confirmation
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Secret token received by email for invitation confirmation", IsRequired=true, Name="Token", ParameterType="body")
+  public token: string;
 
-	/**
-	 * New user password
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="New user password", IsRequired=true, Name="Password", ParameterType="body")
-	public password: string;
+  /**
+   * New user password
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="New user password", IsRequired=true, Name="Password", ParameterType="body")
+  public password: string;
 
-	/**
-	 * New repeated user password
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="New repeated user password", IsRequired=true, Name="RepeatedPassword", ParameterType="body")
-	public repeatedPassword: string;
+  /**
+   * New repeated user password
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="New repeated user password", IsRequired=true, Name="RepeatedPassword", ParameterType="body")
+  public repeatedPassword: string;
 
-	public constructor(init?: Partial<VerifyUserInvitationRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<VerifyUserInvitationRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -5270,27 +5270,27 @@ export class VerifyUserInvitationRequest extends RequestBase {
 // @Api(Description="Deletes an email from queue")
 // @DataContract
 export class DeleteEmailRequest
-	extends CodeMashRequestBase
-	implements IReturn<DeleteEmailResponse> {
-	/**
-	 * ID of an email to delete
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="ID of an email to delete", IsRequired=true, Name="Id", ParameterType="path")
-	public id: string;
+  extends CodeMashRequestBase
+  implements IReturn<DeleteEmailResponse> {
+  /**
+   * ID of an email to delete
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="ID of an email to delete", IsRequired=true, Name="Id", ParameterType="path")
+  public id: string;
 
-	public constructor(init?: Partial<DeleteEmailRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<DeleteEmailRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new DeleteEmailResponse();
-	}
+  public createResponse() {
+    return new DeleteEmailResponse();
+  }
 
-	public getTypeName() {
-		return 'DeleteEmailRequest';
-	}
+  public getTypeName() {
+    return 'DeleteEmailRequest';
+  }
 }
 
 /**
@@ -5301,101 +5301,101 @@ export class DeleteEmailRequest
 // @Api(Description="Sends an email message")
 // @DataContract
 export class SendEmailRequest extends CodeMashRequestBase {
-	/**
-	 * ID of a template to use
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="ID of a template to use", IsRequired=true, Name="TemplateId", ParameterType="body")
-	public templateId: string;
+  /**
+   * ID of a template to use
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="ID of a template to use", IsRequired=true, Name="TemplateId", ParameterType="body")
+  public templateId: string;
 
-	/**
-	 * Recipients' email addresses. Emails, Users or Roles are required.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Array", Description="Recipients' email addresses. Emails, Users or Roles are required.", Name="Emails", ParameterType="body")
-	public emails: string[];
+  /**
+   * Recipients' email addresses. Emails, Users or Roles are required.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Array", Description="Recipients' email addresses. Emails, Users or Roles are required.", Name="Emails", ParameterType="body")
+  public emails: string[];
 
-	/**
-	 * Recipients' user IDs. Emails, Users or Roles are required.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Array", Description="Recipients' user IDs. Emails, Users or Roles are required.", Name="Users", ParameterType="body")
-	public users: string[];
+  /**
+   * Recipients' user IDs. Emails, Users or Roles are required.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Array", Description="Recipients' user IDs. Emails, Users or Roles are required.", Name="Users", ParameterType="body")
+  public users: string[];
 
-	/**
-	 * Recipients' roles. Emails, Users or Roles are required.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Array", Description="Recipients' roles. Emails, Users or Roles are required.", Name="Roles", ParameterType="body")
-	public roles: string[];
+  /**
+   * Recipients' roles. Emails, Users or Roles are required.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Array", Description="Recipients' roles. Emails, Users or Roles are required.", Name="Roles", ParameterType="body")
+  public roles: string[];
 
-	/**
-	 * CC recipients' email addresses
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Array", Description="CC recipients' email addresses", Name="CcEmails", ParameterType="body")
-	public ccEmails: string[];
+  /**
+   * CC recipients' email addresses
+   */
+  // @DataMember
+  // @ApiMember(DataType="Array", Description="CC recipients' email addresses", Name="CcEmails", ParameterType="body")
+  public ccEmails: string[];
 
-	/**
-	 * CC recipients' user IDs
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Array", Description="CC recipients' user IDs", Name="CcUsers", ParameterType="body")
-	public ccUsers: string[];
+  /**
+   * CC recipients' user IDs
+   */
+  // @DataMember
+  // @ApiMember(DataType="Array", Description="CC recipients' user IDs", Name="CcUsers", ParameterType="body")
+  public ccUsers: string[];
 
-	/**
-	 * BCC recipients' email addresses
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Array", Description="BCC recipients' email addresses", Name="BccEmails", ParameterType="body")
-	public bccEmails: string[];
+  /**
+   * BCC recipients' email addresses
+   */
+  // @DataMember
+  // @ApiMember(DataType="Array", Description="BCC recipients' email addresses", Name="BccEmails", ParameterType="body")
+  public bccEmails: string[];
 
-	/**
-	 * BCC recipients' user IDs
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Array", Description="BCC recipients' user IDs", Name="BccUsers", ParameterType="body")
-	public bccUsers: string[];
+  /**
+   * BCC recipients' user IDs
+   */
+  // @DataMember
+  // @ApiMember(DataType="Array", Description="BCC recipients' user IDs", Name="BccUsers", ParameterType="body")
+  public bccUsers: string[];
 
-	/**
-	 * Custom tokens to inject into template
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Object", Description="Custom tokens to inject into template", Name="Tokens", ParameterType="body")
-	public tokens: {[index: string]: string};
+  /**
+   * Custom tokens to inject into template
+   */
+  // @DataMember
+  // @ApiMember(DataType="Object", Description="Custom tokens to inject into template", Name="Tokens", ParameterType="body")
+  public tokens: { [index: string]: string };
 
-	/**
-	 * Amount of milliseconds to postpone sending the email
-	 */
-	// @DataMember
-	// @ApiMember(DataType="long", Description="Amount of milliseconds to postpone sending the email", Name="Postpone", ParameterType="body")
-	public postpone?: number;
+  /**
+   * Amount of milliseconds to postpone sending the email
+   */
+  // @DataMember
+  // @ApiMember(DataType="long", Description="Amount of milliseconds to postpone sending the email", Name="Postpone", ParameterType="body")
+  public postpone?: number;
 
-	/**
-	 * If true, sends an email by recipient's time zone. Postpone needs to be set for this to have an effect. Requires Users or Roles recipients. Default - true
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If true, sends an email by recipient's time zone. Postpone needs to be set for this to have an effect. Requires Users or Roles recipients. Default - true", Name="RespectTimeZone", ParameterType="body")
-	public respectTimeZone: boolean;
+  /**
+   * If true, sends an email by recipient's time zone. Postpone needs to be set for this to have an effect. Requires Users or Roles recipients. Default - true
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If true, sends an email by recipient's time zone. Postpone needs to be set for this to have an effect. Requires Users or Roles recipients. Default - true", Name="RespectTimeZone", ParameterType="body")
+  public respectTimeZone: boolean;
 
-	/**
-	 * If true, will try to send an email using a language from CultureCode instead of user's language
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If true, will try to send an email using a language from CultureCode instead of user's language", Name="ForceRequestLanguage", ParameterType="body")
-	public forceRequestLanguage: boolean;
+  /**
+   * If true, will try to send an email using a language from CultureCode instead of user's language
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If true, will try to send an email using a language from CultureCode instead of user's language", Name="ForceRequestLanguage", ParameterType="body")
+  public forceRequestLanguage: boolean;
 
-	/**
-	 * File IDs to attach to email message
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Array", Description="File IDs to attach to email message", Name="Attachments", ParameterType="body")
-	public attachments: string[];
+  /**
+   * File IDs to attach to email message
+   */
+  // @DataMember
+  // @ApiMember(DataType="Array", Description="File IDs to attach to email message", Name="Attachments", ParameterType="body")
+  public attachments: string[];
 
-	public constructor(init?: Partial<SendEmailRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<SendEmailRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -5406,76 +5406,76 @@ export class SendEmailRequest extends CodeMashRequestBase {
 // @Api(Description="Registers notification device which can receive push notifications")
 // @DataContract
 export class CreateDeviceRequest
-	extends CodeMashRequestBase
-	implements IReturn<CreateDeviceResponse> {
-	/**
-	 * UserId. Parameter can be nullable, but if you provide it, device will be combined with the one of membership users.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="UserId. Parameter can be nullable, but if you provide it, device will be combined with the one of membership users.", Name="UserId", ParameterType="form")
-	public userId?: string;
+  extends CodeMashRequestBase
+  implements IReturn<CreateDeviceResponse> {
+  /**
+   * UserId. Parameter can be nullable, but if you provide it, device will be combined with the one of membership users.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="UserId. Parameter can be nullable, but if you provide it, device will be combined with the one of membership users.", Name="UserId", ParameterType="form")
+  public userId?: string;
 
-	/**
-	 * Device operating system
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Device operating system", Name="OperatingSystem", ParameterType="body")
-	public operatingSystem: string;
+  /**
+   * Device operating system
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Device operating system", Name="OperatingSystem", ParameterType="body")
+  public operatingSystem: string;
 
-	/**
-	 * Device brand
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Device brand", Name="Brand", ParameterType="body")
-	public brand: string;
+  /**
+   * Device brand
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Device brand", Name="Brand", ParameterType="body")
+  public brand: string;
 
-	/**
-	 * Device name
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Device name", Name="DeviceName", ParameterType="body")
-	public deviceName: string;
+  /**
+   * Device name
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Device name", Name="DeviceName", ParameterType="body")
+  public deviceName: string;
 
-	/**
-	 * Device timezone, expects to get a TZ database name
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Device timezone, expects to get a TZ database name", Name="TimeZone", ParameterType="body")
-	public timeZone: string;
+  /**
+   * Device timezone, expects to get a TZ database name
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Device timezone, expects to get a TZ database name", Name="TimeZone", ParameterType="body")
+  public timeZone: string;
 
-	/**
-	 * Device language, expects to get a 2 letter identifier
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Device language, expects to get a 2 letter identifier", Name="Language", ParameterType="body")
-	public language: string;
+  /**
+   * Device language, expects to get a 2 letter identifier
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Device language, expects to get a 2 letter identifier", Name="Language", ParameterType="body")
+  public language: string;
 
-	/**
-	 * Device locale
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Device locale", Name="Locale", ParameterType="body")
-	public locale: string;
+  /**
+   * Device locale
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Device locale", Name="Locale", ParameterType="body")
+  public locale: string;
 
-	/**
-	 * Meta information that comes from device.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Dictionary", Description="Meta information that comes from device.", Name="Meta", ParameterType="body")
-	public meta: {[index: string]: string};
+  /**
+   * Meta information that comes from device.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Dictionary", Description="Meta information that comes from device.", Name="Meta", ParameterType="body")
+  public meta: { [index: string]: string };
 
-	public constructor(init?: Partial<CreateDeviceRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CreateDeviceRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new CreateDeviceResponse();
-	}
+  public createResponse() {
+    return new CreateDeviceResponse();
+  }
 
-	public getTypeName() {
-		return 'CreateDeviceRequest';
-	}
+  public getTypeName() {
+    return 'CreateDeviceRequest';
+  }
 }
 
 /**
@@ -5486,17 +5486,17 @@ export class CreateDeviceRequest
 // @Api(Description="Deletes the device from push notifications recipients list.")
 // @DataContract
 export class DeleteDeviceRequest extends CodeMashRequestBase {
-	/**
-	 * Device Id or device key
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="Device Id or device key", IsRequired=true, Name="Id", ParameterType="path")
-	public id: string;
+  /**
+   * Device Id or device key
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="Device Id or device key", IsRequired=true, Name="Id", ParameterType="path")
+  public id: string;
 
-	public constructor(init?: Partial<DeleteDeviceRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<DeleteDeviceRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -5507,27 +5507,27 @@ export class DeleteDeviceRequest extends CodeMashRequestBase {
 // @Api(Description="Gets the device which can receive push notifications.")
 // @DataContract
 export class GetDeviceRequest
-	extends CodeMashRequestBase
-	implements IReturn<GetDeviceResponse> {
-	/**
-	 * Device Id or device key
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="Device Id or device key", IsRequired=true, Name="Id", ParameterType="path")
-	public id: string;
+  extends CodeMashRequestBase
+  implements IReturn<GetDeviceResponse> {
+  /**
+   * Device Id or device key
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="Device Id or device key", IsRequired=true, Name="Id", ParameterType="path")
+  public id: string;
 
-	public constructor(init?: Partial<GetDeviceRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetDeviceRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new GetDeviceResponse();
-	}
+  public createResponse() {
+    return new GetDeviceResponse();
+  }
 
-	public getTypeName() {
-		return 'GetDeviceRequest';
-	}
+  public getTypeName() {
+    return 'GetDeviceRequest';
+  }
 }
 
 /**
@@ -5538,27 +5538,27 @@ export class GetDeviceRequest
 // @Api(Description="Gets mobile devices")
 // @DataContract
 export class GetDevicesRequest
-	extends CodeMashListRequestBase
-	implements IReturn<GetDevicesResponse> {
-	/**
-	 * User ID of who's devices to get.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="User ID of who's devices to get.", Name="UserId", ParameterType="query")
-	public userId?: string;
+  extends CodeMashListRequestBase
+  implements IReturn<GetDevicesResponse> {
+  /**
+   * User ID of who's devices to get.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="User ID of who's devices to get.", Name="UserId", ParameterType="query")
+  public userId?: string;
 
-	public constructor(init?: Partial<GetDevicesRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetDevicesRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new GetDevicesResponse();
-	}
+  public createResponse() {
+    return new GetDevicesResponse();
+  }
 
-	public getTypeName() {
-		return 'GetDevicesRequest';
-	}
+  public getTypeName() {
+    return 'GetDevicesRequest';
+  }
 }
 
 /**
@@ -5569,34 +5569,34 @@ export class GetDevicesRequest
 // @Api(Description="Deletes push notification token")
 // @DataContract
 export class DeleteDeviceTokenRequest
-	extends CodeMashRequestBase
-	implements IReturn<DeleteDeviceTokenResponse> {
-	/**
-	 * Device Id
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="Device Id", IsRequired=true, Name="Id", ParameterType="path")
-	public id: string;
+  extends CodeMashRequestBase
+  implements IReturn<DeleteDeviceTokenResponse> {
+  /**
+   * Device Id
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="Device Id", IsRequired=true, Name="Id", ParameterType="path")
+  public id: string;
 
-	/**
-	 * Device key
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Device key", Name="DeviceKey", ParameterType="query")
-	public deviceKey: string;
+  /**
+   * Device key
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Device key", Name="DeviceKey", ParameterType="query")
+  public deviceKey: string;
 
-	public constructor(init?: Partial<DeleteDeviceTokenRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<DeleteDeviceTokenRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new DeleteDeviceTokenResponse();
-	}
+  public createResponse() {
+    return new DeleteDeviceTokenResponse();
+  }
 
-	public getTypeName() {
-		return 'DeleteDeviceTokenRequest';
-	}
+  public getTypeName() {
+    return 'DeleteDeviceTokenRequest';
+  }
 }
 
 /**
@@ -5607,104 +5607,104 @@ export class DeleteDeviceTokenRequest
 // @Api(Description="Registers One Signal push notification token")
 // @DataContract
 export class RegisterDeviceTokenRequest
-	extends CodeMashRequestBase
-	implements IReturn<RegisterDeviceTokenResponse> {
-	/**
-	 * Notification provider. Can be "Expo", "OneSignal", "Firebase"
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Notification provider. Can be \"Expo\", \"OneSignal\", \"Firebase\"", Name="Provider", ParameterType="body")
-	public provider: string;
+  extends CodeMashRequestBase
+  implements IReturn<RegisterDeviceTokenResponse> {
+  /**
+   * Notification provider. Can be "Expo", "OneSignal", "Firebase"
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Notification provider. Can be \"Expo\", \"OneSignal\", \"Firebase\"", Name="Provider", ParameterType="body")
+  public provider: string;
 
-	/**
-	 * Push account ID. If you have more than 1 account for provider pass this instead.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="Push account ID. If you have more than 1 account for provider pass this instead.", Name="AccountId", ParameterType="body")
-	public accountId?: string;
+  /**
+   * Push account ID. If you have more than 1 account for provider pass this instead.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="Push account ID. If you have more than 1 account for provider pass this instead.", Name="AccountId", ParameterType="body")
+  public accountId?: string;
 
-	/**
-	 * Identifier for device depending on provider (device ID, player ID)
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Identifier for device depending on provider (device ID, player ID)", IsRequired=true, Name="Token", ParameterType="body")
-	public token: string;
+  /**
+   * Identifier for device depending on provider (device ID, player ID)
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Identifier for device depending on provider (device ID, player ID)", IsRequired=true, Name="Token", ParameterType="body")
+  public token: string;
 
-	/**
-	 * User ID to attach this token to.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="User ID to attach this token to.", Name="UserId", ParameterType="body")
-	public userId?: string;
+  /**
+   * User ID to attach this token to.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="User ID to attach this token to.", Name="UserId", ParameterType="body")
+  public userId?: string;
 
-	/**
-	 * Device ID to attach this token to. New device will be created if this is null.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="Device ID to attach this token to. New device will be created if this is null.", Name="DeviceId", ParameterType="body")
-	public deviceId?: string;
+  /**
+   * Device ID to attach this token to. New device will be created if this is null.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="Device ID to attach this token to. New device will be created if this is null.", Name="DeviceId", ParameterType="body")
+  public deviceId?: string;
 
-	/**
-	 * Device operating system
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Device operating system", Name="OperatingSystem", ParameterType="body")
-	public operatingSystem: string;
+  /**
+   * Device operating system
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Device operating system", Name="OperatingSystem", ParameterType="body")
+  public operatingSystem: string;
 
-	/**
-	 * Device brand
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Device brand", Name="Brand", ParameterType="body")
-	public brand: string;
+  /**
+   * Device brand
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Device brand", Name="Brand", ParameterType="body")
+  public brand: string;
 
-	/**
-	 * Device name
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Device name", Name="DeviceName", ParameterType="body")
-	public deviceName: string;
+  /**
+   * Device name
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Device name", Name="DeviceName", ParameterType="body")
+  public deviceName: string;
 
-	/**
-	 * Device timezone, expects to get a TZ database name
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Device timezone, expects to get a TZ database name", Name="TimeZone", ParameterType="body")
-	public timeZone: string;
+  /**
+   * Device timezone, expects to get a TZ database name
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Device timezone, expects to get a TZ database name", Name="TimeZone", ParameterType="body")
+  public timeZone: string;
 
-	/**
-	 * Device language, expects to get a 2 letter identifier
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Device language, expects to get a 2 letter identifier", Name="Language", ParameterType="body")
-	public language: string;
+  /**
+   * Device language, expects to get a 2 letter identifier
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Device language, expects to get a 2 letter identifier", Name="Language", ParameterType="body")
+  public language: string;
 
-	/**
-	 * Device locale
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Device locale", Name="Locale", ParameterType="body")
-	public locale: string;
+  /**
+   * Device locale
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Device locale", Name="Locale", ParameterType="body")
+  public locale: string;
 
-	/**
-	 * Other device information
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Dictionary", Description="Other device information", Name="Meta", ParameterType="body")
-	public meta: {[index: string]: string};
+  /**
+   * Other device information
+   */
+  // @DataMember
+  // @ApiMember(DataType="Dictionary", Description="Other device information", Name="Meta", ParameterType="body")
+  public meta: { [index: string]: string };
 
-	public constructor(init?: Partial<RegisterDeviceTokenRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<RegisterDeviceTokenRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new RegisterDeviceTokenResponse();
-	}
+  public createResponse() {
+    return new RegisterDeviceTokenResponse();
+  }
 
-	public getTypeName() {
-		return 'RegisterDeviceTokenRequest';
-	}
+  public getTypeName() {
+    return 'RegisterDeviceTokenRequest';
+  }
 }
 
 /**
@@ -5715,55 +5715,55 @@ export class RegisterDeviceTokenRequest
 // @Api(Description="Registers expo push notification token")
 // @DataContract
 export class RegisterDeviceExpoTokenRequest
-	extends CodeMashRequestBase
-	implements IReturn<RegisterDeviceExpoTokenResponse> {
-	/**
-	 * User Id
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="User Id", Name="UserId", ParameterType="form")
-	public userId?: string;
+  extends CodeMashRequestBase
+  implements IReturn<RegisterDeviceExpoTokenResponse> {
+  /**
+   * User Id
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="User Id", Name="UserId", ParameterType="form")
+  public userId?: string;
 
-	/**
-	 * Device Id
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="Device Id", Name="DeviceId", ParameterType="form")
-	public deviceId?: string;
+  /**
+   * Device Id
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="Device Id", Name="DeviceId", ParameterType="form")
+  public deviceId?: string;
 
-	/**
-	 * Token
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Token", IsRequired=true, Name="Token", ParameterType="form")
-	public token: string;
+  /**
+   * Token
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Token", IsRequired=true, Name="Token", ParameterType="form")
+  public token: string;
 
-	/**
-	 * TimeZone
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="TimeZone", Name="TimeZone", ParameterType="form")
-	public timeZone: string;
+  /**
+   * TimeZone
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="TimeZone", Name="TimeZone", ParameterType="form")
+  public timeZone: string;
 
-	/**
-	 * Meta information that comes from device.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Dictionary", Description="Meta information that comes from device.", Name="Meta", ParameterType="body")
-	public meta: {[index: string]: string};
+  /**
+   * Meta information that comes from device.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Dictionary", Description="Meta information that comes from device.", Name="Meta", ParameterType="body")
+  public meta: { [index: string]: string };
 
-	public constructor(init?: Partial<RegisterDeviceExpoTokenRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<RegisterDeviceExpoTokenRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new RegisterDeviceExpoTokenResponse();
-	}
+  public createResponse() {
+    return new RegisterDeviceExpoTokenResponse();
+  }
 
-	public getTypeName() {
-		return 'RegisterDeviceExpoTokenRequest';
-	}
+  public getTypeName() {
+    return 'RegisterDeviceExpoTokenRequest';
+  }
 }
 
 /**
@@ -5774,66 +5774,66 @@ export class RegisterDeviceExpoTokenRequest
 // @Api(Description="Updates device details")
 // @DataContract
 export class UpdateDeviceRequest extends CodeMashRequestBase {
-	/**
-	 * Device id or device key
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="Device id or device key", IsRequired=true, Name="Id", ParameterType="path")
-	public id: string;
+  /**
+   * Device id or device key
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="Device id or device key", IsRequired=true, Name="Id", ParameterType="path")
+  public id: string;
 
-	/**
-	 * Device operating system
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Device operating system", Name="OperatingSystem", ParameterType="body")
-	public operatingSystem: string;
+  /**
+   * Device operating system
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Device operating system", Name="OperatingSystem", ParameterType="body")
+  public operatingSystem: string;
 
-	/**
-	 * Device brand
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Device brand", Name="Brand", ParameterType="body")
-	public brand: string;
+  /**
+   * Device brand
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Device brand", Name="Brand", ParameterType="body")
+  public brand: string;
 
-	/**
-	 * Device name
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Device name", Name="DeviceName", ParameterType="body")
-	public deviceName: string;
+  /**
+   * Device name
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Device name", Name="DeviceName", ParameterType="body")
+  public deviceName: string;
 
-	/**
-	 * Device timezone, expects to get a TZ database name
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Device timezone, expects to get a TZ database name", Name="TimeZone", ParameterType="body")
-	public timeZone: string;
+  /**
+   * Device timezone, expects to get a TZ database name
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Device timezone, expects to get a TZ database name", Name="TimeZone", ParameterType="body")
+  public timeZone: string;
 
-	/**
-	 * Device language, expects to get a 2 letter identifier
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Device language, expects to get a 2 letter identifier", Name="Language", ParameterType="body")
-	public language: string;
+  /**
+   * Device language, expects to get a 2 letter identifier
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Device language, expects to get a 2 letter identifier", Name="Language", ParameterType="body")
+  public language: string;
 
-	/**
-	 * Device locale
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Device locale", Name="Locale", ParameterType="body")
-	public locale: string;
+  /**
+   * Device locale
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Device locale", Name="Locale", ParameterType="body")
+  public locale: string;
 
-	/**
-	 * Meta information that comes from device. Pass an empty object to delete.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Object", Description="Meta information that comes from device. Pass an empty object to delete.", Name="Meta", ParameterType="body")
-	public meta: {[index: string]: string};
+  /**
+   * Meta information that comes from device. Pass an empty object to delete.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Object", Description="Meta information that comes from device. Pass an empty object to delete.", Name="Meta", ParameterType="body")
+  public meta: { [index: string]: string };
 
-	public constructor(init?: Partial<UpdateDeviceRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UpdateDeviceRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -5844,34 +5844,34 @@ export class UpdateDeviceRequest extends CodeMashRequestBase {
 // @Api(Description="Attaches user to the device which can receive push notifications")
 // @DataContract
 export class UpdateDeviceUserRequest
-	extends CodeMashRequestBase
-	implements IReturn<UpdateDeviceUserResponse> {
-	/**
-	 * Device Id or device key
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Device Id or device key", IsRequired=true, Name="Id", ParameterType="path")
-	public id: string;
+  extends CodeMashRequestBase
+  implements IReturn<UpdateDeviceUserResponse> {
+  /**
+   * Device Id or device key
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Device Id or device key", IsRequired=true, Name="Id", ParameterType="path")
+  public id: string;
 
-	/**
-	 * User Id
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="User Id", Name="UserId", ParameterType="body")
-	public userId?: string;
+  /**
+   * User Id
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="User Id", Name="UserId", ParameterType="body")
+  public userId?: string;
 
-	public constructor(init?: Partial<UpdateDeviceUserRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UpdateDeviceUserRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new UpdateDeviceUserResponse();
-	}
+  public createResponse() {
+    return new UpdateDeviceUserResponse();
+  }
 
-	public getTypeName() {
-		return 'UpdateDeviceUserRequest';
-	}
+  public getTypeName() {
+    return 'UpdateDeviceUserRequest';
+  }
 }
 
 /**
@@ -5882,34 +5882,34 @@ export class UpdateDeviceUserRequest
 // @Api(Description="Applies metadata on the device")
 // @DataContract
 export class UpdateDeviceMetaRequest
-	extends CodeMashRequestBase
-	implements IReturn<UpdateDeviceMetaResponse> {
-	/**
-	 * Device Id
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="Device Id", IsRequired=true, Name="Id", ParameterType="form")
-	public id: string;
+  extends CodeMashRequestBase
+  implements IReturn<UpdateDeviceMetaResponse> {
+  /**
+   * Device Id
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="Device Id", IsRequired=true, Name="Id", ParameterType="form")
+  public id: string;
 
-	/**
-	 * Device Id
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Dictionary", Description="Device Id", IsRequired=true, Name="Id", ParameterType="body")
-	public meta: {[index: string]: string};
+  /**
+   * Device Id
+   */
+  // @DataMember
+  // @ApiMember(DataType="Dictionary", Description="Device Id", IsRequired=true, Name="Id", ParameterType="body")
+  public meta: { [index: string]: string };
 
-	public constructor(init?: Partial<UpdateDeviceMetaRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UpdateDeviceMetaRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new UpdateDeviceMetaResponse();
-	}
+  public createResponse() {
+    return new UpdateDeviceMetaResponse();
+  }
 
-	public getTypeName() {
-		return 'UpdateDeviceMetaRequest';
-	}
+  public getTypeName() {
+    return 'UpdateDeviceMetaRequest';
+  }
 }
 
 /**
@@ -5920,41 +5920,41 @@ export class UpdateDeviceMetaRequest
 // @Api(Description="Deletes metadata of the device")
 // @DataContract
 export class DeleteDeviceMetaRequest
-	extends CodeMashRequestBase
-	implements IReturn<DeleteDeviceMetaResponse> {
-	/**
-	 * Device Id
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="Device Id", Name="Id", ParameterType="path")
-	public id: string;
+  extends CodeMashRequestBase
+  implements IReturn<DeleteDeviceMetaResponse> {
+  /**
+   * Device Id
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="Device Id", Name="Id", ParameterType="path")
+  public id: string;
 
-	/**
-	 * Keys to be deleted
-	 */
-	// @DataMember
-	// @ApiMember(DataType="List", Description="Keys to be deleted", Name="Keys", ParameterType="body")
-	public keys: string[];
+  /**
+   * Keys to be deleted
+   */
+  // @DataMember
+  // @ApiMember(DataType="List", Description="Keys to be deleted", Name="Keys", ParameterType="body")
+  public keys: string[];
 
-	/**
-	 * Delete all keys
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Delete all keys", Name="DeleteAllKeys", ParameterType="form")
-	public deleteAllKeys: boolean;
+  /**
+   * Delete all keys
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Delete all keys", Name="DeleteAllKeys", ParameterType="form")
+  public deleteAllKeys: boolean;
 
-	public constructor(init?: Partial<DeleteDeviceMetaRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<DeleteDeviceMetaRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new DeleteDeviceMetaResponse();
-	}
+  public createResponse() {
+    return new DeleteDeviceMetaResponse();
+  }
 
-	public getTypeName() {
-		return 'DeleteDeviceMetaRequest';
-	}
+  public getTypeName() {
+    return 'DeleteDeviceMetaRequest';
+  }
 }
 
 /**
@@ -5965,34 +5965,34 @@ export class DeleteDeviceMetaRequest
 // @Api(Description="Updates the time zone of the device")
 // @DataContract
 export class UpdateDeviceTimeZoneRequest
-	extends CodeMashRequestBase
-	implements IReturn<UpdateDeviceTimeZoneResponse> {
-	/**
-	 * Device Id
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="Device Id", IsRequired=true, Name="Id", ParameterType="form")
-	public id: string;
+  extends CodeMashRequestBase
+  implements IReturn<UpdateDeviceTimeZoneResponse> {
+  /**
+   * Device Id
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="Device Id", IsRequired=true, Name="Id", ParameterType="form")
+  public id: string;
 
-	/**
-	 * In which time zone device is registered. If we are aware of location, we can provide notifications in right time frame.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="In which time zone device is registered. If we are aware of location, we can provide notifications in right time frame.", Name="TimeZone", ParameterType="form")
-	public timeZone: string;
+  /**
+   * In which time zone device is registered. If we are aware of location, we can provide notifications in right time frame.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="In which time zone device is registered. If we are aware of location, we can provide notifications in right time frame.", Name="TimeZone", ParameterType="form")
+  public timeZone: string;
 
-	public constructor(init?: Partial<UpdateDeviceTimeZoneRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UpdateDeviceTimeZoneRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new UpdateDeviceTimeZoneResponse();
-	}
+  public createResponse() {
+    return new UpdateDeviceTimeZoneResponse();
+  }
 
-	public getTypeName() {
-		return 'UpdateDeviceTimeZoneRequest';
-	}
+  public getTypeName() {
+    return 'UpdateDeviceTimeZoneRequest';
+  }
 }
 
 /**
@@ -6003,34 +6003,34 @@ export class UpdateDeviceTimeZoneRequest
 // @Api(Description="Deletes the push notification from queue")
 // @DataContract
 export class DeleteNotificationRequest
-	extends CodeMashRequestBase
-	implements IReturn<DeleteNotificationResponse> {
-	/**
-	 * Notification Id
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Notification Id", IsRequired=true, Name="Id", ParameterType="path")
-	public id: string;
+  extends CodeMashRequestBase
+  implements IReturn<DeleteNotificationResponse> {
+  /**
+   * Notification Id
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Notification Id", IsRequired=true, Name="Id", ParameterType="path")
+  public id: string;
 
-	/**
-	 * Device key
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Device key", Name="DeviceKey", ParameterType="query")
-	public deviceKey: string;
+  /**
+   * Device key
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Device key", Name="DeviceKey", ParameterType="query")
+  public deviceKey: string;
 
-	public constructor(init?: Partial<DeleteNotificationRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<DeleteNotificationRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new DeleteNotificationResponse();
-	}
+  public createResponse() {
+    return new DeleteNotificationResponse();
+  }
 
-	public getTypeName() {
-		return 'DeleteNotificationRequest';
-	}
+  public getTypeName() {
+    return 'DeleteNotificationRequest';
+  }
 }
 
 /**
@@ -6041,34 +6041,34 @@ export class DeleteNotificationRequest
 // @Api(Description="Gets the push notifications")
 // @DataContract
 export class GetNotificationRequest
-	extends CodeMashRequestBase
-	implements IReturn<GetNotificationResponse> {
-	/**
-	 * Notification Id.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Notification Id.", Name="Id", ParameterType="body")
-	public id: string;
+  extends CodeMashRequestBase
+  implements IReturn<GetNotificationResponse> {
+  /**
+   * Notification Id.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Notification Id.", Name="Id", ParameterType="body")
+  public id: string;
 
-	/**
-	 * Device key
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Device key", Name="DeviceKey", ParameterType="query")
-	public deviceKey: string;
+  /**
+   * Device key
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Device key", Name="DeviceKey", ParameterType="query")
+  public deviceKey: string;
 
-	public constructor(init?: Partial<GetNotificationRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetNotificationRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new GetNotificationResponse();
-	}
+  public createResponse() {
+    return new GetNotificationResponse();
+  }
 
-	public getTypeName() {
-		return 'GetNotificationRequest';
-	}
+  public getTypeName() {
+    return 'GetNotificationRequest';
+  }
 }
 
 /**
@@ -6079,41 +6079,41 @@ export class GetNotificationRequest
 // @Api(Description="Gets the push notifications")
 // @DataContract
 export class GetNotificationsRequest
-	extends CodeMashListRequestBase
-	implements IReturn<GetNotificationsResponse> {
-	/**
-	 * Notifications delivered to specified user.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="Notifications delivered to specified user.", Name="UserId", ParameterType="body")
-	public userId?: string;
+  extends CodeMashListRequestBase
+  implements IReturn<GetNotificationsResponse> {
+  /**
+   * Notifications delivered to specified user.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="Notifications delivered to specified user.", Name="UserId", ParameterType="body")
+  public userId?: string;
 
-	/**
-	 * Notifications delivered to specified device.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="Notifications delivered to specified device.", Name="DeviceId", ParameterType="body")
-	public deviceId?: string;
+  /**
+   * Notifications delivered to specified device.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="Notifications delivered to specified device.", Name="DeviceId", ParameterType="body")
+  public deviceId?: string;
 
-	/**
-	 * Device key
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Device key", Name="DeviceKey", ParameterType="query")
-	public deviceKey: string;
+  /**
+   * Device key
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Device key", Name="DeviceKey", ParameterType="query")
+  public deviceKey: string;
 
-	public constructor(init?: Partial<GetNotificationsRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetNotificationsRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new GetNotificationsResponse();
-	}
+  public createResponse() {
+    return new GetNotificationsResponse();
+  }
 
-	public getTypeName() {
-		return 'GetNotificationsRequest';
-	}
+  public getTypeName() {
+    return 'GetNotificationsRequest';
+  }
 }
 
 /**
@@ -6124,55 +6124,55 @@ export class GetNotificationsRequest
 // @Api(Description="Gets amount of push notifications")
 // @DataContract
 export class GetNotificationsCountRequest
-	extends CodeMashRequestBase
-	implements IReturn<GetNotificationsResponse> {
-	/**
-	 * Notifications delivered to specified user.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="Notifications delivered to specified user.", Name="UserId", ParameterType="body")
-	public userId?: string;
+  extends CodeMashRequestBase
+  implements IReturn<GetNotificationsResponse> {
+  /**
+   * Notifications delivered to specified user.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="Notifications delivered to specified user.", Name="UserId", ParameterType="body")
+  public userId?: string;
 
-	/**
-	 * Notifications delivered to specified device.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="Notifications delivered to specified device.", Name="DeviceId", ParameterType="body")
-	public deviceId?: string;
+  /**
+   * Notifications delivered to specified device.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="Notifications delivered to specified device.", Name="DeviceId", ParameterType="body")
+  public deviceId?: string;
 
-	/**
-	 * Device key
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Device key", Name="DeviceKey", ParameterType="query")
-	public deviceKey: string;
+  /**
+   * Device key
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Device key", Name="DeviceKey", ParameterType="query")
+  public deviceKey: string;
 
-	/**
-	 * Optional filter to count only matched notifications.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Optional filter to count only matched notifications.", IsRequired=true, Name="Filter", ParameterType="body")
-	public filter: string;
+  /**
+   * Optional filter to count only matched notifications.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Optional filter to count only matched notifications.", IsRequired=true, Name="Filter", ParameterType="body")
+  public filter: object | string;
 
-	/**
-	 * Optional filter to count only matched notifications.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Optional filter to count only matched notifications.", IsRequired=true, Name="Filter", ParameterType="body")
-	public groupBy: string;
+  /**
+   * Optional filter to count only matched notifications.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Optional filter to count only matched notifications.", IsRequired=true, Name="Filter", ParameterType="body")
+  public groupBy: string;
 
-	public constructor(init?: Partial<GetNotificationsCountRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetNotificationsCountRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new GetNotificationsResponse();
-	}
+  public createResponse() {
+    return new GetNotificationsResponse();
+  }
 
-	public getTypeName() {
-		return 'GetNotificationsCountRequest';
-	}
+  public getTypeName() {
+    return 'GetNotificationsCountRequest';
+  }
 }
 
 /**
@@ -6183,48 +6183,48 @@ export class GetNotificationsCountRequest
 // @Api(Description="Marks notification as read")
 // @DataContract
 export class MarkAllNotificationsAsReadRequest
-	extends CodeMashRequestBase
-	implements IReturn<MarkNotificationAsReadResponse> {
-	/**
-	 * UserId - (Either userId or deviceId is required). The same massage can be spread across many users, so we need to identify which user read the message
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="UserId - (Either userId or deviceId is required). The same massage can be spread across many users, so we need to identify which user read the message", Name="UserId", ParameterType="body")
-	public userId?: string;
+  extends CodeMashRequestBase
+  implements IReturn<MarkNotificationAsReadResponse> {
+  /**
+   * UserId - (Either userId or deviceId is required). The same massage can be spread across many users, so we need to identify which user read the message
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="UserId - (Either userId or deviceId is required). The same massage can be spread across many users, so we need to identify which user read the message", Name="UserId", ParameterType="body")
+  public userId?: string;
 
-	/**
-	 * DeviceId - (Either userId or deviceId is required). The same massage can be spread across many devices, so we need to identify in which device the message has been read
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="DeviceId - (Either userId or deviceId is required). The same massage can be spread across many devices, so we need to identify in which device the message has been read", IsRequired=true, Name="DeviceId", ParameterType="body")
-	public deviceId: string;
+  /**
+   * DeviceId - (Either userId or deviceId is required). The same massage can be spread across many devices, so we need to identify in which device the message has been read
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="DeviceId - (Either userId or deviceId is required). The same massage can be spread across many devices, so we need to identify in which device the message has been read", IsRequired=true, Name="DeviceId", ParameterType="body")
+  public deviceId: string;
 
-	/**
-	 * Device key
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Device key", Name="DeviceKey", ParameterType="query")
-	public deviceKey: string;
+  /**
+   * Device key
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Device key", Name="DeviceKey", ParameterType="query")
+  public deviceKey: string;
 
-	/**
-	 * Optional filter to read only matched notifications.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Optional filter to read only matched notifications.", IsRequired=true, Name="Filter", ParameterType="body")
-	public filter: string;
+  /**
+   * Optional filter to read only matched notifications.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Optional filter to read only matched notifications.", IsRequired=true, Name="Filter", ParameterType="body")
+  public filter: object | string;
 
-	public constructor(init?: Partial<MarkAllNotificationsAsReadRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<MarkAllNotificationsAsReadRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new MarkNotificationAsReadResponse();
-	}
+  public createResponse() {
+    return new MarkNotificationAsReadResponse();
+  }
 
-	public getTypeName() {
-		return 'MarkAllNotificationsAsReadRequest';
-	}
+  public getTypeName() {
+    return 'MarkAllNotificationsAsReadRequest';
+  }
 }
 
 /**
@@ -6235,48 +6235,48 @@ export class MarkAllNotificationsAsReadRequest
 // @Api(Description="Marks notification as read")
 // @DataContract
 export class MarkNotificationAsReadRequest
-	extends CodeMashRequestBase
-	implements IReturn<MarkNotificationAsReadResponse> {
-	/**
-	 * NotificationId - notification to be marked as read
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="NotificationId - notification to be marked as read", IsRequired=true, Name="NotificationId", ParameterType="form")
-	public notificationId: string;
+  extends CodeMashRequestBase
+  implements IReturn<MarkNotificationAsReadResponse> {
+  /**
+   * NotificationId - notification to be marked as read
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="NotificationId - notification to be marked as read", IsRequired=true, Name="NotificationId", ParameterType="form")
+  public notificationId: string;
 
-	/**
-	 * UserId - (Either userId or deviceId is required). The same massage can be spread across many users, so we need to identify which user read the message
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="UserId - (Either userId or deviceId is required). The same massage can be spread across many users, so we need to identify which user read the message", Name="UserId", ParameterType="form")
-	public userId?: string;
+  /**
+   * UserId - (Either userId or deviceId is required). The same massage can be spread across many users, so we need to identify which user read the message
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="UserId - (Either userId or deviceId is required). The same massage can be spread across many users, so we need to identify which user read the message", Name="UserId", ParameterType="form")
+  public userId?: string;
 
-	/**
-	 * DeviceId - (Either userId or deviceId is required). The same massage can be spread across many devices, so we need to identify in which device the message has been read
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="DeviceId - (Either userId or deviceId is required). The same massage can be spread across many devices, so we need to identify in which device the message has been read", IsRequired=true, Name="DeviceId", ParameterType="form")
-	public deviceId: string;
+  /**
+   * DeviceId - (Either userId or deviceId is required). The same massage can be spread across many devices, so we need to identify in which device the message has been read
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="DeviceId - (Either userId or deviceId is required). The same massage can be spread across many devices, so we need to identify in which device the message has been read", IsRequired=true, Name="DeviceId", ParameterType="form")
+  public deviceId: string;
 
-	/**
-	 * Device key
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Device key", Name="DeviceKey", ParameterType="query")
-	public deviceKey: string;
+  /**
+   * Device key
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Device key", Name="DeviceKey", ParameterType="query")
+  public deviceKey: string;
 
-	public constructor(init?: Partial<MarkNotificationAsReadRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<MarkNotificationAsReadRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new MarkNotificationAsReadResponse();
-	}
+  public createResponse() {
+    return new MarkNotificationAsReadResponse();
+  }
 
-	public getTypeName() {
-		return 'MarkNotificationAsReadRequest';
-	}
+  public getTypeName() {
+    return 'MarkNotificationAsReadRequest';
+  }
 }
 
 /**
@@ -6287,83 +6287,83 @@ export class MarkNotificationAsReadRequest
 // @Api(Description="Pushes a mobile notification")
 // @DataContract
 export class SendPushNotificationRequest
-	extends CodeMashRequestBase
-	implements IReturn<SendPushNotificationResponse> {
-	/**
-	 * Template Id
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="Template Id", IsRequired=true, Name="TemplateId", ParameterType="form")
-	public templateId: string;
+  extends CodeMashRequestBase
+  implements IReturn<SendPushNotificationResponse> {
+  /**
+   * Template Id
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="Template Id", IsRequired=true, Name="TemplateId", ParameterType="form")
+  public templateId: string;
 
-	/**
-	 * Recipients list. You can send messages by specifying CodeMash membership users which are combined with devices.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="List", Description="Recipients list. You can send messages by specifying CodeMash membership users which are combined with devices.", Name="Users", ParameterType="body")
-	public users: string[];
+  /**
+   * Recipients list. You can send messages by specifying CodeMash membership users which are combined with devices.
+   */
+  // @DataMember
+  // @ApiMember(DataType="List", Description="Recipients list. You can send messages by specifying CodeMash membership users which are combined with devices.", Name="Users", ParameterType="body")
+  public users: string[];
 
-	/**
-	 * Messages to be delivered into specified devices.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="List", Description="Messages to be delivered into specified devices.", Name="Devices", ParameterType="body")
-	public devices: string[];
+  /**
+   * Messages to be delivered into specified devices.
+   */
+  // @DataMember
+  // @ApiMember(DataType="List", Description="Messages to be delivered into specified devices.", Name="Devices", ParameterType="body")
+  public devices: string[];
 
-	/**
-	 * Messages to be delivered to specified roles.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="List", Description="Messages to be delivered to specified roles.", Name="Roles", ParameterType="body")
-	public roles: string[];
+  /**
+   * Messages to be delivered to specified roles.
+   */
+  // @DataMember
+  // @ApiMember(DataType="List", Description="Messages to be delivered to specified roles.", Name="Roles", ParameterType="body")
+  public roles: string[];
 
-	/**
-	 * Custom tokens which are not provided in project
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Dictionary", Description="Custom tokens which are not provided in project", Name="Tokens", ParameterType="body")
-	public tokens: {[index: string]: string};
+  /**
+   * Custom tokens which are not provided in project
+   */
+  // @DataMember
+  // @ApiMember(DataType="Dictionary", Description="Custom tokens which are not provided in project", Name="Tokens", ParameterType="body")
+  public tokens: { [index: string]: string };
 
-	/**
-	 * Amount of milliseconds to postpone pushing the notification.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="long", Description="Amount of milliseconds to postpone pushing the notification.", Name="Postpone", ParameterType="body")
-	public postpone?: number;
+  /**
+   * Amount of milliseconds to postpone pushing the notification.
+   */
+  // @DataMember
+  // @ApiMember(DataType="long", Description="Amount of milliseconds to postpone pushing the notification.", Name="Postpone", ParameterType="body")
+  public postpone?: number;
 
-	/**
-	 * Respects user's time zone. If false, send by project time zone. Default - true. Postpone needs to be set.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Respects user's time zone. If false, send by project time zone. Default - true. Postpone needs to be set.", Name="RespectTimeZone", ParameterType="body")
-	public respectTimeZone: boolean;
+  /**
+   * Respects user's time zone. If false, send by project time zone. Default - true. Postpone needs to be set.
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Respects user's time zone. If false, send by project time zone. Default - true. Postpone needs to be set.", Name="RespectTimeZone", ParameterType="body")
+  public respectTimeZone: boolean;
 
-	/**
-	 * If set to true, notification will not be pushed to user's device. Cannot be true if postpone is set.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If set to true, notification will not be pushed to user's device. Cannot be true if postpone is set.", Name="IsNonPushable", ParameterType="body")
-	public isNonPushable: boolean;
+  /**
+   * If set to true, notification will not be pushed to user's device. Cannot be true if postpone is set.
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If set to true, notification will not be pushed to user's device. Cannot be true if postpone is set.", Name="IsNonPushable", ParameterType="body")
+  public isNonPushable: boolean;
 
-	/**
-	 * Will try to send a template for language from CultureCode over the user's language
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Will try to send a template for language from CultureCode over the user's language", Name="ForceRequestLanguage", ParameterType="body")
-	public forceRequestLanguage: boolean;
+  /**
+   * Will try to send a template for language from CultureCode over the user's language
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Will try to send a template for language from CultureCode over the user's language", Name="ForceRequestLanguage", ParameterType="body")
+  public forceRequestLanguage: boolean;
 
-	public constructor(init?: Partial<SendPushNotificationRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<SendPushNotificationRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new SendPushNotificationResponse();
-	}
+  public createResponse() {
+    return new SendPushNotificationResponse();
+  }
 
-	public getTypeName() {
-		return 'SendPushNotificationRequest';
-	}
+  public getTypeName() {
+    return 'SendPushNotificationRequest';
+  }
 }
 
 /**
@@ -6374,27 +6374,27 @@ export class SendPushNotificationRequest
 // @Api(Description="Get push notification template")
 // @DataContract
 export class GetNotificationTemplateRequest
-	extends CodeMashRequestBase
-	implements IReturn<GetNotificationTemplateResponse> {
-	/**
-	 * ID of push notification template
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="ID of push notification template", IsRequired=true, Name="Id", ParameterType="path")
-	public id: string;
+  extends CodeMashRequestBase
+  implements IReturn<GetNotificationTemplateResponse> {
+  /**
+   * ID of push notification template
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="ID of push notification template", IsRequired=true, Name="Id", ParameterType="path")
+  public id: string;
 
-	public constructor(init?: Partial<GetNotificationTemplateRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetNotificationTemplateRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new GetNotificationTemplateResponse();
-	}
+  public createResponse() {
+    return new GetNotificationTemplateResponse();
+  }
 
-	public getTypeName() {
-		return 'GetNotificationTemplateRequest';
-	}
+  public getTypeName() {
+    return 'GetNotificationTemplateRequest';
+  }
 }
 
 /**
@@ -6405,20 +6405,20 @@ export class GetNotificationTemplateRequest
 // @Api(Description="Get push notification templates")
 // @DataContract
 export class GetNotificationTemplatesRequest
-	extends CodeMashRequestBase
-	implements IReturn<GetNotificationTemplatesResponse> {
-	public constructor(init?: Partial<GetNotificationTemplatesRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  extends CodeMashRequestBase
+  implements IReturn<GetNotificationTemplatesResponse> {
+  public constructor(init?: Partial<GetNotificationTemplatesRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new GetNotificationTemplatesResponse();
-	}
+  public createResponse() {
+    return new GetNotificationTemplatesResponse();
+  }
 
-	public getTypeName() {
-		return 'GetNotificationTemplatesRequest';
-	}
+  public getTypeName() {
+    return 'GetNotificationTemplatesRequest';
+  }
 }
 
 /**
@@ -6429,41 +6429,41 @@ export class GetNotificationTemplatesRequest
 // @Api(Description="Payments")
 // @DataContract
 export class VerifyAppleAppStoreSubscriptionRequest
-	extends CodeMashRequestBase
-	implements IReturn<VerifyAppleAppStoreSubscriptionResponse> {
-	/**
-	 * Payment receipt.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Payment receipt.", IsRequired=true, Name="Receipt", ParameterType="body")
-	public receipt: string;
+  extends CodeMashRequestBase
+  implements IReturn<VerifyAppleAppStoreSubscriptionResponse> {
+  /**
+   * Payment receipt.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Payment receipt.", IsRequired=true, Name="Receipt", ParameterType="body")
+  public receipt: string;
 
-	/**
-	 * ID of customer who subscribed. Required for first time calling this endpoint.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="ID of customer who subscribed. Required for first time calling this endpoint.", Name="CustomerId", ParameterType="body")
-	public customerId: string;
+  /**
+   * ID of customer who subscribed. Required for first time calling this endpoint.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="ID of customer who subscribed. Required for first time calling this endpoint.", Name="CustomerId", ParameterType="body")
+  public customerId: string;
 
-	/**
-	 * Subscription plan ID. Required for first time calling this endpoint.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="Subscription plan ID. Required for first time calling this endpoint.", Name="PlanId", ParameterType="body")
-	public planId: string;
+  /**
+   * Subscription plan ID. Required for first time calling this endpoint.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="Subscription plan ID. Required for first time calling this endpoint.", Name="PlanId", ParameterType="body")
+  public planId: string;
 
-	public constructor(init?: Partial<VerifyAppleAppStoreSubscriptionRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<VerifyAppleAppStoreSubscriptionRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new VerifyAppleAppStoreSubscriptionResponse();
-	}
+  public createResponse() {
+    return new VerifyAppleAppStoreSubscriptionResponse();
+  }
 
-	public getTypeName() {
-		return 'VerifyAppleAppStoreSubscriptionRequest';
-	}
+  public getTypeName() {
+    return 'VerifyAppleAppStoreSubscriptionRequest';
+  }
 }
 
 /**
@@ -6474,111 +6474,111 @@ export class VerifyAppleAppStoreSubscriptionRequest
 // @Api(Description="Payments")
 // @DataContract
 export class CreateCustomerRequest
-	extends CodeMashRequestBase
-	implements IReturn<CreateCustomerResponse> {
-	/**
-	 * Payment account ID.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="Payment account ID.", IsRequired=true, Name="AccountId", ParameterType="body")
-	public accountId: string;
+  extends CodeMashRequestBase
+  implements IReturn<CreateCustomerResponse> {
+  /**
+   * Payment account ID.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="Payment account ID.", IsRequired=true, Name="AccountId", ParameterType="body")
+  public accountId: string;
 
-	/**
-	 * User's ID to whom to attach this customer.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="User's ID to whom to attach this customer.", Name="UserId", ParameterType="body")
-	public userId: string;
+  /**
+   * User's ID to whom to attach this customer.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="User's ID to whom to attach this customer.", Name="UserId", ParameterType="body")
+  public userId: string;
 
-	/**
-	 * Customer's phone. Overrides user's phone.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's phone. Overrides user's phone.", Name="Phone", ParameterType="body")
-	public phone: string;
+  /**
+   * Customer's phone. Overrides user's phone.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's phone. Overrides user's phone.", Name="Phone", ParameterType="body")
+  public phone: string;
 
-	/**
-	 * Customer's full name. Overrides user's name.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's full name. Overrides user's name.", Name="Name", ParameterType="body")
-	public name: string;
+  /**
+   * Customer's full name. Overrides user's name.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's full name. Overrides user's name.", Name="Name", ParameterType="body")
+  public name: string;
 
-	/**
-	 * Customer's description.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's description.", Name="Description", ParameterType="body")
-	public description: string;
+  /**
+   * Customer's description.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's description.", Name="Description", ParameterType="body")
+  public description: string;
 
-	/**
-	 * Customer's email. Overrides user's email.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's email. Overrides user's email.", Name="Email", ParameterType="body")
-	public email: string;
+  /**
+   * Customer's email. Overrides user's email.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's email. Overrides user's email.", Name="Email", ParameterType="body")
+  public email: string;
 
-	/**
-	 * Customer's city. Overrides user's city.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's city. Overrides user's city.", Name="City", ParameterType="body")
-	public city: string;
+  /**
+   * Customer's city. Overrides user's city.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's city. Overrides user's city.", Name="City", ParameterType="body")
+  public city: string;
 
-	/**
-	 * Customer's country. Overrides user's country.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's country. Overrides user's country.", Name="CountryCode", ParameterType="body")
-	public countryCode: string;
+  /**
+   * Customer's country. Overrides user's country.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's country. Overrides user's country.", Name="CountryCode", ParameterType="body")
+  public countryCode: string;
 
-	/**
-	 * Customer's address 1. Overrides user's address 1.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's address 1. Overrides user's address 1.", Name="Address1", ParameterType="body")
-	public address: string;
+  /**
+   * Customer's address 1. Overrides user's address 1.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's address 1. Overrides user's address 1.", Name="Address1", ParameterType="body")
+  public address: string;
 
-	/**
-	 * Customer's address 2. Overrides user's address 2.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's address 2. Overrides user's address 2.", Name="Address2", ParameterType="body")
-	public address2: string;
+  /**
+   * Customer's address 2. Overrides user's address 2.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's address 2. Overrides user's address 2.", Name="Address2", ParameterType="body")
+  public address2: string;
 
-	/**
-	 * Customer's postal code. Overrides user's postal code.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's postal code. Overrides user's postal code.", Name="PostalCode", ParameterType="body")
-	public postalCode: string;
+  /**
+   * Customer's postal code. Overrides user's postal code.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's postal code. Overrides user's postal code.", Name="PostalCode", ParameterType="body")
+  public postalCode: string;
 
-	/**
-	 * Customer's state. Overrides user's area.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's state. Overrides user's area.", Name="Area", ParameterType="body")
-	public area: string;
+  /**
+   * Customer's state. Overrides user's area.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's state. Overrides user's area.", Name="Area", ParameterType="body")
+  public area: string;
 
-	/**
-	 * Additional key, value data.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="object", Description="Additional key, value data.", Name="Meta", ParameterType="body")
-	public meta: {[index: string]: string};
+  /**
+   * Additional key, value data.
+   */
+  // @DataMember
+  // @ApiMember(DataType="object", Description="Additional key, value data.", Name="Meta", ParameterType="body")
+  public meta: { [index: string]: string };
 
-	public constructor(init?: Partial<CreateCustomerRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CreateCustomerRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new CreateCustomerResponse();
-	}
+  public createResponse() {
+    return new CreateCustomerResponse();
+  }
 
-	public getTypeName() {
-		return 'CreateCustomerRequest';
-	}
+  public getTypeName() {
+    return 'CreateCustomerRequest';
+  }
 }
 
 /**
@@ -6589,17 +6589,17 @@ export class CreateCustomerRequest
 // @Api(Description="Payments")
 // @DataContract
 export class DeleteCustomerRequest extends CodeMashRequestBase {
-	/**
-	 * Customer's ID to delete.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's ID to delete.", IsRequired=true, Name="Id", ParameterType="path")
-	public id: string;
+  /**
+   * Customer's ID to delete.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's ID to delete.", IsRequired=true, Name="Id", ParameterType="path")
+  public id: string;
 
-	public constructor(init?: Partial<DeleteCustomerRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<DeleteCustomerRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -6610,48 +6610,48 @@ export class DeleteCustomerRequest extends CodeMashRequestBase {
 // @Api(Description="Payments")
 // @DataContract
 export class GetCustomerRequest
-	extends CodeMashRequestBase
-	implements IReturn<GetCustomerResponse> {
-	/**
-	 * Customer's ID to get.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's ID to get.", IsRequired=true, Name="Id", ParameterType="path")
-	public id: string;
+  extends CodeMashRequestBase
+  implements IReturn<GetCustomerResponse> {
+  /**
+   * Customer's ID to get.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's ID to get.", IsRequired=true, Name="Id", ParameterType="path")
+  public id: string;
 
-	/**
-	 * If true, id should be customer's provider Id.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If true, id should be customer's provider Id.", Name="UseProviderId", ParameterType="query")
-	public useProviderId: boolean;
+  /**
+   * If true, id should be customer's provider Id.
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If true, id should be customer's provider Id.", Name="UseProviderId", ParameterType="query")
+  public useProviderId: boolean;
 
-	/**
-	 * If true, id should be customer's user Id.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If true, id should be customer's user Id.", Name="UseUserId", ParameterType="query")
-	public useUserId: boolean;
+  /**
+   * If true, id should be customer's user Id.
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If true, id should be customer's user Id.", Name="UseUserId", ParameterType="query")
+  public useUserId: boolean;
 
-	/**
-	 * Required if UseUserId is set to true.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Required if UseUserId is set to true.", Name="PaymentProvider", ParameterType="query")
-	public paymentProvider: string;
+  /**
+   * Required if UseUserId is set to true.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Required if UseUserId is set to true.", Name="PaymentProvider", ParameterType="query")
+  public paymentProvider: string;
 
-	public constructor(init?: Partial<GetCustomerRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetCustomerRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new GetCustomerResponse();
-	}
+  public createResponse() {
+    return new GetCustomerResponse();
+  }
 
-	public getTypeName() {
-		return 'GetCustomerRequest';
-	}
+  public getTypeName() {
+    return 'GetCustomerRequest';
+  }
 }
 
 /**
@@ -6662,27 +6662,27 @@ export class GetCustomerRequest
 // @Api(Description="Payments")
 // @DataContract
 export class GetCustomersRequest
-	extends CodeMashListRequestBase
-	implements IReturn<GetCustomersResponse> {
-	/**
-	 * User's ID whose customers to get.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="User's ID whose customers to get.", Name="UserId", ParameterType="body")
-	public userId?: string;
+  extends CodeMashListRequestBase
+  implements IReturn<GetCustomersResponse> {
+  /**
+   * User's ID whose customers to get.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="User's ID whose customers to get.", Name="UserId", ParameterType="body")
+  public userId?: string;
 
-	public constructor(init?: Partial<GetCustomersRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetCustomersRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new GetCustomersResponse();
-	}
+  public createResponse() {
+    return new GetCustomersResponse();
+  }
 
-	public getTypeName() {
-		return 'GetCustomersRequest';
-	}
+  public getTypeName() {
+    return 'GetCustomersRequest';
+  }
 }
 
 /**
@@ -6693,94 +6693,94 @@ export class GetCustomersRequest
 // @Api(Description="Payments")
 // @DataContract
 export class UpdateCustomerRequest extends CodeMashRequestBase {
-	/**
-	 * Customer's ID.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's ID.", IsRequired=true, Name="Id", ParameterType="path")
-	public id: string;
+  /**
+   * Customer's ID.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's ID.", IsRequired=true, Name="Id", ParameterType="path")
+  public id: string;
 
-	/**
-	 * Customer's phone. Overrides user's phone.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's phone. Overrides user's phone.", Name="Phone", ParameterType="body")
-	public phone: string;
+  /**
+   * Customer's phone. Overrides user's phone.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's phone. Overrides user's phone.", Name="Phone", ParameterType="body")
+  public phone: string;
 
-	/**
-	 * Customer's full name. Overrides user's name.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's full name. Overrides user's name.", Name="Name", ParameterType="body")
-	public name: string;
+  /**
+   * Customer's full name. Overrides user's name.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's full name. Overrides user's name.", Name="Name", ParameterType="body")
+  public name: string;
 
-	/**
-	 * Customer's description.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's description.", Name="Description", ParameterType="body")
-	public description: string;
+  /**
+   * Customer's description.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's description.", Name="Description", ParameterType="body")
+  public description: string;
 
-	/**
-	 * Customer's email. Overrides user's email.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's email. Overrides user's email.", Name="Email", ParameterType="body")
-	public email: string;
+  /**
+   * Customer's email. Overrides user's email.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's email. Overrides user's email.", Name="Email", ParameterType="body")
+  public email: string;
 
-	/**
-	 * Customer's city. Overrides user's city.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's city. Overrides user's city.", Name="City", ParameterType="body")
-	public city: string;
+  /**
+   * Customer's city. Overrides user's city.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's city. Overrides user's city.", Name="City", ParameterType="body")
+  public city: string;
 
-	/**
-	 * Customer's country. Overrides user's country.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's country. Overrides user's country.", Name="CountryCode", ParameterType="body")
-	public countryCode: string;
+  /**
+   * Customer's country. Overrides user's country.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's country. Overrides user's country.", Name="CountryCode", ParameterType="body")
+  public countryCode: string;
 
-	/**
-	 * Customer's address 1. Overrides user's address 1.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's address 1. Overrides user's address 1.", Name="Address1", ParameterType="body")
-	public address: string;
+  /**
+   * Customer's address 1. Overrides user's address 1.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's address 1. Overrides user's address 1.", Name="Address1", ParameterType="body")
+  public address: string;
 
-	/**
-	 * Customer's address 2. Overrides user's address 2.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's address 2. Overrides user's address 2.", Name="Address2", ParameterType="body")
-	public address2: string;
+  /**
+   * Customer's address 2. Overrides user's address 2.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's address 2. Overrides user's address 2.", Name="Address2", ParameterType="body")
+  public address2: string;
 
-	/**
-	 * Customer's postal code. Overrides user's postal code.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's postal code. Overrides user's postal code.", Name="PostalCode", ParameterType="body")
-	public postalCode: string;
+  /**
+   * Customer's postal code. Overrides user's postal code.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's postal code. Overrides user's postal code.", Name="PostalCode", ParameterType="body")
+  public postalCode: string;
 
-	/**
-	 * Customer's state. Overrides user's area.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's state. Overrides user's area.", Name="Area", ParameterType="body")
-	public area: string;
+  /**
+   * Customer's state. Overrides user's area.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's state. Overrides user's area.", Name="Area", ParameterType="body")
+  public area: string;
 
-	/**
-	 * Additional key, value data.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="object", Description="Additional key, value data.", Name="Meta", ParameterType="body")
-	public meta: {[index: string]: string};
+  /**
+   * Additional key, value data.
+   */
+  // @DataMember
+  // @ApiMember(DataType="object", Description="Additional key, value data.", Name="Meta", ParameterType="body")
+  public meta: { [index: string]: string };
 
-	public constructor(init?: Partial<UpdateCustomerRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UpdateCustomerRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -6791,153 +6791,153 @@ export class UpdateCustomerRequest extends CodeMashRequestBase {
 // @Api(Description="Payments")
 // @DataContract
 export class CreateDiscountRequest
-	extends CodeMashDbRequestBase
-	implements IReturn<CreateDiscountResponse> {
-	/**
-	 * Type of the discount (Coupon or Discount).
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Type of the discount (Coupon or Discount).", IsRequired=true, Name="Type", ParameterType="body")
-	public type: string;
+  extends CodeMashDbRequestBase
+  implements IReturn<CreateDiscountResponse> {
+  /**
+   * Type of the discount (Coupon or Discount).
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Type of the discount (Coupon or Discount).", IsRequired=true, Name="Type", ParameterType="body")
+  public type: string;
 
-	/**
-	 * Unique discount code.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Unique discount code.", Name="Code", ParameterType="body")
-	public code: string;
+  /**
+   * Unique discount code.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Unique discount code.", Name="Code", ParameterType="body")
+  public code: string;
 
-	/**
-	 * Display name of the discount.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Display name of the discount.", Name="DisplayName", ParameterType="body")
-	public displayName: string;
+  /**
+   * Display name of the discount.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Display name of the discount.", Name="DisplayName", ParameterType="body")
+  public displayName: string;
 
-	/**
-	 * Start date of being active.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="long", Description="Start date of being active.", Name="ValidFrom", ParameterType="body")
-	public validFrom?: number;
+  /**
+   * Start date of being active.
+   */
+  // @DataMember
+  // @ApiMember(DataType="long", Description="Start date of being active.", Name="ValidFrom", ParameterType="body")
+  public validFrom?: number;
 
-	/**
-	 * End date of being active.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="long", Description="End date of being active.", Name="ValidUntil", ParameterType="body")
-	public validUntil?: number;
+  /**
+   * End date of being active.
+   */
+  // @DataMember
+  // @ApiMember(DataType="long", Description="End date of being active.", Name="ValidUntil", ParameterType="body")
+  public validUntil?: number;
 
-	/**
-	 * Restriction type of discount. Can be Fixed, Percentage, Price or Quantity.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Restriction type of discount. Can be Fixed, Percentage, Price or Quantity.", Name="RestrictionType", ParameterType="body")
-	public restrictionType: string;
+  /**
+   * Restriction type of discount. Can be Fixed, Percentage, Price or Quantity.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Restriction type of discount. Can be Fixed, Percentage, Price or Quantity.", Name="RestrictionType", ParameterType="body")
+  public restrictionType: string;
 
-	/**
-	 * Discount amount for Fixed or Percentage restriction types.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="double", Description="Discount amount for Fixed or Percentage restriction types.", Name="Amount", ParameterType="body")
-	public amount?: number;
+  /**
+   * Discount amount for Fixed or Percentage restriction types.
+   */
+  // @DataMember
+  // @ApiMember(DataType="double", Description="Discount amount for Fixed or Percentage restriction types.", Name="Amount", ParameterType="body")
+  public amount?: number;
 
-	/**
-	 * Discount amounts for Price or Quantity restriction types.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="array", Description="Discount amounts for Price or Quantity restriction types.", Name="Boundaries", ParameterType="body")
-	public boundaries: PaymentDiscountBoundary[];
+  /**
+   * Discount amounts for Price or Quantity restriction types.
+   */
+  // @DataMember
+  // @ApiMember(DataType="array", Description="Discount amounts for Price or Quantity restriction types.", Name="Boundaries", ParameterType="body")
+  public boundaries: PaymentDiscountBoundary[];
 
-	/**
-	 * Target type for specific records. Can be All, Category, Individual.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Target type for specific records. Can be All, Category, Individual.", Name="TargetType", ParameterType="body")
-	public targetType: string;
+  /**
+   * Target type for specific records. Can be All, Category, Individual.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Target type for specific records. Can be All, Category, Individual.", Name="TargetType", ParameterType="body")
+  public targetType: string;
 
-	/**
-	 * Records for Individual target type.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="array", Description="Records for Individual target type.", Name="Records", ParameterType="body")
-	public records: string[];
+  /**
+   * Records for Individual target type.
+   */
+  // @DataMember
+  // @ApiMember(DataType="array", Description="Records for Individual target type.", Name="Records", ParameterType="body")
+  public records: string[];
 
-	/**
-	 * Collection field for Category target type.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Collection field for Category target type.", Name="CategoryField", ParameterType="body")
-	public categoryField: string;
+  /**
+   * Collection field for Category target type.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Collection field for Category target type.", Name="CategoryField", ParameterType="body")
+  public categoryField: string;
 
-	/**
-	 * Values for Category target type.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="array", Description="Values for Category target type.", Name="CategoryValues", ParameterType="body")
-	public categoryValues: string[];
+  /**
+   * Values for Category target type.
+   */
+  // @DataMember
+  // @ApiMember(DataType="array", Description="Values for Category target type.", Name="CategoryValues", ParameterType="body")
+  public categoryValues: string[];
 
-	/**
-	 * Limitations for discounts to be used only with certain payment accounts.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="array", Description="Limitations for discounts to be used only with certain payment accounts.", Name="PaymentAccounts", ParameterType="body")
-	public paymentAccounts: string[];
+  /**
+   * Limitations for discounts to be used only with certain payment accounts.
+   */
+  // @DataMember
+  // @ApiMember(DataType="array", Description="Limitations for discounts to be used only with certain payment accounts.", Name="PaymentAccounts", ParameterType="body")
+  public paymentAccounts: string[];
 
-	/**
-	 * Users who can redeem this discount.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="array", Description="Users who can redeem this discount.", Name="Users", ParameterType="body")
-	public users: string[];
+  /**
+   * Users who can redeem this discount.
+   */
+  // @DataMember
+  // @ApiMember(DataType="array", Description="Users who can redeem this discount.", Name="Users", ParameterType="body")
+  public users: string[];
 
-	/**
-	 * Emails for potential users who can redeem this discount. When user registers with one of the provided emails, he will be allowed to use this discount. Doesn't work with existing users.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="array", Description="Emails for potential users who can redeem this discount. When user registers with one of the provided emails, he will be allowed to use this discount. Doesn't work with existing users.", Name="Users", ParameterType="body")
-	public emails: string[];
+  /**
+   * Emails for potential users who can redeem this discount. When user registers with one of the provided emails, he will be allowed to use this discount. Doesn't work with existing users.
+   */
+  // @DataMember
+  // @ApiMember(DataType="array", Description="Emails for potential users who can redeem this discount. When user registers with one of the provided emails, he will be allowed to use this discount. Doesn't work with existing users.", Name="Users", ParameterType="body")
+  public emails: string[];
 
-	/**
-	 * Amount of times that the same user can redeem. Default - 1.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="int", Description="Amount of times that the same user can redeem. Default - 1.", Name="UserCanRedeem", ParameterType="body")
-	public userCanRedeem?: number;
+  /**
+   * Amount of times that the same user can redeem. Default - 1.
+   */
+  // @DataMember
+  // @ApiMember(DataType="int", Description="Amount of times that the same user can redeem. Default - 1.", Name="UserCanRedeem", ParameterType="body")
+  public userCanRedeem?: number;
 
-	/**
-	 * Amount of times in total this discount can be redeemed.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="int", Description="Amount of times in total this discount can be redeemed.", Name="TotalCanRedeem", ParameterType="body")
-	public totalCanRedeem?: number;
+  /**
+   * Amount of times in total this discount can be redeemed.
+   */
+  // @DataMember
+  // @ApiMember(DataType="int", Description="Amount of times in total this discount can be redeemed.", Name="TotalCanRedeem", ParameterType="body")
+  public totalCanRedeem?: number;
 
-	/**
-	 * Should the discount be enabled. Default - true.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Should the discount be enabled. Default - true.", Name="Enabled", ParameterType="body")
-	public enabled: boolean;
+  /**
+   * Should the discount be enabled. Default - true.
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Should the discount be enabled. Default - true.", Name="Enabled", ParameterType="body")
+  public enabled: boolean;
 
-	/**
-	 * Should the discount be combined with other discounts. Default - true.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Should the discount be combined with other discounts. Default - true.", Name="CombineDiscounts", ParameterType="body")
-	public combineDiscounts: boolean;
+  /**
+   * Should the discount be combined with other discounts. Default - true.
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Should the discount be combined with other discounts. Default - true.", Name="CombineDiscounts", ParameterType="body")
+  public combineDiscounts: boolean;
 
-	public constructor(init?: Partial<CreateDiscountRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CreateDiscountRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new CreateDiscountResponse();
-	}
+  public createResponse() {
+    return new CreateDiscountResponse();
+  }
 
-	public getTypeName() {
-		return 'CreateDiscountRequest';
-	}
+  public getTypeName() {
+    return 'CreateDiscountRequest';
+  }
 }
 
 /**
@@ -6948,17 +6948,17 @@ export class CreateDiscountRequest
 // @Api(Description="Payments")
 // @DataContract
 export class DeleteDiscountRequest extends CodeMashRequestBase {
-	/**
-	 * Id of discount.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Id of discount.", IsRequired=true, Name="Id", ParameterType="body")
-	public id: string;
+  /**
+   * Id of discount.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Id of discount.", IsRequired=true, Name="Id", ParameterType="body")
+  public id: string;
 
-	public constructor(init?: Partial<DeleteDiscountRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<DeleteDiscountRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -6969,55 +6969,55 @@ export class DeleteDiscountRequest extends CodeMashRequestBase {
 // @Api(Description="Payments")
 // @DataContract
 export class GetApplicableCouponsRequest
-	extends CodeMashRequestBase
-	implements IReturn<GetApplicableCouponsResponse> {
-	/**
-	 * Unique code of a discount.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Unique code of a discount.", IsRequired=true, Name="Code", ParameterType="query")
-	public codes: string[];
+  extends CodeMashRequestBase
+  implements IReturn<GetApplicableCouponsResponse> {
+  /**
+   * Unique code of a discount.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Unique code of a discount.", IsRequired=true, Name="Code", ParameterType="query")
+  public codes: string[];
 
-	/**
-	 * Order schema ID. Must match one of your order schemas including user zone.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="Order schema ID. Must match one of your order schemas including user zone.", Name="OrderSchemaId", ParameterType="query")
-	public orderSchemaId: string;
+  /**
+   * Order schema ID. Must match one of your order schemas including user zone.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="Order schema ID. Must match one of your order schemas including user zone.", Name="OrderSchemaId", ParameterType="query")
+  public orderSchemaId: string;
 
-	/**
-	 * User ID. Requires administrator permission.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="User ID. Requires administrator permission.", Name="UserId", ParameterType="body")
-	public userId?: string;
+  /**
+   * User ID. Requires administrator permission.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="User ID. Requires administrator permission.", Name="UserId", ParameterType="body")
+  public userId?: string;
 
-	/**
-	 * If true, will consider a buyer as a guest user.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If true, will consider a buyer as a guest user.", Name="AsGuest", ParameterType="body")
-	public asGuest: boolean;
+  /**
+   * If true, will consider a buyer as a guest user.
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If true, will consider a buyer as a guest user.", Name="AsGuest", ParameterType="body")
+  public asGuest: boolean;
 
-	/**
-	 * Order lines. Check which records are applicable for discount.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Array", Description="Order lines. Check which records are applicable for discount.", IsRequired=true, Name="Lines", ParameterType="query")
-	public lines: OrderLineInput[];
+  /**
+   * Order lines. Check which records are applicable for discount.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Array", Description="Order lines. Check which records are applicable for discount.", IsRequired=true, Name="Lines", ParameterType="query")
+  public lines: OrderLineInput[];
 
-	public constructor(init?: Partial<GetApplicableCouponsRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetApplicableCouponsRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new GetApplicableCouponsResponse();
-	}
+  public createResponse() {
+    return new GetApplicableCouponsResponse();
+  }
 
-	public getTypeName() {
-		return 'GetApplicableCouponsRequest';
-	}
+  public getTypeName() {
+    return 'GetApplicableCouponsRequest';
+  }
 }
 
 /**
@@ -7028,48 +7028,48 @@ export class GetApplicableCouponsRequest
 // @Api(Description="Payments")
 // @DataContract
 export class GetApplicableDiscountsRequest
-	extends CodeMashRequestBase
-	implements IReturn<GetApplicableDiscountsResponse> {
-	/**
-	 * Order schema ID. Must match one of your order schemas including user zone.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="Order schema ID. Must match one of your order schemas including user zone.", IsRequired=true, Name="OrderSchemaId", ParameterType="query")
-	public orderSchemaId: string;
+  extends CodeMashRequestBase
+  implements IReturn<GetApplicableDiscountsResponse> {
+  /**
+   * Order schema ID. Must match one of your order schemas including user zone.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="Order schema ID. Must match one of your order schemas including user zone.", IsRequired=true, Name="OrderSchemaId", ParameterType="query")
+  public orderSchemaId: string;
 
-	/**
-	 * User ID. Requires administrator permission.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="User ID. Requires administrator permission.", Name="UserId", ParameterType="body")
-	public userId?: string;
+  /**
+   * User ID. Requires administrator permission.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="User ID. Requires administrator permission.", Name="UserId", ParameterType="body")
+  public userId?: string;
 
-	/**
-	 * If true, will consider a buyer as a guest user.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If true, will consider a buyer as a guest user.", Name="AsGuest", ParameterType="body")
-	public asGuest: boolean;
+  /**
+   * If true, will consider a buyer as a guest user.
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If true, will consider a buyer as a guest user.", Name="AsGuest", ParameterType="body")
+  public asGuest: boolean;
 
-	/**
-	 * Order lines. Check which records are applicable for discount.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Array", Description="Order lines. Check which records are applicable for discount.", IsRequired=true, Name="Lines", ParameterType="query")
-	public lines: OrderLineInput[];
+  /**
+   * Order lines. Check which records are applicable for discount.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Array", Description="Order lines. Check which records are applicable for discount.", IsRequired=true, Name="Lines", ParameterType="query")
+  public lines: OrderLineInput[];
 
-	public constructor(init?: Partial<GetApplicableDiscountsRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetApplicableDiscountsRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new GetApplicableDiscountsResponse();
-	}
+  public createResponse() {
+    return new GetApplicableDiscountsResponse();
+  }
 
-	public getTypeName() {
-		return 'GetApplicableDiscountsRequest';
-	}
+  public getTypeName() {
+    return 'GetApplicableDiscountsRequest';
+  }
 }
 
 /**
@@ -7080,136 +7080,136 @@ export class GetApplicableDiscountsRequest
 // @Api(Description="Payments")
 // @DataContract
 export class UpdateDiscountRequest extends CodeMashRequestBase {
-	/**
-	 * Id of discount.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Id of discount.", IsRequired=true, Name="Id", ParameterType="body")
-	public id: string;
+  /**
+   * Id of discount.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Id of discount.", IsRequired=true, Name="Id", ParameterType="body")
+  public id: string;
 
-	/**
-	 * Display name of the discount.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Display name of the discount.", Name="DisplayName", ParameterType="body")
-	public displayName: string;
+  /**
+   * Display name of the discount.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Display name of the discount.", Name="DisplayName", ParameterType="body")
+  public displayName: string;
 
-	/**
-	 * Start date of being active.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="long", Description="Start date of being active.", Name="ValidFrom", ParameterType="body")
-	public validFrom?: number;
+  /**
+   * Start date of being active.
+   */
+  // @DataMember
+  // @ApiMember(DataType="long", Description="Start date of being active.", Name="ValidFrom", ParameterType="body")
+  public validFrom?: number;
 
-	/**
-	 * End date of being active.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="long", Description="End date of being active.", Name="ValidUntil", ParameterType="body")
-	public validUntil?: number;
+  /**
+   * End date of being active.
+   */
+  // @DataMember
+  // @ApiMember(DataType="long", Description="End date of being active.", Name="ValidUntil", ParameterType="body")
+  public validUntil?: number;
 
-	/**
-	 * Restriction type of discount. Can be Fixed, Percentage, Price or Quantity.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Restriction type of discount. Can be Fixed, Percentage, Price or Quantity.", Name="RestrictionType", ParameterType="body")
-	public restrictionType: string;
+  /**
+   * Restriction type of discount. Can be Fixed, Percentage, Price or Quantity.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Restriction type of discount. Can be Fixed, Percentage, Price or Quantity.", Name="RestrictionType", ParameterType="body")
+  public restrictionType: string;
 
-	/**
-	 * Discount amount for Fixed or Percentage restriction types.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="double", Description="Discount amount for Fixed or Percentage restriction types.", Name="Amount", ParameterType="body")
-	public amount?: number;
+  /**
+   * Discount amount for Fixed or Percentage restriction types.
+   */
+  // @DataMember
+  // @ApiMember(DataType="double", Description="Discount amount for Fixed or Percentage restriction types.", Name="Amount", ParameterType="body")
+  public amount?: number;
 
-	/**
-	 * Discount amounts for Price or Quantity restriction types.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="array", Description="Discount amounts for Price or Quantity restriction types.", Name="Boundaries", ParameterType="body")
-	public boundaries: PaymentDiscountBoundary[];
+  /**
+   * Discount amounts for Price or Quantity restriction types.
+   */
+  // @DataMember
+  // @ApiMember(DataType="array", Description="Discount amounts for Price or Quantity restriction types.", Name="Boundaries", ParameterType="body")
+  public boundaries: PaymentDiscountBoundary[];
 
-	/**
-	 * Target type for specific records. Can be All, Category, Individual.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Target type for specific records. Can be All, Category, Individual.", Name="TargetType", ParameterType="body")
-	public targetType: string;
+  /**
+   * Target type for specific records. Can be All, Category, Individual.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Target type for specific records. Can be All, Category, Individual.", Name="TargetType", ParameterType="body")
+  public targetType: string;
 
-	/**
-	 * Records for Individual target type.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="array", Description="Records for Individual target type.", Name="Records", ParameterType="body")
-	public records: string[];
+  /**
+   * Records for Individual target type.
+   */
+  // @DataMember
+  // @ApiMember(DataType="array", Description="Records for Individual target type.", Name="Records", ParameterType="body")
+  public records: string[];
 
-	/**
-	 * Collection field for Category target type.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Collection field for Category target type.", Name="CategoryField", ParameterType="body")
-	public categoryField: string;
+  /**
+   * Collection field for Category target type.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Collection field for Category target type.", Name="CategoryField", ParameterType="body")
+  public categoryField: string;
 
-	/**
-	 * Values for Category target type.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="array", Description="Values for Category target type.", Name="CategoryValues", ParameterType="body")
-	public categoryValues: string[];
+  /**
+   * Values for Category target type.
+   */
+  // @DataMember
+  // @ApiMember(DataType="array", Description="Values for Category target type.", Name="CategoryValues", ParameterType="body")
+  public categoryValues: string[];
 
-	/**
-	 * Limitations for discounts to be used only with certain payment accounts.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="array", Description="Limitations for discounts to be used only with certain payment accounts.", Name="PaymentAccounts", ParameterType="body")
-	public paymentAccounts: string[];
+  /**
+   * Limitations for discounts to be used only with certain payment accounts.
+   */
+  // @DataMember
+  // @ApiMember(DataType="array", Description="Limitations for discounts to be used only with certain payment accounts.", Name="PaymentAccounts", ParameterType="body")
+  public paymentAccounts: string[];
 
-	/**
-	 * Users who can redeem this discount.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="array", Description="Users who can redeem this discount.", Name="Users", ParameterType="body")
-	public users: string[];
+  /**
+   * Users who can redeem this discount.
+   */
+  // @DataMember
+  // @ApiMember(DataType="array", Description="Users who can redeem this discount.", Name="Users", ParameterType="body")
+  public users: string[];
 
-	/**
-	 * Emails for potential users who can redeem this discount. When user registers with one of the provided emails, he will be allowed to use this discount. Doesn't work with existing users.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="array", Description="Emails for potential users who can redeem this discount. When user registers with one of the provided emails, he will be allowed to use this discount. Doesn't work with existing users.", Name="Users", ParameterType="body")
-	public emails: string[];
+  /**
+   * Emails for potential users who can redeem this discount. When user registers with one of the provided emails, he will be allowed to use this discount. Doesn't work with existing users.
+   */
+  // @DataMember
+  // @ApiMember(DataType="array", Description="Emails for potential users who can redeem this discount. When user registers with one of the provided emails, he will be allowed to use this discount. Doesn't work with existing users.", Name="Users", ParameterType="body")
+  public emails: string[];
 
-	/**
-	 * Amount of times that the same user can redeem.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="int", Description="Amount of times that the same user can redeem.", Name="UserCanRedeem", ParameterType="body")
-	public userCanRedeem?: number;
+  /**
+   * Amount of times that the same user can redeem.
+   */
+  // @DataMember
+  // @ApiMember(DataType="int", Description="Amount of times that the same user can redeem.", Name="UserCanRedeem", ParameterType="body")
+  public userCanRedeem?: number;
 
-	/**
-	 * Amount of times in total this discount can be redeemed.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="int", Description="Amount of times in total this discount can be redeemed.", Name="TotalCanRedeem", ParameterType="body")
-	public totalCanRedeem?: number;
+  /**
+   * Amount of times in total this discount can be redeemed.
+   */
+  // @DataMember
+  // @ApiMember(DataType="int", Description="Amount of times in total this discount can be redeemed.", Name="TotalCanRedeem", ParameterType="body")
+  public totalCanRedeem?: number;
 
-	/**
-	 * Should the discount be enabled.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Should the discount be enabled.", Name="Enabled", ParameterType="body")
-	public enabled?: boolean;
+  /**
+   * Should the discount be enabled.
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Should the discount be enabled.", Name="Enabled", ParameterType="body")
+  public enabled?: boolean;
 
-	/**
-	 * Should the discount be combined with other discounts
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Should the discount be combined with other discounts", Name="CombineDiscounts", ParameterType="body")
-	public combineDiscounts?: boolean;
+  /**
+   * Should the discount be combined with other discounts
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Should the discount be combined with other discounts", Name="CombineDiscounts", ParameterType="body")
+  public combineDiscounts?: boolean;
 
-	public constructor(init?: Partial<UpdateDiscountRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UpdateDiscountRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -7220,41 +7220,41 @@ export class UpdateDiscountRequest extends CodeMashRequestBase {
 // @Api(Description="Payments")
 // @DataContract
 export class VerifyGooglePlayStoreSubscriptionRequest
-	extends CodeMashRequestBase
-	implements IReturn<VerifyGooglePlayStoreSubscriptionResponse> {
-	/**
-	 * Payment receipt.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Payment receipt.", IsRequired=true, Name="Receipt", ParameterType="body")
-	public receipt: string;
+  extends CodeMashRequestBase
+  implements IReturn<VerifyGooglePlayStoreSubscriptionResponse> {
+  /**
+   * Payment receipt.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Payment receipt.", IsRequired=true, Name="Receipt", ParameterType="body")
+  public receipt: string;
 
-	/**
-	 * ID of customer who subscribed. Required for first time calling this endpoint.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="ID of customer who subscribed. Required for first time calling this endpoint.", Name="CustomerId", ParameterType="body")
-	public customerId: string;
+  /**
+   * ID of customer who subscribed. Required for first time calling this endpoint.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="ID of customer who subscribed. Required for first time calling this endpoint.", Name="CustomerId", ParameterType="body")
+  public customerId: string;
 
-	/**
-	 * Subscription plan ID. Required for first time calling this endpoint.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="Subscription plan ID. Required for first time calling this endpoint.", Name="PlanId", ParameterType="body")
-	public planId: string;
+  /**
+   * Subscription plan ID. Required for first time calling this endpoint.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="Subscription plan ID. Required for first time calling this endpoint.", Name="PlanId", ParameterType="body")
+  public planId: string;
 
-	public constructor(init?: Partial<VerifyGooglePlayStoreSubscriptionRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<VerifyGooglePlayStoreSubscriptionRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new VerifyGooglePlayStoreSubscriptionResponse();
-	}
+  public createResponse() {
+    return new VerifyGooglePlayStoreSubscriptionResponse();
+  }
 
-	public getTypeName() {
-		return 'VerifyGooglePlayStoreSubscriptionRequest';
-	}
+  public getTypeName() {
+    return 'VerifyGooglePlayStoreSubscriptionRequest';
+  }
 }
 
 /**
@@ -7265,55 +7265,55 @@ export class VerifyGooglePlayStoreSubscriptionRequest
 // @Api(Description="Payments")
 // @DataContract
 export class AttachPaymentMethodRequest
-	extends CodeMashRequestBase
-	implements IReturn<AttachPaymentMethodResponse> {
-	/**
-	 * Customer's ID.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's ID.", Name="CustomerId", ParameterType="body")
-	public customerId: string;
+  extends CodeMashRequestBase
+  implements IReturn<AttachPaymentMethodResponse> {
+  /**
+   * Customer's ID.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's ID.", Name="CustomerId", ParameterType="body")
+  public customerId: string;
 
-	/**
-	 * Setup intent ID.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Setup intent ID.", Name="SetupId", ParameterType="body")
-	public setupId: string;
+  /**
+   * Setup intent ID.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Setup intent ID.", Name="SetupId", ParameterType="body")
+  public setupId: string;
 
-	/**
-	 * Client secret got from creating setup intent.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Client secret got from creating setup intent.", Name="SetupClientSecret", ParameterType="body")
-	public setupClientSecret: string;
+  /**
+   * Client secret got from creating setup intent.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Client secret got from creating setup intent.", Name="SetupClientSecret", ParameterType="body")
+  public setupClientSecret: string;
 
-	/**
-	 * Should this payment method be default.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Should this payment method be default.", Name="AsDefault", ParameterType="body")
-	public asDefault: boolean;
+  /**
+   * Should this payment method be default.
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Should this payment method be default.", Name="AsDefault", ParameterType="body")
+  public asDefault: boolean;
 
-	/**
-	 * Should current payment methods be detached.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Should current payment methods be detached.", Name="DetachOthers", ParameterType="body")
-	public detachOthers: boolean;
+  /**
+   * Should current payment methods be detached.
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Should current payment methods be detached.", Name="DetachOthers", ParameterType="body")
+  public detachOthers: boolean;
 
-	public constructor(init?: Partial<AttachPaymentMethodRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<AttachPaymentMethodRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new AttachPaymentMethodResponse();
-	}
+  public createResponse() {
+    return new AttachPaymentMethodResponse();
+  }
 
-	public getTypeName() {
-		return 'AttachPaymentMethodRequest';
-	}
+  public getTypeName() {
+    return 'AttachPaymentMethodRequest';
+  }
 }
 
 /**
@@ -7324,24 +7324,24 @@ export class AttachPaymentMethodRequest
 // @Api(Description="Payments")
 // @DataContract
 export class DetachPaymentMethodRequest extends CodeMashRequestBase {
-	/**
-	 * Payment method's ID.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Payment method's ID.", IsRequired=true, Name="Id", ParameterType="query")
-	public id: string;
+  /**
+   * Payment method's ID.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Payment method's ID.", IsRequired=true, Name="Id", ParameterType="query")
+  public id: string;
 
-	/**
-	 * Customer's ID.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's ID.", Name="CustomerId", ParameterType="query")
-	public customerId: string;
+  /**
+   * Customer's ID.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's ID.", Name="CustomerId", ParameterType="query")
+  public customerId: string;
 
-	public constructor(init?: Partial<DetachPaymentMethodRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<DetachPaymentMethodRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -7352,34 +7352,34 @@ export class DetachPaymentMethodRequest extends CodeMashRequestBase {
 // @Api(Description="Payments")
 // @DataContract
 export class GetPaymentMethodSetupRequest
-	extends CodeMashRequestBase
-	implements IReturn<GetPaymentMethodSetupResponse> {
-	/**
-	 * Payment account ID.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="Payment account ID.", IsRequired=true, Name="AccountId", ParameterType="query")
-	public accountId: string;
+  extends CodeMashRequestBase
+  implements IReturn<GetPaymentMethodSetupResponse> {
+  /**
+   * Payment account ID.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="Payment account ID.", IsRequired=true, Name="AccountId", ParameterType="query")
+  public accountId: string;
 
-	/**
-	 * Can payment method be used without a user.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Can payment method be used without a user.", Name="AllowOffline", ParameterType="query")
-	public allowOffline: boolean;
+  /**
+   * Can payment method be used without a user.
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Can payment method be used without a user.", Name="AllowOffline", ParameterType="query")
+  public allowOffline: boolean;
 
-	public constructor(init?: Partial<GetPaymentMethodSetupRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetPaymentMethodSetupRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new GetPaymentMethodSetupResponse();
-	}
+  public createResponse() {
+    return new GetPaymentMethodSetupResponse();
+  }
 
-	public getTypeName() {
-		return 'GetPaymentMethodSetupRequest';
-	}
+  public getTypeName() {
+    return 'GetPaymentMethodSetupRequest';
+  }
 }
 
 /**
@@ -7390,101 +7390,101 @@ export class GetPaymentMethodSetupRequest
 // @Api(Description="Payments")
 // @DataContract
 export class UpdatePaymentMethodRequest extends CodeMashRequestBase {
-	/**
-	 * Payment method's ID.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Payment method's ID.", IsRequired=true, Name="Id", ParameterType="query")
-	public id: string;
+  /**
+   * Payment method's ID.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Payment method's ID.", IsRequired=true, Name="Id", ParameterType="query")
+  public id: string;
 
-	/**
-	 * Customer's ID.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's ID.", Name="CustomerId", ParameterType="query")
-	public customerId: string;
+  /**
+   * Customer's ID.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's ID.", Name="CustomerId", ParameterType="query")
+  public customerId: string;
 
-	/**
-	 * Payment method's phone. Overrides user's phone.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Payment method's phone. Overrides user's phone.", Name="Phone", ParameterType="body")
-	public phone: string;
+  /**
+   * Payment method's phone. Overrides user's phone.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Payment method's phone. Overrides user's phone.", Name="Phone", ParameterType="body")
+  public phone: string;
 
-	/**
-	 * Payment method's full name. Overrides user's name.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Payment method's full name. Overrides user's name.", Name="Name", ParameterType="body")
-	public name: string;
+  /**
+   * Payment method's full name. Overrides user's name.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Payment method's full name. Overrides user's name.", Name="Name", ParameterType="body")
+  public name: string;
 
-	/**
-	 * Payment method's description.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Payment method's description.", Name="Description", ParameterType="body")
-	public description: string;
+  /**
+   * Payment method's description.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Payment method's description.", Name="Description", ParameterType="body")
+  public description: string;
 
-	/**
-	 * Payment method's email. Overrides user's email.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Payment method's email. Overrides user's email.", Name="Email", ParameterType="body")
-	public email: string;
+  /**
+   * Payment method's email. Overrides user's email.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Payment method's email. Overrides user's email.", Name="Email", ParameterType="body")
+  public email: string;
 
-	/**
-	 * Payment method's city. Overrides user's city.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Payment method's city. Overrides user's city.", Name="City", ParameterType="body")
-	public city: string;
+  /**
+   * Payment method's city. Overrides user's city.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Payment method's city. Overrides user's city.", Name="City", ParameterType="body")
+  public city: string;
 
-	/**
-	 * Payment method's country. Overrides user's country.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Payment method's country. Overrides user's country.", Name="CountryCode", ParameterType="body")
-	public countryCode: string;
+  /**
+   * Payment method's country. Overrides user's country.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Payment method's country. Overrides user's country.", Name="CountryCode", ParameterType="body")
+  public countryCode: string;
 
-	/**
-	 * Payment method's address 1. Overrides user's address 1.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Payment method's address 1. Overrides user's address 1.", Name="Address1", ParameterType="body")
-	public address: string;
+  /**
+   * Payment method's address 1. Overrides user's address 1.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Payment method's address 1. Overrides user's address 1.", Name="Address1", ParameterType="body")
+  public address: string;
 
-	/**
-	 * Payment method's address 2. Overrides user's address 2.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Payment method's address 2. Overrides user's address 2.", Name="Address2", ParameterType="body")
-	public address2: string;
+  /**
+   * Payment method's address 2. Overrides user's address 2.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Payment method's address 2. Overrides user's address 2.", Name="Address2", ParameterType="body")
+  public address2: string;
 
-	/**
-	 * Payment method's postal code. Overrides user's postal code.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Payment method's postal code. Overrides user's postal code.", Name="PostalCode", ParameterType="body")
-	public postalCode: string;
+  /**
+   * Payment method's postal code. Overrides user's postal code.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Payment method's postal code. Overrides user's postal code.", Name="PostalCode", ParameterType="body")
+  public postalCode: string;
 
-	/**
-	 * Payment method's state. Overrides user's area.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Payment method's state. Overrides user's area.", Name="Area", ParameterType="body")
-	public area: string;
+  /**
+   * Payment method's state. Overrides user's area.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Payment method's state. Overrides user's area.", Name="Area", ParameterType="body")
+  public area: string;
 
-	/**
-	 * Additional key, value data.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="object", Description="Additional key, value data.", Name="Meta", ParameterType="body")
-	public meta: {[index: string]: string};
+  /**
+   * Additional key, value data.
+   */
+  // @DataMember
+  // @ApiMember(DataType="object", Description="Additional key, value data.", Name="Meta", ParameterType="body")
+  public meta: { [index: string]: string };
 
-	public constructor(init?: Partial<UpdatePaymentMethodRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UpdatePaymentMethodRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -7495,83 +7495,83 @@ export class UpdatePaymentMethodRequest extends CodeMashRequestBase {
 // @Api(Description="Payments")
 // @DataContract
 export class CreateOrderRequest
-	extends CodeMashRequestBase
-	implements IReturn<CreateOrderResponse> {
-	/**
-	 * Payment account ID.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="Payment account ID.", IsRequired=true, Name="AccountId", ParameterType="body")
-	public accountId: string;
+  extends CodeMashRequestBase
+  implements IReturn<CreateOrderResponse> {
+  /**
+   * Payment account ID.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="Payment account ID.", IsRequired=true, Name="AccountId", ParameterType="body")
+  public accountId: string;
 
-	/**
-	 * Order schema ID. Must match one of your order schemas including user zone.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="Order schema ID. Must match one of your order schemas including user zone.", IsRequired=true, Name="OrderSchemaId", ParameterType="body")
-	public orderSchemaId: string;
+  /**
+   * Order schema ID. Must match one of your order schemas including user zone.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="Order schema ID. Must match one of your order schemas including user zone.", IsRequired=true, Name="OrderSchemaId", ParameterType="body")
+  public orderSchemaId: string;
 
-	/**
-	 * User ID. Requires administrator permission.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="User ID. Requires administrator permission.", Name="UserId", ParameterType="body")
-	public userId?: string;
+  /**
+   * User ID. Requires administrator permission.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="User ID. Requires administrator permission.", Name="UserId", ParameterType="body")
+  public userId?: string;
 
-	/**
-	 * Order lines.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Array", Description="Order lines.", IsRequired=true, Name="Lines", ParameterType="body")
-	public lines: OrderLineInput[];
+  /**
+   * Order lines.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Array", Description="Order lines.", IsRequired=true, Name="Lines", ParameterType="body")
+  public lines: OrderLineInput[];
 
-	/**
-	 * Coupon discounts.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Array", Description="Coupon discounts.", Name="Coupons", ParameterType="body")
-	public coupons: string[];
+  /**
+   * Coupon discounts.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Array", Description="Coupon discounts.", Name="Coupons", ParameterType="body")
+  public coupons: string[];
 
-	/**
-	 * If true, will consider a buyer as a guest user.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If true, will consider a buyer as a guest user.", Name="AsGuest", ParameterType="body")
-	public asGuest: boolean;
+  /**
+   * If true, will consider a buyer as a guest user.
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If true, will consider a buyer as a guest user.", Name="AsGuest", ParameterType="body")
+  public asGuest: boolean;
 
-	/**
-	 * Customer details. Should be provided if this is a guest. If this is a user, then this will override user details.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Object", Description="Customer details. Should be provided if this is a guest. If this is a user, then this will override user details.", Name="BuyerDetails", ParameterType="body")
-	public customerDetails: OrderCustomerInput;
+  /**
+   * Customer details. Should be provided if this is a guest. If this is a user, then this will override user details.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Object", Description="Customer details. Should be provided if this is a guest. If this is a user, then this will override user details.", Name="BuyerDetails", ParameterType="body")
+  public customerDetails: OrderCustomerInput;
 
-	/**
-	 * Consider this as a test order
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Consider this as a test order", Name="IsTest", ParameterType="body")
-	public isTest: boolean;
+  /**
+   * Consider this as a test order
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Consider this as a test order", Name="IsTest", ParameterType="body")
+  public isTest: boolean;
 
-	/**
-	 * Additional information for order
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Object", Description="Additional information for order", Name="Meta", ParameterType="body")
-	public meta: {[index: string]: string};
+  /**
+   * Additional information for order
+   */
+  // @DataMember
+  // @ApiMember(DataType="Object", Description="Additional information for order", Name="Meta", ParameterType="body")
+  public meta: { [index: string]: string };
 
-	public constructor(init?: Partial<CreateOrderRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CreateOrderRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new CreateOrderResponse();
-	}
+  public createResponse() {
+    return new CreateOrderResponse();
+  }
 
-	public getTypeName() {
-		return 'CreateOrderRequest';
-	}
+  public getTypeName() {
+    return 'CreateOrderRequest';
+  }
 }
 
 /**
@@ -7582,34 +7582,34 @@ export class CreateOrderRequest
 // @Api(Description="Payments")
 // @DataContract
 export class GetOrderRequest
-	extends CodeMashRequestBase
-	implements IReturn<GetOrderResponse> {
-	/**
-	 * Order ID.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Order ID.", IsRequired=true, Name="Id", ParameterType="path")
-	public id: string;
+  extends CodeMashRequestBase
+  implements IReturn<GetOrderResponse> {
+  /**
+   * Order ID.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Order ID.", IsRequired=true, Name="Id", ParameterType="path")
+  public id: string;
 
-	/**
-	 * If true, includes paid transactions to response.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If true, includes paid transactions to response.", Name="IncludePaidTransactions", ParameterType="query")
-	public includePaidTransactions: boolean;
+  /**
+   * If true, includes paid transactions to response.
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If true, includes paid transactions to response.", Name="IncludePaidTransactions", ParameterType="query")
+  public includePaidTransactions: boolean;
 
-	public constructor(init?: Partial<GetOrderRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetOrderRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new GetOrderResponse();
-	}
+  public createResponse() {
+    return new GetOrderResponse();
+  }
 
-	public getTypeName() {
-		return 'GetOrderRequest';
-	}
+  public getTypeName() {
+    return 'GetOrderRequest';
+  }
 }
 
 /**
@@ -7620,41 +7620,41 @@ export class GetOrderRequest
 // @Api(Description="Payments")
 // @DataContract
 export class GetOrdersRequest
-	extends CodeMashListRequestBase
-	implements IReturn<GetOrdersResponse> {
-	/**
-	 * User ID. Requires administrator permission.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="User ID. Requires administrator permission.", IsRequired=true, Name="UserId", ParameterType="query")
-	public userId: string;
+  extends CodeMashListRequestBase
+  implements IReturn<GetOrdersResponse> {
+  /**
+   * User ID. Requires administrator permission.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="User ID. Requires administrator permission.", IsRequired=true, Name="UserId", ParameterType="query")
+  public userId: string;
 
-	/**
-	 * If true, includes paid transactions to response.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If true, includes paid transactions to response.", Name="IncludePaidTransactions", ParameterType="query")
-	public includePaidTransactions: boolean;
+  /**
+   * If true, includes paid transactions to response.
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If true, includes paid transactions to response.", Name="IncludePaidTransactions", ParameterType="query")
+  public includePaidTransactions: boolean;
 
-	/**
-	 * API key of your cluster. Can be passed in a header as X-CM-Cluster.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="API key of your cluster. Can be passed in a header as X-CM-Cluster.", IsRequired=true, Name="Cluster", ParameterType="query")
-	public cluster: string;
+  /**
+   * API key of your cluster. Can be passed in a header as X-CM-Cluster.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="API key of your cluster. Can be passed in a header as X-CM-Cluster.", IsRequired=true, Name="Cluster", ParameterType="query")
+  public cluster: string;
 
-	public constructor(init?: Partial<GetOrdersRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetOrdersRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new GetOrdersResponse();
-	}
+  public createResponse() {
+    return new GetOrdersResponse();
+  }
 
-	public getTypeName() {
-		return 'GetOrdersRequest';
-	}
+  public getTypeName() {
+    return 'GetOrdersRequest';
+  }
 }
 
 /**
@@ -7665,42 +7665,42 @@ export class GetOrdersRequest
 // @Api(Description="Payments")
 // @DataContract
 export class CreatePayseraTransactionRequest
-	extends CodeMashRequestBase
-	implements IReturn<CreatePayseraTransactionResponse> {
-	/**
-	 * Order ID to pay for.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Order ID to pay for.", IsRequired=true, Name="Id", ParameterType="path")
-	public id: string;
+  extends CodeMashRequestBase
+  implements IReturn<CreatePayseraTransactionResponse> {
+  /**
+   * Order ID to pay for.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Order ID to pay for.", IsRequired=true, Name="Id", ParameterType="path")
+  public id: string;
 
-	/**
-	 * To choose which mode to use from payment settings.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="To choose which mode to use from payment settings.", IsRequired=true, Name="Mode", ParameterType="body")
-	public mode: string;
+  /**
+   * To choose which mode to use from payment settings.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="To choose which mode to use from payment settings.", IsRequired=true, Name="Mode", ParameterType="body")
+  public mode: string;
 
-	public constructor(init?: Partial<CreatePayseraTransactionRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CreatePayseraTransactionRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new CreatePayseraTransactionResponse();
-	}
+  public createResponse() {
+    return new CreatePayseraTransactionResponse();
+  }
 
-	public getTypeName() {
-		return 'CreatePayseraTransactionRequest';
-	}
+  public getTypeName() {
+    return 'CreatePayseraTransactionRequest';
+  }
 }
 
 export class ValidatePayseraRequest {
-	public pathInfo: string;
+  public pathInfo: string;
 
-	public constructor(init?: Partial<ValidatePayseraRequest>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<ValidatePayseraRequest>) {
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -7711,48 +7711,48 @@ export class ValidatePayseraRequest {
 // @Api(Description="Payments")
 // @DataContract
 export class CheckStripePaymentStatusRequest
-	extends CodeMashRequestBase
-	implements IReturn<CheckStripePaymentStatusResponse> {
-	/**
-	 * Order ID.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Order ID.", IsRequired=true, Name="Id", ParameterType="path")
-	public id: string;
+  extends CodeMashRequestBase
+  implements IReturn<CheckStripePaymentStatusResponse> {
+  /**
+   * Order ID.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Order ID.", IsRequired=true, Name="Id", ParameterType="path")
+  public id: string;
 
-	/**
-	 * Payment account ID.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="Payment account ID.", IsRequired=true, Name="AccountId", ParameterType="query")
-	public accountId: string;
+  /**
+   * Payment account ID.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="Payment account ID.", IsRequired=true, Name="AccountId", ParameterType="query")
+  public accountId: string;
 
-	/**
-	 * Transaction ID which was used with this order and client secret.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Transaction ID which was used with this order and client secret.", IsRequired=true, Name="TransactionId", ParameterType="query")
-	public transactionId: string;
+  /**
+   * Transaction ID which was used with this order and client secret.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Transaction ID which was used with this order and client secret.", IsRequired=true, Name="TransactionId", ParameterType="query")
+  public transactionId: string;
 
-	/**
-	 * ClientSecret got from creating stripe transaction.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="ClientSecret got from creating stripe transaction.", IsRequired=true, Name="ClientSecret", ParameterType="query")
-	public clientSecret: string;
+  /**
+   * ClientSecret got from creating stripe transaction.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="ClientSecret got from creating stripe transaction.", IsRequired=true, Name="ClientSecret", ParameterType="query")
+  public clientSecret: string;
 
-	public constructor(init?: Partial<CheckStripePaymentStatusRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CheckStripePaymentStatusRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new CheckStripePaymentStatusResponse();
-	}
+  public createResponse() {
+    return new CheckStripePaymentStatusResponse();
+  }
 
-	public getTypeName() {
-		return 'CheckStripePaymentStatusRequest';
-	}
+  public getTypeName() {
+    return 'CheckStripePaymentStatusRequest';
+  }
 }
 
 /**
@@ -7763,41 +7763,41 @@ export class CheckStripePaymentStatusRequest
 // @Api(Description="Payments")
 // @DataContract
 export class CreateStripeTransactionRequest
-	extends CodeMashRequestBase
-	implements IReturn<CreateStripeTransactionResponse> {
-	/**
-	 * Order ID to pay for.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Order ID to pay for.", IsRequired=true, Name="Id", ParameterType="path")
-	public id: string;
+  extends CodeMashRequestBase
+  implements IReturn<CreateStripeTransactionResponse> {
+  /**
+   * Order ID to pay for.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Order ID to pay for.", IsRequired=true, Name="Id", ParameterType="path")
+  public id: string;
 
-	/**
-	 * Payment method ID to use.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Payment method ID to use.", IsRequired=true, Name="PaymentMethodId", ParameterType="body")
-	public paymentMethodId: string;
+  /**
+   * Payment method ID to use.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Payment method ID to use.", IsRequired=true, Name="PaymentMethodId", ParameterType="body")
+  public paymentMethodId: string;
 
-	/**
-	 * Customer ID to whom belongs this payment method.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer ID to whom belongs this payment method.", IsRequired=true, Name="CustomerId", ParameterType="body")
-	public customerId: string;
+  /**
+   * Customer ID to whom belongs this payment method.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer ID to whom belongs this payment method.", IsRequired=true, Name="CustomerId", ParameterType="body")
+  public customerId: string;
 
-	public constructor(init?: Partial<CreateStripeTransactionRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CreateStripeTransactionRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new CreateStripeTransactionResponse();
-	}
+  public createResponse() {
+    return new CreateStripeTransactionResponse();
+  }
 
-	public getTypeName() {
-		return 'CreateStripeTransactionRequest';
-	}
+  public getTypeName() {
+    return 'CreateStripeTransactionRequest';
+  }
 }
 
 /**
@@ -7808,48 +7808,48 @@ export class CreateStripeTransactionRequest
 // @Api(Description="Payments")
 // @DataContract
 export class CancelSubscriptionRequest
-	extends CodeMashRequestBase
-	implements IReturn<CancelSubscriptionResponse> {
-	/**
-	 * Subscription ID.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Subscription ID.", IsRequired=true, Name="SubscriptionId", ParameterType="path")
-	public id: string;
+  extends CodeMashRequestBase
+  implements IReturn<CancelSubscriptionResponse> {
+  /**
+   * Subscription ID.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Subscription ID.", IsRequired=true, Name="SubscriptionId", ParameterType="path")
+  public id: string;
 
-	/**
-	 * Customer's ID.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's ID.", IsRequired=true, Name="CustomerId", ParameterType="path")
-	public customerId: string;
+  /**
+   * Customer's ID.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's ID.", IsRequired=true, Name="CustomerId", ParameterType="path")
+  public customerId: string;
 
-	/**
-	 * Should cancel instantly. Overrides payment settings
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Should cancel instantly. Overrides payment settings", Name="CancelInstantly", ParameterType="query")
-	public cancelInstantly?: boolean;
+  /**
+   * Should cancel instantly. Overrides payment settings
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Should cancel instantly. Overrides payment settings", Name="CancelInstantly", ParameterType="query")
+  public cancelInstantly?: boolean;
 
-	/**
-	 * Should refund on cancel instantly. Overrides payment settings
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="Should refund on cancel instantly. Overrides payment settings", Name="RefundOnCancelInstantly", ParameterType="query")
-	public refundOnCancelInstantly?: boolean;
+  /**
+   * Should refund on cancel instantly. Overrides payment settings
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="Should refund on cancel instantly. Overrides payment settings", Name="RefundOnCancelInstantly", ParameterType="query")
+  public refundOnCancelInstantly?: boolean;
 
-	public constructor(init?: Partial<CancelSubscriptionRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CancelSubscriptionRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new CancelSubscriptionResponse();
-	}
+  public createResponse() {
+    return new CancelSubscriptionResponse();
+  }
 
-	public getTypeName() {
-		return 'CancelSubscriptionRequest';
-	}
+  public getTypeName() {
+    return 'CancelSubscriptionRequest';
+  }
 }
 
 /**
@@ -7860,55 +7860,55 @@ export class CancelSubscriptionRequest
 // @Api(Description="Payments")
 // @DataContract
 export class ChangeSubscriptionRequest
-	extends CodeMashRequestBase
-	implements IReturn<ChangeSubscriptionResponse> {
-	/**
-	 * Subscription ID.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Subscription ID.", IsRequired=true, Name="SubscriptionId", ParameterType="path")
-	public id: string;
+  extends CodeMashRequestBase
+  implements IReturn<ChangeSubscriptionResponse> {
+  /**
+   * Subscription ID.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Subscription ID.", IsRequired=true, Name="SubscriptionId", ParameterType="path")
+  public id: string;
 
-	/**
-	 * Customer's ID.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's ID.", IsRequired=true, Name="CustomerId", ParameterType="path")
-	public customerId: string;
+  /**
+   * Customer's ID.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's ID.", IsRequired=true, Name="CustomerId", ParameterType="path")
+  public customerId: string;
 
-	/**
-	 * Subscription plan ID.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="Subscription plan ID.", IsRequired=true, Name="PlanId", ParameterType="body")
-	public newPlanId: string;
+  /**
+   * Subscription plan ID.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="Subscription plan ID.", IsRequired=true, Name="PlanId", ParameterType="body")
+  public newPlanId: string;
 
-	/**
-	 * Payment method's ID. If not provided will use default.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Payment method's ID. If not provided will use default.", Name="PaymentMethodId", ParameterType="body")
-	public paymentMethodId: string;
+  /**
+   * Payment method's ID. If not provided will use default.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Payment method's ID. If not provided will use default.", Name="PaymentMethodId", ParameterType="body")
+  public paymentMethodId: string;
 
-	/**
-	 * Discount coupon ID if supported.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Discount coupon ID if supported.", Name="Coupon", ParameterType="body")
-	public coupon: string;
+  /**
+   * Discount coupon ID if supported.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Discount coupon ID if supported.", Name="Coupon", ParameterType="body")
+  public coupon: string;
 
-	public constructor(init?: Partial<ChangeSubscriptionRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<ChangeSubscriptionRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new ChangeSubscriptionResponse();
-	}
+  public createResponse() {
+    return new ChangeSubscriptionResponse();
+  }
 
-	public getTypeName() {
-		return 'ChangeSubscriptionRequest';
-	}
+  public getTypeName() {
+    return 'ChangeSubscriptionRequest';
+  }
 }
 
 /**
@@ -7919,48 +7919,48 @@ export class ChangeSubscriptionRequest
 // @Api(Description="Payments")
 // @DataContract
 export class CreateSubscriptionRequest
-	extends CodeMashRequestBase
-	implements IReturn<CreateSubscriptionResponse> {
-	/**
-	 * Customer's ID.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's ID.", IsRequired=true, Name="CustomerId", ParameterType="path")
-	public customerId: string;
+  extends CodeMashRequestBase
+  implements IReturn<CreateSubscriptionResponse> {
+  /**
+   * Customer's ID.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's ID.", IsRequired=true, Name="CustomerId", ParameterType="path")
+  public customerId: string;
 
-	/**
-	 * Subscription plan ID.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="Subscription plan ID.", IsRequired=true, Name="PlanId", ParameterType="body")
-	public planId: string;
+  /**
+   * Subscription plan ID.
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="Subscription plan ID.", IsRequired=true, Name="PlanId", ParameterType="body")
+  public planId: string;
 
-	/**
-	 * Payment method's ID. If not provided will use default.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Payment method's ID. If not provided will use default.", Name="PaymentMethodId", ParameterType="body")
-	public paymentMethodId: string;
+  /**
+   * Payment method's ID. If not provided will use default.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Payment method's ID. If not provided will use default.", Name="PaymentMethodId", ParameterType="body")
+  public paymentMethodId: string;
 
-	/**
-	 * Discount coupon ID if supported.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Discount coupon ID if supported.", Name="Coupon", ParameterType="body")
-	public coupon: string;
+  /**
+   * Discount coupon ID if supported.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Discount coupon ID if supported.", Name="Coupon", ParameterType="body")
+  public coupon: string;
 
-	public constructor(init?: Partial<CreateSubscriptionRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<CreateSubscriptionRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new CreateSubscriptionResponse();
-	}
+  public createResponse() {
+    return new CreateSubscriptionResponse();
+  }
 
-	public getTypeName() {
-		return 'CreateSubscriptionRequest';
-	}
+  public getTypeName() {
+    return 'CreateSubscriptionRequest';
+  }
 }
 
 /**
@@ -7971,45 +7971,45 @@ export class CreateSubscriptionRequest
 // @Api(Description="Payments")
 // @DataContract
 export class UpdateSubscriptionRequest extends CodeMashRequestBase {
-	/**
-	 * Subscription ID.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Subscription ID.", IsRequired=true, Name="SubscriptionId", ParameterType="path")
-	public id: string;
+  /**
+   * Subscription ID.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Subscription ID.", IsRequired=true, Name="SubscriptionId", ParameterType="path")
+  public id: string;
 
-	/**
-	 * Customer's ID.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Customer's ID.", IsRequired=true, Name="CustomerId", ParameterType="path")
-	public customerId: string;
+  /**
+   * Customer's ID.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Customer's ID.", IsRequired=true, Name="CustomerId", ParameterType="path")
+  public customerId: string;
 
-	/**
-	 * Discount coupon ID if supported.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Discount coupon ID if supported.", Name="Coupon", ParameterType="body")
-	public coupon: string;
+  /**
+   * Discount coupon ID if supported.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Discount coupon ID if supported.", Name="Coupon", ParameterType="body")
+  public coupon: string;
 
-	/**
-	 * Payment method's ID to use for subscription.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Payment method's ID to use for subscription.", Name="PaymentMethodId", ParameterType="body")
-	public paymentMethodId: string;
+  /**
+   * Payment method's ID to use for subscription.
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Payment method's ID to use for subscription.", Name="PaymentMethodId", ParameterType="body")
+  public paymentMethodId: string;
 
-	/**
-	 * If subscription is set to cancel at period end, renews the subscription.
-	 */
-	// @DataMember
-	// @ApiMember(DataType="bool", Description="If subscription is set to cancel at period end, renews the subscription.", Name="RenewCanceled", ParameterType="body")
-	public renewCanceled: boolean;
+  /**
+   * If subscription is set to cancel at period end, renews the subscription.
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If subscription is set to cancel at period end, renews the subscription.", Name="RenewCanceled", ParameterType="body")
+  public renewCanceled: boolean;
 
-	public constructor(init?: Partial<UpdateSubscriptionRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<UpdateSubscriptionRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 /**
@@ -8020,20 +8020,20 @@ export class UpdateSubscriptionRequest extends CodeMashRequestBase {
 // @Api(Description="Returns project details")
 // @DataContract
 export class GetProjectRequest
-	extends CodeMashRequestBase
-	implements IReturn<GetProjectResponse> {
-	public constructor(init?: Partial<GetProjectRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  extends CodeMashRequestBase
+  implements IReturn<GetProjectResponse> {
+  public constructor(init?: Partial<GetProjectRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new GetProjectResponse();
-	}
+  public createResponse() {
+    return new GetProjectResponse();
+  }
 
-	public getTypeName() {
-		return 'GetProjectRequest';
-	}
+  public getTypeName() {
+    return 'GetProjectRequest';
+  }
 }
 
 /**
@@ -8044,100 +8044,100 @@ export class GetProjectRequest
 // @Api(Description="Executes a function")
 // @DataContract
 export class ExecuteFunctionRequest
-	extends CodeMashRequestBase
-	implements IReturn<ExecuteFunctionResponse> {
-	/**
-	 * Function Id
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Guid", Description="Function Id", IsRequired=true, Name="Id", ParameterType="path")
-	public id: string;
+  extends CodeMashRequestBase
+  implements IReturn<ExecuteFunctionResponse> {
+  /**
+   * Function Id
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="Function Id", IsRequired=true, Name="Id", ParameterType="path")
+  public id: string;
 
-	/**
-	 * Parameters of to pass into function
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Parameters of to pass into function", Name="Template", ParameterType="body")
-	public data: string;
+  /**
+   * Parameters of to pass into function
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Parameters of to pass into function", Name="Template", ParameterType="body")
+  public data: string;
 
-	/**
-	 * Additional parameters for specific functions
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Dictionary", Description="Additional parameters for specific functions", Name="Meta", ParameterType="body")
-	public meta: {[index: string]: string};
+  /**
+   * Additional parameters for specific functions
+   */
+  // @DataMember
+  // @ApiMember(DataType="Dictionary", Description="Additional parameters for specific functions", Name="Meta", ParameterType="body")
+  public meta: { [index: string]: string };
 
-	/**
-	 * Tokens to inject into queries
-	 */
-	// @DataMember
-	// @ApiMember(DataType="Dictionary", Description="Tokens to inject into queries", Name="Tokens", ParameterType="body")
-	public tokens: {[index: string]: string};
+  /**
+   * Tokens to inject into queries
+   */
+  // @DataMember
+  // @ApiMember(DataType="Dictionary", Description="Tokens to inject into queries", Name="Tokens", ParameterType="body")
+  public tokens: { [index: string]: string };
 
-	/**
-	 * Version or Alias of a function
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Version or Alias of a function", Name="Qualifier", ParameterType="body")
-	public qualifier: string;
+  /**
+   * Version or Alias of a function
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Version or Alias of a function", Name="Qualifier", ParameterType="body")
+  public qualifier: string;
 
-	public constructor(init?: Partial<ExecuteFunctionRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<ExecuteFunctionRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new ExecuteFunctionResponse();
-	}
+  public createResponse() {
+    return new ExecuteFunctionResponse();
+  }
 
-	public getTypeName() {
-		return 'ExecuteFunctionRequest';
-	}
+  public getTypeName() {
+    return 'ExecuteFunctionRequest';
+  }
 }
 
 // @Route("/notifications/email/aws/events", "POST")
 export class AwsSesEndpoint implements IReturn<HttpResult> {
-	public constructor(init?: Partial<AwsSesEndpoint>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<AwsSesEndpoint>) {
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new HttpResult();
-	}
+  public createResponse() {
+    return new HttpResult();
+  }
 
-	public getTypeName() {
-		return 'AwsSesEndpoint';
-	}
+  public getTypeName() {
+    return 'AwsSesEndpoint';
+  }
 }
 
 // @Route("/notifications/email/mailgun/events", "POST")
 export class MailGunEndpoint implements IReturn<HttpResult> {
-	public constructor(init?: Partial<MailGunEndpoint>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<MailGunEndpoint>) {
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new HttpResult();
-	}
+  public createResponse() {
+    return new HttpResult();
+  }
 
-	public getTypeName() {
-		return 'MailGunEndpoint';
-	}
+  public getTypeName() {
+    return 'MailGunEndpoint';
+  }
 }
 
 // @Route("/notifications/email/sendgrid/events", "POST")
 export class SendGridEndpoint implements IReturn<HttpResult> {
-	public constructor(init?: Partial<SendGridEndpoint>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<SendGridEndpoint>) {
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new HttpResult();
-	}
+  public createResponse() {
+    return new HttpResult();
+  }
 
-	public getTypeName() {
-		return 'SendGridEndpoint';
-	}
+  public getTypeName() {
+    return 'SendGridEndpoint';
+  }
 }
 
 /**
@@ -8148,166 +8148,166 @@ export class SendGridEndpoint implements IReturn<HttpResult> {
 // @Api(Description="Authentication")
 // @DataContract
 export class AppleAuthenticationRequest
-	extends CodeMashRequestBase
-	implements IOAuthRequest {
-	/**
-	 * Mode to use for authentication
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Mode to use for authentication", Name="Mode", ParameterType="query")
-	public mode: string;
+  extends CodeMashRequestBase
+  implements IOAuthRequest {
+  /**
+   * Mode to use for authentication
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Mode to use for authentication", Name="Mode", ParameterType="query")
+  public mode: string;
 
-	/**
-	 * Code received from Google services
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Code received from Google services", Name="Code", ParameterType="query")
-	public code: string;
+  /**
+   * Code received from Google services
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Code received from Google services", Name="Code", ParameterType="query")
+  public code: string;
 
-	/**
-	 * State received with a code
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="State received with a code", Name="State", ParameterType="query")
-	public state: string;
+  /**
+   * State received with a code
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="State received with a code", Name="State", ParameterType="query")
+  public state: string;
 
-	/**
-	 * When transferring access token from client app
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="When transferring access token from client app", Name="AccessToken", ParameterType="query")
-	public accessToken: string;
+  /**
+   * When transferring access token from client app
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="When transferring access token from client app", Name="AccessToken", ParameterType="query")
+  public accessToken: string;
 
-	/**
-	 * Attach any data to the request
-	 */
-	// @DataMember
-	// @ApiMember(DataType="string", Description="Attach any data to the request", Name="Meta", ParameterType="body")
-	public meta: {[index: string]: string};
+  /**
+   * Attach any data to the request
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Attach any data to the request", Name="Meta", ParameterType="body")
+  public meta: { [index: string]: string };
 
-	public constructor(init?: Partial<AppleAuthenticationRequest>) {
-		super(init);
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<AppleAuthenticationRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
 }
 
 // @Route("/auth")
 // @Route("/auth/{provider}")
 // @DataContract
 export class Authenticate implements IReturn<AuthenticateResponse>, IPost {
-	// @DataMember(Order=1)
-	public provider: string;
+  // @DataMember(Order=1)
+  public provider: string;
 
-	// @DataMember(Order=2)
-	public state: string;
+  // @DataMember(Order=2)
+  public state: string;
 
-	// @DataMember(Order=3)
-	public oauth_token: string;
+  // @DataMember(Order=3)
+  public oauth_token: string;
 
-	// @DataMember(Order=4)
-	public oauth_verifier: string;
+  // @DataMember(Order=4)
+  public oauth_verifier: string;
 
-	// @DataMember(Order=5)
-	public userName: string;
+  // @DataMember(Order=5)
+  public userName: string;
 
-	// @DataMember(Order=6)
-	public password: string;
+  // @DataMember(Order=6)
+  public password: string;
 
-	// @DataMember(Order=7)
-	public rememberMe?: boolean;
+  // @DataMember(Order=7)
+  public rememberMe?: boolean;
 
-	// @DataMember(Order=9)
-	public errorView: string;
+  // @DataMember(Order=9)
+  public errorView: string;
 
-	// @DataMember(Order=10)
-	public nonce: string;
+  // @DataMember(Order=10)
+  public nonce: string;
 
-	// @DataMember(Order=11)
-	public uri: string;
+  // @DataMember(Order=11)
+  public uri: string;
 
-	// @DataMember(Order=12)
-	public response: string;
+  // @DataMember(Order=12)
+  public response: string;
 
-	// @DataMember(Order=13)
-	public qop: string;
+  // @DataMember(Order=13)
+  public qop: string;
 
-	// @DataMember(Order=14)
-	public nc: string;
+  // @DataMember(Order=14)
+  public nc: string;
 
-	// @DataMember(Order=15)
-	public cnonce: string;
+  // @DataMember(Order=15)
+  public cnonce: string;
 
-	// @DataMember(Order=16)
-	public useTokenCookie?: boolean;
+  // @DataMember(Order=16)
+  public useTokenCookie?: boolean;
 
-	// @DataMember(Order=17)
-	public accessToken: string;
+  // @DataMember(Order=17)
+  public accessToken: string;
 
-	// @DataMember(Order=18)
-	public accessTokenSecret: string;
+  // @DataMember(Order=18)
+  public accessTokenSecret: string;
 
-	// @DataMember(Order=19)
-	public scope: string;
+  // @DataMember(Order=19)
+  public scope: string;
 
-	// @DataMember(Order=20)
-	public meta: {[index: string]: string};
+  // @DataMember(Order=20)
+  public meta: { [index: string]: string };
 
-	public constructor(init?: Partial<Authenticate>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<Authenticate>) {
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new AuthenticateResponse();
-	}
+  public createResponse() {
+    return new AuthenticateResponse();
+  }
 
-	public getTypeName() {
-		return 'Authenticate';
-	}
+  public getTypeName() {
+    return 'Authenticate';
+  }
 }
 
 // @Route("/apikeys")
 // @Route("/apikeys/{Environment}")
 // @DataContract
 export class GetApiKeys implements IReturn<GetApiKeysResponse>, IGet {
-	// @DataMember(Order=1)
-	public environment: string;
+  // @DataMember(Order=1)
+  public environment: string;
 
-	// @DataMember(Order=2)
-	public meta: {[index: string]: string};
+  // @DataMember(Order=2)
+  public meta: { [index: string]: string };
 
-	public constructor(init?: Partial<GetApiKeys>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<GetApiKeys>) {
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new GetApiKeysResponse();
-	}
+  public createResponse() {
+    return new GetApiKeysResponse();
+  }
 
-	public getTypeName() {
-		return 'GetApiKeys';
-	}
+  public getTypeName() {
+    return 'GetApiKeys';
+  }
 }
 
 // @Route("/apikeys/regenerate")
 // @Route("/apikeys/regenerate/{Environment}")
 // @DataContract
 export class RegenerateApiKeys
-	implements IReturn<RegenerateApiKeysResponse>, IPost {
-	// @DataMember(Order=1)
-	public environment: string;
+  implements IReturn<RegenerateApiKeysResponse>, IPost {
+  // @DataMember(Order=1)
+  public environment: string;
 
-	// @DataMember(Order=2)
-	public meta: {[index: string]: string};
+  // @DataMember(Order=2)
+  public meta: { [index: string]: string };
 
-	public constructor(init?: Partial<RegenerateApiKeys>) {
-		(Object as any).assign(this, init);
-	}
+  public constructor(init?: Partial<RegenerateApiKeys>) {
+    (Object as any).assign(this, init);
+  }
 
-	public createResponse() {
-		return new RegenerateApiKeysResponse();
-	}
+  public createResponse() {
+    return new RegenerateApiKeysResponse();
+  }
 
-	public getTypeName() {
-		return 'RegenerateApiKeys';
-	}
+  public getTypeName() {
+    return 'RegenerateApiKeys';
+  }
 }
