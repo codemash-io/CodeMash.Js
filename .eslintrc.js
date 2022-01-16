@@ -56,11 +56,13 @@ module.exports = {
     'no-unused-expressions': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-shadow': 'error',
     '@typescript-eslint/no-non-null-assertion': 'off',
     'class-methods-use-this': 'off',
     'max-classes-per-file': 'off',
     'no-useless-constructor': 'off',
     'no-empty-function': 'off',
+    'no-shadow': 'off',
   },
   globals: {
     Atomics: 'readonly',
@@ -103,7 +105,6 @@ module.exports = {
       files: ['*.dtos.ts'],
       rules: {
         'no-use-before-define': 'off',
-        'no-shadow': 'off',
         camelcase: 'off',
       },
     },
