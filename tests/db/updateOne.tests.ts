@@ -14,7 +14,7 @@ const CREATE_NAME = 'updateMyName';
 const UPDATE_NAME = 'updated-name';
 
 describe('updateOne', () => {
-  beforeEach(() => {
+  before(() => {
     dotenv.config({
       path: path.resolve(__dirname, '../data/config/.env'),
     });

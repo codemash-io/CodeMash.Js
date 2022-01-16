@@ -1,4 +1,11 @@
-import { ApiResult, IReturn, JsonServiceClient } from '@servicestack/client';
+import {
+  ApiResult,
+  getMethod,
+  IReturn,
+  JsonServiceClient,
+} from '@servicestack/client';
+import chalk from 'chalk';
+import { CMConfig } from 'config';
 import { ICMConfig } from 'config/config';
 
 enum StringifiedFields {
@@ -28,7 +35,9 @@ export class RestClient extends JsonServiceClient {
   constructor(private config: ICMConfig) {
     super(config.apiUrl);
     if (this.config.isValid()) {
-      this.headers.set('X-CM-Cluster', this.config.cluster);
+      if (this.config.cluster) {
+        this.headers.set('X-CM-Cluster', this.config.cluster);
+      }
       this.headers.set('Authorization', `Bearer ${this.config.apiKey}`);
       this.headers.set('X-CM-ProjectId', this.config.projectId);
     }
@@ -41,22 +50,29 @@ export class RestClient extends JsonServiceClient {
     method?: string,
   ): Promise<ApiResult<TResponse>> {
     // stringify selected fields that are passed as objects.
-    Object.keys(StringifiedArrayFields).forEach(key => {
-      const value = request[key as StringifiedFields];
+    Object.values(StringifiedFields).forEach(key => {
+      const value = request[key];
       if (value) {
-        request[key as StringifiedFields] =
+        request[key] =
           typeof value !== 'string' ? JSON.stringify(value) : value;
       }
     });
 
-    Object.keys(StringifiedArrayFields).forEach(key => {
-      const value = request[key as StringifiedArrayFields];
+    Object.values(StringifiedArrayFields).forEach(key => {
+      const value = request[key];
       if (value) {
-        request[key as StringifiedArrayFields] = value.map(i =>
+        request[key] = value.map(i =>
           typeof i !== 'string' ? JSON.stringify(i) : i,
         );
       }
     });
+
+    if (CMConfig.getInstance().showLogs) {
+      console.log(
+        `Outgoing ${chalk.bgGray(getMethod(request))} request: `,
+        request,
+      );
+    }
 
     return this.api((request as any) as IReturn<TResponse>, args, method);
   }

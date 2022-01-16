@@ -31,6 +31,7 @@ describe('updateMany', () => {
     await insertMany(insert);
 
     const request = new UpdateManyRequest({
+      bypassDocumentValidation: true,
       collectionName: 'employees',
       filter: {
         first_name: CREATE_NAME,
@@ -42,6 +43,7 @@ describe('updateMany', () => {
       },
     });
     const result = await updateMany(request);
+
     expect(result.response?.result?.modifiedCount).to.be.greaterThanOrEqual(
       ENTRIES_TO_CREATE,
     );

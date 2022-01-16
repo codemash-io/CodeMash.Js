@@ -3,12 +3,7 @@ import path from 'path';
 import { expect } from 'chai';
 import dotenv from 'dotenv';
 
-import {
-  deleteMany,
-  distinct,
-  findMany,
-  insertMany,
-} from '../../src/modules/database';
+import { deleteMany, distinct, insertMany } from '../../src/modules/database';
 import {
   DeleteManyRequest,
   DistinctRequest,

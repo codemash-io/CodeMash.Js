@@ -1,4 +1,5 @@
-import { ApiResult } from '@servicestack/client';
+import { ApiResult, getMethod } from '@servicestack/client';
+import chalk from 'chalk';
 import { RestClient } from 'client';
 import { CMConfig } from 'config';
 import {
@@ -33,6 +34,13 @@ const transformApiResult = (target: ApiResult<any>): ICMDbResult => {
   // transform given api string result to a js object.
   const { isSuccess, response, isError, errorStatus } = target;
   const { responseStatus, result } = response || {};
+
+  if (CMConfig.getInstance().showLogs) {
+    console.log(
+      `Result for ${chalk.bgGray(getMethod(target))} request: `,
+      target.response,
+    );
+  }
 
   return {
     isSuccess,

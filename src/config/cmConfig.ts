@@ -16,6 +16,8 @@ export class CMConfig implements ICMConfig {
 
   public region?: string;
 
+  public showLogs: boolean;
+
   private static instance: CMConfig;
 
   private constructor() {
@@ -25,6 +27,7 @@ export class CMConfig implements ICMConfig {
     this.cluster = process.env.CODEMASH_CLUSTER;
     this.baseFilePath = process.env.CODEMASH_BASE_FILE_PATH;
     this.region = process.env.CODEMASH_REGION;
+    this.showLogs = !!process.env.CODEMASH_SHOW_LOGS;
   }
 
   public static getInstance() {

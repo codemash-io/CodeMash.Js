@@ -8,7 +8,7 @@ interface ICMConfigBase {
 }
 
 export type TValidCMClientConfig = Required<
-  Pick<ICMConfigBase, 'apiUrl' | 'apiKey' | 'cluster' | 'projectId'>
+  Pick<ICMConfigBase, 'apiUrl' | 'apiKey' | 'projectId'>
 >;
 export interface IValidateConfig {
   Validate(): void;
