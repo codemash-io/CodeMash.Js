@@ -1,17 +1,79 @@
-import {ICMConfig} from '../config';
-import {JsonServiceClient} from '@servicestack/client';
+import {
+  ApiResult,
+  getMethod,
+  IReturn,
+  JsonServiceClient,
+} from '@servicestack/client';
+import chalk from 'chalk';
+import { CMConfig } from 'config';
+import { ICMConfig } from 'config/config';
 
-export class RestClient {
-	constructor(private config: ICMConfig) {}
+enum StringifiedFields {
+  Update = 'update',
+  Filter = 'filter',
+  Document = 'document',
+}
 
-	public static Json(config: ICMConfig): JsonServiceClient {
-		const rcpClient = new RestClient(config);
-		let jsonClient = rcpClient.client;
-		jsonClient.bearerToken = config.apiKey!;
-		return rcpClient.client;
-	}
+enum StringifiedArrayFields {
+  Documents = 'documents',
+}
 
-	public get client(): JsonServiceClient {
-		return new JsonServiceClient(this.config.apiUrl);
-	}
+type DbFilter = {
+  [StringifiedFields.Filter]: object | string;
+};
+type DbUpdate = {
+  [StringifiedFields.Update]: object | string;
+};
+type DbDocument = {
+  [StringifiedFields.Document]: object | string;
+};
+type DbDocuments = {
+  [StringifiedArrayFields.Documents]: object[] | string[];
+};
+
+export class RestClient extends JsonServiceClient {
+  constructor(private config: ICMConfig) {
+    super(config.apiUrl);
+    if (this.config.isValid()) {
+      if (this.config.cluster) {
+        this.headers.set('X-CM-Cluster', this.config.cluster);
+      }
+      this.headers.set('Authorization', `Bearer ${this.config.apiKey}`);
+      this.headers.set('X-CM-ProjectId', this.config.projectId);
+    }
+  }
+
+  public dbRequest<TResponse>(
+    request: IReturn<TResponse> &
+      Partial<DbFilter & DbUpdate & DbDocument & DbDocuments>,
+    args?: any,
+    method?: string,
+  ): Promise<ApiResult<TResponse>> {
+    // stringify selected fields that are passed as objects.
+    Object.values(StringifiedFields).forEach(key => {
+      const value = request[key];
+      if (value) {
+        request[key] =
+          typeof value !== 'string' ? JSON.stringify(value) : value;
+      }
+    });
+
+    Object.values(StringifiedArrayFields).forEach(key => {
+      const value = request[key];
+      if (value) {
+        request[key] = value.map(i =>
+          typeof i !== 'string' ? JSON.stringify(i) : i,
+        );
+      }
+    });
+
+    if (CMConfig.getInstance().showLogs) {
+      console.log(
+        `Outgoing ${chalk.bgGray(getMethod(request))} request: `,
+        request,
+      );
+    }
+
+    return this.api((request as any) as IReturn<TResponse>, args, method);
+  }
 }

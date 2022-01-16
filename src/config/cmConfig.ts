@@ -1,35 +1,51 @@
-import {ConfigValidator} from 'app/utils/configValidator';
-import {IValidateConfig, Config} from './config';
-import {STATICS} from './statics';
+import { ConfigValidator } from 'utils/configValidator';
 
-export interface ICMConfig extends IValidateConfig {
-	apiUrl: string | undefined;
-	apiKey: string | undefined;
-	projectId: string | undefined;
-	cluster: string | undefined;
-	baseFilePath: string | undefined;
-	region: string | undefined;
-}
+import { ICMConfig, TValidCMClientConfig } from './config';
+import { STATICS } from './statics';
 
-export class CMConfig extends Config implements ICMConfig {
-	public apiUrl: string | undefined;
-	public apiKey: string | undefined;
-	public projectId: string | undefined;
-	public cluster: string | undefined;
-	public baseFilePath: string | undefined;
-	public region: string | undefined;
+export class CMConfig implements ICMConfig {
+  public apiUrl: string;
 
-	constructor() {
-		super();
-		this.apiUrl = process.env.CODEMASH_API_URL || STATICS.CODEMASH_API_URL;
-		this.apiKey = process.env.CODEMASH_API_KEY;
-		this.projectId = process.env.CODEMASH_PROJECT_ID;
-		this.cluster = process.env.CODEMASH_CLUSTER;
-		this.baseFilePath = process.env.CODEMASH_BASE_FILE_PATH;
-		this.region = process.env.CODEMASH_REGION;
-	}
+  public apiKey?: string;
 
-	public Validate(): void {
-		ConfigValidator.AssertCMConfig(this);
-	}
+  public projectId?: string;
+
+  public cluster?: string;
+
+  public baseFilePath?: string;
+
+  public region?: string;
+
+  public showLogs: boolean;
+
+  private static instance: CMConfig;
+
+  private constructor() {
+    this.apiUrl = process.env.CODEMASH_API_URL || STATICS.CODEMASH_API_URL;
+    this.apiKey = process.env.CODEMASH_API_KEY;
+    this.projectId = process.env.CODEMASH_PROJECT_ID;
+    this.cluster = process.env.CODEMASH_CLUSTER;
+    this.baseFilePath = process.env.CODEMASH_BASE_FILE_PATH;
+    this.region = process.env.CODEMASH_REGION;
+    this.showLogs = !!process.env.CODEMASH_SHOW_LOGS;
+  }
+
+  public static getInstance() {
+    if (CMConfig.instance) return CMConfig.instance;
+
+    this.instance = new CMConfig();
+    return this.instance;
+  }
+
+  public isValid(): this is TValidCMClientConfig {
+    return (
+      typeof this.apiKey === 'string' &&
+      typeof this.cluster === 'string' &&
+      typeof this.projectId === 'string'
+    );
+  }
+
+  public Validate(): void {
+    ConfigValidator.AssertCMConfig(this);
+  }
 }

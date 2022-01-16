@@ -1,0 +1,5 @@
+dist/
+node_modules/
+
+# remove the line below after we refactor everything to typescript
+*.js

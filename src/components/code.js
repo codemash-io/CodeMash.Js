@@ -22,9 +22,9 @@ export async function executeFunction({
 			},
 			body: JSON.stringify({
 				data: JSON.stringify(data),
-				qualifier: qualifier,
-				meta: meta,
-				tokens: tokens,
+				qualifier,
+				meta,
+				tokens,
 			}),
 		}
 	);
