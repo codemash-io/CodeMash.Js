@@ -36,10 +36,7 @@ const transformApiResult = (target: ApiResult<any>): ICMDbResult => {
   const { responseStatus, result } = response || {};
 
   if (CMConfig.getInstance().showLogs) {
-    console.log(
-      `Result for ${chalk.bgGray(getMethod(target))} request: `,
-      target.response,
-    );
+    console.log(`Result for ${getMethod(target)} request: `, target.response);
   }
 
   return {

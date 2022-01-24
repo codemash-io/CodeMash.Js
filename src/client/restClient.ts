@@ -50,7 +50,7 @@ export class RestClient extends JsonServiceClient {
     method?: string,
   ): Promise<ApiResult<TResponse>> {
     // stringify selected fields that are passed as objects.
-    Object.values(StringifiedFields).forEach(key => {
+    Object.values(StringifiedFields).forEach((key) => {
       const value = request[key];
       if (value) {
         request[key] =
@@ -58,20 +58,17 @@ export class RestClient extends JsonServiceClient {
       }
     });
 
-    Object.values(StringifiedArrayFields).forEach(key => {
+    Object.values(StringifiedArrayFields).forEach((key) => {
       const value = request[key];
       if (value) {
-        request[key] = value.map(i =>
+        request[key] = value.map((i) =>
           typeof i !== 'string' ? JSON.stringify(i) : i,
         );
       }
     });
 
     if (CMConfig.getInstance().showLogs) {
-      console.log(
-        `Outgoing ${chalk.bgGray(getMethod(request))} request: `,
-        request,
-      );
+      console.log(`Outgoing ${getMethod(request)} request: `, request);
     }
 
     return this.api((request as any) as IReturn<TResponse>, args, method);
