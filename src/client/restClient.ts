@@ -1,12 +1,8 @@
-import {
-  ApiResult,
-  getMethod,
-  IReturn,
-  JsonServiceClient,
-} from '@servicestack/client';
-import chalk from 'chalk';
+import { getMethod, IReturn, JsonServiceClient } from '@servicestack/client';
 import { CMConfig } from 'config';
 import { ICMConfig } from 'config/config';
+import { ICMDbResult } from 'types';
+import { isJsonResponse } from 'utils/api';
 
 enum StringifiedFields {
   Update = 'update',
@@ -30,6 +26,8 @@ type DbDocument = {
 type DbDocuments = {
   [StringifiedArrayFields.Documents]: object[] | string[];
 };
+type DbRequest<T> = IReturn<T> &
+  Partial<DbFilter & DbUpdate & DbDocument & DbDocuments>;
 
 export class RestClient extends JsonServiceClient {
   constructor(private config: ICMConfig) {
@@ -43,14 +41,27 @@ export class RestClient extends JsonServiceClient {
     }
   }
 
-  public dbRequest<TResponse>(
-    request: IReturn<TResponse> &
-      Partial<DbFilter & DbUpdate & DbDocument & DbDocuments>,
+  private transformApiResult(target: any): ICMDbResult {
+    // transform given api string result to a js object.
+    const { response } = target;
+
+    if (CMConfig.getInstance().showLogs) {
+      console.log(`Result for ${getMethod(target)} request: `, target.response);
+    }
+
+    return {
+      response: isJsonResponse(response) ? JSON.parse(response) : response,
+    };
+  }
+
+  public async dbRequest<T>(
+    request: any, // FIXME: should be DbRequest<T>
     args?: any,
     method?: string,
-  ): Promise<ApiResult<TResponse>> {
+  ): Promise<any> {
+    // FIXME: should be: Promise<ICMDbResult>
     // stringify selected fields that are passed as objects.
-    Object.values(StringifiedFields).forEach((key) => {
+    Object.values(StringifiedFields).forEach(key => {
       const value = request[key];
       if (value) {
         request[key] =
@@ -58,12 +69,12 @@ export class RestClient extends JsonServiceClient {
       }
     });
 
-    Object.values(StringifiedArrayFields).forEach((key) => {
+    Object.values(StringifiedArrayFields).forEach(key => {
       const value = request[key];
       if (value) {
-        request[key] = value.map((i) =>
-          typeof i !== 'string' ? JSON.stringify(i) : i,
-        );
+        request[key] = value.map((
+          i: any, // FIXME: remove any
+        ) => (typeof i !== 'string' ? JSON.stringify(i) : i));
       }
     });
 
@@ -71,6 +82,12 @@ export class RestClient extends JsonServiceClient {
       console.log(`Outgoing ${getMethod(request)} request: `, request);
     }
 
-    return this.api((request as any) as IReturn<TResponse>, args, method);
+    const result = await this.fetch(
+      method || getMethod(request),
+      (request as any) as IReturn<T>,
+      args,
+    );
+
+    return this.transformApiResult(result);
   }
 }
