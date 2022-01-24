@@ -21,8 +21,8 @@ describe('registerUser', () => {
       email: faker.internet.email(),
       password: faker.internet.password(),
     });
-
     const result = await registerUser(request);
+
     expect(result).to.not.throw;
   });
 });

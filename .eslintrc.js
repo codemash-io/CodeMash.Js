@@ -108,5 +108,12 @@ module.exports = {
         camelcase: 'off',
       },
     },
+    {
+      files: ['*.tests.ts'],
+      rules: {
+        'prefer-arrow-callback': 'off',
+        'func-names': 'off'
+      }
+    }
   ],
 };
