@@ -4,15 +4,15 @@ Version: 5.104
 Tip: To override a DTO option, remove "//" prefix before updating
 BaseUrl: https://api.codemash.io/
 
-//GlobalNamespace: 
+//GlobalNamespace:
 //MakePropertiesOptional: False
 AddServiceStackTypes: True
 AddResponseStatus: True
-//AddImplicitVersion: 
+//AddImplicitVersion:
 AddDescriptionAsComments: True
-//IncludeTypes: 
-//ExcludeTypes: 
-//DefaultImports: 
+//IncludeTypes:
+//ExcludeTypes:
+//DefaultImports:
 */
 
 import { Cookie } from '@servicestack/client';
@@ -136,7 +136,6 @@ export class ResponseStatus {
 
 export class ResponseBase<T> {
   // @DataMember
-  public responseStatus: ResponseStatus;
 
   // @DataMember(Name="result")
   public result: T;
@@ -1613,8 +1612,6 @@ export interface IHttpFile {
 }
 
 export class AggregateResponse extends ResponseBase<string> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<AggregateResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1622,8 +1619,6 @@ export class AggregateResponse extends ResponseBase<string> {
 }
 
 export class CountResponse extends ResponseBase<number> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<CountResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1631,8 +1626,6 @@ export class CountResponse extends ResponseBase<number> {
 }
 
 export class DeleteManyResponse extends ResponseBase<DeleteResult> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<DeleteManyResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1640,8 +1633,6 @@ export class DeleteManyResponse extends ResponseBase<DeleteResult> {
 }
 
 export class DeleteOneResponse extends ResponseBase<DeleteResult> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<DeleteOneResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1649,8 +1640,6 @@ export class DeleteOneResponse extends ResponseBase<DeleteResult> {
 }
 
 export class DistinctResponse extends Array<ResponseBase<Object>> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<DistinctResponse>) {
     super();
     (Object as any).assign(this, init);
@@ -1662,8 +1651,6 @@ export class FindResponse extends ResponseBase<string> {
 
   public schema: Schema;
 
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<FindResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1673,8 +1660,6 @@ export class FindResponse extends ResponseBase<string> {
 export class FindOneResponse extends ResponseBase<string> {
   public schema: Schema;
 
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<FindOneResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1682,8 +1667,6 @@ export class FindOneResponse extends ResponseBase<string> {
 }
 
 export class InsertManyResponse extends Array<ResponseBase<string>> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<InsertManyResponse>) {
     super();
     (Object as any).assign(this, init);
@@ -1692,8 +1675,6 @@ export class InsertManyResponse extends Array<ResponseBase<string>> {
 
 // @DataContract
 export class InsertOneResponse extends ResponseBase<string> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<InsertOneResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1701,8 +1682,6 @@ export class InsertOneResponse extends ResponseBase<string> {
 }
 
 export class ReplaceOneResponse extends ResponseBase<ReplaceOneResult> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<ReplaceOneResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1710,8 +1689,6 @@ export class ReplaceOneResponse extends ResponseBase<ReplaceOneResult> {
 }
 
 export class UpdateManyResponse extends ResponseBase<UpdateResult> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<UpdateManyResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1719,8 +1696,6 @@ export class UpdateManyResponse extends ResponseBase<UpdateResult> {
 }
 
 export class UpdateOneResponse extends ResponseBase<UpdateResult> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<UpdateOneResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1732,8 +1707,6 @@ export class FindTermsResponse extends Array<ResponseBase<Term>> {
 
   public taxonomy: Taxonomy;
 
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<FindTermsResponse>) {
     super();
     (Object as any).assign(this, init);
@@ -1742,8 +1715,6 @@ export class FindTermsResponse extends Array<ResponseBase<Term>> {
 
 export class FindTermsChildrenResponse extends Array<ResponseBase<Term>> {
   public totalCount: number;
-
-  public responseStatus: ResponseStatus;
 
   public constructor(init?: Partial<FindTermsChildrenResponse>) {
     super();
@@ -1800,8 +1771,6 @@ export class HttpResult {
 
   public isPartialRequest: boolean;
 
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<HttpResult>) {
     (Object as any).assign(this, init);
   }
@@ -1813,8 +1782,6 @@ export class GetFileResponse extends ResponseBase<string> {
   public isImage: boolean;
 
   public file: File;
-
-  public responseStatus: ResponseStatus;
 
   public constructor(init?: Partial<GetFileResponse>) {
     super(init);
@@ -1829,8 +1796,6 @@ export class UploadFileResponse extends ResponseBase<File> {
 
   public uploadDate: number;
 
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<UploadFileResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1839,8 +1804,6 @@ export class UploadFileResponse extends ResponseBase<File> {
 
 export class UploadOrderFileResponse extends ResponseBase<File> {
   public key: string;
-
-  public responseStatus: ResponseStatus;
 
   public constructor(init?: Partial<UploadOrderFileResponse>) {
     super(init);
@@ -1851,8 +1814,6 @@ export class UploadOrderFileResponse extends ResponseBase<File> {
 export class UploadRecordFileResponse extends ResponseBase<File> {
   public key: string;
 
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<UploadRecordFileResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1862,8 +1823,6 @@ export class UploadRecordFileResponse extends ResponseBase<File> {
 export class UploadUserFileResponse extends ResponseBase<File> {
   public key: string;
 
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<UploadUserFileResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1871,8 +1830,6 @@ export class UploadUserFileResponse extends ResponseBase<File> {
 }
 
 export class CreateLogResponse extends ResponseBase<string> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<CreateLogResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1880,8 +1837,6 @@ export class CreateLogResponse extends ResponseBase<string> {
 }
 
 export class AuthCheckResponse extends ResponseBase<AuthResponse> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<AuthCheckResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1893,8 +1848,6 @@ export class ValidateUserDeactivationTokenResponse extends ResponseBase<boolean>
 
   public hasCredentials: boolean;
 
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<ValidateUserDeactivationTokenResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1902,8 +1855,6 @@ export class ValidateUserDeactivationTokenResponse extends ResponseBase<boolean>
 }
 
 export class GetProfileResponse extends ResponseBase<User> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetProfileResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1911,8 +1862,6 @@ export class GetProfileResponse extends ResponseBase<User> {
 }
 
 export class GetUserResponse extends ResponseBase<User> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetUserResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1921,8 +1870,6 @@ export class GetUserResponse extends ResponseBase<User> {
 
 export class GetUsersResponse extends Array<ResponseBase<User>> {
   public totalCount: number;
-
-  public responseStatus: ResponseStatus;
 
   public constructor(init?: Partial<GetUsersResponse>) {
     super();
@@ -1933,8 +1880,6 @@ export class GetUsersResponse extends Array<ResponseBase<User>> {
 export class RegisterGuestUserResponse extends ResponseBase<User> {
   public bearerToken: string;
 
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<RegisterGuestUserResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1944,8 +1889,6 @@ export class RegisterGuestUserResponse extends ResponseBase<User> {
 export class ValidatePasswordTokenResponse extends ResponseBase<boolean> {
   public project: Project;
 
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<ValidatePasswordTokenResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1953,8 +1896,6 @@ export class ValidatePasswordTokenResponse extends ResponseBase<boolean> {
 }
 
 export class CreatePasswordResetResponse extends ResponseBase<boolean> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<CreatePasswordResetResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1966,8 +1907,6 @@ export class ValidateInvitationTokenResponse extends ResponseBase<boolean> {
 
   public userId: string;
 
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<ValidateInvitationTokenResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1975,8 +1914,6 @@ export class ValidateInvitationTokenResponse extends ResponseBase<boolean> {
 }
 
 export class DeleteEmailResponse extends ResponseBase<boolean> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<DeleteEmailResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1984,8 +1921,6 @@ export class DeleteEmailResponse extends ResponseBase<boolean> {
 }
 
 export class CreateDeviceResponse extends ResponseBase<Device> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<CreateDeviceResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1993,8 +1928,6 @@ export class CreateDeviceResponse extends ResponseBase<Device> {
 }
 
 export class GetDeviceResponse extends ResponseBase<Device> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetDeviceResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2004,8 +1937,6 @@ export class GetDeviceResponse extends ResponseBase<Device> {
 export class GetDevicesResponse extends Array<ResponseBase<Device>> {
   public totalCount: number;
 
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetDevicesResponse>) {
     super();
     (Object as any).assign(this, init);
@@ -2013,8 +1944,6 @@ export class GetDevicesResponse extends Array<ResponseBase<Device>> {
 }
 
 export class DeleteDeviceTokenResponse extends ResponseBase<boolean> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<DeleteDeviceTokenResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2022,8 +1951,6 @@ export class DeleteDeviceTokenResponse extends ResponseBase<boolean> {
 }
 
 export class RegisterDeviceTokenResponse extends ResponseBase<Device> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<RegisterDeviceTokenResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2031,8 +1958,6 @@ export class RegisterDeviceTokenResponse extends ResponseBase<Device> {
 }
 
 export class RegisterDeviceExpoTokenResponse extends ResponseBase<string> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<RegisterDeviceExpoTokenResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2040,8 +1965,6 @@ export class RegisterDeviceExpoTokenResponse extends ResponseBase<string> {
 }
 
 export class UpdateDeviceUserResponse extends ResponseBase<boolean> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<UpdateDeviceUserResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2049,8 +1972,6 @@ export class UpdateDeviceUserResponse extends ResponseBase<boolean> {
 }
 
 export class UpdateDeviceMetaResponse extends ResponseBase<boolean> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<UpdateDeviceMetaResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2058,8 +1979,6 @@ export class UpdateDeviceMetaResponse extends ResponseBase<boolean> {
 }
 
 export class DeleteDeviceMetaResponse extends ResponseBase<boolean> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<DeleteDeviceMetaResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2067,8 +1986,6 @@ export class DeleteDeviceMetaResponse extends ResponseBase<boolean> {
 }
 
 export class UpdateDeviceTimeZoneResponse extends ResponseBase<boolean> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<UpdateDeviceTimeZoneResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2076,8 +1993,6 @@ export class UpdateDeviceTimeZoneResponse extends ResponseBase<boolean> {
 }
 
 export class DeleteNotificationResponse extends ResponseBase<boolean> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<DeleteNotificationResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2085,8 +2000,6 @@ export class DeleteNotificationResponse extends ResponseBase<boolean> {
 }
 
 export class GetNotificationResponse extends ResponseBase<PushNotification> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetNotificationResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2098,8 +2011,6 @@ export class GetNotificationsResponse extends Array<
 > {
   public totalCount: number;
 
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetNotificationsResponse>) {
     super();
     (Object as any).assign(this, init);
@@ -2107,8 +2018,6 @@ export class GetNotificationsResponse extends Array<
 }
 
 export class MarkNotificationAsReadResponse extends ResponseBase<boolean> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<MarkNotificationAsReadResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2116,8 +2025,6 @@ export class MarkNotificationAsReadResponse extends ResponseBase<boolean> {
 }
 
 export class SendPushNotificationResponse extends ResponseBase<boolean> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<SendPushNotificationResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2125,8 +2032,6 @@ export class SendPushNotificationResponse extends ResponseBase<boolean> {
 }
 
 export class GetNotificationTemplateResponse extends ResponseBase<PushNotificationTemplate> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetNotificationTemplateResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2136,8 +2041,6 @@ export class GetNotificationTemplateResponse extends ResponseBase<PushNotificati
 export class GetNotificationTemplatesResponse extends Array<
   ResponseBase<PushNotificationTemplate>
 > {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetNotificationTemplatesResponse>) {
     super();
     (Object as any).assign(this, init);
@@ -2147,8 +2050,6 @@ export class GetNotificationTemplatesResponse extends Array<
 export class VerifyAppleAppStoreSubscriptionResponse extends Array<
   ResponseBase<Subscription>
 > {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<VerifyAppleAppStoreSubscriptionResponse>) {
     super();
     (Object as any).assign(this, init);
@@ -2156,8 +2057,6 @@ export class VerifyAppleAppStoreSubscriptionResponse extends Array<
 }
 
 export class CreateCustomerResponse extends ResponseBase<Customer> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<CreateCustomerResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2165,8 +2064,6 @@ export class CreateCustomerResponse extends ResponseBase<Customer> {
 }
 
 export class GetCustomerResponse extends ResponseBase<Customer> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetCustomerResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2176,8 +2073,6 @@ export class GetCustomerResponse extends ResponseBase<Customer> {
 export class GetCustomersResponse extends Array<ResponseBase<Customer>> {
   public totalCount: number;
 
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetCustomersResponse>) {
     super();
     (Object as any).assign(this, init);
@@ -2185,8 +2080,6 @@ export class GetCustomersResponse extends Array<ResponseBase<Customer>> {
 }
 
 export class CreateDiscountResponse extends ResponseBase<Discount> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<CreateDiscountResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2196,8 +2089,6 @@ export class CreateDiscountResponse extends ResponseBase<Discount> {
 export class GetApplicableCouponsResponse extends Array<
   ResponseBase<ApplicableDiscount>
 > {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetApplicableCouponsResponse>) {
     super();
     (Object as any).assign(this, init);
@@ -2207,8 +2098,6 @@ export class GetApplicableCouponsResponse extends Array<
 export class GetApplicableDiscountsResponse extends Array<
   ResponseBase<ApplicableDiscount>
 > {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetApplicableDiscountsResponse>) {
     super();
     (Object as any).assign(this, init);
@@ -2218,8 +2107,6 @@ export class GetApplicableDiscountsResponse extends Array<
 export class VerifyGooglePlayStoreSubscriptionResponse extends Array<
   ResponseBase<Subscription>
 > {
-  public responseStatus: ResponseStatus;
-
   public constructor(
     init?: Partial<VerifyGooglePlayStoreSubscriptionResponse>,
   ) {
@@ -2229,8 +2116,6 @@ export class VerifyGooglePlayStoreSubscriptionResponse extends Array<
 }
 
 export class AttachPaymentMethodResponse extends ResponseBase<PaymentMethod> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<AttachPaymentMethodResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2238,8 +2123,6 @@ export class AttachPaymentMethodResponse extends ResponseBase<PaymentMethod> {
 }
 
 export class GetPaymentMethodSetupResponse extends ResponseBase<PaymentMethodSetup> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetPaymentMethodSetupResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2247,8 +2130,6 @@ export class GetPaymentMethodSetupResponse extends ResponseBase<PaymentMethodSet
 }
 
 export class CreateOrderResponse extends ResponseBase<Order> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<CreateOrderResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2256,8 +2137,6 @@ export class CreateOrderResponse extends ResponseBase<Order> {
 }
 
 export class GetOrderResponse extends ResponseBase<Order> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetOrderResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2267,8 +2146,6 @@ export class GetOrderResponse extends ResponseBase<Order> {
 export class GetOrdersResponse extends Array<ResponseBase<Order>> {
   public totalCount: number;
 
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetOrdersResponse>) {
     super();
     (Object as any).assign(this, init);
@@ -2276,8 +2153,6 @@ export class GetOrdersResponse extends Array<ResponseBase<Order>> {
 }
 
 export class CreatePayseraTransactionResponse extends ResponseBase<string> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<CreatePayseraTransactionResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2285,8 +2160,6 @@ export class CreatePayseraTransactionResponse extends ResponseBase<string> {
 }
 
 export class CheckStripePaymentStatusResponse extends ResponseBase<string> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<CheckStripePaymentStatusResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2294,8 +2167,6 @@ export class CheckStripePaymentStatusResponse extends ResponseBase<string> {
 }
 
 export class CreateStripeTransactionResponse extends ResponseBase<StripePaymentIntent> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<CreateStripeTransactionResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2303,8 +2174,6 @@ export class CreateStripeTransactionResponse extends ResponseBase<StripePaymentI
 }
 
 export class CancelSubscriptionResponse extends ResponseBase<Subscription> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<CancelSubscriptionResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2312,8 +2181,6 @@ export class CancelSubscriptionResponse extends ResponseBase<Subscription> {
 }
 
 export class ChangeSubscriptionResponse extends ResponseBase<Subscription> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<ChangeSubscriptionResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2321,8 +2188,6 @@ export class ChangeSubscriptionResponse extends ResponseBase<Subscription> {
 }
 
 export class CreateSubscriptionResponse extends ResponseBase<Subscription> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<CreateSubscriptionResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2330,8 +2195,6 @@ export class CreateSubscriptionResponse extends ResponseBase<Subscription> {
 }
 
 export class GetProjectResponse extends ResponseBase<Project> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetProjectResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2339,8 +2202,6 @@ export class GetProjectResponse extends ResponseBase<Project> {
 }
 
 export class ExecuteFunctionResponse extends ResponseBase<string> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<ExecuteFunctionResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2380,7 +2241,6 @@ export class AuthenticateResponse implements IHasSessionId, IHasBearerToken {
   public permissions: string[];
 
   // @DataMember(Order=11)
-  public responseStatus: ResponseStatus;
 
   // @DataMember(Order=12)
   public meta: { [index: string]: string };
@@ -2399,7 +2259,6 @@ export class GetApiKeysResponse {
   public meta: { [index: string]: string };
 
   // @DataMember(Order=3)
-  public responseStatus: ResponseStatus;
 
   public constructor(init?: Partial<GetApiKeysResponse>) {
     (Object as any).assign(this, init);
@@ -2415,7 +2274,6 @@ export class RegenerateApiKeysResponse {
   public meta: { [index: string]: string };
 
   // @DataMember(Order=3)
-  public responseStatus: ResponseStatus;
 
   public constructor(init?: Partial<RegenerateApiKeysResponse>) {
     (Object as any).assign(this, init);

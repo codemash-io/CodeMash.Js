@@ -5,7 +5,7 @@ import { GetUsersRequest, GetUsersResponse } from 'types/codemash.dtos';
 export async function getUsers(
   request: GetUsersRequest,
 ): Promise<GetUsersResponse> {
-  const client = RestClient.Json(new CMConfig());
+  const client = new RestClient(CMConfig.getInstance());
   const response = await client.post(request);
   return response;
 }
