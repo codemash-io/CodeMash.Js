@@ -1,6 +1,7 @@
 class Config {
 	constructor() {
 		this.apiUrl = 'https://api.codemash.io';
+		this.eventsApiUrl = 'https://server-events.codemash.io';
 	}
 
 	init(config) {
