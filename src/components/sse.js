@@ -3,12 +3,7 @@ import Config from '../config';
 import {CONFIG as Endpoints} from '../routes';
 import {objectOrStringToString, toQueryString} from '../utils';
 
-export async function createGroup({
-	secretKey,
-	title,
-	meta,
-	users,
-}) {
+export async function createGroup({secretKey, title, meta, users}) {
 	const response = await server.loadJson(
 		`${Config.eventsApiUrl}${Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.CREATE_GROUP}`,
 		{
@@ -22,7 +17,7 @@ export async function createGroup({
 			body: JSON.stringify({
 				title,
 				meta,
-				users
+				users,
 			}),
 		}
 	);
@@ -30,21 +25,23 @@ export async function createGroup({
 	return response;
 }
 
-export async function deleteGroup({
-	secretKey,
-	id,
-}) {
-	const requestUrl = Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.DELETE_GROUP(id);
-	const response = await server.loadJson(`${Config.eventsApiUrl}${requestUrl}`, {
-		method: 'DELETE',
-		headers: {
-			'X-CM-ProjectId': Config.projectId,
-			Authorization: `Bearer ${secretKey || Config.secretKey}`,
-			Accept: 'application/json',
-			'Content-Type': 'application/json',
-		},
-		body: null,
-	});
+export async function deleteGroup({secretKey, id}) {
+	const requestUrl = Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.DELETE_GROUP(
+		id
+	);
+	const response = await server.loadJson(
+		`${Config.eventsApiUrl}${requestUrl}`,
+		{
+			method: 'DELETE',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: null,
+		}
+	);
 
 	return response;
 }
@@ -70,28 +67,27 @@ export async function getGroups({
 		Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.GET_GROUPS
 	}?${toQueryString(request)}`;
 
-	const response = await server.loadJson(`${Config.eventsApiUrl}${requestUrl}`, {
-		method: 'GET',
-		headers: {
-			'X-CM-ProjectId': Config.projectId,
-			Authorization: `Bearer ${secretKey || Config.secretKey}`,
-			Accept: 'application/json',
-			'Content-Type': 'application/json',
-		},
-		body: null,
-	});
+	const response = await server.loadJson(
+		`${Config.eventsApiUrl}${requestUrl}`,
+		{
+			method: 'GET',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: null,
+		}
+	);
 	return response;
 }
 
-export async function createChannel({
-	secretKey,
-	groupId,
-	title,
-	meta,
-	users,
-}) {
+export async function createChannel({secretKey, groupId, title, meta, users}) {
 	const response = await server.loadJson(
-		`${Config.eventsApiUrl}${Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.CREATE_CHANNEL(groupId)}`,
+		`${
+			Config.eventsApiUrl
+		}${Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.CREATE_CHANNEL(groupId)}`,
 		{
 			method: 'POST',
 			headers: {
@@ -103,7 +99,7 @@ export async function createChannel({
 			body: JSON.stringify({
 				title,
 				meta,
-				users
+				users,
 			}),
 		}
 	);
@@ -111,22 +107,24 @@ export async function createChannel({
 	return response;
 }
 
-export async function deleteChannel({
-	secretKey,
-	groupId,
-	id,
-}) {
-	const requestUrl = Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.DELETE_CHANNEL(groupId, id);
-	const response = await server.loadJson(`${Config.eventsApiUrl}${requestUrl}`, {
-		method: 'DELETE',
-		headers: {
-			'X-CM-ProjectId': Config.projectId,
-			Authorization: `Bearer ${secretKey || Config.secretKey}`,
-			Accept: 'application/json',
-			'Content-Type': 'application/json',
-		},
-		body: null,
-	});
+export async function deleteChannel({secretKey, groupId, id}) {
+	const requestUrl = Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.DELETE_CHANNEL(
+		groupId,
+		id
+	);
+	const response = await server.loadJson(
+		`${Config.eventsApiUrl}${requestUrl}`,
+		{
+			method: 'DELETE',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: null,
+		}
+	);
 
 	return response;
 }
@@ -145,29 +143,27 @@ export async function getChannels({
 		filter: objectOrStringToString(filter),
 		sort: objectOrStringToString(sort),
 	};
-	const requestUrl = `${
-		Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.GET_CHANNELS(groupId)
-	}?${toQueryString(request)}`;
+	const requestUrl = `${Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.GET_CHANNELS(
+		groupId
+	)}?${toQueryString(request)}`;
 
-	const response = await server.loadJson(`${Config.eventsApiUrl}${requestUrl}`, {
-		method: 'GET',
-		headers: {
-			'X-CM-ProjectId': Config.projectId,
-			Authorization: `Bearer ${secretKey || Config.secretKey}`,
-			Accept: 'application/json',
-			'Content-Type': 'application/json',
-		},
-		body: null,
-	});
+	const response = await server.loadJson(
+		`${Config.eventsApiUrl}${requestUrl}`,
+		{
+			method: 'GET',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: null,
+		}
+	);
 	return response;
 }
 
-export async function sendMessage({
-	secretKey,
-	channelId,
-	message,
-	meta,
-}) {
+export async function sendMessage({secretKey, channelId, message, meta}) {
 	const response = await server.loadJson(
 		`${Config.eventsApiUrl}${Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.SEND_MESSAGE}`,
 		{
@@ -208,33 +204,114 @@ export async function getMessages({
 		Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.GET_MESSAGES
 	}?${toQueryString(request)}`;
 
-	const response = await server.loadJson(`${Config.eventsApiUrl}${requestUrl}`, {
-		method: 'GET',
-		headers: {
-			'X-CM-ProjectId': Config.projectId,
-			Authorization: `Bearer ${secretKey || Config.secretKey}`,
-			Accept: 'application/json',
-			'Content-Type': 'application/json',
-		},
-		body: null,
-	});
+	const response = await server.loadJson(
+		`${Config.eventsApiUrl}${requestUrl}`,
+		{
+			method: 'GET',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: null,
+		}
+	);
 	return response;
 }
 
-export async function authorizeConnection({
-	secretKey,
-}) {
-	const requestUrl = Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.AUTHORIZE_CONNECTION;
-	const response = await server.loadJson(`${Config.eventsApiUrl}${requestUrl}`, {
-		method: 'GET',
-		headers: {
-			'X-CM-ProjectId': Config.projectId,
-			Authorization: `Bearer ${secretKey || Config.secretKey}`,
-			Accept: 'application/json',
-			'Content-Type': 'application/json',
-		},
-		body: null,
-	});
+export async function authorizeConnection({secretKey}) {
+	const requestUrl =
+		Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.AUTHORIZE_CONNECTION;
+	const response = await server.loadJson(
+		`${Config.eventsApiUrl}${requestUrl}`,
+		{
+			method: 'GET',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: null,
+		}
+	);
+
+	return response;
+}
+
+export function formEventSourceUrl({authorizationToken}) {
+	return `${Config.eventsApiUrl}${Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.OPEN_CONNECTION}?token=${authorizationToken}`;
+}
+
+export function handleServerEvent({event}) {
+	if (!event) {
+		return null;
+	}
+
+	const correctedData = event.data || event;
+
+	const msgType = correctedData.substring(0, correctedData.indexOf(' '));
+	const cmdType = msgType.substring(msgType.indexOf('@') + 1);
+	const channelFullId = msgType.substring(0, msgType.indexOf('@'));
+
+	let channelId, groupId;
+	if (channelFullId) {
+		const splitChannelId = channelFullId.split('_');
+		if (splitChannelId && splitChannelId.length === 2) {
+			if (splitChannelId[0] === 'channel') {
+				channelId = splitChannelId[1];
+			} else if (splitChannelId[0] === 'group') {
+				groupId = splitChannelId[1];
+			}
+		}
+	}
+
+	const dataString = correctedData.substring(correctedData.indexOf(' ') + 1);
+	const parsedData = JSON.parse(dataString);
+
+	return {
+		type: cmdType,
+		channelId: channelId,
+		groupId: groupId,
+		data: parsedData,
+	};
+}
+
+export async function heartbeatConnection({subscriptionId}) {
+	const requestUrl = `${Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.HEARTBEAT_CONNECTION}?id=${subscriptionId}`;
+	const response = await server.loadJson(
+		`${Config.eventsApiUrl}${requestUrl}`,
+		{
+			method: 'GET',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: null,
+		}
+	);
+
+	return response;
+}
+
+export async function closeConnection({subscriptionId}) {
+	const requestUrl = `${Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.CLOSE_CONNECTION}?id=${subscriptionId}`;
+	const response = await server.loadJson(
+		`${Config.eventsApiUrl}${requestUrl}`,
+		{
+			method: 'GET',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: null,
+		}
+	);
 
 	return response;
 }

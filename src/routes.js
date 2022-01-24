@@ -75,15 +75,22 @@ export const CONFIG = {
 			},
 			SERVER_EVENTS: {
 				CREATE_GROUP: '/v2/notifications/server-events/groups',
-				DELETE_GROUP: (id) =>
-					`/v2/notifications/server-events/groups/${id}`,
+				DELETE_GROUP: (id) => `/v2/notifications/server-events/groups/${id}`,
 				GET_GROUPS: '/v2/notifications/server-events/groups',
-				CREATE_CHANNEL: (groupId) => `/v2/notifications/server-events/groups/${groupId}/channels`,
-				DELETE_CHANNEL: (groupId, id) => `/v2/notifications/server-events/groups/${groupId}/channels/${id}`,
-				GET_CHANNELS: (groupId) => `/v2/notifications/server-events/groups/${groupId}/channels`,
+				CREATE_CHANNEL: (groupId) =>
+					`/v2/notifications/server-events/groups/${groupId}/channels`,
+				DELETE_CHANNEL: (groupId, id) =>
+					`/v2/notifications/server-events/groups/${groupId}/channels/${id}`,
+				GET_CHANNELS: (groupId) =>
+					`/v2/notifications/server-events/groups/${groupId}/channels`,
 				GET_MESSAGES: '/v2/notifications/server-events/messages',
 				SEND_MESSAGE: '/v2/notifications/server-events/messages',
-				AUTHORIZE_CONNECTION: '/v2/notifications/server-events/connections/initialize',
+				AUTHORIZE_CONNECTION:
+					'/v2/notifications/server-events/connections/initialize',
+				OPEN_CONNECTION: '/v2/notifications/server-events/connections/open',
+				HEARTBEAT_CONNECTION:
+					'/v2/notifications/server-events/connections/health',
+				CLOSE_CONNECTION: '/v2/notifications/server-events/connections/close',
 			},
 		},
 		MEMBERSHIP: {
