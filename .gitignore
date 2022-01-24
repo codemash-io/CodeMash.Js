@@ -61,5 +61,5 @@ typings/
 .next
 
 # build output
-dist
-build
+dist/
+build/
