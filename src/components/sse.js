@@ -285,8 +285,6 @@ export async function heartbeatConnection({subscriptionId}) {
 		{
 			method: 'GET',
 			headers: {
-				'X-CM-ProjectId': Config.projectId,
-				Authorization: `Bearer ${secretKey || Config.secretKey}`,
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
 			},
@@ -304,8 +302,6 @@ export async function closeConnection({subscriptionId}) {
 		{
 			method: 'GET',
 			headers: {
-				'X-CM-ProjectId': Config.projectId,
-				Authorization: `Bearer ${secretKey || Config.secretKey}`,
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
 			},
