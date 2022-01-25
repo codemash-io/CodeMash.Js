@@ -1,6 +1,6 @@
 import path from 'path';
 
-import * as faker from '@faker-js/faker';
+import faker from '@faker-js/faker';
 import { expect } from 'chai';
 import dotenv from 'dotenv';
 
@@ -23,6 +23,7 @@ describe('registerUser', () => {
     });
     const result = await registerUser(request);
 
-    expect(result).to.not.throw;
+    expect(result.isSuccess).to.be.true;
+    expect(result.response).to.be.not.null;
   });
 });
