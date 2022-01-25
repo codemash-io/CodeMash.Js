@@ -1,11 +1,10 @@
 import { RestClient } from 'client';
 import { CMConfig } from 'config';
 import {
-  AppleAuthenticationRequest,
-  Authenticate,
   BlockUserRequest,
   CreatePasswordResetRequest,
   CreateUserDeactivationRequest,
+  CredentialsAuthenticationRequest,
   DeactivateUserRequest,
   DeleteUserRequest,
   GetProfileRequest,
@@ -80,7 +79,9 @@ export async function validateInvitationToken(
   const client = new RestClient(CMConfig.getInstance());
   return client.request(request);
 }
-export async function authenticate(request: Authenticate) {
+export async function credentialsAuthentication(
+  request: CredentialsAuthenticationRequest,
+) {
   const client = new RestClient(CMConfig.getInstance());
   return client.request(request);
 }
@@ -127,11 +128,6 @@ export async function deactivateUser(request: DeactivateUserRequest) {
   const client = new RestClient(CMConfig.getInstance());
   return client.request(request);
 }
-export async function appleAuthentication(request: AppleAuthenticationRequest) {
-  const client = new RestClient(CMConfig.getInstance());
-  return client.request(request);
-}
-
 // export async function verifyRegistration(request: VerifyUserRequest) {}
 // export async function checkAuthentication(request: CredentialsAuthenticationRequest) {}
 // export async function logout(request: ?) {}
