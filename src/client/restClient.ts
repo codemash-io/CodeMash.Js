@@ -14,20 +14,20 @@ enum StringifiedArrayFields {
   Documents = 'documents',
 }
 
-type DbFilter = {
+type TFilter = {
   [StringifiedFields.Filter]: object | string;
 };
-type DbUpdate = {
+type TUpdate = {
   [StringifiedFields.Update]: object | string;
 };
-type DbDocument = {
+type TDocument = {
   [StringifiedFields.Document]: object | string;
 };
-type DbDocuments = {
+type TDocuments = {
   [StringifiedArrayFields.Documents]: object[] | string[];
 };
-type DbRequest<T> = IReturn<T> &
-  Partial<DbFilter & DbUpdate & DbDocument & DbDocuments>;
+type TRequest<T> = IReturn<T> &
+  Partial<TFilter & TUpdate & TDocument & TDocuments>;
 
 export class RestClient extends JsonServiceClient {
   constructor(private config: ICMConfig) {
@@ -43,23 +43,23 @@ export class RestClient extends JsonServiceClient {
 
   private transformApiResult(target: any): ICMDbResult {
     // transform given api string result to a js object.
-    const { response } = target;
+    const { isSuccess, response, isError, errorStatus } = target;
+    const { responseStatus, result } = response || {};
 
     if (CMConfig.getInstance().showLogs) {
-      console.log(`Result for ${getMethod(target)} request: `, target.response);
+      console.log(`Result for ${getMethod(target)} request: `, target);
     }
 
     return {
-      response: isJsonResponse(response) ? JSON.parse(response) : response,
+      isSuccess,
+      isError,
+      errorStatus,
+      responseStatus,
+      response: isJsonResponse(result) ? JSON.parse(result) : response,
     };
   }
 
-  public async dbRequest<T>(
-    request: any, // FIXME: should be DbRequest<T>
-    args?: any,
-    method?: string,
-  ): Promise<any> {
-    // FIXME: should be: Promise<ICMDbResult>
+  public async request<T>(request: TRequest<T>): Promise<ICMDbResult> {
     // stringify selected fields that are passed as objects.
     Object.values(StringifiedFields).forEach(key => {
       const value = request[key];
@@ -72,9 +72,9 @@ export class RestClient extends JsonServiceClient {
     Object.values(StringifiedArrayFields).forEach(key => {
       const value = request[key];
       if (value) {
-        request[key] = value.map((
-          i: any, // FIXME: remove any
-        ) => (typeof i !== 'string' ? JSON.stringify(i) : i));
+        request[key] = value.map(i =>
+          typeof i !== 'string' ? JSON.stringify(i) : i,
+        );
       }
     });
 
@@ -82,11 +82,7 @@ export class RestClient extends JsonServiceClient {
       console.log(`Outgoing ${getMethod(request)} request: `, request);
     }
 
-    const result = await this.fetch(
-      method || getMethod(request),
-      (request as any) as IReturn<T>,
-      args,
-    );
+    const result = await this.api((request as any) as IReturn<T>);
 
     return this.transformApiResult(result);
   }

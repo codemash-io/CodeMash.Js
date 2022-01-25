@@ -19,9 +19,11 @@ describe('inviteUser', () => {
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
       email: faker.internet.email(),
+      displayName: faker.internet.userName(),
+      meta: JSON.stringify({}),
     });
 
     const result = await inviteUser(request);
-    expect(result).to.not.throw;
+    expect(result.isSuccess).to.be.true;
   });
 });
