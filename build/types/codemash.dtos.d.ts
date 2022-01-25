@@ -64,8 +64,16 @@ export declare class ResponseStatus {
     constructor(init?: Partial<ResponseStatus>);
 }
 export declare class ResponseBase<T> {
+    responseStatus: ResponseStatus;
     result: T;
     constructor(init?: Partial<ResponseBase<T>>);
+}
+export declare class UpdateResult {
+    isAcknowledged: boolean;
+    matchedCount: number;
+    modifiedCount: number;
+    upsertedId: string;
+    constructor(init?: Partial<UpdateResult>);
 }
 export declare class DeleteResult {
     deletedCount: number;
@@ -148,13 +156,6 @@ export declare class ReplaceOneResult {
      */
     upsertedId: string;
     constructor(init?: Partial<ReplaceOneResult>);
-}
-export declare class UpdateResult {
-    isAcknowledged: boolean;
-    matchedCount: number;
-    modifiedCount: number;
-    upsertedId: string;
-    constructor(init?: Partial<UpdateResult>);
 }
 export declare class Taxonomy {
     id: string;
@@ -896,6 +897,9 @@ export interface IHttpFile {
 export declare class AggregateResponse extends ResponseBase<string> {
     constructor(init?: Partial<AggregateResponse>);
 }
+export declare class ChangeResponsibilityResponse extends ResponseBase<UpdateResult> {
+    constructor(init?: Partial<ChangeResponsibilityResponse>);
+}
 export declare class CountResponse extends ResponseBase<number> {
     constructor(init?: Partial<CountResponse>);
 }
@@ -999,8 +1003,23 @@ export declare class UploadUserFileResponse extends ResponseBase<File> {
 export declare class CreateLogResponse extends ResponseBase<string> {
     constructor(init?: Partial<CreateLogResponse>);
 }
+export declare class AadAuthenticationResponse extends ResponseBase<AuthResponse> {
+    constructor(init?: Partial<AadAuthenticationResponse>);
+}
 export declare class AuthCheckResponse extends ResponseBase<AuthResponse> {
     constructor(init?: Partial<AuthCheckResponse>);
+}
+export declare class CredentialsAuthenticationResponse extends ResponseBase<AuthResponse> {
+    constructor(init?: Partial<CredentialsAuthenticationResponse>);
+}
+export declare class FacebookAuthenticationResponse extends ResponseBase<AuthResponse> {
+    constructor(init?: Partial<FacebookAuthenticationResponse>);
+}
+export declare class GoogleAuthenticationResponse extends ResponseBase<AuthResponse> {
+    constructor(init?: Partial<GoogleAuthenticationResponse>);
+}
+export declare class TwitterAuthenticationResponse extends ResponseBase<AuthResponse> {
+    constructor(init?: Partial<TwitterAuthenticationResponse>);
 }
 export declare class ValidateUserDeactivationTokenResponse extends ResponseBase<boolean> {
     project: Project;
@@ -1017,9 +1036,16 @@ export declare class GetUsersResponse extends Array<ResponseBase<User>> {
     totalCount: number;
     constructor(init?: Partial<GetUsersResponse>);
 }
+export declare class InviteUserV2Response extends ResponseBase<User> {
+    constructor(init?: Partial<InviteUserV2Response>);
+}
 export declare class RegisterGuestUserResponse extends ResponseBase<User> {
     bearerToken: string;
     constructor(init?: Partial<RegisterGuestUserResponse>);
+}
+export declare class RegisterUserV2Response extends ResponseBase<User> {
+    bearerToken: string;
+    constructor(init?: Partial<RegisterUserV2Response>);
 }
 export declare class ValidatePasswordTokenResponse extends ResponseBase<boolean> {
     project: Project;
@@ -1035,6 +1061,9 @@ export declare class ValidateInvitationTokenResponse extends ResponseBase<boolea
 }
 export declare class DeleteEmailResponse extends ResponseBase<boolean> {
     constructor(init?: Partial<DeleteEmailResponse>);
+}
+export declare class SendEmailNotificationV2Response extends ResponseBase<string> {
+    constructor(init?: Partial<SendEmailNotificationV2Response>);
 }
 export declare class CreateDeviceResponse extends ResponseBase<Device> {
     constructor(init?: Partial<CreateDeviceResponse>);
@@ -1154,6 +1183,9 @@ export declare class GetProjectResponse extends ResponseBase<Project> {
 export declare class ExecuteFunctionResponse extends ResponseBase<string> {
     constructor(init?: Partial<ExecuteFunctionResponse>);
 }
+export declare class AppleAuthenticationResponse extends ResponseBase<AuthResponse> {
+    constructor(init?: Partial<AppleAuthenticationResponse>);
+}
 export declare class AuthenticateResponse implements IHasSessionId, IHasBearerToken {
     userId: string;
     sessionId: string;
@@ -1165,6 +1197,7 @@ export declare class AuthenticateResponse implements IHasSessionId, IHasBearerTo
     profileUrl: string;
     roles: string[];
     permissions: string[];
+    responseStatus: ResponseStatus;
     meta: {
         [index: string]: string;
     };
@@ -1175,6 +1208,7 @@ export declare class GetApiKeysResponse {
     meta: {
         [index: string]: string;
     };
+    responseStatus: ResponseStatus;
     constructor(init?: Partial<GetApiKeysResponse>);
 }
 export declare class RegenerateApiKeysResponse {
@@ -1182,6 +1216,7 @@ export declare class RegenerateApiKeysResponse {
     meta: {
         [index: string]: string;
     };
+    responseStatus: ResponseStatus;
     constructor(init?: Partial<RegenerateApiKeysResponse>);
 }
 /**
@@ -1200,6 +1235,22 @@ export declare class AggregateRequest extends CodeMashDbRequestBase implements I
     };
     constructor(init?: Partial<AggregateRequest>);
     createResponse(): AggregateResponse;
+    getTypeName(): string;
+}
+/**
+ * Database services
+ */
+export declare class ChangeResponsibilityRequest extends CodeMashDbRequestBase implements IReturn<ChangeResponsibilityResponse> {
+    /**
+     * Id of a record to change responsibility for
+     */
+    id: string;
+    /**
+     * New responsible user for this record
+     */
+    newResponsibleUserId: string;
+    constructor(init?: Partial<ChangeResponsibilityRequest>);
+    createResponse(): ChangeResponsibilityResponse;
     getTypeName(): string;
 }
 /**
@@ -1373,7 +1424,7 @@ export declare class InsertManyRequest extends CodeMashDbRequestBase implements 
     /**
      * Array of json records to insert
      */
-    documents: object[] | string[];
+    documents: string[];
     /**
      * By default records are validated before insert, set to true to prevent validation
      */
@@ -1401,7 +1452,7 @@ export declare class InsertOneRequest extends CodeMashDbRequestBase implements I
     /**
      * Entity represented as json to insert
      */
-    document: object | string;
+    document: string;
     /**
      * By default records are validated before insert, set to true to prevent validation
      */
@@ -1433,7 +1484,7 @@ export declare class ReplaceOneRequest extends CodeMashDbRequestBase implements 
     /**
      * Entity represented as json to replace
      */
-    document: object | string;
+    document: string;
     /**
      * ID of a record to replace. Required if Filter is empty.
      */
@@ -1473,7 +1524,7 @@ export declare class UpdateManyRequest extends CodeMashDbRequestBase implements 
     /**
      * The modifications to apply. Use Update Operators such as $set, $unset, or $rename.
      */
-    update: object | string;
+    update: string;
     /**
      * The selection criteria for the update. The same query selectors as in the Find method are available. - https://docs.mongodb.org/manual/reference/method/db.collection.updateMany/#db.collection.updateMany . Specify an empty document '{}' to update the first document returned in the collection
      */
@@ -1505,7 +1556,7 @@ export declare class UpdateOneRequest extends CodeMashDbRequestBase implements I
     /**
      * The modifications to apply. Use Update Operators such as $set, $unset, or $rename.
      */
-    update: object | string;
+    update: string;
     /**
      * The selection criteria for the update. Required if Id is empty.
      */
@@ -1557,7 +1608,7 @@ export declare class FindTermsChildrenRequest extends CodeMashDbListRequestBase 
     /**
      * The selection criteria for the parent terms. Required if Id is not set.
      */
-    parentFilter: object | string;
+    parentFilter: string;
     /**
      * Prevent setting culture code from headers
      */
@@ -1569,12 +1620,14 @@ export declare class FindTermsChildrenRequest extends CodeMashDbListRequestBase 
 /**
  * File services
  */
-export declare class DeleteFileRequest extends CodeMashRequestBase {
+export declare class DeleteFileRequest extends CodeMashRequestBase implements IReturnVoid {
     /**
      * ID of a file to delete
      */
     fileId: string;
     constructor(init?: Partial<DeleteFileRequest>);
+    createResponse(): void;
+    getTypeName(): string;
 }
 /**
  * File services
@@ -1664,6 +1717,10 @@ export declare class UploadRecordFileRequest extends CodeMashDbRequestBase imple
      * Alternative way to upload a file by providing a base64 encoded string
      */
     base64File: Base64FileUpload;
+    /**
+     * If true, does not activate triggers
+     */
+    ignoreTriggers: boolean;
     constructor(init?: Partial<UploadRecordFileRequest>);
     createResponse(): UploadRecordFileResponse;
     getTypeName(): string;
@@ -1713,7 +1770,7 @@ export declare class CreateLogRequest extends CodeMashRequestBase implements IRe
 /**
  * Authentication
  */
-export declare class AadAuthenticationRequest extends CodeMashRequestBase implements IOAuthRequest {
+export declare class AadAuthenticationRequest extends CodeMashRequestBase implements IReturn<AadAuthenticationResponse>, IOAuthRequest {
     /**
      * Mode to use for authentication
      */
@@ -1731,6 +1788,8 @@ export declare class AadAuthenticationRequest extends CodeMashRequestBase implem
      */
     accessToken: string;
     constructor(init?: Partial<AadAuthenticationRequest>);
+    createResponse(): AadAuthenticationResponse;
+    getTypeName(): string;
 }
 /**
  * Gets one user
@@ -1743,7 +1802,7 @@ export declare class AuthCheckRequest extends CodeMashRequestBase implements IRe
 /**
  * Authentication
  */
-export declare class CredentialsAuthenticationRequest extends CodeMashRequestBase {
+export declare class CredentialsAuthenticationRequest extends CodeMashRequestBase implements IReturn<CredentialsAuthenticationResponse> {
     /**
      * User's login e-mail address.
      */
@@ -1753,11 +1812,13 @@ export declare class CredentialsAuthenticationRequest extends CodeMashRequestBas
      */
     password: string;
     constructor(init?: Partial<CredentialsAuthenticationRequest>);
+    createResponse(): CredentialsAuthenticationResponse;
+    getTypeName(): string;
 }
 /**
  * Authentication
  */
-export declare class FacebookAuthenticationRequest extends CodeMashRequestBase implements IOAuthRequest {
+export declare class FacebookAuthenticationRequest extends CodeMashRequestBase implements IReturn<FacebookAuthenticationResponse>, IOAuthRequest {
     /**
      * Mode to use for authentication
      */
@@ -1775,11 +1836,13 @@ export declare class FacebookAuthenticationRequest extends CodeMashRequestBase i
      */
     accessToken: string;
     constructor(init?: Partial<FacebookAuthenticationRequest>);
+    createResponse(): FacebookAuthenticationResponse;
+    getTypeName(): string;
 }
 /**
  * Authentication
  */
-export declare class GoogleAuthenticationRequest extends CodeMashRequestBase implements IOAuthRequest {
+export declare class GoogleAuthenticationRequest extends CodeMashRequestBase implements IReturn<GoogleAuthenticationResponse>, IOAuthRequest {
     /**
      * Mode to use for authentication
      */
@@ -1797,11 +1860,13 @@ export declare class GoogleAuthenticationRequest extends CodeMashRequestBase imp
      */
     accessToken: string;
     constructor(init?: Partial<GoogleAuthenticationRequest>);
+    createResponse(): GoogleAuthenticationResponse;
+    getTypeName(): string;
 }
 /**
  * Authentication
  */
-export declare class TwitterAuthenticationRequest extends CodeMashRequestBase implements IOAuthRequest {
+export declare class TwitterAuthenticationRequest extends CodeMashRequestBase implements IReturn<TwitterAuthenticationResponse>, IOAuthRequest {
     /**
      * Mode to use for authentication
      */
@@ -1831,6 +1896,8 @@ export declare class TwitterAuthenticationRequest extends CodeMashRequestBase im
      */
     oAuthVerifier: string;
     constructor(init?: Partial<TwitterAuthenticationRequest>);
+    createResponse(): TwitterAuthenticationResponse;
+    getTypeName(): string;
 }
 /**
  * Membership
@@ -1851,13 +1918,15 @@ export declare class ValidateUserDeactivationTokenRequest extends RequestBase im
 /**
  * Membership
  */
-export declare class CreateUserDeactivationRequest extends CodeMashRequestBase {
+export declare class CreateUserDeactivationRequest extends CodeMashRequestBase implements IReturnVoid {
     constructor(init?: Partial<CreateUserDeactivationRequest>);
+    createResponse(): void;
+    getTypeName(): string;
 }
 /**
  * Membership
  */
-export declare class DeactivateUserRequest extends RequestBase {
+export declare class DeactivateUserRequest extends RequestBase implements IReturnVoid {
     /**
      * Secret token received by email for deactivation
      */
@@ -1867,26 +1936,32 @@ export declare class DeactivateUserRequest extends RequestBase {
      */
     password: string;
     constructor(init?: Partial<DeactivateUserRequest>);
+    createResponse(): void;
+    getTypeName(): string;
 }
 /**
  * Blocks selected user preventing the use of authenticated actions
  */
-export declare class BlockUserRequest extends CodeMashRequestBase {
+export declare class BlockUserRequest extends CodeMashRequestBase implements IReturnVoid {
     /**
      * ID of user to be blocked
      */
     id: string;
     constructor(init?: Partial<BlockUserRequest>);
+    createResponse(): void;
+    getTypeName(): string;
 }
 /**
  * Deletes user
  */
-export declare class DeleteUserRequest extends CodeMashRequestBase {
+export declare class DeleteUserRequest extends CodeMashRequestBase implements IReturnVoid {
     /**
      * ID of user to be deleted
      */
     id: string;
     constructor(init?: Partial<DeleteUserRequest>);
+    createResponse(): void;
+    getTypeName(): string;
 }
 /**
  * Gets one user
@@ -1971,17 +2046,19 @@ export declare class GetUsersRequest extends CodeMashListRequestBase implements 
 /**
  * Unblocks blocked user
  */
-export declare class UnblockUserRequest extends CodeMashRequestBase {
+export declare class UnblockUserRequest extends CodeMashRequestBase implements IReturnVoid {
     /**
      * User Id
      */
     id: string;
     constructor(init?: Partial<UnblockUserRequest>);
+    createResponse(): void;
+    getTypeName(): string;
 }
 /**
  * Membership
  */
-export declare class UpdatePasswordRequest extends CodeMashRequestBase {
+export declare class UpdatePasswordRequest extends CodeMashRequestBase implements IReturnVoid {
     /**
      * User whose password to change.
      */
@@ -1999,11 +2076,13 @@ export declare class UpdatePasswordRequest extends CodeMashRequestBase {
      */
     repeatedPassword: string;
     constructor(init?: Partial<UpdatePasswordRequest>);
+    createResponse(): void;
+    getTypeName(): string;
 }
 /**
  * Membership
  */
-export declare class UpdateProfileRequest extends CodeMashRequestBase {
+export declare class UpdateProfileRequest extends CodeMashRequestBase implements IReturnVoid {
     /**
      * Guest email. Will not work for normal user.
      */
@@ -2089,11 +2168,13 @@ export declare class UpdateProfileRequest extends CodeMashRequestBase {
      */
     birthDate: string;
     constructor(init?: Partial<UpdateProfileRequest>);
+    createResponse(): void;
+    getTypeName(): string;
 }
 /**
  * Membership
  */
-export declare class UpdateUserRequest extends CodeMashRequestBase {
+export declare class UpdateUserRequest extends CodeMashRequestBase implements IReturnVoid {
     /**
      * User Id
      */
@@ -2195,11 +2276,13 @@ export declare class UpdateUserRequest extends CodeMashRequestBase {
      */
     zone: string;
     constructor(init?: Partial<UpdateUserRequest>);
+    createResponse(): void;
+    getTypeName(): string;
 }
 /**
  * Membership
  */
-export declare class InviteUserRequest extends CodeMashRequestBase {
+export declare class InviteUserRequest extends CodeMashRequestBase implements IReturn<InviteUserV2Response> {
     /**
      * Member display name
      */
@@ -2293,6 +2376,8 @@ export declare class InviteUserRequest extends CodeMashRequestBase {
      */
     zone: string;
     constructor(init?: Partial<InviteUserRequest>);
+    createResponse(): InviteUserV2Response;
+    getTypeName(): string;
 }
 /**
  * Membership
@@ -2393,7 +2478,7 @@ export declare class RegisterGuestUserRequest extends CodeMashRequestBase implem
 /**
  * Membership
  */
-export declare class RegisterUserRequest extends CodeMashRequestBase {
+export declare class RegisterUserRequest extends CodeMashRequestBase implements IReturn<RegisterUserV2Response> {
     /**
      * Member display name
      */
@@ -2499,6 +2584,8 @@ export declare class RegisterUserRequest extends CodeMashRequestBase {
      */
     zone: string;
     constructor(init?: Partial<RegisterUserRequest>);
+    createResponse(): RegisterUserV2Response;
+    getTypeName(): string;
 }
 /**
  * Membership
@@ -2531,7 +2618,7 @@ export declare class CreatePasswordResetRequest extends CodeMashRequestBase impl
 /**
  * Membership
  */
-export declare class ResetPasswordRequest extends RequestBase {
+export declare class ResetPasswordRequest extends RequestBase implements IReturnVoid {
     /**
      * Secret token received by email for password reset
      */
@@ -2545,6 +2632,8 @@ export declare class ResetPasswordRequest extends RequestBase {
      */
     repeatedPassword: string;
     constructor(init?: Partial<ResetPasswordRequest>);
+    createResponse(): void;
+    getTypeName(): string;
 }
 /**
  * Membership
@@ -2565,17 +2654,19 @@ export declare class ValidateInvitationTokenRequest extends RequestBase implemen
 /**
  * Membership
  */
-export declare class VerifyUserRequest extends RequestBase {
+export declare class VerifyUserRequest extends RequestBase implements IReturnVoid {
     /**
      * Secret token received by email for registration confirmation
      */
     token: string;
     constructor(init?: Partial<VerifyUserRequest>);
+    createResponse(): void;
+    getTypeName(): string;
 }
 /**
  * Membership
  */
-export declare class VerifyUserInvitationRequest extends RequestBase {
+export declare class VerifyUserInvitationRequest extends RequestBase implements IReturnVoid {
     /**
      * Secret token received by email for invitation confirmation
      */
@@ -2589,6 +2680,8 @@ export declare class VerifyUserInvitationRequest extends RequestBase {
      */
     repeatedPassword: string;
     constructor(init?: Partial<VerifyUserInvitationRequest>);
+    createResponse(): void;
+    getTypeName(): string;
 }
 /**
  * Deletes an email from queue
@@ -2605,7 +2698,7 @@ export declare class DeleteEmailRequest extends CodeMashRequestBase implements I
 /**
  * Sends an email message
  */
-export declare class SendEmailRequest extends CodeMashRequestBase {
+export declare class SendEmailRequest extends CodeMashRequestBase implements IReturn<SendEmailNotificationV2Response> {
     /**
      * ID of a template to use
      */
@@ -2661,6 +2754,8 @@ export declare class SendEmailRequest extends CodeMashRequestBase {
      */
     attachments: string[];
     constructor(init?: Partial<SendEmailRequest>);
+    createResponse(): SendEmailNotificationV2Response;
+    getTypeName(): string;
 }
 /**
  * Registers notification device which can receive push notifications
@@ -2707,12 +2802,14 @@ export declare class CreateDeviceRequest extends CodeMashRequestBase implements 
 /**
  * Deletes the device from push notifications recipients list.
  */
-export declare class DeleteDeviceRequest extends CodeMashRequestBase {
+export declare class DeleteDeviceRequest extends CodeMashRequestBase implements IReturnVoid {
     /**
      * Device Id or device key
      */
     id: string;
     constructor(init?: Partial<DeleteDeviceRequest>);
+    createResponse(): void;
+    getTypeName(): string;
 }
 /**
  * Gets the device which can receive push notifications.
@@ -2845,7 +2942,7 @@ export declare class RegisterDeviceExpoTokenRequest extends CodeMashRequestBase 
 /**
  * Updates device details
  */
-export declare class UpdateDeviceRequest extends CodeMashRequestBase {
+export declare class UpdateDeviceRequest extends CodeMashRequestBase implements IReturnVoid {
     /**
      * Device id or device key
      */
@@ -2881,6 +2978,8 @@ export declare class UpdateDeviceRequest extends CodeMashRequestBase {
         [index: string]: string;
     };
     constructor(init?: Partial<UpdateDeviceRequest>);
+    createResponse(): void;
+    getTypeName(): string;
 }
 /**
  * Attaches user to the device which can receive push notifications
@@ -3231,12 +3330,14 @@ export declare class CreateCustomerRequest extends CodeMashRequestBase implement
 /**
  * Payments
  */
-export declare class DeleteCustomerRequest extends CodeMashRequestBase {
+export declare class DeleteCustomerRequest extends CodeMashRequestBase implements IReturnVoid {
     /**
      * Customer's ID to delete.
      */
     id: string;
     constructor(init?: Partial<DeleteCustomerRequest>);
+    createResponse(): void;
+    getTypeName(): string;
 }
 /**
  * Payments
@@ -3277,7 +3378,7 @@ export declare class GetCustomersRequest extends CodeMashListRequestBase impleme
 /**
  * Payments
  */
-export declare class UpdateCustomerRequest extends CodeMashRequestBase {
+export declare class UpdateCustomerRequest extends CodeMashRequestBase implements IReturnVoid {
     /**
      * Customer's ID.
      */
@@ -3329,6 +3430,8 @@ export declare class UpdateCustomerRequest extends CodeMashRequestBase {
         [index: string]: string;
     };
     constructor(init?: Partial<UpdateCustomerRequest>);
+    createResponse(): void;
+    getTypeName(): string;
 }
 /**
  * Payments
@@ -3417,12 +3520,14 @@ export declare class CreateDiscountRequest extends CodeMashDbRequestBase impleme
 /**
  * Payments
  */
-export declare class DeleteDiscountRequest extends CodeMashRequestBase {
+export declare class DeleteDiscountRequest extends CodeMashRequestBase implements IReturnVoid {
     /**
      * Id of discount.
      */
     id: string;
     constructor(init?: Partial<DeleteDiscountRequest>);
+    createResponse(): void;
+    getTypeName(): string;
 }
 /**
  * Payments
@@ -3479,7 +3584,7 @@ export declare class GetApplicableDiscountsRequest extends CodeMashRequestBase i
 /**
  * Payments
  */
-export declare class UpdateDiscountRequest extends CodeMashRequestBase {
+export declare class UpdateDiscountRequest extends CodeMashRequestBase implements IReturnVoid {
     /**
      * Id of discount.
      */
@@ -3553,6 +3658,8 @@ export declare class UpdateDiscountRequest extends CodeMashRequestBase {
      */
     combineDiscounts?: boolean;
     constructor(init?: Partial<UpdateDiscountRequest>);
+    createResponse(): void;
+    getTypeName(): string;
 }
 /**
  * Payments
@@ -3605,7 +3712,7 @@ export declare class AttachPaymentMethodRequest extends CodeMashRequestBase impl
 /**
  * Payments
  */
-export declare class DetachPaymentMethodRequest extends CodeMashRequestBase {
+export declare class DetachPaymentMethodRequest extends CodeMashRequestBase implements IReturnVoid {
     /**
      * Payment method's ID.
      */
@@ -3615,6 +3722,8 @@ export declare class DetachPaymentMethodRequest extends CodeMashRequestBase {
      */
     customerId: string;
     constructor(init?: Partial<DetachPaymentMethodRequest>);
+    createResponse(): void;
+    getTypeName(): string;
 }
 /**
  * Payments
@@ -3635,7 +3744,7 @@ export declare class GetPaymentMethodSetupRequest extends CodeMashRequestBase im
 /**
  * Payments
  */
-export declare class UpdatePaymentMethodRequest extends CodeMashRequestBase {
+export declare class UpdatePaymentMethodRequest extends CodeMashRequestBase implements IReturnVoid {
     /**
      * Payment method's ID.
      */
@@ -3691,6 +3800,8 @@ export declare class UpdatePaymentMethodRequest extends CodeMashRequestBase {
         [index: string]: string;
     };
     constructor(init?: Partial<UpdatePaymentMethodRequest>);
+    createResponse(): void;
+    getTypeName(): string;
 }
 /**
  * Payments
@@ -3789,10 +3900,6 @@ export declare class CreatePayseraTransactionRequest extends CodeMashRequestBase
     constructor(init?: Partial<CreatePayseraTransactionRequest>);
     createResponse(): CreatePayseraTransactionResponse;
     getTypeName(): string;
-}
-export declare class ValidatePayseraRequest {
-    pathInfo: string;
-    constructor(init?: Partial<ValidatePayseraRequest>);
 }
 /**
  * Payments
@@ -3917,7 +4024,7 @@ export declare class CreateSubscriptionRequest extends CodeMashRequestBase imple
 /**
  * Payments
  */
-export declare class UpdateSubscriptionRequest extends CodeMashRequestBase {
+export declare class UpdateSubscriptionRequest extends CodeMashRequestBase implements IReturnVoid {
     /**
      * Subscription ID.
      */
@@ -3939,6 +4046,8 @@ export declare class UpdateSubscriptionRequest extends CodeMashRequestBase {
      */
     renewCanceled: boolean;
     constructor(init?: Partial<UpdateSubscriptionRequest>);
+    createResponse(): void;
+    getTypeName(): string;
 }
 /**
  * Returns project details
@@ -3998,7 +4107,7 @@ export declare class SendGridEndpoint implements IReturn<HttpResult> {
 /**
  * Authentication
  */
-export declare class AppleAuthenticationRequest extends CodeMashRequestBase implements IOAuthRequest {
+export declare class AppleAuthenticationRequest extends CodeMashRequestBase implements IReturn<AppleAuthenticationResponse>, IOAuthRequest {
     /**
      * Mode to use for authentication
      */
@@ -4022,6 +4131,8 @@ export declare class AppleAuthenticationRequest extends CodeMashRequestBase impl
         [index: string]: string;
     };
     constructor(init?: Partial<AppleAuthenticationRequest>);
+    createResponse(): AppleAuthenticationResponse;
+    getTypeName(): string;
 }
 export declare class Authenticate implements IReturn<AuthenticateResponse>, IPost {
     provider: string;

@@ -1,5 +1,6 @@
 dist/
 node_modules/
+src/types/codemash.dtos.ts
 
 # remove the line below after we refactor everything to typescript
 *.js
