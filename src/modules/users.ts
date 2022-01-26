@@ -85,7 +85,7 @@ export async function credentialsAuthentication(
   const client = new RestClient(CMConfig.getInstance());
   return client.request(request);
 }
-export async function checkUserDeactivationToken(
+export async function validateUserDeactivationToken(
   request: ValidateUserDeactivationTokenRequest,
 ) {
   const client = new RestClient(CMConfig.getInstance());

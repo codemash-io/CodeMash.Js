@@ -50,6 +50,7 @@ export class RestClient extends JsonServiceClient {
       console.log(`Result for ${getMethod(target)} request: `, target);
     }
 
+    // FIXME: sometimes, result comes with { isSuccess: false, isError: false }. This shouldn't happen.
     return {
       isSuccess,
       isError,
