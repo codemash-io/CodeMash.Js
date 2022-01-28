@@ -77,6 +77,7 @@ export const CONFIG = {
 				CREATE_GROUP: '/v2/notifications/server-events/groups',
 				DELETE_GROUP: (id) => `/v2/notifications/server-events/groups/${id}`,
 				GET_GROUPS: '/v2/notifications/server-events/groups',
+				GET_GROUP: (id) => `/v2/notifications/server-events/groups/${id}`,
 				CREATE_CHANNEL: (groupId) =>
 					`/v2/notifications/server-events/groups/${groupId}/channels`,
 				DELETE_CHANNEL: (groupId, id) =>
@@ -85,12 +86,16 @@ export const CONFIG = {
 					`/v2/notifications/server-events/groups/${groupId}/channels`,
 				GET_MESSAGES: '/v2/notifications/server-events/messages',
 				SEND_MESSAGE: '/v2/notifications/server-events/messages',
+				READ_MESSAGES: '/v2/notifications/server-events/messages/read',
 				AUTHORIZE_CONNECTION:
 					'/v2/notifications/server-events/connections/initialize',
 				OPEN_CONNECTION: '/v2/notifications/server-events/connections/open',
 				HEARTBEAT_CONNECTION:
 					'/v2/notifications/server-events/connections/health',
 				CLOSE_CONNECTION: '/v2/notifications/server-events/connections/close',
+				FILES: {
+					UPLOAD: '/v2/notifications/server-events/messages/files',
+				},
 			},
 		},
 		MEMBERSHIP: {

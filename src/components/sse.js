@@ -54,6 +54,7 @@ export async function getGroups({
 	sort,
 	includeChannels,
 	includeUsers,
+	includeNotSeenCount,
 }) {
 	const request = {
 		pageSize: pageSize || Config.tablePageSize,
@@ -62,10 +63,43 @@ export async function getGroups({
 		sort: objectOrStringToString(sort),
 		includeChannels,
 		includeUsers,
+		includeNotSeenCount,
 	};
 	const requestUrl = `${
 		Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.GET_GROUPS
 	}?${toQueryString(request)}`;
+
+	const response = await server.loadJson(
+		`${Config.eventsApiUrl}${requestUrl}`,
+		{
+			method: 'GET',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: null,
+		}
+	);
+	return response;
+}
+
+export async function getGroup({
+	secretKey,
+	id,
+	includeChannels,
+	includeUsers,
+	includeNotSeenCount,
+}) {
+	const request = {
+		includeChannels,
+		includeUsers,
+		includeNotSeenCount,
+	};
+	const requestUrl = `${Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.GET_GROUP(
+		id
+	)}?${toQueryString(request)}`;
 
 	const response = await server.loadJson(
 		`${Config.eventsApiUrl}${requestUrl}`,
@@ -163,7 +197,13 @@ export async function getChannels({
 	return response;
 }
 
-export async function sendMessage({secretKey, channelId, message, meta}) {
+export async function sendMessage({
+	secretKey,
+	channelId,
+	message,
+	meta,
+	fileIds,
+}) {
 	const response = await server.loadJson(
 		`${Config.eventsApiUrl}${Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.SEND_MESSAGE}`,
 		{
@@ -178,6 +218,28 @@ export async function sendMessage({secretKey, channelId, message, meta}) {
 				channelId,
 				message,
 				meta,
+				fileIds,
+			}),
+		}
+	);
+
+	return response;
+}
+
+export async function readMessages({secretKey, channelId, ids}) {
+	const response = await server.loadJson(
+		`${Config.eventsApiUrl}${Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.READ_MESSAGES}`,
+		{
+			method: 'POST',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				channelId,
+				ids,
 			}),
 		}
 	);
