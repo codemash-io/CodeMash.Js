@@ -8,7 +8,7 @@
   "scripts": {
     "ts-types": " tsc --emitDeclarationOnly --outDir dist",
     "build": "rimraf build && node ./esbuild.config.js && npm run ts-types",
-    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/**/*.ts' --timeout 3600000",
+    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' nyc mocha -r ts-node/register 'tests/**/*.ts' --timeout 3600000",
     "format:check": "prettier --check \"**/*.{js,jsx,yml,yaml,json.css}\"",
     "format": "prettier --write \"**/*.{js,jsx,yml,yaml,json.css}\"",
     "commit": "cz",
@@ -22,6 +22,12 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codemash-io/CodeMash.Js.git"
+  },
+  "nyc": {
+    "include": "src",
+    "exclude": [
+      "src/types"
+    ]
   },
   "keywords": [
     "baas",
@@ -79,6 +85,7 @@
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "eslint-plugin-standard": "^4.0.1",
     "mocha": "^8.4.0",
+    "nyc": "^15.1.0",
     "prettier": "2.2.1",
     "rimraf": "^3.0.2",
     "semantic-release": "^17.3.9",
