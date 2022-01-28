@@ -14,15 +14,15 @@ describe('resetPassword', () => {
     });
   });
 
-  it('should reset the password', async () => {
+  it('should return an error for invalid token', async () => {
+    const password = faker.internet.password();
     const request = new ResetPasswordRequest({
-      token: '?',
-      password: faker.internet.password(),
-      repeatedPassword: faker.internet.password(),
+      token: 'clearlyInvalidToken',
+      password,
+      repeatedPassword: password,
     });
     const result = await resetPassword(request);
 
-    expect(result.isSuccess).to.be.true;
-    expect(result.response?.bearerToken).to.be.not.null;
+    expect(result.isError).to.be.true;
   });
 });

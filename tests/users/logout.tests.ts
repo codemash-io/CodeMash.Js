@@ -4,43 +4,36 @@ import faker from '@faker-js/faker';
 import { expect } from 'chai';
 import dotenv from 'dotenv';
 
+import { logout, registerUser } from '../../src/modules/users';
 import {
-  credentialsAuthentication,
-  registerUser,
-} from '../../src/modules/users';
-import {
-  CredentialsAuthenticationRequest,
+  Authenticate,
   RegisterUserRequest,
 } from '../../src/types/codemash.dtos';
 
 const EMAIL = faker.internet.email();
 const PASSWORD = faker.internet.password();
 
-describe('credentialsAuthentication', () => {
+describe('logout', () => {
   beforeEach(() => {
     dotenv.config({
       path: path.resolve(__dirname, '../data/config/.env'),
     });
   });
 
-  it('should login with newly created user credentials', async () => {
+  it('should logout with newly created user credentials', async () => {
     const createRequest = new RegisterUserRequest({
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
       displayName: faker.internet.userName(),
       email: EMAIL,
       password: PASSWORD,
-      autoLogin: false,
+      autoLogin: true,
     });
     await registerUser(createRequest);
 
-    const request = new CredentialsAuthenticationRequest({
-      userName: EMAIL,
-      password: PASSWORD,
-    });
-    const result = await credentialsAuthentication(request);
+    const request = new Authenticate();
+    const result = await logout(request);
 
-    expect(result.isSuccess).to.be.true;
-    expect(result.response?.bearerToken).to.be.not.null;
+    expect(result.response).to.not.be.null;
   });
 });
