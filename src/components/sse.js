@@ -54,7 +54,7 @@ export async function getGroups({
 	sort,
 	includeChannels,
 	includeUsers,
-	includeNotSeenCount
+	includeNotSeenCount,
 }) {
 	const request = {
 		pageSize: pageSize || Config.tablePageSize,
@@ -90,16 +90,16 @@ export async function getGroup({
 	id,
 	includeChannels,
 	includeUsers,
-	includeNotSeenCount
+	includeNotSeenCount,
 }) {
 	const request = {
 		includeChannels,
 		includeUsers,
 		includeNotSeenCount,
 	};
-	const requestUrl = `${
-		Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.GET_GROUP(id)
-	}?${toQueryString(request)}`;
+	const requestUrl = `${Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.GET_GROUP(
+		id
+	)}?${toQueryString(request)}`;
 
 	const response = await server.loadJson(
 		`${Config.eventsApiUrl}${requestUrl}`,
@@ -197,7 +197,13 @@ export async function getChannels({
 	return response;
 }
 
-export async function sendMessage({secretKey, channelId, message, meta, fileIds}) {
+export async function sendMessage({
+	secretKey,
+	channelId,
+	message,
+	meta,
+	fileIds,
+}) {
 	const response = await server.loadJson(
 		`${Config.eventsApiUrl}${Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.SEND_MESSAGE}`,
 		{
