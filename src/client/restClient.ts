@@ -1,12 +1,8 @@
-import {
-  ApiResult,
-  getMethod,
-  IReturn,
-  JsonServiceClient,
-} from '@servicestack/client';
-import chalk from 'chalk';
+import { getMethod, IReturn, JsonServiceClient } from '@servicestack/client';
 import { CMConfig } from 'config';
 import { ICMConfig } from 'config/config';
+import { ICMDbResult } from 'types';
+import { isJsonResponse } from 'utils/api';
 
 enum StringifiedFields {
   Update = 'update',
@@ -18,18 +14,20 @@ enum StringifiedArrayFields {
   Documents = 'documents',
 }
 
-type DbFilter = {
+type TFilter = {
   [StringifiedFields.Filter]: object | string;
 };
-type DbUpdate = {
+type TUpdate = {
   [StringifiedFields.Update]: object | string;
 };
-type DbDocument = {
+type TDocument = {
   [StringifiedFields.Document]: object | string;
 };
-type DbDocuments = {
+type TDocuments = {
   [StringifiedArrayFields.Documents]: object[] | string[];
 };
+type TRequest<T> = IReturn<T> &
+  Partial<TFilter & TUpdate & TDocument & TDocuments>;
 
 export class RestClient extends JsonServiceClient {
   constructor(private config: ICMConfig) {
@@ -43,12 +41,26 @@ export class RestClient extends JsonServiceClient {
     }
   }
 
-  public dbRequest<TResponse>(
-    request: IReturn<TResponse> &
-      Partial<DbFilter & DbUpdate & DbDocument & DbDocuments>,
-    args?: any,
-    method?: string,
-  ): Promise<ApiResult<TResponse>> {
+  private transformApiResult(target: any): ICMDbResult {
+    // transform given api string result to a js object.
+    const { isSuccess, response, isError, errorStatus } = target;
+    const { responseStatus, result } = response || {};
+
+    if (CMConfig.getInstance().showLogs) {
+      console.log(`Result for ${getMethod(target)} request: `, target);
+    }
+
+    // Fixes the issue when sometimes result comes with { isSuccess: false, isError: false }.
+    return {
+      isSuccess: isSuccess || isError === false,
+      isError,
+      errorStatus,
+      responseStatus,
+      response: isJsonResponse(result) ? JSON.parse(result) : response,
+    };
+  }
+
+  public async request<T>(request: TRequest<T>): Promise<ICMDbResult> {
     // stringify selected fields that are passed as objects.
     Object.values(StringifiedFields).forEach(key => {
       const value = request[key];
@@ -68,12 +80,11 @@ export class RestClient extends JsonServiceClient {
     });
 
     if (CMConfig.getInstance().showLogs) {
-      console.log(
-        `Outgoing ${chalk.bgGray(getMethod(request))} request: `,
-        request,
-      );
+      console.log(`Outgoing ${getMethod(request)} request: `, request);
     }
 
-    return this.api((request as any) as IReturn<TResponse>, args, method);
+    const result = await this.api((request as any) as IReturn<T>);
+
+    return this.transformApiResult(result);
   }
 }

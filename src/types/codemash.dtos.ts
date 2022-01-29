@@ -1,18 +1,18 @@
 /* Options:
-Date: 2021-12-16 09:54:00
+Date: 2022-01-25 10:08:33
 Version: 5.104
 Tip: To override a DTO option, remove "//" prefix before updating
 BaseUrl: https://api.codemash.io/
 
-//GlobalNamespace: 
+//GlobalNamespace:
 //MakePropertiesOptional: False
 AddServiceStackTypes: True
-AddResponseStatus: True
-//AddImplicitVersion: 
+AddResponseStatus: False
+//AddImplicitVersion:
 AddDescriptionAsComments: True
-//IncludeTypes: 
-//ExcludeTypes: 
-//DefaultImports: 
+//IncludeTypes:
+//ExcludeTypes:
+//DefaultImports:
 */
 
 import { Cookie } from '@servicestack/client';
@@ -146,6 +146,17 @@ export class ResponseBase<T> {
   }
 }
 
+export class UpdateResult {
+  public isAcknowledged: boolean;
+  public matchedCount: number;
+  public modifiedCount: number;
+  public upsertedId: string;
+
+  public constructor(init?: Partial<UpdateResult>) {
+    (Object as any).assign(this, init);
+  }
+}
+
 // @DataContract
 export class DeleteResult {
   // @DataMember(Name="deletedCount")
@@ -161,13 +172,9 @@ export class DeleteResult {
 
 export class ReferencingField {
   public name: string;
-
   public pageSize: number;
-
   public pageNumber: number;
-
   public sort: string;
-
   public projection: string;
 
   public constructor(init?: Partial<ReferencingField>) {
@@ -242,17 +249,11 @@ export interface IRequestWithProjection {
 
 export class Schema {
   public collectionNameAsTitle: string;
-
   public collectionName: string;
-
   public uiSchema: string;
-
   public jsonSchema: string;
-
   public translatableFields: string[];
-
   public databaseId: string;
-
   public schemaId: string;
 
   public constructor(init?: Partial<Schema>) {
@@ -302,41 +303,17 @@ export class ReplaceOneResult {
   }
 }
 
-export class UpdateResult {
-  public isAcknowledged: boolean;
-
-  public matchedCount: number;
-
-  public modifiedCount: number;
-
-  public upsertedId: string;
-
-  public constructor(init?: Partial<UpdateResult>) {
-    (Object as any).assign(this, init);
-  }
-}
-
 export class Taxonomy {
   public id: string;
-
   public name: string;
-
   public title: string;
-
   public description: string;
-
   public parentId: string;
-
   public dependencies: string[];
-
   public termsUiSchema: string;
-
   public termsJsonSchema: string;
-
   public translatableFields: string[];
-
   public databaseId: string;
-
   public taxonomyId: string;
 
   public constructor(init?: Partial<Taxonomy>) {
@@ -346,11 +323,8 @@ export class Taxonomy {
 
 export class TermMultiParent {
   public parentId: string;
-
   public taxonomyId: string;
-
   public name: string;
-
   public names: { [index: string]: string };
 
   public constructor(init?: Partial<TermMultiParent>) {
@@ -360,29 +334,17 @@ export class TermMultiParent {
 
 export class Term {
   public taxonomyId: string;
-
   public taxonomyName: string;
-
   public id: string;
-
   public name: string;
-
   public description: string;
-
   public names: { [index: string]: string };
-
   public descriptions: { [index: string]: string };
-
   public parentId: string;
-
   public parentName: string;
-
   public parentNames: { [index: string]: string };
-
   public order?: number;
-
   public multiParents: TermMultiParent[];
-
   public meta: string;
 
   public constructor(init?: Partial<Term>) {
@@ -503,29 +465,17 @@ export interface IResponse {
 
 export class File {
   public id: string;
-
   public description: string;
-
   public modifiedOn: string;
-
   public createdOn: string;
-
   public uniqueName: string;
-
   public enumerator: number;
-
   public originalName: string;
-
   public directory: string;
-
   public contentType: string;
-
   public size: number;
-
   public isPublic: boolean;
-
   public isParentPublic: boolean;
-
   public publicUrl: string;
 
   public constructor(init?: Partial<File>) {
@@ -535,9 +485,7 @@ export class File {
 
 export class Base64FileUpload {
   public data: string;
-
   public contentType: string;
-
   public fileName: string;
 
   public constructor(init?: Partial<Base64FileUpload>) {
@@ -554,11 +502,8 @@ export interface IOAuthRequest {
 
 export class Policy {
   public name: string;
-
   public displayName: string;
-
   public disabled: boolean;
-
   public permissions: string[];
 
   public constructor(init?: Partial<Policy>) {
@@ -568,9 +513,7 @@ export class Policy {
 
 export class Role {
   public name: string;
-
   public displayName: string;
-
   public policies: Policy[];
 
   public constructor(init?: Partial<Role>) {
@@ -592,75 +535,40 @@ export interface IAuthTokens {
 
 export class AuthResponse {
   public userId: string;
-
   public userAuthId: string;
-
   public userName: string;
-
   public displayName: string;
-
   public firstName: string;
-
   public lastName: string;
-
   public sessionId: string;
-
   public referrerUrl: string;
-
   public bearerToken: string;
-
   public email: string;
-
   public roles: Role[];
-
   public permissions: string[];
-
   public company: string;
-
   public phoneNumber: string;
-
   public birthDate?: string;
-
   public birthDateRaw: string;
-
   public address: string;
-
   public address2: string;
-
   public city: string;
-
   public country: string;
-
   public culture: string;
-
   public fullName: string;
-
   public gender: string;
-
   public language: string;
-
   public profileUrl: string;
-
   public tag: number;
-
   public authProvider: string;
-
   public mailAddress: string;
-
   public nickname: string;
-
   public postalCode: string;
-
   public timeZone: string;
-
   public createdAt: string;
-
   public lastModified: string;
-
   public status: string;
-
   public authTokens: IAuthTokens[];
-
   public meta: { [index: string]: string };
 
   public constructor(init?: Partial<AuthResponse>) {
@@ -670,9 +578,7 @@ export class AuthResponse {
 
 export class Token {
   public key: string;
-
   public value: string;
-
   public owner: string;
 
   public constructor(init?: Partial<Token>) {
@@ -682,21 +588,13 @@ export class Token {
 
 export class Project {
   public id: string;
-
   public tokens: Token[];
-
   public languages: string[];
-
   public defaultLanguage: string;
-
   public defaultTimeZone: string;
-
   public name: string;
-
   public description: string;
-
   public slugifiedName: string;
-
   public logoUrl: string;
 
   public constructor(init?: Partial<Project>) {
@@ -706,9 +604,7 @@ export class Project {
 
 export class PushNotificationToken {
   public provider: string;
-
   public token: string;
-
   public accountId: string;
 
   public constructor(init?: Partial<PushNotificationToken>) {
@@ -718,33 +614,19 @@ export class PushNotificationToken {
 
 export class Device {
   public id: string;
-
   public createdOn: string;
-
   public token: PushNotificationToken;
-
   public userName: string;
-
   public userId: string;
-
   public operatingSystem: string;
-
   public brand: string;
-
   public deviceName: string;
-
   public timeZone: string;
-
   public language: string;
-
   public locale: string;
-
   public meta: { [index: string]: string };
-
   public totalNotifications: number;
-
   public deviceKey: string;
-
   public accountId: string;
 
   public constructor(init?: Partial<Device>) {
@@ -754,7 +636,6 @@ export class Device {
 
 export class UserAuthProvider {
   public provider: string;
-
   public userId: string;
 
   public constructor(init?: Partial<UserAuthProvider>) {
@@ -764,71 +645,38 @@ export class UserAuthProvider {
 
 export class User {
   public id: string;
-
   public createdOn: string;
-
   public modifiedOn: string;
-
   public displayName: string;
-
   public firstName: string;
-
   public lastName: string;
-
   public email: string;
-
   public userName: string;
-
   public roles: Role[];
-
   public devices: Device[];
-
   public rolesEditable: boolean;
-
   public status: string;
-
   public type: string;
-
   public meta: string;
-
   public language: string;
-
   public timeZone: string;
-
   public country: string;
-
   public countryCode: string;
-
   public area: string;
-
   public city: string;
-
   public address: string;
-
   public address2: string;
-
   public phone: string;
-
   public company: string;
-
   public companyCode: string;
-
   public postalCode: string;
-
   public gender: string;
-
   public birthDate: string;
-
   public zone: string;
-
   public authProviders: UserAuthProvider[];
-
   public hasCredentials: boolean;
-
   public subscribedToNews: boolean;
-
   public unsubscribedNewsTags: string[];
-
   public unreadNotifications?: number;
 
   public constructor(init?: Partial<User>) {
@@ -882,7 +730,6 @@ export class CodeMashListRequestBase
 
 export class UserPolicyUpdateInput {
   public policy: string;
-
   public permissions: string[];
 
   public constructor(init?: Partial<UserPolicyUpdateInput>) {
@@ -892,7 +739,6 @@ export class UserPolicyUpdateInput {
 
 export class UserRoleUpdateInput {
   public role: string;
-
   public policies: UserPolicyUpdateInput[];
 
   public constructor(init?: Partial<UserRoleUpdateInput>) {
@@ -902,27 +748,16 @@ export class UserRoleUpdateInput {
 
 export class PushNotification {
   public id: string;
-
   public receivedOn: string;
-
   public status: string;
-
   public title: string;
-
   public body: string;
-
   public data: string;
-
   public subtitle: string;
-
   public meta: { [index: string]: string };
-
   public isRead: boolean;
-
   public userId: string;
-
   public deviceId: string;
-
   public senderId: string;
 
   public constructor(init?: Partial<PushNotification>) {
@@ -932,17 +767,11 @@ export class PushNotification {
 
 export class FileDetails {
   public id: string;
-
   public directory: string;
-
   public originalFileName: string;
-
   public fileName: string;
-
   public filePath: string;
-
   public contentType: string;
-
   public contentLength: number;
 
   public constructor(init?: Partial<FileDetails>) {
@@ -952,9 +781,7 @@ export class FileDetails {
 
 export class PushNotificationTemplateButtons {
   public id: string;
-
   public text: string;
-
   public icon: string;
 
   public constructor(init?: Partial<PushNotificationTemplateButtons>) {
@@ -964,9 +791,7 @@ export class PushNotificationTemplateButtons {
 
 export class AndroidBackgroundLayout {
   public image: string;
-
   public headingColor: string;
-
   public contentColor: string;
 
   public constructor(init?: Partial<AndroidBackgroundLayout>) {
@@ -976,91 +801,48 @@ export class AndroidBackgroundLayout {
 
 export class PushNotificationTemplate {
   public id: string;
-
   public templateName: string;
-
   public accountId: string;
-
   public accountName: string;
-
   public title: string;
-
   public body: string;
-
   public code: string;
-
   public priority: string;
-
   public data: string;
-
   public ttl?: number;
-
   public url: string;
-
   public collapseId: string;
-
   public image: FileDetails;
-
   public fileAccountId?: string;
-
   public meta: { [index: string]: string };
-
   public buttons: PushNotificationTemplateButtons[];
-
   public subtitle: string;
-
   public iosBadge?: number;
-
   public iosCategory: string;
-
   public iosContentAvailable: boolean;
-
   public iosSound: string;
-
   public iosAppBundleId: string;
-
   public iosGroupId: string;
-
   public iosPushType: string;
-
   public iosLaunchImage: string;
-
   public iosAnalyticsLabel: string;
-
   public androidGroup: string;
-
   public androidGroupMessage: string;
-
   public restrictedPackageName: string;
-
   public androidChannelId: string;
-
   public androidSound: string;
-
   public androidVisibility: string;
-
   public androidDefaultVibration: boolean;
-
   public androidVibrateTimings: string;
-
   public androidDefaultLight: boolean;
-
   public androidAccentColor: string;
-
   public androidLedColor: string;
-
   public androidLightOnDuration: string;
-
   public androidLightOffDuration: string;
-
   public androidSticky: boolean;
-
   public androidSmallIcon: string;
-
   public androidLargeIcon: string;
-
   public androidBackground: AndroidBackgroundLayout;
-
   public androidAnalyticsLabel: string;
 
   public constructor(init?: Partial<PushNotificationTemplate>) {
@@ -1070,29 +852,17 @@ export class PushNotificationTemplate {
 
 export class Subscription {
   public id: string;
-
   public createdOn: string;
-
   public currentPeriodStart: string;
-
   public currentPeriodEnd: string;
-
   public canceledAt: string;
-
   public cancelAtPeriodEnd: boolean;
-
   public trialStart: string;
-
   public trialEnd: string;
-
   public status: string;
-
   public planId: string;
-
   public appliedCoupon: string;
-
   public paymentMethodId: string;
-
   public customerId: string;
 
   public constructor(init?: Partial<Subscription>) {
@@ -1102,31 +872,18 @@ export class Subscription {
 
 export class PaymentMethod {
   public id: string;
-
   public createdOn: string;
-
   public type: string;
-
   public data: string;
-
   public email: string;
-
   public name: string;
-
   public phone: string;
-
   public countryCode: string;
-
   public area: string;
-
   public city: string;
-
   public address: string;
-
   public address2: string;
-
   public postalCode: string;
-
   public meta: { [index: string]: string };
 
   public constructor(init?: Partial<PaymentMethod>) {
@@ -1136,45 +893,25 @@ export class PaymentMethod {
 
 export class Customer {
   public id: string;
-
   public createdOn: string;
-
   public provider: string;
-
   public providerId: string;
-
   public phone: string;
-
   public name: string;
-
   public description: string;
-
   public email: string;
-
   public city: string;
-
   public countryCode: string;
-
   public address: string;
-
   public address2: string;
-
   public postalCode: string;
-
   public area: string;
-
   public userId: string;
-
   public userName: string;
-
   public projectId: string;
-
   public paymentAccountId: string;
-
   public paymentMethods: PaymentMethod[];
-
   public subscriptions: Subscription[];
-
   public meta: { [index: string]: string };
 
   public constructor(init?: Partial<Customer>) {
@@ -1184,9 +921,7 @@ export class Customer {
 
 export class PaymentDiscountBoundary {
   public boundary: number;
-
   public amount: number;
-
   public type: string;
 
   public constructor(init?: Partial<PaymentDiscountBoundary>) {
@@ -1196,51 +931,28 @@ export class PaymentDiscountBoundary {
 
 export class Discount {
   public id: string;
-
   public createdOn: string;
-
   public modifiedOn: string;
-
   public type: string;
-
   public code: string;
-
   public displayName: string;
-
   public validFrom: string;
-
   public validUntil: string;
-
   public schemaId: string;
-
   public cluster: string;
-
   public restrictionType: string;
-
   public amount?: number;
-
   public boundaries: PaymentDiscountBoundary[];
-
   public targetType: string;
-
   public records: string[];
-
   public categoryField: string;
-
   public categoryValues: string[];
-
   public paymentAccounts: string[];
-
   public users: string[];
-
   public emails: string[];
-
   public userCanRedeem?: number;
-
   public totalCanRedeem?: number;
-
   public enabled: boolean;
-
   public combineDiscounts: boolean;
 
   public constructor(init?: Partial<Discount>) {
@@ -1250,11 +962,8 @@ export class Discount {
 
 export class OrderLineInput {
   public collectionName: string;
-
   public recordId: string;
-
   public quantity: number;
-
   public variation: string;
 
   public constructor(init?: Partial<OrderLineInput>) {
@@ -1264,9 +973,7 @@ export class OrderLineInput {
 
 export class DiscountIndividualLine {
   public recordId: string;
-
   public variation: string;
-
   public discount: number;
 
   public constructor(init?: Partial<DiscountIndividualLine>) {
@@ -1276,7 +983,6 @@ export class DiscountIndividualLine {
 
 export class DiscountLine {
   public recordId: string;
-
   public variation: string;
 
   public constructor(init?: Partial<DiscountLine>) {
@@ -1286,9 +992,7 @@ export class DiscountLine {
 
 export class DiscountCategory {
   public category: string;
-
   public lines: DiscountLine[];
-
   public discount: number;
 
   public constructor(init?: Partial<DiscountCategory>) {
@@ -1298,7 +1002,6 @@ export class DiscountCategory {
 
 export class DiscountAll {
   public lines: DiscountLine[];
-
   public discount: number;
 
   public constructor(init?: Partial<DiscountAll>) {
@@ -1308,31 +1011,18 @@ export class DiscountAll {
 
 export class ApplicableDiscount {
   public id: string;
-
   public code: string;
-
   public createdOn: string;
-
   public validFrom: string;
-
   public validUntil: string;
-
   public type: string;
-
   public targetType: string;
-
   public displayName: string;
-
   public description: string;
-
   public collectionName: string;
-
   public cluster: string;
-
   public individualDiscounts: DiscountIndividualLine[];
-
   public categoryDiscounts: DiscountCategory[];
-
   public allDiscount: DiscountAll;
 
   public constructor(init?: Partial<ApplicableDiscount>) {
@@ -1342,9 +1032,7 @@ export class ApplicableDiscount {
 
 export class PaymentMethodSetup {
   public setupId: string;
-
   public setupClientSecret: string;
-
   public status: string;
 
   public constructor(init?: Partial<PaymentMethodSetup>) {
@@ -1354,29 +1042,17 @@ export class PaymentMethodSetup {
 
 export class OrderCustomerInput {
   public email: string;
-
   public firstName: string;
-
   public lastName: string;
-
   public phone: string;
-
   public company: string;
-
   public address: string;
-
   public address2: string;
-
   public country: string;
-
   public countryCode: string;
-
   public area: string;
-
   public city: string;
-
   public postalCode: string;
-
   public language: string;
 
   public constructor(init?: Partial<OrderCustomerInput>) {
@@ -1386,27 +1062,16 @@ export class OrderCustomerInput {
 
 export class OrderCustomer {
   public email: string;
-
   public firstName: string;
-
   public lastName: string;
-
   public phone: string;
-
   public company: string;
-
   public address: string;
-
   public address2: string;
-
   public country: string;
-
   public countryCode: string;
-
   public area: string;
-
   public city: string;
-
   public postalCode: string;
 
   public constructor(init?: Partial<OrderCustomer>) {
@@ -1416,19 +1081,12 @@ export class OrderCustomer {
 
 export class OrderLine {
   public schemaId: string;
-
   public collectionName: string;
-
   public recordId: string;
-
   public priceFields: string[];
-
   public variation: string;
-
   public recordData: string;
-
   public price: number;
-
   public quantity: number;
 
   public constructor(init?: Partial<OrderLine>) {
@@ -1438,17 +1096,11 @@ export class OrderLine {
 
 export class OrderFile {
   public category: string;
-
   public id: string;
-
   public directory: string;
-
   public originalFileName: string;
-
   public fileName: string;
-
   public contentType: string;
-
   public contentLength: number;
 
   public constructor(init?: Partial<OrderFile>) {
@@ -1458,39 +1110,22 @@ export class OrderFile {
 
 export class OrderTransaction {
   public id: string;
-
   public createdOn: string;
-
   public payUntil: string;
-
   public paidOn: string;
-
   public callbackOn: string;
-
   public provider: string;
-
   public eventStatus: string;
-
   public eventUniqueId: string;
-
   public type: string;
-
   public data: string;
-
   public payerIpCountry: string;
-
   public payerCountry: string;
-
   public payerEmail: string;
-
   public paymentType: string;
-
   public eventAccount: string;
-
   public payText: string;
-
   public eventCurrency: string;
-
   public eventAmount: number;
 
   public constructor(init?: Partial<OrderTransaction>) {
@@ -1500,21 +1135,13 @@ export class OrderTransaction {
 
 export class OrderDiscount {
   public id: string;
-
   public code: string;
-
   public type: string;
-
   public targetType: string;
-
   public displayName: string;
-
   public description: string;
-
   public individualDiscounts: DiscountIndividualLine[];
-
   public categoryDiscounts: DiscountCategory[];
-
   public allDiscount: DiscountAll;
 
   public constructor(init?: Partial<OrderDiscount>) {
@@ -1524,45 +1151,25 @@ export class OrderDiscount {
 
 export class Order {
   public id: string;
-
   public createdOn: string;
-
   public modifiedOn: string;
-
   public paidOn: string;
-
   public number: number;
-
   public numberPrefix: string;
-
   public paymentStatus: string;
-
   public paymentProvider: string;
-
   public currency: string;
-
   public asGuest: boolean;
-
   public isTest: boolean;
-
   public customer: OrderCustomer;
-
   public cluster: string;
-
   public lines: OrderLine[];
-
   public files: OrderFile[];
-
   public transactions: OrderTransaction[];
-
   public discounts: OrderDiscount[];
-
   public userId: string;
-
   public paymentAccountId: string;
-
   public total: number;
-
   public meta: { [index: string]: string };
 
   public constructor(init?: Partial<Order>) {
@@ -1572,13 +1179,9 @@ export class Order {
 
 export class StripePaymentIntent {
   public paymentId: string;
-
   public paymentClientSecret: string;
-
   public status: string;
-
   public amount: number;
-
   public transactionId: string;
 
   public constructor(init?: Partial<StripePaymentIntent>) {
@@ -1613,17 +1216,20 @@ export interface IHttpFile {
 }
 
 export class AggregateResponse extends ResponseBase<string> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<AggregateResponse>) {
     super(init);
     (Object as any).assign(this, init);
   }
 }
 
-export class CountResponse extends ResponseBase<number> {
-  public responseStatus: ResponseStatus;
+export class ChangeResponsibilityResponse extends ResponseBase<UpdateResult> {
+  public constructor(init?: Partial<ChangeResponsibilityResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
+}
 
+export class CountResponse extends ResponseBase<number> {
   public constructor(init?: Partial<CountResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1631,8 +1237,6 @@ export class CountResponse extends ResponseBase<number> {
 }
 
 export class DeleteManyResponse extends ResponseBase<DeleteResult> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<DeleteManyResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1640,8 +1244,6 @@ export class DeleteManyResponse extends ResponseBase<DeleteResult> {
 }
 
 export class DeleteOneResponse extends ResponseBase<DeleteResult> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<DeleteOneResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1649,8 +1251,6 @@ export class DeleteOneResponse extends ResponseBase<DeleteResult> {
 }
 
 export class DistinctResponse extends Array<ResponseBase<Object>> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<DistinctResponse>) {
     super();
     (Object as any).assign(this, init);
@@ -1659,10 +1259,7 @@ export class DistinctResponse extends Array<ResponseBase<Object>> {
 
 export class FindResponse extends ResponseBase<string> {
   public totalCount: number;
-
   public schema: Schema;
-
-  public responseStatus: ResponseStatus;
 
   public constructor(init?: Partial<FindResponse>) {
     super(init);
@@ -1673,8 +1270,6 @@ export class FindResponse extends ResponseBase<string> {
 export class FindOneResponse extends ResponseBase<string> {
   public schema: Schema;
 
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<FindOneResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1682,8 +1277,6 @@ export class FindOneResponse extends ResponseBase<string> {
 }
 
 export class InsertManyResponse extends Array<ResponseBase<string>> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<InsertManyResponse>) {
     super();
     (Object as any).assign(this, init);
@@ -1692,8 +1285,6 @@ export class InsertManyResponse extends Array<ResponseBase<string>> {
 
 // @DataContract
 export class InsertOneResponse extends ResponseBase<string> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<InsertOneResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1701,8 +1292,6 @@ export class InsertOneResponse extends ResponseBase<string> {
 }
 
 export class ReplaceOneResponse extends ResponseBase<ReplaceOneResult> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<ReplaceOneResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1710,8 +1299,6 @@ export class ReplaceOneResponse extends ResponseBase<ReplaceOneResult> {
 }
 
 export class UpdateManyResponse extends ResponseBase<UpdateResult> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<UpdateManyResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1719,8 +1306,6 @@ export class UpdateManyResponse extends ResponseBase<UpdateResult> {
 }
 
 export class UpdateOneResponse extends ResponseBase<UpdateResult> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<UpdateOneResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1729,10 +1314,7 @@ export class UpdateOneResponse extends ResponseBase<UpdateResult> {
 
 export class FindTermsResponse extends Array<ResponseBase<Term>> {
   public totalCount: number;
-
   public taxonomy: Taxonomy;
-
-  public responseStatus: ResponseStatus;
 
   public constructor(init?: Partial<FindTermsResponse>) {
     super();
@@ -1743,8 +1325,6 @@ export class FindTermsResponse extends Array<ResponseBase<Term>> {
 export class FindTermsChildrenResponse extends Array<ResponseBase<Term>> {
   public totalCount: number;
 
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<FindTermsChildrenResponse>) {
     super();
     (Object as any).assign(this, init);
@@ -1753,54 +1333,29 @@ export class FindTermsChildrenResponse extends Array<ResponseBase<Term>> {
 
 export class HttpResult {
   public responseText: string;
-
   public fileInfo: any;
-
   public contentType: string;
-
   public headers: { [index: string]: string };
-
   public cookies: Cookie[];
-
   public eTag: string;
-
   public age?: string;
-
   public maxAge?: string;
-
   public expires?: string;
-
   public lastModified?: string;
-
   public cacheControl: CacheControl;
-
   public resultScope: any;
-
   public allowsPartialResponse: boolean;
-
   public options: { [index: string]: string };
-
   public status: number;
-
   public statusCode: any;
-
   public statusDescription: string;
-
   public response: Object;
-
   public responseFilter: IContentTypeWriter;
-
   public requestContext: IRequest;
-
   public view: string;
-
   public template: string;
-
   public paddingLength: number;
-
   public isPartialRequest: boolean;
-
-  public responseStatus: ResponseStatus;
 
   public constructor(init?: Partial<HttpResult>) {
     (Object as any).assign(this, init);
@@ -1809,12 +1364,8 @@ export class HttpResult {
 
 export class GetFileResponse extends ResponseBase<string> {
   public fileName: string;
-
   public isImage: boolean;
-
   public file: File;
-
-  public responseStatus: ResponseStatus;
 
   public constructor(init?: Partial<GetFileResponse>) {
     super(init);
@@ -1824,12 +1375,8 @@ export class GetFileResponse extends ResponseBase<string> {
 
 export class UploadFileResponse extends ResponseBase<File> {
   public key: string;
-
   public name: string;
-
   public uploadDate: number;
-
-  public responseStatus: ResponseStatus;
 
   public constructor(init?: Partial<UploadFileResponse>) {
     super(init);
@@ -1840,8 +1387,6 @@ export class UploadFileResponse extends ResponseBase<File> {
 export class UploadOrderFileResponse extends ResponseBase<File> {
   public key: string;
 
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<UploadOrderFileResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1850,8 +1395,6 @@ export class UploadOrderFileResponse extends ResponseBase<File> {
 
 export class UploadRecordFileResponse extends ResponseBase<File> {
   public key: string;
-
-  public responseStatus: ResponseStatus;
 
   public constructor(init?: Partial<UploadRecordFileResponse>) {
     super(init);
@@ -1862,8 +1405,6 @@ export class UploadRecordFileResponse extends ResponseBase<File> {
 export class UploadUserFileResponse extends ResponseBase<File> {
   public key: string;
 
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<UploadUserFileResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1871,18 +1412,49 @@ export class UploadUserFileResponse extends ResponseBase<File> {
 }
 
 export class CreateLogResponse extends ResponseBase<string> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<CreateLogResponse>) {
     super(init);
     (Object as any).assign(this, init);
   }
 }
 
-export class AuthCheckResponse extends ResponseBase<AuthResponse> {
-  public responseStatus: ResponseStatus;
+export class AadAuthenticationResponse extends ResponseBase<AuthResponse> {
+  public constructor(init?: Partial<AadAuthenticationResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
+}
 
+export class AuthCheckResponse extends ResponseBase<AuthResponse> {
   public constructor(init?: Partial<AuthCheckResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
+}
+
+export class CredentialsAuthenticationResponse extends ResponseBase<AuthResponse> {
+  public constructor(init?: Partial<CredentialsAuthenticationResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
+}
+
+export class FacebookAuthenticationResponse extends ResponseBase<AuthResponse> {
+  public constructor(init?: Partial<FacebookAuthenticationResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
+}
+
+export class GoogleAuthenticationResponse extends ResponseBase<AuthResponse> {
+  public constructor(init?: Partial<GoogleAuthenticationResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
+}
+
+export class TwitterAuthenticationResponse extends ResponseBase<AuthResponse> {
+  public constructor(init?: Partial<TwitterAuthenticationResponse>) {
     super(init);
     (Object as any).assign(this, init);
   }
@@ -1890,10 +1462,7 @@ export class AuthCheckResponse extends ResponseBase<AuthResponse> {
 
 export class ValidateUserDeactivationTokenResponse extends ResponseBase<boolean> {
   public project: Project;
-
   public hasCredentials: boolean;
-
-  public responseStatus: ResponseStatus;
 
   public constructor(init?: Partial<ValidateUserDeactivationTokenResponse>) {
     super(init);
@@ -1902,8 +1471,6 @@ export class ValidateUserDeactivationTokenResponse extends ResponseBase<boolean>
 }
 
 export class GetProfileResponse extends ResponseBase<User> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetProfileResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1911,8 +1478,6 @@ export class GetProfileResponse extends ResponseBase<User> {
 }
 
 export class GetUserResponse extends ResponseBase<User> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetUserResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1922,10 +1487,15 @@ export class GetUserResponse extends ResponseBase<User> {
 export class GetUsersResponse extends Array<ResponseBase<User>> {
   public totalCount: number;
 
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetUsersResponse>) {
     super();
+    (Object as any).assign(this, init);
+  }
+}
+
+export class InviteUserV2Response extends ResponseBase<User> {
+  public constructor(init?: Partial<InviteUserV2Response>) {
+    super(init);
     (Object as any).assign(this, init);
   }
 }
@@ -1933,9 +1503,16 @@ export class GetUsersResponse extends Array<ResponseBase<User>> {
 export class RegisterGuestUserResponse extends ResponseBase<User> {
   public bearerToken: string;
 
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<RegisterGuestUserResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
+}
+
+export class RegisterUserV2Response extends ResponseBase<User> {
+  public bearerToken: string;
+
+  public constructor(init?: Partial<RegisterUserV2Response>) {
     super(init);
     (Object as any).assign(this, init);
   }
@@ -1944,8 +1521,6 @@ export class RegisterGuestUserResponse extends ResponseBase<User> {
 export class ValidatePasswordTokenResponse extends ResponseBase<boolean> {
   public project: Project;
 
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<ValidatePasswordTokenResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1953,8 +1528,6 @@ export class ValidatePasswordTokenResponse extends ResponseBase<boolean> {
 }
 
 export class CreatePasswordResetResponse extends ResponseBase<boolean> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<CreatePasswordResetResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1963,10 +1536,7 @@ export class CreatePasswordResetResponse extends ResponseBase<boolean> {
 
 export class ValidateInvitationTokenResponse extends ResponseBase<boolean> {
   public project: Project;
-
   public userId: string;
-
-  public responseStatus: ResponseStatus;
 
   public constructor(init?: Partial<ValidateInvitationTokenResponse>) {
     super(init);
@@ -1975,17 +1545,20 @@ export class ValidateInvitationTokenResponse extends ResponseBase<boolean> {
 }
 
 export class DeleteEmailResponse extends ResponseBase<boolean> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<DeleteEmailResponse>) {
     super(init);
     (Object as any).assign(this, init);
   }
 }
 
-export class CreateDeviceResponse extends ResponseBase<Device> {
-  public responseStatus: ResponseStatus;
+export class SendEmailNotificationV2Response extends ResponseBase<string> {
+  public constructor(init?: Partial<SendEmailNotificationV2Response>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
+}
 
+export class CreateDeviceResponse extends ResponseBase<Device> {
   public constructor(init?: Partial<CreateDeviceResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -1993,8 +1566,6 @@ export class CreateDeviceResponse extends ResponseBase<Device> {
 }
 
 export class GetDeviceResponse extends ResponseBase<Device> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetDeviceResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2004,8 +1575,6 @@ export class GetDeviceResponse extends ResponseBase<Device> {
 export class GetDevicesResponse extends Array<ResponseBase<Device>> {
   public totalCount: number;
 
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetDevicesResponse>) {
     super();
     (Object as any).assign(this, init);
@@ -2013,8 +1582,6 @@ export class GetDevicesResponse extends Array<ResponseBase<Device>> {
 }
 
 export class DeleteDeviceTokenResponse extends ResponseBase<boolean> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<DeleteDeviceTokenResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2022,8 +1589,6 @@ export class DeleteDeviceTokenResponse extends ResponseBase<boolean> {
 }
 
 export class RegisterDeviceTokenResponse extends ResponseBase<Device> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<RegisterDeviceTokenResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2031,8 +1596,6 @@ export class RegisterDeviceTokenResponse extends ResponseBase<Device> {
 }
 
 export class RegisterDeviceExpoTokenResponse extends ResponseBase<string> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<RegisterDeviceExpoTokenResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2040,8 +1603,6 @@ export class RegisterDeviceExpoTokenResponse extends ResponseBase<string> {
 }
 
 export class UpdateDeviceUserResponse extends ResponseBase<boolean> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<UpdateDeviceUserResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2049,8 +1610,6 @@ export class UpdateDeviceUserResponse extends ResponseBase<boolean> {
 }
 
 export class UpdateDeviceMetaResponse extends ResponseBase<boolean> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<UpdateDeviceMetaResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2058,8 +1617,6 @@ export class UpdateDeviceMetaResponse extends ResponseBase<boolean> {
 }
 
 export class DeleteDeviceMetaResponse extends ResponseBase<boolean> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<DeleteDeviceMetaResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2067,8 +1624,6 @@ export class DeleteDeviceMetaResponse extends ResponseBase<boolean> {
 }
 
 export class UpdateDeviceTimeZoneResponse extends ResponseBase<boolean> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<UpdateDeviceTimeZoneResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2076,8 +1631,6 @@ export class UpdateDeviceTimeZoneResponse extends ResponseBase<boolean> {
 }
 
 export class DeleteNotificationResponse extends ResponseBase<boolean> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<DeleteNotificationResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2085,8 +1638,6 @@ export class DeleteNotificationResponse extends ResponseBase<boolean> {
 }
 
 export class GetNotificationResponse extends ResponseBase<PushNotification> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetNotificationResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2098,8 +1649,6 @@ export class GetNotificationsResponse extends Array<
 > {
   public totalCount: number;
 
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetNotificationsResponse>) {
     super();
     (Object as any).assign(this, init);
@@ -2107,8 +1656,6 @@ export class GetNotificationsResponse extends Array<
 }
 
 export class MarkNotificationAsReadResponse extends ResponseBase<boolean> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<MarkNotificationAsReadResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2116,8 +1663,6 @@ export class MarkNotificationAsReadResponse extends ResponseBase<boolean> {
 }
 
 export class SendPushNotificationResponse extends ResponseBase<boolean> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<SendPushNotificationResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2125,8 +1670,6 @@ export class SendPushNotificationResponse extends ResponseBase<boolean> {
 }
 
 export class GetNotificationTemplateResponse extends ResponseBase<PushNotificationTemplate> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetNotificationTemplateResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2136,8 +1679,6 @@ export class GetNotificationTemplateResponse extends ResponseBase<PushNotificati
 export class GetNotificationTemplatesResponse extends Array<
   ResponseBase<PushNotificationTemplate>
 > {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetNotificationTemplatesResponse>) {
     super();
     (Object as any).assign(this, init);
@@ -2147,8 +1688,6 @@ export class GetNotificationTemplatesResponse extends Array<
 export class VerifyAppleAppStoreSubscriptionResponse extends Array<
   ResponseBase<Subscription>
 > {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<VerifyAppleAppStoreSubscriptionResponse>) {
     super();
     (Object as any).assign(this, init);
@@ -2156,8 +1695,6 @@ export class VerifyAppleAppStoreSubscriptionResponse extends Array<
 }
 
 export class CreateCustomerResponse extends ResponseBase<Customer> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<CreateCustomerResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2165,8 +1702,6 @@ export class CreateCustomerResponse extends ResponseBase<Customer> {
 }
 
 export class GetCustomerResponse extends ResponseBase<Customer> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetCustomerResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2176,8 +1711,6 @@ export class GetCustomerResponse extends ResponseBase<Customer> {
 export class GetCustomersResponse extends Array<ResponseBase<Customer>> {
   public totalCount: number;
 
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetCustomersResponse>) {
     super();
     (Object as any).assign(this, init);
@@ -2185,8 +1718,6 @@ export class GetCustomersResponse extends Array<ResponseBase<Customer>> {
 }
 
 export class CreateDiscountResponse extends ResponseBase<Discount> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<CreateDiscountResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2196,8 +1727,6 @@ export class CreateDiscountResponse extends ResponseBase<Discount> {
 export class GetApplicableCouponsResponse extends Array<
   ResponseBase<ApplicableDiscount>
 > {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetApplicableCouponsResponse>) {
     super();
     (Object as any).assign(this, init);
@@ -2207,8 +1736,6 @@ export class GetApplicableCouponsResponse extends Array<
 export class GetApplicableDiscountsResponse extends Array<
   ResponseBase<ApplicableDiscount>
 > {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetApplicableDiscountsResponse>) {
     super();
     (Object as any).assign(this, init);
@@ -2218,8 +1745,6 @@ export class GetApplicableDiscountsResponse extends Array<
 export class VerifyGooglePlayStoreSubscriptionResponse extends Array<
   ResponseBase<Subscription>
 > {
-  public responseStatus: ResponseStatus;
-
   public constructor(
     init?: Partial<VerifyGooglePlayStoreSubscriptionResponse>,
   ) {
@@ -2229,8 +1754,6 @@ export class VerifyGooglePlayStoreSubscriptionResponse extends Array<
 }
 
 export class AttachPaymentMethodResponse extends ResponseBase<PaymentMethod> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<AttachPaymentMethodResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2238,8 +1761,6 @@ export class AttachPaymentMethodResponse extends ResponseBase<PaymentMethod> {
 }
 
 export class GetPaymentMethodSetupResponse extends ResponseBase<PaymentMethodSetup> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetPaymentMethodSetupResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2247,8 +1768,6 @@ export class GetPaymentMethodSetupResponse extends ResponseBase<PaymentMethodSet
 }
 
 export class CreateOrderResponse extends ResponseBase<Order> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<CreateOrderResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2256,8 +1775,6 @@ export class CreateOrderResponse extends ResponseBase<Order> {
 }
 
 export class GetOrderResponse extends ResponseBase<Order> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetOrderResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2267,8 +1784,6 @@ export class GetOrderResponse extends ResponseBase<Order> {
 export class GetOrdersResponse extends Array<ResponseBase<Order>> {
   public totalCount: number;
 
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetOrdersResponse>) {
     super();
     (Object as any).assign(this, init);
@@ -2276,8 +1791,6 @@ export class GetOrdersResponse extends Array<ResponseBase<Order>> {
 }
 
 export class CreatePayseraTransactionResponse extends ResponseBase<string> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<CreatePayseraTransactionResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2285,8 +1798,6 @@ export class CreatePayseraTransactionResponse extends ResponseBase<string> {
 }
 
 export class CheckStripePaymentStatusResponse extends ResponseBase<string> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<CheckStripePaymentStatusResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2294,8 +1805,6 @@ export class CheckStripePaymentStatusResponse extends ResponseBase<string> {
 }
 
 export class CreateStripeTransactionResponse extends ResponseBase<StripePaymentIntent> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<CreateStripeTransactionResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2303,8 +1812,6 @@ export class CreateStripeTransactionResponse extends ResponseBase<StripePaymentI
 }
 
 export class CancelSubscriptionResponse extends ResponseBase<Subscription> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<CancelSubscriptionResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2312,8 +1819,6 @@ export class CancelSubscriptionResponse extends ResponseBase<Subscription> {
 }
 
 export class ChangeSubscriptionResponse extends ResponseBase<Subscription> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<ChangeSubscriptionResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2321,8 +1826,6 @@ export class ChangeSubscriptionResponse extends ResponseBase<Subscription> {
 }
 
 export class CreateSubscriptionResponse extends ResponseBase<Subscription> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<CreateSubscriptionResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2330,8 +1833,6 @@ export class CreateSubscriptionResponse extends ResponseBase<Subscription> {
 }
 
 export class GetProjectResponse extends ResponseBase<Project> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<GetProjectResponse>) {
     super(init);
     (Object as any).assign(this, init);
@@ -2339,9 +1840,14 @@ export class GetProjectResponse extends ResponseBase<Project> {
 }
 
 export class ExecuteFunctionResponse extends ResponseBase<string> {
-  public responseStatus: ResponseStatus;
-
   public constructor(init?: Partial<ExecuteFunctionResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
+}
+
+export class AppleAuthenticationResponse extends ResponseBase<AuthResponse> {
+  public constructor(init?: Partial<AppleAuthenticationResponse>) {
     super(init);
     (Object as any).assign(this, init);
   }
@@ -2450,13 +1956,47 @@ export class AggregateRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new AggregateResponse();
   }
-
   public getTypeName() {
     return 'AggregateRequest';
+  }
+}
+
+/**
+ * Database services
+ */
+// @Route("/db/{collectionName}/responsibility", "POST")
+// @Route("/{version}/db/{collectionName}/responsibility", "POST")
+// @Api(Description="Database services")
+// @DataContract
+export class ChangeResponsibilityRequest
+  extends CodeMashDbRequestBase
+  implements IReturn<ChangeResponsibilityResponse> {
+  /**
+   * Id of a record to change responsibility for
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="Id of a record to change responsibility for", IsRequired=true, Name="Id", ParameterType="body")
+  public id: string;
+
+  /**
+   * New responsible user for this record
+   */
+  // @DataMember
+  // @ApiMember(DataType="Guid", Description="New responsible user for this record", IsRequired=true, Name="NewResponsibleUserId", ParameterType="body")
+  public newResponsibleUserId: string;
+
+  public constructor(init?: Partial<ChangeResponsibilityRequest>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
+  public createResponse() {
+    return new ChangeResponsibilityResponse();
+  }
+  public getTypeName() {
+    return 'ChangeResponsibilityRequest';
   }
 }
 
@@ -2495,11 +2035,9 @@ export class CountRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new CountResponse();
   }
-
   public getTypeName() {
     return 'CountRequest';
   }
@@ -2533,11 +2071,9 @@ export class DeleteManyRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new DeleteManyResponse();
   }
-
   public getTypeName() {
     return 'DeleteManyRequest';
   }
@@ -2579,11 +2115,9 @@ export class DeleteOneRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new DeleteOneResponse();
   }
-
   public getTypeName() {
     return 'DeleteOneRequest';
   }
@@ -2617,11 +2151,9 @@ export class DistinctRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new DistinctResponse();
   }
-
   public getTypeName() {
     return 'DistinctRequest';
   }
@@ -2697,11 +2229,9 @@ export class FindRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new FindResponse();
   }
-
   public getTypeName() {
     return 'FindRequest';
   }
@@ -2800,11 +2330,9 @@ export class FindOneRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new FindOneResponse();
   }
-
   public getTypeName() {
     return 'FindOneRequest';
   }
@@ -2859,11 +2387,9 @@ export class InsertManyRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new InsertManyResponse();
   }
-
   public getTypeName() {
     return 'InsertManyRequest';
   }
@@ -2925,11 +2451,9 @@ export class InsertOneRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new InsertOneResponse();
   }
-
   public getTypeName() {
     return 'InsertOneRequest';
   }
@@ -3006,11 +2530,9 @@ export class ReplaceOneRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new ReplaceOneResponse();
   }
-
   public getTypeName() {
     return 'ReplaceOneRequest';
   }
@@ -3065,11 +2587,9 @@ export class UpdateManyRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new UpdateManyResponse();
   }
-
   public getTypeName() {
     return 'UpdateManyRequest';
   }
@@ -3140,11 +2660,9 @@ export class UpdateOneRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new UpdateOneResponse();
   }
-
   public getTypeName() {
     return 'UpdateOneRequest';
   }
@@ -3178,11 +2696,9 @@ export class FindTermsRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new FindTermsResponse();
   }
-
   public getTypeName() {
     return 'FindTermsRequest';
   }
@@ -3212,7 +2728,7 @@ export class FindTermsChildrenRequest
    */
   // @DataMember
   // @ApiMember(DataType="string", Description="The selection criteria for the parent terms. Required if Id is not set.", Name="ParentFilter", ParameterType="query")
-  public parentFilter: object | string;
+  public parentFilter: string;
 
   /**
    * Prevent setting culture code from headers
@@ -3225,11 +2741,9 @@ export class FindTermsChildrenRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new FindTermsChildrenResponse();
   }
-
   public getTypeName() {
     return 'FindTermsChildrenRequest';
   }
@@ -3242,7 +2756,9 @@ export class FindTermsChildrenRequest
 // @Route("/{version}/files/{fileId}", "DELETE")
 // @Api(Description="File services")
 // @DataContract
-export class DeleteFileRequest extends CodeMashRequestBase {
+export class DeleteFileRequest
+  extends CodeMashRequestBase
+  implements IReturnVoid {
   /**
    * ID of a file to delete
    */
@@ -3253,6 +2769,10 @@ export class DeleteFileRequest extends CodeMashRequestBase {
   public constructor(init?: Partial<DeleteFileRequest>) {
     super(init);
     (Object as any).assign(this, init);
+  }
+  public createResponse() {}
+  public getTypeName() {
+    return 'DeleteFileRequest';
   }
 }
 
@@ -3284,11 +2804,9 @@ export class DownloadFileRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new HttpResult();
   }
-
   public getTypeName() {
     return 'DownloadFileRequest';
   }
@@ -3322,11 +2840,9 @@ export class GetFileRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new GetFileResponse();
   }
-
   public getTypeName() {
     return 'GetFileRequest';
   }
@@ -3367,11 +2883,9 @@ export class UploadFileRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new UploadFileResponse();
   }
-
   public getTypeName() {
     return 'UploadFileRequest';
   }
@@ -3412,11 +2926,9 @@ export class UploadOrderFileRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new UploadOrderFileResponse();
   }
-
   public getTypeName() {
     return 'UploadOrderFileRequest';
   }
@@ -3453,15 +2965,20 @@ export class UploadRecordFileRequest
   // @ApiMember(DataType="object", Description="Alternative way to upload a file by providing a base64 encoded string", Name="Base64File", ParameterType="body")
   public base64File: Base64FileUpload;
 
+  /**
+   * If true, does not activate triggers
+   */
+  // @DataMember
+  // @ApiMember(DataType="bool", Description="If true, does not activate triggers", Name="IgnoreTriggers", ParameterType="body")
+  public ignoreTriggers: boolean;
+
   public constructor(init?: Partial<UploadRecordFileRequest>) {
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new UploadRecordFileResponse();
   }
-
   public getTypeName() {
     return 'UploadRecordFileRequest';
   }
@@ -3502,11 +3019,9 @@ export class UploadUserFileRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new UploadUserFileResponse();
   }
-
   public getTypeName() {
     return 'UploadUserFileRequest';
   }
@@ -3547,11 +3062,9 @@ export class CreateLogRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new CreateLogResponse();
   }
-
   public getTypeName() {
     return 'CreateLogRequest';
   }
@@ -3566,7 +3079,7 @@ export class CreateLogRequest
 // @DataContract
 export class AadAuthenticationRequest
   extends CodeMashRequestBase
-  implements IOAuthRequest {
+  implements IReturn<AadAuthenticationResponse>, IOAuthRequest {
   /**
    * Mode to use for authentication
    */
@@ -3599,6 +3112,12 @@ export class AadAuthenticationRequest
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {
+    return new AadAuthenticationResponse();
+  }
+  public getTypeName() {
+    return 'AadAuthenticationRequest';
+  }
 }
 
 /**
@@ -3615,11 +3134,9 @@ export class AuthCheckRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new AuthCheckResponse();
   }
-
   public getTypeName() {
     return 'AuthCheckRequest';
   }
@@ -3632,7 +3149,9 @@ export class AuthCheckRequest
 // @Route("/{version}/auth/credentials", "GET POST")
 // @Api(Description="Authentication")
 // @DataContract
-export class CredentialsAuthenticationRequest extends CodeMashRequestBase {
+export class CredentialsAuthenticationRequest
+  extends CodeMashRequestBase
+  implements IReturn<CredentialsAuthenticationResponse> {
   /**
    * User's login e-mail address.
    */
@@ -3651,6 +3170,12 @@ export class CredentialsAuthenticationRequest extends CodeMashRequestBase {
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {
+    return new CredentialsAuthenticationResponse();
+  }
+  public getTypeName() {
+    return 'CredentialsAuthenticationRequest';
+  }
 }
 
 /**
@@ -3662,7 +3187,7 @@ export class CredentialsAuthenticationRequest extends CodeMashRequestBase {
 // @DataContract
 export class FacebookAuthenticationRequest
   extends CodeMashRequestBase
-  implements IOAuthRequest {
+  implements IReturn<FacebookAuthenticationResponse>, IOAuthRequest {
   /**
    * Mode to use for authentication
    */
@@ -3695,6 +3220,12 @@ export class FacebookAuthenticationRequest
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {
+    return new FacebookAuthenticationResponse();
+  }
+  public getTypeName() {
+    return 'FacebookAuthenticationRequest';
+  }
 }
 
 /**
@@ -3706,7 +3237,7 @@ export class FacebookAuthenticationRequest
 // @DataContract
 export class GoogleAuthenticationRequest
   extends CodeMashRequestBase
-  implements IOAuthRequest {
+  implements IReturn<GoogleAuthenticationResponse>, IOAuthRequest {
   /**
    * Mode to use for authentication
    */
@@ -3739,6 +3270,12 @@ export class GoogleAuthenticationRequest
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {
+    return new GoogleAuthenticationResponse();
+  }
+  public getTypeName() {
+    return 'GoogleAuthenticationRequest';
+  }
 }
 
 /**
@@ -3750,7 +3287,7 @@ export class GoogleAuthenticationRequest
 // @DataContract
 export class TwitterAuthenticationRequest
   extends CodeMashRequestBase
-  implements IOAuthRequest {
+  implements IReturn<TwitterAuthenticationResponse>, IOAuthRequest {
   /**
    * Mode to use for authentication
    */
@@ -3804,6 +3341,12 @@ export class TwitterAuthenticationRequest
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {
+    return new TwitterAuthenticationResponse();
+  }
+  public getTypeName() {
+    return 'TwitterAuthenticationRequest';
+  }
 }
 
 /**
@@ -3834,11 +3377,9 @@ export class ValidateUserDeactivationTokenRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new ValidateUserDeactivationTokenResponse();
   }
-
   public getTypeName() {
     return 'ValidateUserDeactivationTokenRequest';
   }
@@ -3851,10 +3392,16 @@ export class ValidateUserDeactivationTokenRequest
 // @Route("/{version}/membership/users/deactivate/token", "POST")
 // @Api(Description="Membership")
 // @DataContract
-export class CreateUserDeactivationRequest extends CodeMashRequestBase {
+export class CreateUserDeactivationRequest
+  extends CodeMashRequestBase
+  implements IReturnVoid {
   public constructor(init?: Partial<CreateUserDeactivationRequest>) {
     super(init);
     (Object as any).assign(this, init);
+  }
+  public createResponse() {}
+  public getTypeName() {
+    return 'CreateUserDeactivationRequest';
   }
 }
 
@@ -3865,7 +3412,7 @@ export class CreateUserDeactivationRequest extends CodeMashRequestBase {
 // @Route("/{version}/membership/users/deactivate", "POST")
 // @Api(Description="Membership")
 // @DataContract
-export class DeactivateUserRequest extends RequestBase {
+export class DeactivateUserRequest extends RequestBase implements IReturnVoid {
   /**
    * Secret token received by email for deactivation
    */
@@ -3884,6 +3431,10 @@ export class DeactivateUserRequest extends RequestBase {
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
+  public getTypeName() {
+    return 'DeactivateUserRequest';
+  }
 }
 
 /**
@@ -3893,7 +3444,9 @@ export class DeactivateUserRequest extends RequestBase {
 // @Route("/{version}/membership/users/{Id}/block", "PUT PATCH")
 // @Api(Description="Blocks selected user preventing the use of authenticated actions")
 // @DataContract
-export class BlockUserRequest extends CodeMashRequestBase {
+export class BlockUserRequest
+  extends CodeMashRequestBase
+  implements IReturnVoid {
   /**
    * ID of user to be blocked
    */
@@ -3905,6 +3458,10 @@ export class BlockUserRequest extends CodeMashRequestBase {
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
+  public getTypeName() {
+    return 'BlockUserRequest';
+  }
 }
 
 /**
@@ -3914,7 +3471,9 @@ export class BlockUserRequest extends CodeMashRequestBase {
 // @Route("/{version}/membership/users/{Id}", "DELETE")
 // @Api(Description="Deletes user")
 // @DataContract
-export class DeleteUserRequest extends CodeMashRequestBase {
+export class DeleteUserRequest
+  extends CodeMashRequestBase
+  implements IReturnVoid {
   /**
    * ID of user to be deleted
    */
@@ -3925,6 +3484,10 @@ export class DeleteUserRequest extends CodeMashRequestBase {
   public constructor(init?: Partial<DeleteUserRequest>) {
     super(init);
     (Object as any).assign(this, init);
+  }
+  public createResponse() {}
+  public getTypeName() {
+    return 'DeleteUserRequest';
   }
 }
 
@@ -3970,11 +3533,9 @@ export class GetProfileRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new GetProfileResponse();
   }
-
   public getTypeName() {
     return 'GetProfileRequest';
   }
@@ -4044,11 +3605,9 @@ export class GetUserRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new GetUserResponse();
   }
-
   public getTypeName() {
     return 'GetUserRequest';
   }
@@ -4089,11 +3648,9 @@ export class GetUsersRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new GetUsersResponse();
   }
-
   public getTypeName() {
     return 'GetUsersRequest';
   }
@@ -4106,7 +3663,9 @@ export class GetUsersRequest
 // @Route("/{version}/membership/users/{Id}/unblock", "PUT PATCH")
 // @Api(Description="Unblocks blocked user")
 // @DataContract
-export class UnblockUserRequest extends CodeMashRequestBase {
+export class UnblockUserRequest
+  extends CodeMashRequestBase
+  implements IReturnVoid {
   /**
    * User Id
    */
@@ -4118,6 +3677,10 @@ export class UnblockUserRequest extends CodeMashRequestBase {
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
+  public getTypeName() {
+    return 'UnblockUserRequest';
+  }
 }
 
 /**
@@ -4127,7 +3690,9 @@ export class UnblockUserRequest extends CodeMashRequestBase {
 // @Route("/{version}/membership/users/password", "PATCH")
 // @Api(Description="Membership")
 // @DataContract
-export class UpdatePasswordRequest extends CodeMashRequestBase {
+export class UpdatePasswordRequest
+  extends CodeMashRequestBase
+  implements IReturnVoid {
   /**
    * User whose password to change.
    */
@@ -4160,6 +3725,10 @@ export class UpdatePasswordRequest extends CodeMashRequestBase {
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
+  public getTypeName() {
+    return 'UpdatePasswordRequest';
+  }
 }
 
 /**
@@ -4169,7 +3738,9 @@ export class UpdatePasswordRequest extends CodeMashRequestBase {
 // @Route("/{version}/membership/users/profile", "PATCH")
 // @Api(Description="Membership")
 // @DataContract
-export class UpdateProfileRequest extends CodeMashRequestBase {
+export class UpdateProfileRequest
+  extends CodeMashRequestBase
+  implements IReturnVoid {
   /**
    * Guest email. Will not work for normal user.
    */
@@ -4321,6 +3892,10 @@ export class UpdateProfileRequest extends CodeMashRequestBase {
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
+  public getTypeName() {
+    return 'UpdateProfileRequest';
+  }
 }
 
 /**
@@ -4332,7 +3907,9 @@ export class UpdateProfileRequest extends CodeMashRequestBase {
 // @Route("/{version}/membership/users/{id}", "PATCH PUT")
 // @Api(Description="Membership")
 // @DataContract
-export class UpdateUserRequest extends CodeMashRequestBase {
+export class UpdateUserRequest
+  extends CodeMashRequestBase
+  implements IReturnVoid {
   /**
    * User Id
    */
@@ -4512,6 +4089,10 @@ export class UpdateUserRequest extends CodeMashRequestBase {
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
+  public getTypeName() {
+    return 'UpdateUserRequest';
+  }
 }
 
 /**
@@ -4521,7 +4102,9 @@ export class UpdateUserRequest extends CodeMashRequestBase {
 // @Route("/{version}/membership/users/invite", "POST")
 // @Api(Description="Membership")
 // @DataContract
-export class InviteUserRequest extends CodeMashRequestBase {
+export class InviteUserRequest
+  extends CodeMashRequestBase
+  implements IReturn<InviteUserV2Response> {
   /**
    * Member display name
    */
@@ -4686,6 +4269,12 @@ export class InviteUserRequest extends CodeMashRequestBase {
   public constructor(init?: Partial<InviteUserRequest>) {
     super(init);
     (Object as any).assign(this, init);
+  }
+  public createResponse() {
+    return new InviteUserV2Response();
+  }
+  public getTypeName() {
+    return 'InviteUserRequest';
   }
 }
 
@@ -4857,11 +4446,9 @@ export class RegisterGuestUserRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new RegisterGuestUserResponse();
   }
-
   public getTypeName() {
     return 'RegisterGuestUserRequest';
   }
@@ -4874,7 +4461,9 @@ export class RegisterGuestUserRequest
 // @Route("/{version}/membership/users/register", "POST")
 // @Api(Description="Membership")
 // @DataContract
-export class RegisterUserRequest extends CodeMashRequestBase {
+export class RegisterUserRequest
+  extends CodeMashRequestBase
+  implements IReturn<RegisterUserV2Response> {
   /**
    * Member display name
    */
@@ -5061,6 +4650,12 @@ export class RegisterUserRequest extends CodeMashRequestBase {
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {
+    return new RegisterUserV2Response();
+  }
+  public getTypeName() {
+    return 'RegisterUserRequest';
+  }
 }
 
 /**
@@ -5091,11 +4686,9 @@ export class ValidatePasswordTokenRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new ValidatePasswordTokenResponse();
   }
-
   public getTypeName() {
     return 'ValidatePasswordTokenRequest';
   }
@@ -5122,11 +4715,9 @@ export class CreatePasswordResetRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new CreatePasswordResetResponse();
   }
-
   public getTypeName() {
     return 'CreatePasswordResetRequest';
   }
@@ -5139,7 +4730,7 @@ export class CreatePasswordResetRequest
 // @Route("/{version}/membership/users/password/reset", "POST")
 // @Api(Description="Membership")
 // @DataContract
-export class ResetPasswordRequest extends RequestBase {
+export class ResetPasswordRequest extends RequestBase implements IReturnVoid {
   /**
    * Secret token received by email for password reset
    */
@@ -5164,6 +4755,10 @@ export class ResetPasswordRequest extends RequestBase {
   public constructor(init?: Partial<ResetPasswordRequest>) {
     super(init);
     (Object as any).assign(this, init);
+  }
+  public createResponse() {}
+  public getTypeName() {
+    return 'ResetPasswordRequest';
   }
 }
 
@@ -5195,11 +4790,9 @@ export class ValidateInvitationTokenRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new ValidateInvitationTokenResponse();
   }
-
   public getTypeName() {
     return 'ValidateInvitationTokenRequest';
   }
@@ -5212,7 +4805,7 @@ export class ValidateInvitationTokenRequest
 // @Route("/{version}/membership/users/verify", "POST")
 // @Api(Description="Membership")
 // @DataContract
-export class VerifyUserRequest extends RequestBase {
+export class VerifyUserRequest extends RequestBase implements IReturnVoid {
   /**
    * Secret token received by email for registration confirmation
    */
@@ -5224,6 +4817,10 @@ export class VerifyUserRequest extends RequestBase {
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
+  public getTypeName() {
+    return 'VerifyUserRequest';
+  }
 }
 
 /**
@@ -5233,7 +4830,9 @@ export class VerifyUserRequest extends RequestBase {
 // @Route("/{version}/membership/users/invitation/verify", "POST")
 // @Api(Description="Membership")
 // @DataContract
-export class VerifyUserInvitationRequest extends RequestBase {
+export class VerifyUserInvitationRequest
+  extends RequestBase
+  implements IReturnVoid {
   /**
    * Secret token received by email for invitation confirmation
    */
@@ -5259,6 +4858,10 @@ export class VerifyUserInvitationRequest extends RequestBase {
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
+  public getTypeName() {
+    return 'VerifyUserInvitationRequest';
+  }
 }
 
 /**
@@ -5283,11 +4886,9 @@ export class DeleteEmailRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new DeleteEmailResponse();
   }
-
   public getTypeName() {
     return 'DeleteEmailRequest';
   }
@@ -5300,7 +4901,9 @@ export class DeleteEmailRequest
 // @Route("/{version}/notifications/email", "POST")
 // @Api(Description="Sends an email message")
 // @DataContract
-export class SendEmailRequest extends CodeMashRequestBase {
+export class SendEmailRequest
+  extends CodeMashRequestBase
+  implements IReturn<SendEmailNotificationV2Response> {
   /**
    * ID of a template to use
    */
@@ -5396,6 +4999,12 @@ export class SendEmailRequest extends CodeMashRequestBase {
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {
+    return new SendEmailNotificationV2Response();
+  }
+  public getTypeName() {
+    return 'SendEmailRequest';
+  }
 }
 
 /**
@@ -5468,11 +5077,9 @@ export class CreateDeviceRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new CreateDeviceResponse();
   }
-
   public getTypeName() {
     return 'CreateDeviceRequest';
   }
@@ -5485,7 +5092,9 @@ export class CreateDeviceRequest
 // @Route("/{version}/notifications/push/devices/{Id}", "DELETE")
 // @Api(Description="Deletes the device from push notifications recipients list.")
 // @DataContract
-export class DeleteDeviceRequest extends CodeMashRequestBase {
+export class DeleteDeviceRequest
+  extends CodeMashRequestBase
+  implements IReturnVoid {
   /**
    * Device Id or device key
    */
@@ -5496,6 +5105,10 @@ export class DeleteDeviceRequest extends CodeMashRequestBase {
   public constructor(init?: Partial<DeleteDeviceRequest>) {
     super(init);
     (Object as any).assign(this, init);
+  }
+  public createResponse() {}
+  public getTypeName() {
+    return 'DeleteDeviceRequest';
   }
 }
 
@@ -5520,11 +5133,9 @@ export class GetDeviceRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new GetDeviceResponse();
   }
-
   public getTypeName() {
     return 'GetDeviceRequest';
   }
@@ -5551,11 +5162,9 @@ export class GetDevicesRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new GetDevicesResponse();
   }
-
   public getTypeName() {
     return 'GetDevicesRequest';
   }
@@ -5589,11 +5198,9 @@ export class DeleteDeviceTokenRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new DeleteDeviceTokenResponse();
   }
-
   public getTypeName() {
     return 'DeleteDeviceTokenRequest';
   }
@@ -5697,11 +5304,9 @@ export class RegisterDeviceTokenRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new RegisterDeviceTokenResponse();
   }
-
   public getTypeName() {
     return 'RegisterDeviceTokenRequest';
   }
@@ -5756,11 +5361,9 @@ export class RegisterDeviceExpoTokenRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new RegisterDeviceExpoTokenResponse();
   }
-
   public getTypeName() {
     return 'RegisterDeviceExpoTokenRequest';
   }
@@ -5773,7 +5376,9 @@ export class RegisterDeviceExpoTokenRequest
 // @Route("/{version}/notifications/push/devices/{Id}", "PATCH")
 // @Api(Description="Updates device details")
 // @DataContract
-export class UpdateDeviceRequest extends CodeMashRequestBase {
+export class UpdateDeviceRequest
+  extends CodeMashRequestBase
+  implements IReturnVoid {
   /**
    * Device id or device key
    */
@@ -5834,6 +5439,10 @@ export class UpdateDeviceRequest extends CodeMashRequestBase {
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
+  public getTypeName() {
+    return 'UpdateDeviceRequest';
+  }
 }
 
 /**
@@ -5864,11 +5473,9 @@ export class UpdateDeviceUserRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new UpdateDeviceUserResponse();
   }
-
   public getTypeName() {
     return 'UpdateDeviceUserRequest';
   }
@@ -5902,11 +5509,9 @@ export class UpdateDeviceMetaRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new UpdateDeviceMetaResponse();
   }
-
   public getTypeName() {
     return 'UpdateDeviceMetaRequest';
   }
@@ -5947,11 +5552,9 @@ export class DeleteDeviceMetaRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new DeleteDeviceMetaResponse();
   }
-
   public getTypeName() {
     return 'DeleteDeviceMetaRequest';
   }
@@ -5985,11 +5588,9 @@ export class UpdateDeviceTimeZoneRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new UpdateDeviceTimeZoneResponse();
   }
-
   public getTypeName() {
     return 'UpdateDeviceTimeZoneRequest';
   }
@@ -6023,11 +5624,9 @@ export class DeleteNotificationRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new DeleteNotificationResponse();
   }
-
   public getTypeName() {
     return 'DeleteNotificationRequest';
   }
@@ -6061,11 +5660,9 @@ export class GetNotificationRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new GetNotificationResponse();
   }
-
   public getTypeName() {
     return 'GetNotificationRequest';
   }
@@ -6106,11 +5703,9 @@ export class GetNotificationsRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new GetNotificationsResponse();
   }
-
   public getTypeName() {
     return 'GetNotificationsRequest';
   }
@@ -6165,11 +5760,9 @@ export class GetNotificationsCountRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new GetNotificationsResponse();
   }
-
   public getTypeName() {
     return 'GetNotificationsCountRequest';
   }
@@ -6217,11 +5810,9 @@ export class MarkAllNotificationsAsReadRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new MarkNotificationAsReadResponse();
   }
-
   public getTypeName() {
     return 'MarkAllNotificationsAsReadRequest';
   }
@@ -6269,11 +5860,9 @@ export class MarkNotificationAsReadRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new MarkNotificationAsReadResponse();
   }
-
   public getTypeName() {
     return 'MarkNotificationAsReadRequest';
   }
@@ -6356,11 +5945,9 @@ export class SendPushNotificationRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new SendPushNotificationResponse();
   }
-
   public getTypeName() {
     return 'SendPushNotificationRequest';
   }
@@ -6387,11 +5974,9 @@ export class GetNotificationTemplateRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new GetNotificationTemplateResponse();
   }
-
   public getTypeName() {
     return 'GetNotificationTemplateRequest';
   }
@@ -6411,11 +5996,9 @@ export class GetNotificationTemplatesRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new GetNotificationTemplatesResponse();
   }
-
   public getTypeName() {
     return 'GetNotificationTemplatesRequest';
   }
@@ -6456,11 +6039,9 @@ export class VerifyAppleAppStoreSubscriptionRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new VerifyAppleAppStoreSubscriptionResponse();
   }
-
   public getTypeName() {
     return 'VerifyAppleAppStoreSubscriptionRequest';
   }
@@ -6571,11 +6152,9 @@ export class CreateCustomerRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new CreateCustomerResponse();
   }
-
   public getTypeName() {
     return 'CreateCustomerRequest';
   }
@@ -6588,7 +6167,9 @@ export class CreateCustomerRequest
 // @Route("/{version}/payments/customers/{id}", "DELETE")
 // @Api(Description="Payments")
 // @DataContract
-export class DeleteCustomerRequest extends CodeMashRequestBase {
+export class DeleteCustomerRequest
+  extends CodeMashRequestBase
+  implements IReturnVoid {
   /**
    * Customer's ID to delete.
    */
@@ -6599,6 +6180,10 @@ export class DeleteCustomerRequest extends CodeMashRequestBase {
   public constructor(init?: Partial<DeleteCustomerRequest>) {
     super(init);
     (Object as any).assign(this, init);
+  }
+  public createResponse() {}
+  public getTypeName() {
+    return 'DeleteCustomerRequest';
   }
 }
 
@@ -6644,11 +6229,9 @@ export class GetCustomerRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new GetCustomerResponse();
   }
-
   public getTypeName() {
     return 'GetCustomerRequest';
   }
@@ -6675,11 +6258,9 @@ export class GetCustomersRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new GetCustomersResponse();
   }
-
   public getTypeName() {
     return 'GetCustomersRequest';
   }
@@ -6692,7 +6273,9 @@ export class GetCustomersRequest
 // @Route("/{version}/payments/customers/{id}", "PATCH PUT")
 // @Api(Description="Payments")
 // @DataContract
-export class UpdateCustomerRequest extends CodeMashRequestBase {
+export class UpdateCustomerRequest
+  extends CodeMashRequestBase
+  implements IReturnVoid {
   /**
    * Customer's ID.
    */
@@ -6780,6 +6363,10 @@ export class UpdateCustomerRequest extends CodeMashRequestBase {
   public constructor(init?: Partial<UpdateCustomerRequest>) {
     super(init);
     (Object as any).assign(this, init);
+  }
+  public createResponse() {}
+  public getTypeName() {
+    return 'UpdateCustomerRequest';
   }
 }
 
@@ -6930,11 +6517,9 @@ export class CreateDiscountRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new CreateDiscountResponse();
   }
-
   public getTypeName() {
     return 'CreateDiscountRequest';
   }
@@ -6947,7 +6532,9 @@ export class CreateDiscountRequest
 // @Route("/{version}/payments/discounts/{id}", "DELETE")
 // @Api(Description="Payments")
 // @DataContract
-export class DeleteDiscountRequest extends CodeMashRequestBase {
+export class DeleteDiscountRequest
+  extends CodeMashRequestBase
+  implements IReturnVoid {
   /**
    * Id of discount.
    */
@@ -6958,6 +6545,10 @@ export class DeleteDiscountRequest extends CodeMashRequestBase {
   public constructor(init?: Partial<DeleteDiscountRequest>) {
     super(init);
     (Object as any).assign(this, init);
+  }
+  public createResponse() {}
+  public getTypeName() {
+    return 'DeleteDiscountRequest';
   }
 }
 
@@ -7010,11 +6601,9 @@ export class GetApplicableCouponsRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new GetApplicableCouponsResponse();
   }
-
   public getTypeName() {
     return 'GetApplicableCouponsRequest';
   }
@@ -7062,11 +6651,9 @@ export class GetApplicableDiscountsRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new GetApplicableDiscountsResponse();
   }
-
   public getTypeName() {
     return 'GetApplicableDiscountsRequest';
   }
@@ -7079,7 +6666,9 @@ export class GetApplicableDiscountsRequest
 // @Route("/{version}/payments/discounts/{id}", "PUT PATCH")
 // @Api(Description="Payments")
 // @DataContract
-export class UpdateDiscountRequest extends CodeMashRequestBase {
+export class UpdateDiscountRequest
+  extends CodeMashRequestBase
+  implements IReturnVoid {
   /**
    * Id of discount.
    */
@@ -7210,6 +6799,10 @@ export class UpdateDiscountRequest extends CodeMashRequestBase {
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
+  public getTypeName() {
+    return 'UpdateDiscountRequest';
+  }
 }
 
 /**
@@ -7247,11 +6840,9 @@ export class VerifyGooglePlayStoreSubscriptionRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new VerifyGooglePlayStoreSubscriptionResponse();
   }
-
   public getTypeName() {
     return 'VerifyGooglePlayStoreSubscriptionRequest';
   }
@@ -7306,11 +6897,9 @@ export class AttachPaymentMethodRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new AttachPaymentMethodResponse();
   }
-
   public getTypeName() {
     return 'AttachPaymentMethodRequest';
   }
@@ -7323,7 +6912,9 @@ export class AttachPaymentMethodRequest
 // @Route("/{version}/payments/methods/{id}", "DELETE")
 // @Api(Description="Payments")
 // @DataContract
-export class DetachPaymentMethodRequest extends CodeMashRequestBase {
+export class DetachPaymentMethodRequest
+  extends CodeMashRequestBase
+  implements IReturnVoid {
   /**
    * Payment method's ID.
    */
@@ -7341,6 +6932,10 @@ export class DetachPaymentMethodRequest extends CodeMashRequestBase {
   public constructor(init?: Partial<DetachPaymentMethodRequest>) {
     super(init);
     (Object as any).assign(this, init);
+  }
+  public createResponse() {}
+  public getTypeName() {
+    return 'DetachPaymentMethodRequest';
   }
 }
 
@@ -7372,11 +6967,9 @@ export class GetPaymentMethodSetupRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new GetPaymentMethodSetupResponse();
   }
-
   public getTypeName() {
     return 'GetPaymentMethodSetupRequest';
   }
@@ -7389,7 +6982,9 @@ export class GetPaymentMethodSetupRequest
 // @Route("/{version}/payments/methods/{id}", "PATCH PUT")
 // @Api(Description="Payments")
 // @DataContract
-export class UpdatePaymentMethodRequest extends CodeMashRequestBase {
+export class UpdatePaymentMethodRequest
+  extends CodeMashRequestBase
+  implements IReturnVoid {
   /**
    * Payment method's ID.
    */
@@ -7485,6 +7080,10 @@ export class UpdatePaymentMethodRequest extends CodeMashRequestBase {
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
+  public getTypeName() {
+    return 'UpdatePaymentMethodRequest';
+  }
 }
 
 /**
@@ -7564,11 +7163,9 @@ export class CreateOrderRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new CreateOrderResponse();
   }
-
   public getTypeName() {
     return 'CreateOrderRequest';
   }
@@ -7602,11 +7199,9 @@ export class GetOrderRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new GetOrderResponse();
   }
-
   public getTypeName() {
     return 'GetOrderRequest';
   }
@@ -7647,11 +7242,9 @@ export class GetOrdersRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new GetOrdersResponse();
   }
-
   public getTypeName() {
     return 'GetOrdersRequest';
   }
@@ -7685,21 +7278,11 @@ export class CreatePayseraTransactionRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new CreatePayseraTransactionResponse();
   }
-
   public getTypeName() {
     return 'CreatePayseraTransactionRequest';
-  }
-}
-
-export class ValidatePayseraRequest {
-  public pathInfo: string;
-
-  public constructor(init?: Partial<ValidatePayseraRequest>) {
-    (Object as any).assign(this, init);
   }
 }
 
@@ -7745,11 +7328,9 @@ export class CheckStripePaymentStatusRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new CheckStripePaymentStatusResponse();
   }
-
   public getTypeName() {
     return 'CheckStripePaymentStatusRequest';
   }
@@ -7790,11 +7371,9 @@ export class CreateStripeTransactionRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new CreateStripeTransactionResponse();
   }
-
   public getTypeName() {
     return 'CreateStripeTransactionRequest';
   }
@@ -7842,11 +7421,9 @@ export class CancelSubscriptionRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new CancelSubscriptionResponse();
   }
-
   public getTypeName() {
     return 'CancelSubscriptionRequest';
   }
@@ -7901,11 +7478,9 @@ export class ChangeSubscriptionRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new ChangeSubscriptionResponse();
   }
-
   public getTypeName() {
     return 'ChangeSubscriptionRequest';
   }
@@ -7953,11 +7528,9 @@ export class CreateSubscriptionRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new CreateSubscriptionResponse();
   }
-
   public getTypeName() {
     return 'CreateSubscriptionRequest';
   }
@@ -7970,7 +7543,9 @@ export class CreateSubscriptionRequest
 // @Route("/{version}/payments/customers/{customerId}/subscriptions/{id}", "PATCH")
 // @Api(Description="Payments")
 // @DataContract
-export class UpdateSubscriptionRequest extends CodeMashRequestBase {
+export class UpdateSubscriptionRequest
+  extends CodeMashRequestBase
+  implements IReturnVoid {
   /**
    * Subscription ID.
    */
@@ -8010,6 +7585,10 @@ export class UpdateSubscriptionRequest extends CodeMashRequestBase {
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
+  public getTypeName() {
+    return 'UpdateSubscriptionRequest';
+  }
 }
 
 /**
@@ -8026,11 +7605,9 @@ export class GetProjectRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new GetProjectResponse();
   }
-
   public getTypeName() {
     return 'GetProjectRequest';
   }
@@ -8085,11 +7662,9 @@ export class ExecuteFunctionRequest
     super(init);
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new ExecuteFunctionResponse();
   }
-
   public getTypeName() {
     return 'ExecuteFunctionRequest';
   }
@@ -8100,11 +7675,9 @@ export class AwsSesEndpoint implements IReturn<HttpResult> {
   public constructor(init?: Partial<AwsSesEndpoint>) {
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new HttpResult();
   }
-
   public getTypeName() {
     return 'AwsSesEndpoint';
   }
@@ -8115,11 +7688,9 @@ export class MailGunEndpoint implements IReturn<HttpResult> {
   public constructor(init?: Partial<MailGunEndpoint>) {
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new HttpResult();
   }
-
   public getTypeName() {
     return 'MailGunEndpoint';
   }
@@ -8130,11 +7701,9 @@ export class SendGridEndpoint implements IReturn<HttpResult> {
   public constructor(init?: Partial<SendGridEndpoint>) {
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new HttpResult();
   }
-
   public getTypeName() {
     return 'SendGridEndpoint';
   }
@@ -8149,7 +7718,7 @@ export class SendGridEndpoint implements IReturn<HttpResult> {
 // @DataContract
 export class AppleAuthenticationRequest
   extends CodeMashRequestBase
-  implements IOAuthRequest {
+  implements IReturn<AppleAuthenticationResponse>, IOAuthRequest {
   /**
    * Mode to use for authentication
    */
@@ -8188,6 +7757,12 @@ export class AppleAuthenticationRequest
   public constructor(init?: Partial<AppleAuthenticationRequest>) {
     super(init);
     (Object as any).assign(this, init);
+  }
+  public createResponse() {
+    return new AppleAuthenticationResponse();
+  }
+  public getTypeName() {
+    return 'AppleAuthenticationRequest';
   }
 }
 
@@ -8255,11 +7830,9 @@ export class Authenticate implements IReturn<AuthenticateResponse>, IPost {
   public constructor(init?: Partial<Authenticate>) {
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new AuthenticateResponse();
   }
-
   public getTypeName() {
     return 'Authenticate';
   }
@@ -8278,11 +7851,9 @@ export class GetApiKeys implements IReturn<GetApiKeysResponse>, IGet {
   public constructor(init?: Partial<GetApiKeys>) {
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new GetApiKeysResponse();
   }
-
   public getTypeName() {
     return 'GetApiKeys';
   }
@@ -8302,11 +7873,9 @@ export class RegenerateApiKeys
   public constructor(init?: Partial<RegenerateApiKeys>) {
     (Object as any).assign(this, init);
   }
-
   public createResponse() {
     return new RegenerateApiKeysResponse();
   }
-
   public getTypeName() {
     return 'RegenerateApiKeys';
   }

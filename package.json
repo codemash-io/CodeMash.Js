@@ -2,14 +2,13 @@
   "name": "codemash",
   "version": "1.2.36",
   "description": "CodeMash tools for Node and javascript developers. Access codemash.io tools from npm",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "rollup -c",
-    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/**/*.ts' --timeout 3600000",
-    "test-grep": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register --timeout 3600000 -g",
-    "test-single": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha --timeout 3600000",
+    "ts-types": " tsc --emitDeclarationOnly --outDir dist",
+    "build": "rimraf build && node ./esbuild.config.js && npm run ts-types",
+    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' nyc mocha -r ts-node/register 'tests/**/*.ts' --timeout 3600000",
     "format:check": "prettier --check \"**/*.{js,jsx,yml,yaml,json.css}\"",
     "format": "prettier --write \"**/*.{js,jsx,yml,yaml,json.css}\"",
     "commit": "cz",
@@ -23,6 +22,12 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codemash-io/CodeMash.Js.git"
+  },
+  "nyc": {
+    "include": "src",
+    "exclude": [
+      "src/types"
+    ]
   },
   "keywords": [
     "baas",
@@ -50,23 +55,22 @@
     "@babel/preset-typescript": "^7.16.0",
     "@commitlint/cli": "^12.0.0",
     "@commitlint/config-conventional": "^12.0.0",
-    "@rollup/plugin-babel": "^5.2.1",
-    "@rollup/plugin-node-resolve": "^10.0.0",
-    "@rollup/plugin-replace": "^2.3.4",
+    "@faker-js/faker": "^6.0.0-alpha.3",
     "@types/chai": "^4.2.18",
     "@types/chai-as-promised": "^7.1.4",
     "@types/cookie": "^0.4.1",
     "@types/mocha": "^8.2.2",
     "@types/node": "14.11.1",
-    "@types/whatwg-fetch": "0.0.33",
     "@typescript-eslint/eslint-plugin": "^5.8.0",
     "@typescript-eslint/parser": "^5.8.0",
-    "babel-jest": "^26.6.3",
+    "add": "^2.0.6",
     "chai": "^4.3.4",
     "chai-as-promised": "^7.1.1",
     "commitizen": "^4.2.3",
     "cz-conventional-changelog": "^3.3.0",
     "dotenv": "^8.2.0",
+    "esbuild": "^0.14.13",
+    "esbuild-node-externals": "^1.4.1",
     "eslint": "^7.3.1",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.3.0",
@@ -81,22 +85,18 @@
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "eslint-plugin-standard": "^4.0.1",
     "mocha": "^8.4.0",
+    "nyc": "^15.1.0",
     "prettier": "2.2.1",
-    "rollup": "^2.33.1",
-    "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-typescript2": "^0.31.1",
+    "rimraf": "^3.0.2",
     "semantic-release": "^17.3.9",
     "ts-mocha": "^8.0.0",
     "ts-node": "9.0.0",
     "tsconfig-paths": "^3.9.0",
-    "typescript": "^4.3.5"
+    "typescript": "^4.5.5",
+    "yarn": "^1.22.17"
   },
   "dependencies": {
-    "@servicestack/client": "^1.1.1",
-    "chalk": "4.1.2",
-    "cross-fetch": "^3.1.4",
-    "husky": "^5.1.1",
-    "node-fetch": "^2.6.1"
+    "@servicestack/client": "^1.1.1"
   },
   "husky": {
     "hooks": {
