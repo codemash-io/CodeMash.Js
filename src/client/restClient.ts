@@ -50,9 +50,9 @@ export class RestClient extends JsonServiceClient {
       console.log(`Result for ${getMethod(target)} request: `, target);
     }
 
-    // FIXME: sometimes, result comes with { isSuccess: false, isError: false }. This shouldn't happen.
+    // Fixes the issue when sometimes result comes with { isSuccess: false, isError: false }.
     return {
-      isSuccess,
+      isSuccess: isSuccess || isError === false,
       isError,
       errorStatus,
       responseStatus,
