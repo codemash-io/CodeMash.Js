@@ -3,10 +3,10 @@ import path from 'path';
 import { expect } from 'chai';
 import dotenv from 'dotenv';
 
-import { deleteEmail } from '../../src/modules/email';
-import { DeleteEmailRequest } from '../../src/types/codemash.dtos';
+import { deleteEmailFromQueue } from '../../src/modules/email';
+import { DeleteEmailFromQueueRequest } from '../../src/types';
 
-describe('deleteEmail', () => {
+describe('deleteEmailFromQueue', () => {
   beforeEach(() => {
     dotenv.config({
       path: path.resolve(__dirname, '../data/config/.env'),
@@ -14,10 +14,10 @@ describe('deleteEmail', () => {
   });
 
   it('should return an error for invalid email id', async () => {
-    const request = new DeleteEmailRequest({
+    const request = new DeleteEmailFromQueueRequest({
       id: 'invalidEmailid',
     });
-    const result = await deleteEmail(request);
+    const result = await deleteEmailFromQueue(request);
 
     expect(result.isError).to.be.true;
   });
