@@ -90,7 +90,8 @@ export async function login(request: CredentialsAuthenticationRequest) {
   return client.request(request);
 }
 
-export async function logout(request: Authenticate) {
+export async function logout() {
+  const request = new Authenticate();
   const client = new RestClient(CMConfig.getInstance());
   request.provider = 'logout';
 

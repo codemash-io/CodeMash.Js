@@ -1,5 +1,7 @@
 import { ResponseStatus } from '@servicestack/client';
 
+import { DeleteEmailRequest } from './codemash.dtos';
+
 interface ICMDbResult {
   response: any;
   isSuccess: boolean;
@@ -7,3 +9,5 @@ interface ICMDbResult {
   responseStatus?: ResponseStatus;
   errorStatus?: ResponseStatus;
 }
+
+export class DeleteEmailFromQueueRequest extends DeleteEmailRequest {}
