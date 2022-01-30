@@ -5,10 +5,7 @@ import { expect } from 'chai';
 import dotenv from 'dotenv';
 
 import { logout, registerUser } from '../../src/modules/users';
-import {
-  Authenticate,
-  RegisterUserRequest,
-} from '../../src/types/codemash.dtos';
+import { RegisterUserRequest } from '../../src/types/codemash.dtos';
 
 const EMAIL = faker.internet.email();
 const PASSWORD = faker.internet.password();
@@ -30,9 +27,7 @@ describe('logout', () => {
       autoLogin: true,
     });
     await registerUser(createRequest);
-
-    const request = new Authenticate();
-    const result = await logout(request);
+    const result = await logout();
 
     expect(result.response).to.not.be.null;
   });
