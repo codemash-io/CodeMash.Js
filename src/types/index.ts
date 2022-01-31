@@ -2,7 +2,7 @@ import { ResponseStatus } from '@servicestack/client';
 
 import { DeleteEmailRequest } from './codemash.dtos';
 
-interface ICMDbResult {
+export interface ICMDbResult {
   response: any;
   isSuccess: boolean;
   isError: boolean;

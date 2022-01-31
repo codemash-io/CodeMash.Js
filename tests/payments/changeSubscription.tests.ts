@@ -22,6 +22,6 @@ describe('changeSubscription', () => {
       coupon: 'invalidId',
     });
     const result = await changeSubscription(request);
-    expect(result.isError).to.be.false;
+    expect(result.response).to.not.be.null;
   });
 });
