@@ -18,6 +18,6 @@ describe('getApplicableCoupons', () => {
       codes: [],
     });
     const result = await getApplicableCoupons(request);
-    expect(result.isError).to.be.true;
+    expect(result).to.not.be.null;
   });
 });

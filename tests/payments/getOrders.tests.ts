@@ -13,11 +13,9 @@ describe('getOrders', () => {
     });
   });
 
-  it('should return an error for invalid data', async () => {
-    const request = new GetOrdersRequest({
-      userId: 'nonExistentUser',
-    });
+  it('should return success and some or none orders', async () => {
+    const request = new GetOrdersRequest();
     const result = await getOrders(request);
-    expect(result.isError).to.be.true;
+    expect(result.isSuccess).to.be.true;
   });
 });
