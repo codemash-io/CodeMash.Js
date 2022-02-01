@@ -13,12 +13,11 @@ describe('deleteDeviceToken', () => {
     });
   });
 
-  it('should return an error for invalid data', async () => {
+  it('should throw an error for invalid data', async () => {
     const request = new DeleteDeviceTokenRequest({
       id: 'invalidId',
       deviceKey: 'invaliddeviceKey',
     });
-    const result = await deleteDeviceToken(request);
-    expect(result.isError).to.be.true;
+    await expect(deleteDeviceToken(request)).to.be.rejected;
   });
 });

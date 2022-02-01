@@ -13,12 +13,11 @@ describe('updateDeviceTimeZone', () => {
     });
   });
 
-  it('should return an error for invalid data', async () => {
+  it('should throw an error for invalid data', async () => {
     const request = new UpdateDeviceTimeZoneRequest({
       id: 'invalidId',
       timeZone: 'invaldiTimeZone',
     });
-    const result = await updateDeviceTimeZone(request);
-    expect(result.isError).to.be.true;
+    await expect(updateDeviceTimeZone(request)).to.be.rejected;
   });
 });

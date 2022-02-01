@@ -31,13 +31,13 @@ describe('updatePassword', () => {
     const newUser = await registerUser(newUserRequest);
 
     const request = new UpdatePasswordRequest({
-      userId: newUser?.response?.userId,
+      userId: newUser.userId,
       currentPassword: oldPassword,
       password: newPassword,
       repeatedPassword: newPassword,
     });
-    const result = await updatePassword(request);
+    const response = await updatePassword(request);
 
-    expect(result.isError).to.be.false;
+    expect(response).to.not.be.null;
   });
 });

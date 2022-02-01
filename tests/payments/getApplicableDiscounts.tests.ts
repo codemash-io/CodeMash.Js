@@ -13,11 +13,10 @@ describe('getApplicableDiscounts', () => {
     });
   });
 
-  it('should return an error for invalid data', async () => {
+  it('should throw an error for invalid data', async () => {
     const request = new GetApplicableDiscountsRequest({
       orderSchemaId: 'invalidSchemaId',
     });
-    const result = await getApplicableDiscounts(request);
-    expect(result.isError).to.be.true;
+    await expect(getApplicableDiscounts(request)).to.be.rejected;
   });
 });

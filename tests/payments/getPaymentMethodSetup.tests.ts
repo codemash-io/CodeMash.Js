@@ -13,11 +13,10 @@ describe('getPaymentMethodSetup', () => {
     });
   });
 
-  it('should return an error for invalid data', async () => {
+  it('should throw an error for invalid data', async () => {
     const request = new GetPaymentMethodSetupRequest({
       accountId: 'invalidId',
     });
-    const result = await getPaymentMethodSetup(request);
-    expect(result.isError).to.be.true;
+    await expect(getPaymentMethodSetup(request)).to.be.rejected;
   });
 });

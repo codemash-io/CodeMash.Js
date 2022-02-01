@@ -38,17 +38,16 @@ describe('deleteMany', () => {
       },
     });
 
-    const result = await deleteMany(request);
-    expect(result.response?.result?.deletedCount).to.be.greaterThanOrEqual(
+    const response = await deleteMany(request);
+    expect(response.result?.deletedCount).to.be.greaterThanOrEqual(
       ENTRIES_TO_INSERT,
     );
   });
 
-  it('should return an error for a non-existent collection', async () => {
+  it('should throw an error for a non-existent collection', async () => {
     const request = new DeleteManyRequest({
       collectionName: 'someNonExistentCollection',
     });
-    const result = await deleteMany(request);
-    expect(result.isError).to.be.true;
+    await expect(deleteMany(request)).to.be.rejected;
   });
 });

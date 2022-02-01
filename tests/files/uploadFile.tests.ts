@@ -33,12 +33,11 @@ describe('uploadFile', () => {
         contentType: 'text/plain',
       },
     });
-    const result = await uploadFile(request);
-    expect(result.isSuccess).to.be.true;
-    expect(result.response?.result).to.not.be.null;
+    const response = await uploadFile(request);
+    expect(response).to.not.be.null;
 
     const delRequest = new DeleteFileRequest({
-      fileId: result?.response?.result?.id,
+      fileId: response.result?.id,
     });
     await deleteFile(delRequest);
   });

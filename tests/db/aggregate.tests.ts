@@ -39,8 +39,8 @@ describe('aggregate', () => {
         FirstName: MATCH_NAME,
       },
     });
-    const result = await aggregate(request);
-    const count = result.response?.length;
+    const response = await aggregate(request);
+    const count = response.result?.length;
 
     expect(count).to.be.greaterThanOrEqual(RECORD_COUNT);
   });

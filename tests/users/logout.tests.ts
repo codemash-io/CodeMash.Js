@@ -17,18 +17,17 @@ describe('logout', () => {
     });
   });
 
-  it('should logout with newly created user credentials', async () => {
+  it('should throw forbidden error', async () => {
     const createRequest = new RegisterUserRequest({
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
       displayName: faker.internet.userName(),
       email: EMAIL,
       password: PASSWORD,
-      autoLogin: true,
+      autoLogin: false,
     });
     await registerUser(createRequest);
-    const result = await logout();
 
-    expect(result.response).to.not.be.null;
+    await expect(registerUser(createRequest)).to.be.rejected;
   });
 });

@@ -28,13 +28,12 @@ describe('updateUser', () => {
     const createResult = await registerUser(createRequest);
 
     const request = new UpdateUserRequest({
-      id: createResult.response?.userId,
+      id: createResult.userId,
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
       displayName: faker.internet.userName(),
     });
-    const result = await updateUser(request);
-    expect(result.isSuccess).to.be.true;
-    expect(result.response).to.be.not.null;
+    const response = await updateUser(request);
+    expect(response).to.not.be.null;
   });
 });

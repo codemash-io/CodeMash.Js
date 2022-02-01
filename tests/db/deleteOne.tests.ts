@@ -37,15 +37,14 @@ describe('deleteOne', () => {
       },
     });
 
-    const result = await deleteOne(request);
-    expect(result.response?.result?.deletedCount).to.be.equal(1);
+    const response = await deleteOne(request);
+    expect(response.result?.deletedCount).to.be.equal(1);
   });
 
-  it('should return an error for a non-existent collection', async () => {
+  it('should throw an error for a non-existent collection', async () => {
     const request = new DeleteOneRequest({
       collectionName: 'someNonExistentCollection',
     });
-    const result = await deleteOne(request);
-    expect(result.isError).to.be.true;
+    await expect(deleteOne(request)).to.be.rejected;
   });
 });

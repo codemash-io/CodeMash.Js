@@ -17,7 +17,7 @@ describe('createUserDeactivation', () => {
     });
   });
 
-  it('should create a new user deactivation token', async () => {
+  it('should throw action not allowed error', async () => {
     const createRequest = new RegisterUserRequest({
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
@@ -29,7 +29,6 @@ describe('createUserDeactivation', () => {
     await registerUser(createRequest);
 
     const request = new CreateUserDeactivationRequest(); // TODO: select new user from above
-    const result = await createUserDeactivation(request);
-    expect(result.response).to.not.be.null;
+    await expect(createUserDeactivation(request)).to.be.rejected;
   });
 });

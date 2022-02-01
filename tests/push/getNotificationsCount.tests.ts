@@ -13,9 +13,9 @@ describe('getNotificationsCount', () => {
     });
   });
 
-  it('should return an error for invalid data', async () => {
+  it('should throw an error for invalid data', async () => {
     const request = new GetNotificationsCountRequest();
-    const result = await getNotificationsCount(request);
-    expect(result).to.not.be.null;
+    const response = await getNotificationsCount(request);
+    expect(response).to.not.be.null;
   });
 });

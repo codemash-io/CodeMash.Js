@@ -27,22 +27,22 @@ describe('updateOne', () => {
         first_name: CREATE_NAME,
       },
     });
-    const newEntry = await insertOne(insert);
+    const newEntryResponse = await insertOne(insert);
 
     const request = new UpdateOneRequest({
       collectionName: 'employees',
-      id: newEntry.response?._id?.$oid,
+      id: newEntryResponse?._id?.$oid,
       update: {
         $set: {
           first_name: UPDATE_NAME,
         },
       },
     });
-    const result = await updateOne(request);
-    expect(result.response?.result?.modifiedCount).to.be.equal(1);
+    const response = await updateOne(request);
+    expect(response.result?.modifiedCount).to.be.equal(1);
   });
 
-  it('should return an error for a non-existent collection', async () => {
+  it('should throw an error for a non-existent collection', async () => {
     const insert = new InsertOneRequest({
       collectionName: 'employees',
       document: {
@@ -60,9 +60,8 @@ describe('updateOne', () => {
         },
       },
     });
-    const response = await updateOne(request);
-    expect(response).to.be.not.null;
-    expect(response.isError).to.be.true;
+
+    await expect(updateOne(request)).to.be.rejected;
   });
 
   after(async () => {

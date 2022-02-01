@@ -21,7 +21,7 @@ describe('uploadOrderFile', () => {
         contentType: '',
       },
     });
-    const result = await uploadOrderFile(request);
-    expect(result.isError).to.be.true;
+
+    await expect(uploadOrderFile(request)).to.be.rejected;
   });
 });

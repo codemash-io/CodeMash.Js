@@ -13,12 +13,11 @@ describe('createCustomer', () => {
     });
   });
 
-  it('should return an error for invalid data', async () => {
+  it('should throw an error for invalid data', async () => {
     const request = new CreateCustomerRequest({
       accountId: 'invalidaccountId',
       userId: 'invaliduserId',
     });
-    const result = await createCustomer(request);
-    expect(result.isError).to.be.true;
+    expect(createCustomer(request)).to.be.rejected;
   });
 });

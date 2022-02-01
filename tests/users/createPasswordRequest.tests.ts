@@ -32,8 +32,7 @@ describe('createPasswordReset', () => {
     const request = new CreatePasswordResetRequest({
       email: EMAIL_ADDRESS,
     });
-    const result = await createPasswordReset(request);
-    expect(result.isSuccess).to.be.true;
-    expect(result.response).to.be.not.null;
+    const response = await createPasswordReset(request);
+    expect(response).to.not.be.null;
   });
 });

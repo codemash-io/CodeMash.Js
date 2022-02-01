@@ -21,8 +21,7 @@ describe('registerGuest', () => {
       email: faker.internet.email(),
     });
 
-    const result = await registerGuest(request);
-    expect(result.isSuccess).to.be.true;
-    expect(result.response).to.be.not.null;
+    const response = await registerGuest(request);
+    expect(response).to.not.be.null;
   });
 });

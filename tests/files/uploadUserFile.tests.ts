@@ -21,7 +21,6 @@ describe('uploadUserFile', () => {
         contentType: '',
       },
     });
-    const result = await uploadUserFile(request);
-    expect(result.isError).to.be.true;
+    await expect(uploadUserFile(request)).to.be.rejected;
   });
 });

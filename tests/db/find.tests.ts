@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 import { find } from '../../src/modules/database';
 import { FindRequest } from '../../src/types/codemash.dtos';
 
-describe('find', () => {
+describe('findMany', () => {
   beforeEach(() => {
     dotenv.config({
       path: path.resolve(__dirname, '../data/config/.env'),
@@ -18,14 +18,16 @@ describe('find', () => {
       collectionName: 'employees',
     });
     const response = await find(request);
-    expect(response.isSuccess).to.be.true;
+    console.log(`response`, response.result[0]._id, response);
+
+    expect(response.totalCount).to.be.greaterThanOrEqual(0);
   });
 
-  it('should return an error for a non-existent collection', async () => {
+  it('should throw an error for a non-existent collection', async () => {
     const request = new FindRequest({
       collectionName: 'someNonExistentCollection',
     });
-    const response = await find(request);
-    expect(response.isError).to.be.true;
+
+    await expect(find(request)).to.be.rejected;
   });
 });

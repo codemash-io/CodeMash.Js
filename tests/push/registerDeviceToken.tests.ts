@@ -13,7 +13,7 @@ describe('registerDeviceToken', () => {
     });
   });
 
-  it('should return an error for invalid data', async () => {
+  it('should throw an error for invalid data', async () => {
     const request = new RegisterDeviceTokenRequest({
       provider: 'invalidPprvider',
       accountId: 'invalidAccountId',
@@ -21,7 +21,6 @@ describe('registerDeviceToken', () => {
       userId: 'invalidUserId',
       deviceId: 'invaliddeviceId',
     });
-    const result = await registerDeviceToken(request);
-    expect(result.isError).to.be.true;
+    await expect(registerDeviceToken(request)).to.be.rejected;
   });
 });

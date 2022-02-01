@@ -13,12 +13,11 @@ describe('getNotification', () => {
     });
   });
 
-  it('should return an error for invalid data', async () => {
+  it('should throw an error for invalid data', async () => {
     const request = new GetNotificationRequest({
       id: 'invalidId',
       deviceKey: 'invaliddeviceKey',
     });
-    const result = await getNotification(request);
-    expect(result.isError).to.be.true;
+    await expect(getNotification(request)).to.be.rejected;
   });
 });

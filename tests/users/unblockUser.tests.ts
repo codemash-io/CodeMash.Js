@@ -28,16 +28,15 @@ describe('unblockUser', () => {
     const createdUser = await registerUser(createUser);
 
     const blockReq = new BlockUserRequest({
-      id: createdUser.response?.userId,
+      id: createdUser.userId,
     });
     await blockUser(blockReq);
 
     const request = new UnblockUserRequest({
-      id: createdUser.response?.userId,
+      id: createdUser.userId,
     });
-    const result = await unblockUser(request);
+    const response = await unblockUser(request);
 
-    expect(result.isSuccess).to.be.true;
-    expect(result.response).to.be.not.null;
+    expect(response).to.not.be.null;
   });
 });

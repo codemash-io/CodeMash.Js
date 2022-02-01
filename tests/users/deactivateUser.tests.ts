@@ -13,12 +13,10 @@ describe('deactivateUser', () => {
     });
   });
 
-  it('should return an error for bad token', async () => {
+  it('should throw an error for bad token', async () => {
     const request = new DeactivateUserRequest({
       token: 'clearlyABadToken',
     });
-    const result = await deactivateUser(request);
-
-    expect(result.isError).to.be.true;
+    await expect(deactivateUser(request)).to.be.rejected;
   });
 });

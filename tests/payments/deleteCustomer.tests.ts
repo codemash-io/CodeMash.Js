@@ -13,11 +13,10 @@ describe('deleteCustomer', () => {
     });
   });
 
-  it('should return an error for invalid data', async () => {
+  it('should throw an error for invalid data', async () => {
     const request = new DeleteCustomerRequest({
       id: 'nonExistentCustomer',
     });
-    const result = await deleteCustomer(request);
-    expect(result.isError).to.be.true;
+    await expect(deleteCustomer(request)).to.be.rejected;
   });
 });

@@ -13,12 +13,11 @@ describe('deleteNotification', () => {
     });
   });
 
-  it('should return an error for invalid data', async () => {
+  it('should throw an error for invalid data', async () => {
     const request = new DeleteNotificationRequest({
       id: 'invalidId',
       deviceKey: 'invaliddeviceKey',
     });
-    const result = await deleteNotification(request);
-    expect(result.isError).to.be.true;
+    await expect(deleteNotification(request)).to.be.rejected;
   });
 });

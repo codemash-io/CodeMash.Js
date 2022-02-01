@@ -15,7 +15,7 @@ describe('getNotifications', () => {
 
   it('should return some or none notifications without error', async () => {
     const request = new GetNotificationsRequest();
-    const result = await getNotifications(request);
-    expect(result.isSuccess).to.be.true;
+    const response = await getNotifications(request);
+    expect(response).to.not.be.null;
   });
 });

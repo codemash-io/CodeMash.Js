@@ -13,12 +13,11 @@ describe('verifyUser', () => {
     });
   });
 
-  it('should return an error for invalid token', async () => {
+  it('should throw an error for invalid token', async () => {
     const request = new VerifyUserRequest({
       token: 'clearlyInvalidToken',
     });
-    const result = await verifyUser(request);
 
-    expect(result.response).to.not.be.null;
+    expect(verifyUser(request)).to.be.rejected;
   });
 });

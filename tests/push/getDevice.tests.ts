@@ -13,11 +13,10 @@ describe('getDevice', () => {
     });
   });
 
-  it('should return an error for invalid data', async () => {
+  it('should throw an error for invalid data', async () => {
     const request = new GetDeviceRequest({
       id: 'invalidId',
     });
-    const result = await getDevice(request);
-    expect(result.isError).to.be.true;
+    await expect(getDevice(request)).to.be.rejected;
   });
 });

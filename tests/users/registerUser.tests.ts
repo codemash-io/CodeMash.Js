@@ -21,9 +21,8 @@ describe('registerUser', () => {
       email: faker.internet.email(),
       password: faker.internet.password(),
     });
-    const result = await registerUser(request);
+    const response = await registerUser(request);
 
-    expect(result.isSuccess).to.be.true;
-    expect(result.response).to.be.not.null;
+    expect(response).to.not.be.null;
   });
 });

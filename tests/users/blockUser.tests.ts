@@ -27,11 +27,10 @@ describe('blockUser', () => {
     const createdUser = await registerUser(createUser);
 
     const request = new BlockUserRequest({
-      id: createdUser.response?.userId,
+      id: createdUser.userId,
     });
-    const result = await blockUser(request);
+    const response = await blockUser(request);
 
-    expect(result.isSuccess).to.be.true;
-    expect(result.response).to.be.not.null;
+    expect(response).to.not.be.null;
   });
 });

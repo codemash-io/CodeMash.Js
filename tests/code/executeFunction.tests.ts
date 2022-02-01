@@ -13,13 +13,11 @@ describe('executeFunction', () => {
     });
   });
 
-  it('should return an error for invalid function id', async () => {
+  it('should throw an error for invalid function id', async () => {
     const request = new ExecuteFunctionRequest({
       data: '',
       id: 'invalidFunctionId',
     });
-    const result = await executeFunction(request);
-
-    expect(result.isError).to.be.true;
+    await expect(executeFunction(request)).to.be.rejected;
   });
 });

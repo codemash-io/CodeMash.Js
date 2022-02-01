@@ -15,9 +15,8 @@ describe('getProfile', () => {
 
   it('should get the profile', async () => {
     const request = new GetProfileRequest();
-    const result = await getProfile(request);
+    const response = await getProfile(request);
 
-    expect(result.isSuccess).to.be.true;
-    expect(result.response?.result).to.be.not.null;
+    expect(response.result).to.not.be.null;
   });
 });

@@ -35,9 +35,8 @@ describe('login', () => {
       userName: EMAIL,
       password: PASSWORD,
     });
-    const result = await login(request);
+    const response = await login(request);
 
-    expect(result.isSuccess).to.be.true;
-    expect(result.response?.bearerToken).to.be.not.null;
+    expect(response.bearerToken).to.be.not.null;
   });
 });

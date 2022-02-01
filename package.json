@@ -8,7 +8,8 @@
   "scripts": {
     "ts-types": " tsc --emitDeclarationOnly --outDir dist",
     "build": "rimraf build && node ./esbuild.config.js && npm run ts-types",
-    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' nyc mocha -r ts-node/register 'tests/**/*.ts' --timeout 3600000",
+    "test:coverage": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' nyc mocha -r ts-node/register 'tests/**/*.ts' --timeout 3600000",
+    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/**/*.ts' --timeout 3600000",
     "format:check": "prettier --check \"**/*.{js,jsx,yml,yaml,json.css}\"",
     "format": "prettier --write \"**/*.{js,jsx,yml,yaml,json.css}\"",
     "commit": "cz",
@@ -96,7 +97,8 @@
     "yarn": "^1.22.17"
   },
   "dependencies": {
-    "@servicestack/client": "^1.1.1"
+    "@servicestack/client": "^1.1.1",
+    "deep-parse-json": "^1.0.2"
   },
   "husky": {
     "hooks": {

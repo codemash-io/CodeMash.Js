@@ -13,11 +13,10 @@ describe('getCustomer', () => {
     });
   });
 
-  it('should return an error for invalid data', async () => {
+  it('should throw an error for invalid data', async () => {
     const request = new GetCustomerRequest({
       id: 'invalidCustomerId',
     });
-    const result = await getCustomer(request);
-    expect(result.isError).to.be.true;
+    await expect(getCustomer(request)).to.be.rejected;
   });
 });

@@ -13,11 +13,11 @@ describe('getFile', () => {
     });
   });
 
-  it('should return an error for invalid file id', async () => {
+  it('should throw an error for invalid file id', async () => {
     const request = new GetFileRequest({
       fileId: 'badFileId',
     });
-    const result = await getFile(request);
-    expect(result.isError).to.be.true;
+
+    await expect(getFile(request)).to.be.rejected;
   });
 });

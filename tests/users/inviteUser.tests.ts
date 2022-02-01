@@ -22,8 +22,7 @@ describe('inviteUser', () => {
       displayName: faker.internet.userName(),
     });
 
-    const result = await inviteUser(request);
-    expect(result.isSuccess).to.be.true;
-    expect(result.response).to.be.not.null;
+    const response = await inviteUser(request);
+    expect(response).to.not.be.null;
   });
 });

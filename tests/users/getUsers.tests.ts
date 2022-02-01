@@ -15,9 +15,8 @@ describe('getUsers', () => {
 
   it('should get all users', async () => {
     const request = new GetUsersRequest();
-    const result = await getUsers(request);
+    const response = await getUsers(request);
 
-    expect(result.isSuccess).to.be.true;
-    expect(result.response?.totalCount).to.be.greaterThanOrEqual(0);
+    expect(response.totalCount).to.be.greaterThanOrEqual(0);
   });
 });

@@ -29,11 +29,10 @@ describe('getUser', () => {
     const createRes = await registerUser(createReq);
 
     const request = new GetUserRequest({
-      id: createRes.response?.userId,
+      id: createRes.userId,
     });
-    const result = await getUser(request);
+    const response = await getUser(request);
 
-    expect(result.isSuccess).to.be.true;
-    expect(result.response?.result?.firstName).to.equal(NAME_TO_MATCH);
+    expect(response.result?.firstName).to.equal(NAME_TO_MATCH);
   });
 });
