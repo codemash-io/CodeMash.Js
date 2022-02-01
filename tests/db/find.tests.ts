@@ -18,14 +18,14 @@ describe('find', () => {
       collectionName: 'employees',
     });
     const response = await find(request);
-    expect(response.isSuccess).to.be.true;
+    expect(response.totalCount).to.be.greaterThanOrEqual(0);
   });
 
-  it('should return an error for a non-existent collection', async () => {
+  it('should throw an error for a non-existent collection', async () => {
     const request = new FindRequest({
       collectionName: 'someNonExistentCollection',
     });
-    const response = await find(request);
-    expect(response.isError).to.be.true;
+
+    await expect(find(request)).to.be.rejected;
   });
 });

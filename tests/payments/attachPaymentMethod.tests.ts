@@ -13,7 +13,7 @@ describe('attachPaymentMethod', () => {
     });
   });
 
-  it('should return an error for invalid data', async () => {
+  it('should throw an error for invalid data', async () => {
     const request = new AttachPaymentMethodRequest({
       customerId: 'invalidCustomer',
       setupId: 'invalidSetup',
@@ -21,7 +21,6 @@ describe('attachPaymentMethod', () => {
       asDefault: false,
       detachOthers: false,
     });
-    const result = await attachPaymentMethod(request);
-    expect(result.isError).to.be.true;
+    await expect(attachPaymentMethod(request)).to.be.rejected;
   });
 });

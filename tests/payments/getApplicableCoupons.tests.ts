@@ -13,11 +13,11 @@ describe('getApplicableCoupons', () => {
     });
   });
 
-  it('should return an error for invalid data', async () => {
+  it('should throw an error for invalid data', async () => {
     const request = new GetApplicableCouponsRequest({
       codes: [],
     });
-    const result = await getApplicableCoupons(request);
-    expect(result).to.not.be.null;
+    const response = await getApplicableCoupons(request);
+    expect(response).to.not.be.null;
   });
 });

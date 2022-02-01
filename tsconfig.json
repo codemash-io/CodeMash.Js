@@ -1,11 +1,16 @@
 {
-	"extends": "./tsconfig.base.json",
-	"compilerOptions": {
-		"baseUrl": "./src",
-	},
-	"include": ["./src/**/*"],
-	"linterOptions": {
-		"exclude": ["docs"]
-	},
-	"exclude": ["**/tests", "docs", "node_modules"]
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "rootDir": "src",
+    "typeRoots": ["./node_modules/@types", "./src/types", "./types"]
+  },
+  "include": ["./src/**/*"],
+  "linterOptions": {
+    "exclude": ["docs"]
+  },
+  "exclude": ["**/tests", "docs", "node_modules"],
+  "ts-node": {
+    "files": true
+  }
 }

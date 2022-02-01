@@ -1,8 +1,7 @@
 import { getMethod, IReturn, JsonServiceClient } from '@servicestack/client';
 import { CMConfig } from 'config';
 import { ICMConfig } from 'config/config';
-import { ICMDbResult } from 'types';
-import { isJsonResponse } from 'utils/api';
+import { deepParseJson } from 'deep-parse-json';
 
 enum StringifiedFields {
   Update = 'update',
@@ -41,26 +40,23 @@ export class RestClient extends JsonServiceClient {
     }
   }
 
-  private transformApiResult(target: any): ICMDbResult {
-    // transform given api string result to a js object.
-    const { isSuccess, response, isError, errorStatus } = target;
-    const { responseStatus, result } = response || {};
-
-    if (CMConfig.getInstance().showLogs) {
-      console.log(`Result for ${getMethod(target)} request: `, target);
-    }
-
-    // Fixes the issue when sometimes result comes with { isSuccess: false, isError: false }.
-    return {
-      isSuccess: isSuccess || isError === false,
-      isError,
-      errorStatus,
-      responseStatus,
-      response: isJsonResponse(result) ? JSON.parse(result) : response,
-    };
+  private getRequestName(request: any) {
+    return request?.getTypeName();
   }
 
-  public async request<T>(request: TRequest<T>): Promise<ICMDbResult> {
+  private transformApiResult(result: any, requestName?: string) {
+    // transform given api string result to a js object.
+    if (CMConfig.getInstance().showLogs) {
+      console.log(
+        `Result for ${getMethod(result)} ${requestName} request: `,
+        deepParseJson(result),
+      );
+    }
+
+    return deepParseJson(result);
+  }
+
+  public async request<T>(request: TRequest<T>) {
     // stringify selected fields that are passed as objects.
     Object.values(StringifiedFields).forEach(key => {
       const value = request[key];
@@ -83,8 +79,11 @@ export class RestClient extends JsonServiceClient {
       console.log(`Outgoing ${getMethod(request)} request: `, request);
     }
 
-    const result = await this.api((request as any) as IReturn<T>);
+    const response = await this.fetch(
+      getMethod(request),
+      (request as any) as IReturn<T>,
+    );
 
-    return this.transformApiResult(result);
+    return this.transformApiResult(response, this.getRequestName(request));
   }
 }

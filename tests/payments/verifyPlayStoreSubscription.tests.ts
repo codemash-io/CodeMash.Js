@@ -13,12 +13,11 @@ describe('verifyPlayStoreSubscription', () => {
     });
   });
 
-  it('should return an error for invalid data', async () => {
+  it('should throw an error for invalid data', async () => {
     const request = new VerifyGooglePlayStoreSubscriptionRequest({
       customerId: 'invalidId',
       planId: 'invalidId',
     });
-    const result = await verifyPlayStoreSubscription(request);
-    expect(result.isError).to.be.true;
+    await expect(verifyPlayStoreSubscription(request)).to.be.rejected;
   });
 });

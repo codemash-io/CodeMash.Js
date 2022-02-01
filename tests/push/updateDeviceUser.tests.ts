@@ -13,12 +13,11 @@ describe('updateDeviceUser', () => {
     });
   });
 
-  it('should return an error for invalid data', async () => {
+  it('should throw an error for invalid data', async () => {
     const request = new UpdateDeviceUserRequest({
       id: 'invalidId',
       userId: 'nonExistentUser',
     });
-    const result = await updateDeviceUser(request);
-    expect(result.isError).to.be.true;
+    await expect(updateDeviceUser(request)).to.be.rejected;
   });
 });

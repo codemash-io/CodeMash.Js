@@ -13,11 +13,10 @@ describe('updateSubscription', () => {
     });
   });
 
-  it('should return an error for invalid data', async () => {
+  it('should throw an error for invalid data', async () => {
     const request = new UpdateSubscriptionRequest({
       id: 'invalidId',
     });
-    const result = await updateSubscription(request);
-    expect(result.isError).to.be.true;
+    await expect(updateSubscription(request)).to.be.rejected;
   });
 });

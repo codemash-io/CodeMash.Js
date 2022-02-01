@@ -38,17 +38,16 @@ describe('distinct', () => {
     });
     const response = await distinct(request);
 
-    expect(response.response?.result as Array<string>).to.include(MATCH_NAME);
-    expect(response.response?.result?.length).to.be.greaterThanOrEqual(1);
+    expect(response.result as Array<string>).to.include(MATCH_NAME);
+    expect(response.result?.length).to.be.greaterThanOrEqual(1);
   });
 
-  it('should return an error for a non-existent collection', async () => {
+  it('should throw an error for a non-existent collection', async () => {
     const request = new DistinctRequest({
       collectionName: 'someNonExistentCollection',
       field: 'first_name',
     });
-    const result = await distinct(request);
-    expect(result.isError).to.be.true;
+    await expect(distinct(request)).to.be.rejected;
   });
 
   after(async () => {

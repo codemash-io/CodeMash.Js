@@ -13,7 +13,7 @@ describe('changeSubscription', () => {
     });
   });
 
-  it('should return an error for invalid data', async () => {
+  it('should throw an error for invalid data', async () => {
     const request = new ChangeSubscriptionRequest({
       id: 'invalidId',
       customerId: 'invalidCustomerId',
@@ -21,7 +21,6 @@ describe('changeSubscription', () => {
       paymentMethodId: 'invalidMethodId',
       coupon: 'invalidId',
     });
-    const result = await changeSubscription(request);
-    expect(result.response).to.not.be.null;
+    await expect(changeSubscription(request)).to.be.rejected;
   });
 });

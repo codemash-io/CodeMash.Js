@@ -18,16 +18,15 @@ describe('findTerms', () => {
       collectionName: 'countries',
     });
 
-    const result = await findTerms(request);
-    expect(result.response?.result).length.to.be.greaterThanOrEqual(0);
+    const response = await findTerms(request);
+    expect(response.result).length.to.be.greaterThanOrEqual(0);
   });
 
-  it('should return an error for non-existent taxonomy', async () => {
+  it('should throw an error for non-existent taxonomy', async () => {
     const request = new FindTermsRequest({
       collectionName: 'n0nExistentTaxonomy',
     });
 
-    const response = await findTerms(request);
-    expect(response.isError).to.be.true;
+    await expect(findTerms(request)).to.be.rejected;
   });
 });

@@ -27,27 +27,25 @@ describe('replaceOne', () => {
         first_name: INITIAL_ENTRY_NAME,
       },
     });
-    const newEntry = await insertOne(insertRequest);
+    const newEntryResponse = await insertOne(insertRequest);
 
     const request = new ReplaceOneRequest({
       collectionName: 'employees',
-      id: newEntry.response?._id?.$oid,
+      id: newEntryResponse?._id?.$oid,
       document: {
         first_name: REPLACE_WITH_NAME,
       },
     });
-    const result = await replaceOne(request);
-    expect(result.response?.result.matchedCount).to.be.equal(1);
+    const response = await replaceOne(request);
+    expect(response.result?.matchedCount).to.be.equal(1);
   });
 
-  it('should return an error for a non-existent collection', async () => {
+  it('should throw an error for a non-existent collection', async () => {
     const request = new ReplaceOneRequest({
       collectionName: 'nonExistentCollection',
       id: 'empty',
     });
-    const response = await replaceOne(request);
-    expect(response).to.be.not.null;
-    expect(response.isError).to.be.true;
+    await expect(replaceOne(request)).to.be.rejected;
   });
 
   after(async () => {

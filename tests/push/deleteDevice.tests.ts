@@ -13,11 +13,10 @@ describe('deleteDevice', () => {
     });
   });
 
-  it('should return an error for invalid data', async () => {
+  it('should throw an error for invalid data', async () => {
     const request = new DeleteDeviceRequest({
       id: 'invalidId',
     });
-    const result = await deleteDevice(request);
-    expect(result.isError).to.be.true;
+    await expect(deleteDevice(request)).to.be.rejected;
   });
 });

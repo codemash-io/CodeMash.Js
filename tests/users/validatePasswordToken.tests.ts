@@ -43,7 +43,7 @@ describe('validatePasswordToken', () => {
     // const validationRequest = new ValidatePasswordTokenRequest({
     //   token: ?
     // });
-    // expect(result.isSuccess).to.be.true;
+    // expect(response).to.not.be.null;
     // expect(result.response).to.be.not.null;
   });
 });

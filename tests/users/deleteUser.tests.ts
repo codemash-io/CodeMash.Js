@@ -27,11 +27,10 @@ describe('deleteUser', () => {
     const createdUser = await registerUser(createUser);
 
     const request = new DeleteUserRequest({
-      id: createdUser.response?.userId,
+      id: createdUser.userId,
     });
-    const result = await deleteUser(request);
+    const response = await deleteUser(request);
 
-    expect(result.isSuccess).to.be.true;
-    expect(result.response).to.be.not.null;
+    expect(response).to.not.be.null;
   });
 });

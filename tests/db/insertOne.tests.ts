@@ -25,19 +25,17 @@ describe('insertOne', () => {
     });
     const response = await insertOne(request);
     expect(response).to.be.not.null;
-    expect(response.isSuccess).to.be.true;
   });
 
-  it('should return an error for a non-existent collection', async () => {
+  it('should throw an error for a non-existent collection', async () => {
     const request = new InsertOneRequest({
       collectionName: 'nonExistentCollection',
       document: {
         dummy: 'data',
       },
     });
-    const response = await insertOne(request);
-    expect(response).to.be.not.null;
-    expect(response.isError).to.be.true;
+
+    await expect(insertOne(request)).to.be.rejected;
   });
 
   after(async () => {

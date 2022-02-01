@@ -13,14 +13,13 @@ describe('cancelSubscription', () => {
     });
   });
 
-  it('should return an error for invalid data', async () => {
+  it('should throw an error for invalid data', async () => {
     const request = new CancelSubscriptionRequest({
       id: 'emptyId',
       customerId: 'invalidCustomer',
       cancelInstantly: false,
       refundOnCancelInstantly: false,
     });
-    const result = await cancelSubscription(request);
-    expect(result.isError).to.be.true;
+    await expect(cancelSubscription(request)).to.be.rejected;
   });
 });

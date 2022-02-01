@@ -13,12 +13,12 @@ describe('markNotificationAsRead', () => {
     });
   });
 
-  it('should return an error for invalid data', async () => {
+  it('should throw an error for invalid data', async () => {
     const request = new MarkNotificationAsReadRequest({
       deviceKey: 'invaliddeviceKey',
       notificationId: 'invalidnotificationId',
     });
-    const result = await markNotificationAsRead(request);
-    expect(result).to.not.be.null;
+    const response = await markNotificationAsRead(request);
+    expect(response).to.not.be.null;
   });
 });

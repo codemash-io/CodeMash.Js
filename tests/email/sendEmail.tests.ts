@@ -13,13 +13,11 @@ describe('sendEmail', () => {
     });
   });
 
-  it('should return an error for invalid template id', async () => {
+  it('should throw an error for invalid template id', async () => {
     const request = new SendEmailRequest({
       emails: ['no-reply@codemash.io'],
       templateId: 'invalidTemplateId',
     });
-    const result = await sendEmail(request);
-
-    expect(result.isError).to.be.true;
+    await expect(sendEmail(request)).to.be.rejected;
   });
 });

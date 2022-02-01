@@ -13,12 +13,11 @@ describe('createStripeTransaction', () => {
     });
   });
 
-  it('should return an error for invalid data', async () => {
+  it('should throw an error for invalid data', async () => {
     const request = new CreateStripeTransactionRequest({
       id: 'invalidId',
       paymentMethodId: 'invalidPaymentMethod',
     });
-    const result = await createStripeTransaction(request);
-    expect(result.isError).to.be.true;
+    await expect(createStripeTransaction(request)).to.be.rejected;
   });
 });

@@ -13,13 +13,12 @@ describe('registerDeviceExpoToken', () => {
     });
   });
 
-  it('should return an error for invalid data', async () => {
+  it('should throw an error for invalid data', async () => {
     const request = new RegisterDeviceExpoTokenRequest({
       token: 'invalidtoken',
       userId: 'invalidUserId',
       deviceId: 'invaliddeviceId',
     });
-    const result = await registerDeviceExpoToken(request);
-    expect(result.isError).to.be.true;
+    await expect(registerDeviceExpoToken(request)).to.be.rejected;
   });
 });

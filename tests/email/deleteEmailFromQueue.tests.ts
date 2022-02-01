@@ -13,12 +13,10 @@ describe('deleteEmailFromQueue', () => {
     });
   });
 
-  it('should return an error for invalid email id', async () => {
+  it('should throw an error for invalid email id', async () => {
     const request = new DeleteEmailFromQueueRequest({
       id: 'invalidEmailid',
     });
-    const result = await deleteEmailFromQueue(request);
-
-    expect(result.isError).to.be.true;
+    await expect(deleteEmailFromQueue(request)).to.be.rejected;
   });
 });

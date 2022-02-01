@@ -13,12 +13,11 @@ describe('createOrder', () => {
     });
   });
 
-  it('should return an error for invalid data', async () => {
+  it('should throw an error for invalid data', async () => {
     const request = new CreateOrderRequest({
       accountId: 'invalidId',
       orderSchemaId: 'invalidId',
     });
-    const result = await createOrder(request);
-    expect(result.isError).to.be.true;
+    await expect(createOrder(request)).to.be.rejected;
   });
 });

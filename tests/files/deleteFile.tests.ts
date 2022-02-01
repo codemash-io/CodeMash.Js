@@ -36,11 +36,10 @@ describe('deleteFile', () => {
     const newFile = await uploadFile(newFileReq);
 
     const delRequest = new DeleteFileRequest({
-      fileId: newFile?.response?.result?.id,
+      fileId: newFile.key,
     });
-    const result = await deleteFile(delRequest);
-
-    expect(result.isSuccess).to.be.true;
+    const response = await deleteFile(delRequest);
+    expect(response).to.not.be.null;
   });
 
   after(async () => {

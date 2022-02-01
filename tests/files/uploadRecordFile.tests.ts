@@ -21,7 +21,6 @@ describe('uploadRecordFile', () => {
         contentType: '',
       },
     });
-    const result = await uploadRecordFile(request);
-    expect(result.isError).to.be.true;
+    await expect(uploadRecordFile(request)).to.be.rejected;
   });
 });

@@ -13,11 +13,10 @@ describe('createPayseraTransaction', () => {
     });
   });
 
-  it('should return an error for invalid data', async () => {
+  it('should throw an error for invalid data', async () => {
     const request = new CreatePayseraTransactionRequest({
       id: 'invalidId',
     });
-    const result = await createPayseraTransaction(request);
-    expect(result.isError).to.be.true;
+    await expect(createPayseraTransaction(request)).to.be.rejected;
   });
 });

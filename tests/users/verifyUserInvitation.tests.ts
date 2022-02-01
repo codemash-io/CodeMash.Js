@@ -22,8 +22,6 @@ describe('verifyUserInvitation', () => {
       password,
       repeatedPassword: password,
     });
-    const result = await verifyUserInvitation(request);
-
-    expect(result).to.not.be.null;
+    await expect(verifyUserInvitation(request)).to.be.rejected;
   });
 });

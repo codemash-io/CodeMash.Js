@@ -42,14 +42,14 @@ describe('updateMany', () => {
         },
       },
     });
-    const result = await updateMany(request);
+    const response = await updateMany(request);
 
-    expect(result.response?.result?.modifiedCount).to.be.greaterThanOrEqual(
+    expect(response.result?.modifiedCount).to.be.greaterThanOrEqual(
       ENTRIES_TO_CREATE,
     );
   });
 
-  it('should return an error for a non-existent collection', async () => {
+  it('should throw an error for a non-existent collection', async () => {
     const insert = new InsertManyRequest({
       collectionName: 'employees',
       documents: Array.from({ length: ENTRIES_TO_CREATE }).map(() => ({
@@ -69,9 +69,7 @@ describe('updateMany', () => {
         },
       },
     });
-    const response = await updateMany(request);
-    expect(response).to.be.not.null;
-    expect(response.isError).to.be.true;
+    await expect(updateMany(request)).to.be.rejected;
   });
 
   after(async () => {

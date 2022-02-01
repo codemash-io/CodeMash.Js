@@ -13,10 +13,10 @@ describe('updateDeviceMeta', () => {
     });
   });
 
-  it('should return an error for invalid data', async () => {
+  it('should throw an error for invalid data', async () => {
     const request = new UpdateDeviceMetaRequest();
-    const result = await updateDeviceMeta(request);
-    
-    expect(result.response).to.not.be.null;
+    const response = await updateDeviceMeta(request);
+
+    expect(response).to.not.be.null;
   });
 });

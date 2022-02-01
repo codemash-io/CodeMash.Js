@@ -18,16 +18,15 @@ describe('findTermsChildren', () => {
       collectionName: 'countries',
     });
 
-    const result = await findTermsChildren(request);
-    expect(result.response?.totalCount).to.be.greaterThanOrEqual(0);
+    const response = await findTermsChildren(request);
+    expect(response.totalCount).to.be.greaterThanOrEqual(0);
   });
 
-  it('should return an error for non-existent taxonomy', async () => {
+  it('should throw an error for non-existent taxonomy', async () => {
     const request = new FindTermsChildrenRequest({
       collectionName: 'n0nExistentTaxonomy',
     });
 
-    const response = await findTermsChildren(request);
-    expect(response.isError).to.be.true;
+    await expect(findTermsChildren(request)).to.be.rejected;
   });
 });

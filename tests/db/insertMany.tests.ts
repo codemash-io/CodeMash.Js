@@ -23,17 +23,14 @@ describe('insertMany', () => {
     });
     const response = await insertMany(request);
     expect(response).to.be.not.null;
-    expect(response.isSuccess).to.be.true;
   });
 
-  it('should return an error for a non-existent collection', async () => {
+  it('should throw an error for a non-existent collection', async () => {
     const request = new InsertManyRequest({
       collectionName: 'nonExistentCollection',
       documents: [{ first_name: 'Dummy' }, { first_name: 'Dummy' }],
     });
-    const response = await insertMany(request);
-    expect(response).to.be.not.null;
-    expect(response.isError).to.be.true;
+    await expect(insertMany(request)).to.be.rejected;
   });
 
   after(async () => {

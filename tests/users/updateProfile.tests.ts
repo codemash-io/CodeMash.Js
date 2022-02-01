@@ -20,10 +20,10 @@ describe('updateProfile', () => {
   //     firstName: faker.name.firstName(),
   //     lastName: faker.name.lastName(),
   //   });
-  //   const result = await updateProfile(request);
+  //   const response = await updateProfile(request);
   //   console.log(`result`, result);
 
-  //   expect(result.isSuccess).to.be.true;
+  //   expect(response).to.not.be.null;
   //   expect(result.response).to.be.not.null;
   // });
 });

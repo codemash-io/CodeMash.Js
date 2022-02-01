@@ -17,8 +17,7 @@ describe('validateUserDeactivationToken', () => {
     const request = new ValidateUserDeactivationTokenRequest({
       token: '?',
     });
-    const result = await validateUserDeactivationToken(request);
 
-    expect(result).to.not.be.null;
+    expect(validateUserDeactivationToken(request)).to.be.rejected;
   });
 });

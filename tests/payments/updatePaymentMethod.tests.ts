@@ -13,11 +13,10 @@ describe('updatePaymentMethod', () => {
     });
   });
 
-  it('should return an error for invalid data', async () => {
+  it('should throw an error for invalid data', async () => {
     const request = new UpdatePaymentMethodRequest({
       id: 'invalidId',
     });
-    const result = await updatePaymentMethod(request);
-    expect(result.isError).to.be.true;
+    expect(updatePaymentMethod(request)).to.be.rejected;
   });
 });
