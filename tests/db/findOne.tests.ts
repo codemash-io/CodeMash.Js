@@ -24,8 +24,6 @@ describe('findOne', () => {
       },
     });
     const response = await findOne(request);
-    console.log(`response,`, response);
-
     expect(response).to.be.not.null;
   });
 

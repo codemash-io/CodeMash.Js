@@ -18,8 +18,6 @@ describe('find', () => {
       collectionName: 'employees',
     });
     const response = await find(request);
-    console.log(`response`, response.result[0]._id, response);
-
     expect(response.totalCount).to.be.greaterThanOrEqual(0);
   });
 
