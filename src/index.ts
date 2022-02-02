@@ -5,15 +5,16 @@ import * as filesService from './modules/files';
 import * as paymentsService from './modules/payments';
 import * as pushService from './modules/push';
 import * as usersService from './modules/users';
-import * as config from './config';
+import * as types from './types/codemash.dtos';
 
+export * from './types/codemash.dtos';
 export {
   codeService,
-  config,
   databaseService,
   emailsService,
   filesService,
   paymentsService,
   pushService,
+  types,
   usersService,
 };
