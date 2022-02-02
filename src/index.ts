@@ -5,9 +5,7 @@ import * as filesService from './modules/files';
 import * as paymentsService from './modules/payments';
 import * as pushService from './modules/push';
 import * as usersService from './modules/users';
-import * as types from './types/codemash.dtos';
 
-export * from './types/codemash.dtos';
 export {
   codeService,
   databaseService,
@@ -15,6 +13,7 @@ export {
   filesService,
   paymentsService,
   pushService,
-  types,
   usersService,
 };
+export * from './config';
+export * from './types/codemash.dtos';

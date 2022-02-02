@@ -1,6 +1,6 @@
 import { ConfigValidator } from 'utils/configValidator';
 
-import { ICMConfig, TValidCMClientConfig } from './config';
+import { ICMConfig, ICMConfigBase, TValidCMClientConfig } from './config';
 import { STATICS } from './statics';
 
 export class CMConfig implements ICMConfig {
@@ -20,20 +20,29 @@ export class CMConfig implements ICMConfig {
 
   private static instance: CMConfig;
 
-  private constructor() {
-    this.apiUrl = process.env.CODEMASH_API_URL || STATICS.CODEMASH_API_URL;
-    this.apiKey = process.env.CODEMASH_API_KEY;
-    this.projectId = process.env.CODEMASH_PROJECT_ID;
-    this.cluster = process.env.CODEMASH_CLUSTER;
-    this.baseFilePath = process.env.CODEMASH_BASE_FILE_PATH;
-    this.region = process.env.CODEMASH_REGION;
-    this.showLogs = !!process.env.CODEMASH_SHOW_LOGS;
+  private constructor(config?: Partial<ICMConfigBase>) {
+    this.apiUrl =
+      config?.apiUrl ||
+      process.env.CODEMASH_API_URL ||
+      STATICS.CODEMASH_API_URL;
+
+    this.apiKey = config?.apiKey || process.env.CODEMASH_API_KEY;
+    this.projectId = config?.projectId || process.env.CODEMASH_PROJECT_ID;
+    this.cluster = config?.cluster || process.env.CODEMASH_CLUSTER;
+    this.baseFilePath =
+      config?.baseFilePath || process.env.CODEMASH_BASE_FILE_PATH;
+    this.region = config?.region || process.env.CODEMASH_REGION;
+    this.showLogs = config?.showLogs || !!process.env.CODEMASH_SHOW_LOGS;
+  }
+
+  public static init(config: Partial<ICMConfigBase>) {
+    this.instance = new CMConfig(config);
   }
 
   public static getInstance() {
     if (CMConfig.instance) return CMConfig.instance;
 
-    this.instance = new CMConfig();
+    this.instance = new CMConfig({});
     return this.instance;
   }
 
