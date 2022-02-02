@@ -1,10 +1,11 @@
-interface ICMConfigBase {
+export interface ICMConfigBase {
   apiUrl?: string;
   apiKey?: string;
   projectId?: string;
   cluster?: string;
   baseFilePath?: string;
   region?: string;
+  showLogs?: boolean;
 }
 
 export type TValidCMClientConfig = Required<
