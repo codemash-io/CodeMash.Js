@@ -46,6 +46,28 @@ export async function deleteGroup({secretKey, id}) {
 	return response;
 }
 
+export async function addUsersToGroup({secretKey, id, users}) {
+	const response = await server.loadJson(
+		`${
+			Config.eventsApiUrl
+		}${Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.ADD_USERS_TO_GROUP(id)}`,
+		{
+			method: 'POST',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				users,
+			}),
+		}
+	);
+
+	return response;
+}
+
 export async function getGroups({
 	secretKey,
 	pageNumber,
@@ -157,6 +179,31 @@ export async function deleteChannel({secretKey, groupId, id}) {
 				'Content-Type': 'application/json',
 			},
 			body: null,
+		}
+	);
+
+	return response;
+}
+
+export async function addUsersToChannel({secretKey, groupId, id, users}) {
+	const response = await server.loadJson(
+		`${
+			Config.eventsApiUrl
+		}${Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.ADD_USERS_TO_CHANNEL(
+			groupId,
+			id
+		)}`,
+		{
+			method: 'POST',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				users,
+			}),
 		}
 	);
 
