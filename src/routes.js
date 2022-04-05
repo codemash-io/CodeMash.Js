@@ -76,12 +76,16 @@ export const CONFIG = {
 			SERVER_EVENTS: {
 				CREATE_GROUP: '/v2/notifications/server-events/groups',
 				DELETE_GROUP: (id) => `/v2/notifications/server-events/groups/${id}`,
+				ADD_USERS_TO_GROUP: (id) =>
+					`/v2/notifications/server-events/groups/${id}/users`,
 				GET_GROUPS: '/v2/notifications/server-events/groups',
 				GET_GROUP: (id) => `/v2/notifications/server-events/groups/${id}`,
 				CREATE_CHANNEL: (groupId) =>
 					`/v2/notifications/server-events/groups/${groupId}/channels`,
 				DELETE_CHANNEL: (groupId, id) =>
 					`/v2/notifications/server-events/groups/${groupId}/channels/${id}`,
+				ADD_USERS_TO_CHANNEL: (groupId, id) =>
+					`/v2/notifications/server-events/groups/${groupId}/channels/${id}/users`,
 				GET_CHANNELS: (groupId) =>
 					`/v2/notifications/server-events/groups/${groupId}/channels`,
 				GET_MESSAGES: '/v2/notifications/server-events/messages',
