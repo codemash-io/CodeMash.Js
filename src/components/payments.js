@@ -152,6 +152,48 @@ export async function createStripeTransaction({
 	return response;
 }
 
+export async function startKevinAuthentication({secretKey, bankId}) {
+	const response = await server.loadJson(
+		`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.AUTHENTICATION.AUTHENTICATE_KEVIN}`,
+		{
+			method: 'POST',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				bankId,
+			}),
+		}
+	);
+
+	return response;
+}
+
+export async function createKevinTransaction({secretKey, orderId, bankId}) {
+	const response = await server.loadJson(
+		`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.TRANSACTIONS.CREATE_STRIPE(
+			orderId
+		)}`,
+		{
+			method: 'POST',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				bankId,
+			}),
+		}
+	);
+
+	return response;
+}
+
 export async function createCustomer({
 	secretKey,
 	accountId,
