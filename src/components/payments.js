@@ -174,7 +174,7 @@ export async function startKevinAuthentication({secretKey, bankId}) {
 
 export async function createKevinTransaction({secretKey, orderId, bankId}) {
 	const response = await server.loadJson(
-		`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.TRANSACTIONS.CREATE_STRIPE(
+		`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.TRANSACTIONS.CREATE_KEVIN(
 			orderId
 		)}`,
 		{
