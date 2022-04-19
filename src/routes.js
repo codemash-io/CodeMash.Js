@@ -107,6 +107,7 @@ export const CONFIG = {
 			USERS: {
 				REGISTER: '/v2/membership/users/register',
 				REGISTER_GUEST: '/v2/membership/users/register/guest',
+				REGISTER_PHONE_USER: '/v2/membership/users/register/phone',
 				INVITE: '/v2/membership/users/invite',
 				UPDATE: (id) => `/v2/membership/users/${id}`,
 				UPDATE_PROFILE: '/v2/membership/users/profile',
@@ -151,10 +152,14 @@ export const CONFIG = {
 				GET_ALL: '/v2/payments/orders',
 				CREATE: '/v2/payments/orders',
 			},
+			AUTHENTICATION: {
+				AUTHENTICATE_KEVIN: '/v2/payments/auth/kevin',
+			},
 			TRANSACTIONS: {
 				CREATE_PAYSERA: (orderId) =>
 					`/v2/payments/orders/${orderId}/paysera/pay`,
 				CREATE_STRIPE: (orderId) => `/v2/payments/orders/${orderId}/stripe/pay`,
+				CREATE_KEVIN: (orderId) => `/v2/payments/orders/${orderId}/kevin/pay`,
 			},
 			DISCOUNTS: {
 				CREATE_DISCOUNT: '/v2/payments/discounts',
