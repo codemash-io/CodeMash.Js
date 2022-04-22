@@ -152,7 +152,7 @@ export async function createStripeTransaction({
 	return response;
 }
 
-export async function startKevinAuthentication({secretKey, bankId}) {
+export async function startKevinAuthentication({secretKey, accountId, bankId}) {
 	const response = await server.loadJson(
 		`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.AUTHENTICATION.AUTHENTICATE_KEVIN}`,
 		{
@@ -164,6 +164,7 @@ export async function startKevinAuthentication({secretKey, bankId}) {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
+				accountId,
 				bankId,
 			}),
 		}
