@@ -154,6 +154,7 @@ export const CONFIG = {
 			},
 			AUTHENTICATION: {
 				AUTHENTICATE_KEVIN: '/v2/payments/auth/kevin',
+				AUTHENTICATE_KEVIN_TOKEN: '/v2/payments/auth/kevin/token',
 			},
 			TRANSACTIONS: {
 				CREATE_PAYSERA: (orderId) =>

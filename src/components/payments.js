@@ -173,6 +173,31 @@ export async function startKevinAuthentication({secretKey, accountId, bankId}) {
 	return response;
 }
 
+export async function completeKevinAuthentication({
+	secretKey,
+	requestId,
+	authorizationCode,
+}) {
+	const response = await server.loadJson(
+		`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.AUTHENTICATION.AUTHENTICATE_KEVIN_TOKEN}`,
+		{
+			method: 'POST',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				requestId,
+				authorizationCode,
+			}),
+		}
+	);
+
+	return response;
+}
+
 export async function createKevinTransaction({secretKey, orderId, bankId}) {
 	const response = await server.loadJson(
 		`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.TRANSACTIONS.CREATE_KEVIN(
