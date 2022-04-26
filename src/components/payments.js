@@ -198,7 +198,11 @@ export async function completeKevinAuthentication({
 	return response;
 }
 
-export async function createKevinTransaction({secretKey, orderId, bankId}) {
+export async function createKevinTransaction({
+	secretKey,
+	orderId,
+	paymentMethodId,
+}) {
 	const response = await server.loadJson(
 		`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.TRANSACTIONS.CREATE_KEVIN(
 			orderId
@@ -212,7 +216,27 @@ export async function createKevinTransaction({secretKey, orderId, bankId}) {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
-				bankId,
+				paymentMethodId,
+			}),
+		}
+	);
+
+	return response;
+}
+
+export async function checkKevinPaymentStatus({secretKey, paymentId}) {
+	const response = await server.loadJson(
+		`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.TRANSACTIONS.CHECK_KEVIN_STATUS}`,
+		{
+			method: 'POST',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				paymentId,
 			}),
 		}
 	);
