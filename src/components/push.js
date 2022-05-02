@@ -6,6 +6,7 @@ import {objectOrStringToString, toQueryString} from '../utils';
 export async function registerDeviceToken({
 	secretKey,
 	provider,
+	accountId,
 	token,
 	userId,
 	deviceId,
@@ -29,6 +30,7 @@ export async function registerDeviceToken({
 			},
 			body: JSON.stringify({
 				provider,
+				accountId,
 				token,
 				userId,
 				deviceId,
