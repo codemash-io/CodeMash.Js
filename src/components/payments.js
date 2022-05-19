@@ -202,6 +202,7 @@ export async function createKevinTransaction({
 	secretKey,
 	orderId,
 	paymentMethodId,
+	preferredPaymentMethod,
 }) {
 	const response = await server.loadJson(
 		`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.TRANSACTIONS.CREATE_KEVIN(
@@ -217,6 +218,7 @@ export async function createKevinTransaction({
 			},
 			body: JSON.stringify({
 				paymentMethodId,
+				preferredPaymentMethod,
 			}),
 		}
 	);
