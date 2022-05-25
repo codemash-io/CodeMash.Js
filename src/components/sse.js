@@ -250,6 +250,8 @@ export async function sendMessage({
 	message,
 	meta,
 	fileIds,
+	pushAfter,
+	pushTemplateId,
 }) {
 	const response = await server.loadJson(
 		`${Config.eventsApiUrl}${Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.SEND_MESSAGE}`,
@@ -266,6 +268,8 @@ export async function sendMessage({
 				message,
 				meta,
 				fileIds,
+				pushAfter,
+				pushTemplateId,
 			}),
 		}
 	);
