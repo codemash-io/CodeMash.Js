@@ -161,6 +161,7 @@ export const CONFIG = {
 					`/v2/payments/orders/${orderId}/paysera/pay`,
 				CREATE_STRIPE: (orderId) => `/v2/payments/orders/${orderId}/stripe/pay`,
 				CREATE_KEVIN: (orderId) => `/v2/payments/orders/${orderId}/kevin/pay`,
+				CREATE_DECTA: (orderId) => `/v2/payments/orders/${orderId}/decta/pay`,
 				CHECK_KEVIN_STATUS: '/v2/payments/orders/kevin/payment/status',
 			},
 			DISCOUNTS: {
