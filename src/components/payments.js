@@ -249,8 +249,8 @@ export async function checkKevinPaymentStatus({secretKey, paymentId}) {
 export async function createDectaTransaction({
 	secretKey,
 	orderId,
-	customerId,
 	chargeCard,
+	customerId,
 }) {
 	const response = await server.loadJson(
 		`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.TRANSACTIONS.CREATE_DECTA(
