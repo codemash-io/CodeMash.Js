@@ -263,6 +263,7 @@ export async function insertRecord({
 	ignoreTriggers,
 	cluster,
 	resolveProviderFiles,
+	responsibleUserId,
 }) {
 	const response = await server.loadJson(
 		`${Config.apiUrl}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.CREATE(
@@ -283,6 +284,7 @@ export async function insertRecord({
 				waitForFileUpload,
 				ignoreTriggers,
 				resolveProviderFiles,
+				responsibleUserId,
 			}),
 		}
 	);
@@ -298,6 +300,7 @@ export async function insertManyRecords({
 	ignoreTriggers,
 	cluster,
 	resolveProviderFiles,
+	responsibleUserId,
 }) {
 	const stringDocs = [];
 	if (documents && Array.isArray(documents)) {
@@ -324,6 +327,7 @@ export async function insertManyRecords({
 				bypassDocumentValidation,
 				ignoreTriggers,
 				resolveProviderFiles,
+				responsibleUserId,
 			}),
 		}
 	);
@@ -700,4 +704,36 @@ export async function getChildrenOfTerms({
 		totalCount: response.totalCount,
 		result: response.result,
 	};
+}
+
+export async function changeResponsibility({
+	secretKey,
+	collectionName,
+	id,
+	newResponsibleUserId,
+	cluster,
+}) {
+	const response = await server.loadJson(
+		`${
+			Config.apiUrl
+		}${Endpoints.PROJECT.DATABASE.COLLECTION.RECORD.RESPONSIBILITY(
+			collectionName
+		)}`,
+		{
+			method: 'POST',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				'X-CM-Cluster': cluster,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				id,
+				newResponsibleUserId,
+			}),
+		}
+	);
+
+	return response ? response.result : null;
 }

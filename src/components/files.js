@@ -203,6 +203,69 @@ export async function uploadRecordFile({
 	return response;
 }
 
+export async function uploadMessageFile({
+	secretKey,
+	fileUri,
+	file,
+	base64,
+	fileType,
+	fileName,
+	channelId,
+}) {
+	if (base64) {
+		const response = await server.loadJson(
+			`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.FILES.UPLOAD}`,
+			{
+				method: 'POST',
+				headers: {
+					'X-CM-ProjectId': Config.projectId,
+					Authorization: `Bearer ${secretKey || Config.secretKey}`,
+					'Content-Type': 'application/json',
+					Accept: 'application/json',
+				},
+				body: JSON.stringify({
+					channelId,
+					base64File: {data: base64, contentType: fileType, fileName},
+				}),
+			}
+		);
+
+		return response;
+	}
+
+	const formData = new FormData();
+	if (channelId != null && channelId !== undefined) {
+		formData.append('channelId', channelId);
+	}
+
+	if (fileUri) {
+		const finalFilename =
+			fileName || fileUri.substring(fileUri.lastIndexOf('/') + 1);
+
+		formData.append('file', {
+			uri: fileUri,
+			name: finalFilename,
+			type: fileType,
+		});
+	} else {
+		formData.append('file', file);
+	}
+
+	const response = await server.loadJson(
+		`${Config.apiUrl}${Endpoints.PROJECT.NOTIFICATIONS.SERVER_EVENTS.FILES.UPLOAD}`,
+		{
+			method: 'POST',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+			},
+			body: formData,
+		}
+	);
+
+	return response;
+}
+
 export function getFilePath(directory, fileName) {
 	return `${Config.baseFilePath}/${directory}/${fileName}`;
 }
