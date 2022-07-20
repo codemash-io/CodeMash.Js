@@ -4,6 +4,11 @@
 
 CodeMash for javascript developers. All the documentation can be found [here](https://docs.codemash.io)
 
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/codemash?logo=files&style=for-the-badge)
+![npm](https://img.shields.io/npm/v/codemash?logo=npm&style=for-the-badge)
+![node-current](https://img.shields.io/badge/Node-%3E=12-success?style=for-the-badge&logo=node)
+![npm](https://img.shields.io/npm/dw/codemash?style=for-the-badge)
+
 ## Installation
 
 Use the package manager [codemash](https://docs.codemash.io/get-started/install-codemash#install-codemash-via-npm) to install codemash.

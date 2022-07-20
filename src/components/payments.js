@@ -152,6 +152,128 @@ export async function createStripeTransaction({
 	return response;
 }
 
+export async function startKevinAuthentication({secretKey, accountId, bankId}) {
+	const response = await server.loadJson(
+		`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.AUTHENTICATION.AUTHENTICATE_KEVIN}`,
+		{
+			method: 'POST',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				accountId,
+				bankId,
+			}),
+		}
+	);
+
+	return response;
+}
+
+export async function completeKevinAuthentication({
+	secretKey,
+	requestId,
+	authorizationCode,
+}) {
+	const response = await server.loadJson(
+		`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.AUTHENTICATION.AUTHENTICATE_KEVIN_TOKEN}`,
+		{
+			method: 'POST',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				requestId,
+				authorizationCode,
+			}),
+		}
+	);
+
+	return response;
+}
+
+export async function createKevinTransaction({
+	secretKey,
+	orderId,
+	paymentMethodId,
+	preferredPaymentMethod,
+}) {
+	const response = await server.loadJson(
+		`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.TRANSACTIONS.CREATE_KEVIN(
+			orderId
+		)}`,
+		{
+			method: 'POST',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				paymentMethodId,
+				preferredPaymentMethod,
+			}),
+		}
+	);
+
+	return response;
+}
+
+export async function checkKevinPaymentStatus({secretKey, paymentId}) {
+	const response = await server.loadJson(
+		`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.TRANSACTIONS.CHECK_KEVIN_STATUS}`,
+		{
+			method: 'POST',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				paymentId,
+			}),
+		}
+	);
+
+	return response;
+}
+
+export async function createDectaTransaction({
+	secretKey,
+	orderId,
+	chargeCard,
+	customerId,
+}) {
+	const response = await server.loadJson(
+		`${Config.apiUrl}${Endpoints.PROJECT.PAYMENTS.TRANSACTIONS.CREATE_DECTA(
+			orderId
+		)}`,
+		{
+			method: 'POST',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				customerId,
+				chargeCard,
+			}),
+		}
+	);
+
+	return response;
+}
+
 export async function createCustomer({
 	secretKey,
 	accountId,

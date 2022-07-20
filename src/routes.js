@@ -26,6 +26,8 @@ export const CONFIG = {
 					DELETE_MANY: (collectionName) => `/v2/db/${collectionName}/bulk`,
 					COUNT: (collectionName) => `/v2/db/${collectionName}/count`,
 					DISTINCT: (collectionName) => `/v2/db/${collectionName}/distinct`,
+					RESPONSIBILITY: (collectionName) =>
+						`/v2/db/${collectionName}/responsibility`,
 				},
 				FILES: {
 					UPLOAD: (collectionName) => `/v2/db/${collectionName}/files`,
@@ -71,12 +73,41 @@ export const CONFIG = {
 				BASE_URL: '/v2/notifications/email',
 				SEND: '/v2/notifications/email',
 			},
+			SERVER_EVENTS: {
+				CREATE_GROUP: '/v2/notifications/server-events/groups',
+				DELETE_GROUP: (id) => `/v2/notifications/server-events/groups/${id}`,
+				ADD_USERS_TO_GROUP: (id) =>
+					`/v2/notifications/server-events/groups/${id}/users`,
+				GET_GROUPS: '/v2/notifications/server-events/groups',
+				GET_GROUP: (id) => `/v2/notifications/server-events/groups/${id}`,
+				CREATE_CHANNEL: (groupId) =>
+					`/v2/notifications/server-events/groups/${groupId}/channels`,
+				DELETE_CHANNEL: (groupId, id) =>
+					`/v2/notifications/server-events/groups/${groupId}/channels/${id}`,
+				ADD_USERS_TO_CHANNEL: (groupId, id) =>
+					`/v2/notifications/server-events/groups/${groupId}/channels/${id}/users`,
+				GET_CHANNELS: (groupId) =>
+					`/v2/notifications/server-events/groups/${groupId}/channels`,
+				GET_MESSAGES: '/v2/notifications/server-events/messages',
+				SEND_MESSAGE: '/v2/notifications/server-events/messages',
+				READ_MESSAGES: '/v2/notifications/server-events/messages/read',
+				AUTHORIZE_CONNECTION:
+					'/v2/notifications/server-events/connections/initialize',
+				OPEN_CONNECTION: '/v2/notifications/server-events/connections/open',
+				HEARTBEAT_CONNECTION:
+					'/v2/notifications/server-events/connections/health',
+				CLOSE_CONNECTION: '/v2/notifications/server-events/connections/close',
+				FILES: {
+					UPLOAD: '/v2/notifications/server-events/messages/files',
+				},
+			},
 		},
 		MEMBERSHIP: {
 			BASE_URL: '/v2/membership',
 			USERS: {
 				REGISTER: '/v2/membership/users/register',
 				REGISTER_GUEST: '/v2/membership/users/register/guest',
+				REGISTER_PHONE_USER: '/v2/membership/users/register/phone',
 				INVITE: '/v2/membership/users/invite',
 				UPDATE: (id) => `/v2/membership/users/${id}`,
 				UPDATE_PROFILE: '/v2/membership/users/profile',
@@ -121,10 +152,17 @@ export const CONFIG = {
 				GET_ALL: '/v2/payments/orders',
 				CREATE: '/v2/payments/orders',
 			},
+			AUTHENTICATION: {
+				AUTHENTICATE_KEVIN: '/v2/payments/auth/kevin',
+				AUTHENTICATE_KEVIN_TOKEN: '/v2/payments/auth/kevin/token',
+			},
 			TRANSACTIONS: {
 				CREATE_PAYSERA: (orderId) =>
 					`/v2/payments/orders/${orderId}/paysera/pay`,
 				CREATE_STRIPE: (orderId) => `/v2/payments/orders/${orderId}/stripe/pay`,
+				CREATE_KEVIN: (orderId) => `/v2/payments/orders/${orderId}/kevin/pay`,
+				CREATE_DECTA: (orderId) => `/v2/payments/orders/${orderId}/decta/pay`,
+				CHECK_KEVIN_STATUS: '/v2/payments/orders/kevin/payment/status',
 			},
 			DISCOUNTS: {
 				CREATE_DISCOUNT: '/v2/payments/discounts',

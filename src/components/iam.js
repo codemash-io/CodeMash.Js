@@ -131,6 +131,66 @@ export async function registerGuest({
 	return response;
 }
 
+export async function registerPhoneUser({
+	secretKey,
+	phone,
+	email,
+	displayName,
+	firstName,
+	lastName,
+	meta,
+	language,
+	timeZone,
+	subscribeToNews,
+	country,
+	countryCode,
+	area,
+	city,
+	address,
+	address2,
+	company,
+	companyCode,
+	postalCode,
+	gender,
+	birthDate,
+}) {
+	const response = await server.loadJson(
+		`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.REGISTER_PHONE_USER}`,
+		{
+			method: 'POST',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				phone,
+				email,
+				displayName,
+				firstName,
+				lastName,
+				meta: objectOrStringToString(meta),
+				language,
+				timeZone,
+				subscribeToNews,
+				country,
+				countryCode,
+				area,
+				city,
+				address,
+				address2,
+				company,
+				companyCode,
+				postalCode,
+				gender,
+				birthDate,
+			}),
+		}
+	);
+	return response;
+}
+
 export async function invite({
 	secretKey,
 	email,
