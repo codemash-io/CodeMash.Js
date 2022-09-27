@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 import { find } from '../../src/modules/database';
 import { FindRequest } from '../../src/types/codemash.dtos';
 
-describe('find', () => {
+describe('db.find', () => {
   beforeEach(() => {
     dotenv.config({
       path: path.resolve(__dirname, '../data/config/.env'),

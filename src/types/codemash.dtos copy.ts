@@ -1,6 +1,6 @@
 /* Options:
-Date: 2022-09-27 18:48:37
-Version: 6.02
+Date: 2022-01-25 10:08:33
+Version: 5.104
 Tip: To override a DTO option, remove "//" prefix before updating
 BaseUrl: https://api.codemash.io/
 
@@ -93,203 +93,6 @@ export interface IVersionBasedRequest {
   cultureCode: string;
 }
 
-export class ReferencingField {
-  public name: string;
-  public pageSize: number;
-  public pageNumber: number;
-  public sort: string;
-  public projection: string;
-
-  public constructor(init?: Partial<ReferencingField>) {
-    (Object as any).assign(this, init);
-  }
-}
-
-export class CodeMashDbListRequestBase
-  extends CodeMashDbRequestBase
-  implements
-    IRequestWithPaging,
-    IRequestWithFilter,
-    IRequestWithSorting,
-    IRequestWithProjection {
-  /**
-   * Amount of records to return
-   */
-  // @DataMember
-  // @ApiMember(DataType="integer", Description="Amount of records to return", Format="int32", Name="PageSize", ParameterType="query")
-  public pageSize: number;
-
-  /**
-   * Page of records to return
-   */
-  // @DataMember
-  // @ApiMember(DataType="integer", Description="Page of records to return", Format="int32", Name="PageNumber", ParameterType="query")
-  public pageNumber: number;
-
-  /**
-   * A query that specifies which records to return
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="A query that specifies which records to return", Name="Filter", ParameterType="query")
-  public filter: object | string;
-
-  /**
-   * A query that specifies how to sort filtered records
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="A query that specifies how to sort filtered records", Name="Sort", ParameterType="query")
-  public sort: string;
-
-  /**
-   * A query that specifies what fields in records to return
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="A query that specifies what fields in records to return", Name="Projection", ParameterType="query")
-  public projection: string;
-
-  public constructor(init?: Partial<CodeMashDbListRequestBase>) {
-    super(init);
-    (Object as any).assign(this, init);
-  }
-}
-
-export interface IRequestWithPaging {
-  pageSize: number;
-  pageNumber: number;
-}
-
-export interface IRequestWithFilter {
-  filter: object | string;
-}
-
-export interface IRequestWithSorting {
-  sort: string;
-}
-
-export interface IRequestWithProjection {
-  projection: string;
-}
-
-export class Base64FileUpload {
-  public data: string;
-  public contentType: string;
-  public fileName: string;
-
-  public constructor(init?: Partial<Base64FileUpload>) {
-    (Object as any).assign(this, init);
-  }
-}
-
-export interface IOAuthRequest {
-  mode: string;
-  code: string;
-  state: string;
-  accessToken: string;
-}
-
-export class CodeMashListRequestBase
-  extends CodeMashRequestBase
-  implements IRequestWithPaging, IRequestWithFilter, IRequestWithSorting {
-  /**
-   * Amount of records to return
-   */
-  // @DataMember
-  // @ApiMember(DataType="integer", Description="Amount of records to return", Format="int32", Name="PageSize", ParameterType="form")
-  public pageSize: number;
-
-  /**
-   * Page of records to return
-   */
-  // @DataMember
-  // @ApiMember(DataType="integer", Description="Page of records to return", Format="int32", Name="PageNumber", ParameterType="form")
-  public pageNumber: number;
-
-  /**
-   * A query that specifies which records to return
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="A query that specifies which records to return", Name="Filter", ParameterType="body")
-  public filter: object | string;
-
-  /**
-   * A query that specifies how to sort filtered records
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="A query that specifies how to sort filtered records", Name="Sort", ParameterType="body")
-  public sort: string;
-
-  /**
-   * A query that specifies what fields in records to return
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="A query that specifies what fields in records to return", Name="Projection", ParameterType="body")
-  public projection: string;
-
-  public constructor(init?: Partial<CodeMashListRequestBase>) {
-    super(init);
-    (Object as any).assign(this, init);
-  }
-}
-
-export class UserPolicyUpdateInput {
-  public policy: string;
-  public permissions: string[];
-
-  public constructor(init?: Partial<UserPolicyUpdateInput>) {
-    (Object as any).assign(this, init);
-  }
-}
-
-export class UserRoleUpdateInput {
-  public role: string;
-  public policies: UserPolicyUpdateInput[];
-
-  public constructor(init?: Partial<UserRoleUpdateInput>) {
-    (Object as any).assign(this, init);
-  }
-}
-
-export class PaymentDiscountBoundary {
-  public boundary: number;
-  public amount: number;
-  public type: string;
-
-  public constructor(init?: Partial<PaymentDiscountBoundary>) {
-    (Object as any).assign(this, init);
-  }
-}
-
-export class OrderLineInput {
-  public collectionName: string;
-  public recordId: string;
-  public quantity: number;
-  public variation: string;
-
-  public constructor(init?: Partial<OrderLineInput>) {
-    (Object as any).assign(this, init);
-  }
-}
-
-export class OrderCustomerInput {
-  public email: string;
-  public firstName: string;
-  public lastName: string;
-  public phone: string;
-  public company: string;
-  public address: string;
-  public address2: string;
-  public country: string;
-  public countryCode: string;
-  public area: string;
-  public city: string;
-  public postalCode: string;
-  public language: string;
-
-  public constructor(init?: Partial<OrderCustomerInput>) {
-    (Object as any).assign(this, init);
-  }
-}
-
 // @DataContract
 export class ResponseError {
   // @DataMember(Order=1)
@@ -365,6 +168,83 @@ export class DeleteResult {
   public constructor(init?: Partial<DeleteResult>) {
     (Object as any).assign(this, init);
   }
+}
+
+export class ReferencingField {
+  public name: string;
+  public pageSize: number;
+  public pageNumber: number;
+  public sort: string;
+  public projection: string;
+
+  public constructor(init?: Partial<ReferencingField>) {
+    (Object as any).assign(this, init);
+  }
+}
+
+export class CodeMashDbListRequestBase
+  extends CodeMashDbRequestBase
+  implements
+    IRequestWithPaging,
+    IRequestWithFilter,
+    IRequestWithSorting,
+    IRequestWithProjection {
+  /**
+   * Amount of records to return
+   */
+  // @DataMember
+  // @ApiMember(DataType="int", Description="Amount of records to return", Name="PageSize", ParameterType="query")
+  public pageSize: number;
+
+  /**
+   * Page of records to return
+   */
+  // @DataMember
+  // @ApiMember(DataType="int", Description="Page of records to return", Name="PageNumber", ParameterType="query")
+  public pageNumber: number;
+
+  /**
+   * A query that specifies which records to return
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="A query that specifies which records to return", Name="Filter", ParameterType="query")
+  public filter: object | string;
+
+  /**
+   * A query that specifies how to sort filtered records
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="A query that specifies how to sort filtered records", Name="Sort", ParameterType="query")
+  public sort: string;
+
+  /**
+   * A query that specifies what fields in records to return
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="A query that specifies what fields in records to return", Name="Projection", ParameterType="query")
+  public projection: string;
+
+  public constructor(init?: Partial<CodeMashDbListRequestBase>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
+}
+
+export interface IRequestWithPaging {
+  pageSize: number;
+  pageNumber: number;
+}
+
+export interface IRequestWithFilter {
+  filter: object | string;
+}
+
+export interface IRequestWithSorting {
+  sort: string;
+}
+
+export interface IRequestWithProjection {
+  projection: string;
 }
 
 export class Schema {
@@ -532,9 +412,8 @@ export enum RequestAttributes {
 }
 
 export interface IRequestPreferences {
-  acceptsBrotli: boolean;
-  acceptsDeflate: boolean;
   acceptsGzip: boolean;
+  acceptsDeflate: boolean;
 }
 
 export interface IRequest {
@@ -602,6 +481,23 @@ export class File {
   public constructor(init?: Partial<File>) {
     (Object as any).assign(this, init);
   }
+}
+
+export class Base64FileUpload {
+  public data: string;
+  public contentType: string;
+  public fileName: string;
+
+  public constructor(init?: Partial<Base64FileUpload>) {
+    (Object as any).assign(this, init);
+  }
+}
+
+export interface IOAuthRequest {
+  mode: string;
+  code: string;
+  state: string;
+  accessToken: string;
 }
 
 export class Policy {
@@ -788,6 +684,68 @@ export class User {
   }
 }
 
+export class CodeMashListRequestBase
+  extends CodeMashRequestBase
+  implements IRequestWithPaging, IRequestWithFilter, IRequestWithSorting {
+  /**
+   * Amount of records to return
+   */
+  // @DataMember
+  // @ApiMember(DataType="int", Description="Amount of records to return", Name="PageSize", ParameterType="form")
+  public pageSize: number;
+
+  /**
+   * Page of records to return
+   */
+  // @DataMember
+  // @ApiMember(DataType="int", Description="Page of records to return", Name="PageNumber", ParameterType="form")
+  public pageNumber: number;
+
+  /**
+   * A query that specifies which records to return
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="A query that specifies which records to return", Name="Filter", ParameterType="body")
+  public filter: object | string;
+
+  /**
+   * A query that specifies how to sort filtered records
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="A query that specifies how to sort filtered records", Name="Sort", ParameterType="body")
+  public sort: string;
+
+  /**
+   * A query that specifies what fields in records to return
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="A query that specifies what fields in records to return", Name="Projection", ParameterType="body")
+  public projection: string;
+
+  public constructor(init?: Partial<CodeMashListRequestBase>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
+}
+
+export class UserPolicyUpdateInput {
+  public policy: string;
+  public permissions: string[];
+
+  public constructor(init?: Partial<UserPolicyUpdateInput>) {
+    (Object as any).assign(this, init);
+  }
+}
+
+export class UserRoleUpdateInput {
+  public role: string;
+  public policies: UserPolicyUpdateInput[];
+
+  public constructor(init?: Partial<UserRoleUpdateInput>) {
+    (Object as any).assign(this, init);
+  }
+}
+
 export class PushNotification {
   public id: string;
   public receivedOn: string;
@@ -844,6 +802,7 @@ export class AndroidBackgroundLayout {
 export class PushNotificationTemplate {
   public id: string;
   public templateName: string;
+  public accountId: string;
   public accountName: string;
   public title: string;
   public body: string;
@@ -854,7 +813,6 @@ export class PushNotificationTemplate {
   public url: string;
   public collapseId: string;
   public image: FileDetails;
-  public accountId: string;
   public fileAccountId?: string;
   public meta: { [index: string]: string };
   public buttons: PushNotificationTemplateButtons[];
@@ -926,9 +884,6 @@ export class PaymentMethod {
   public address: string;
   public address2: string;
   public postalCode: string;
-  public last4: string;
-  public expMonth: number;
-  public expYear: number;
   public meta: { [index: string]: string };
 
   public constructor(init?: Partial<PaymentMethod>) {
@@ -964,14 +919,12 @@ export class Customer {
   }
 }
 
-export class DectaOrder {
-  public id: string;
-  public paid: boolean;
-  public fullPageCheckout: string;
-  public iframeCheckout: string;
-  public directPost: string;
+export class PaymentDiscountBoundary {
+  public boundary: number;
+  public amount: number;
+  public type: string;
 
-  public constructor(init?: Partial<DectaOrder>) {
+  public constructor(init?: Partial<PaymentDiscountBoundary>) {
     (Object as any).assign(this, init);
   }
 }
@@ -1003,6 +956,17 @@ export class Discount {
   public combineDiscounts: boolean;
 
   public constructor(init?: Partial<Discount>) {
+    (Object as any).assign(this, init);
+  }
+}
+
+export class OrderLineInput {
+  public collectionName: string;
+  public recordId: string;
+  public quantity: number;
+  public variation: string;
+
+  public constructor(init?: Partial<OrderLineInput>) {
     (Object as any).assign(this, init);
   }
 }
@@ -1066,44 +1030,32 @@ export class ApplicableDiscount {
   }
 }
 
-export class KevinAuthorizationLink {
-  public authorizationLink: string;
-  public state: string;
-  public requestId: string;
-
-  public constructor(init?: Partial<KevinAuthorizationLink>) {
-    (Object as any).assign(this, init);
-  }
-}
-
-export class KevinPaymentStatus {
-  public groupStatus: string;
-  public transactionId: string;
-  public orderId: string;
-
-  public constructor(init?: Partial<KevinPaymentStatus>) {
-    (Object as any).assign(this, init);
-  }
-}
-
-export class StripePaymentIntent {
-  public paymentId: string;
-  public paymentClientSecret: string;
-  public status: string;
-  public amount: number;
-  public transactionId: string;
-
-  public constructor(init?: Partial<StripePaymentIntent>) {
-    (Object as any).assign(this, init);
-  }
-}
-
 export class PaymentMethodSetup {
   public setupId: string;
   public setupClientSecret: string;
   public status: string;
 
   public constructor(init?: Partial<PaymentMethodSetup>) {
+    (Object as any).assign(this, init);
+  }
+}
+
+export class OrderCustomerInput {
+  public email: string;
+  public firstName: string;
+  public lastName: string;
+  public phone: string;
+  public company: string;
+  public address: string;
+  public address2: string;
+  public country: string;
+  public countryCode: string;
+  public area: string;
+  public city: string;
+  public postalCode: string;
+  public language: string;
+
+  public constructor(init?: Partial<OrderCustomerInput>) {
     (Object as any).assign(this, init);
   }
 }
@@ -1225,6 +1177,18 @@ export class Order {
   }
 }
 
+export class StripePaymentIntent {
+  public paymentId: string;
+  public paymentClientSecret: string;
+  public status: string;
+  public amount: number;
+  public transactionId: string;
+
+  public constructor(init?: Partial<StripePaymentIntent>) {
+    (Object as any).assign(this, init);
+  }
+}
+
 // @DataContract
 export class UserApiKey {
   // @DataMember(Order=1)
@@ -1295,6 +1259,7 @@ export class DistinctResponse extends Array<ResponseBase<Object>> {
 
 export class FindResponse extends ResponseBase<string> {
   public totalCount: number;
+
   public schema: Schema;
 
   public constructor(init?: Partial<FindResponse>) {
@@ -1350,6 +1315,7 @@ export class UpdateOneResponse extends ResponseBase<UpdateResult> {
 
 export class FindTermsResponse extends Array<ResponseBase<Term>> {
   public totalCount: number;
+
   public taxonomy: Taxonomy;
 
   public constructor(init?: Partial<FindTermsResponse>) {
@@ -1433,15 +1399,6 @@ export class UploadRecordFileResponse extends ResponseBase<File> {
   public key: string;
 
   public constructor(init?: Partial<UploadRecordFileResponse>) {
-    super(init);
-    (Object as any).assign(this, init);
-  }
-}
-
-export class UploadSseMessageFileResponse extends ResponseBase<File> {
-  public key: string;
-
-  public constructor(init?: Partial<UploadSseMessageFileResponse>) {
     super(init);
     (Object as any).assign(this, init);
   }
@@ -1549,15 +1506,6 @@ export class RegisterGuestUserResponse extends ResponseBase<User> {
   public bearerToken: string;
 
   public constructor(init?: Partial<RegisterGuestUserResponse>) {
-    super(init);
-    (Object as any).assign(this, init);
-  }
-}
-
-export class RegisterPhoneUserResponse extends ResponseBase<User> {
-  public bearerToken: string;
-
-  public constructor(init?: Partial<RegisterPhoneUserResponse>) {
     super(init);
     (Object as any).assign(this, init);
   }
@@ -1771,13 +1719,6 @@ export class GetCustomersResponse extends Array<ResponseBase<Customer>> {
   }
 }
 
-export class CreateDectaTransactionResponse extends ResponseBase<DectaOrder> {
-  public constructor(init?: Partial<CreateDectaTransactionResponse>) {
-    super(init);
-    (Object as any).assign(this, init);
-  }
-}
-
 export class CreateDiscountResponse extends ResponseBase<Discount> {
   public constructor(init?: Partial<CreateDiscountResponse>) {
     super(init);
@@ -1810,27 +1751,6 @@ export class VerifyGooglePlayStoreSubscriptionResponse extends Array<
     init?: Partial<VerifyGooglePlayStoreSubscriptionResponse>,
   ) {
     super();
-    (Object as any).assign(this, init);
-  }
-}
-
-export class StartKevinAuthResponse extends ResponseBase<KevinAuthorizationLink> {
-  public constructor(init?: Partial<StartKevinAuthResponse>) {
-    super(init);
-    (Object as any).assign(this, init);
-  }
-}
-
-export class CheckKevinPaymentStatusResponse extends ResponseBase<KevinPaymentStatus> {
-  public constructor(init?: Partial<CheckKevinPaymentStatusResponse>) {
-    super(init);
-    (Object as any).assign(this, init);
-  }
-}
-
-export class CreateStripeTransactionResponse extends ResponseBase<StripePaymentIntent> {
-  public constructor(init?: Partial<CreateStripeTransactionResponse>) {
-    super(init);
     (Object as any).assign(this, init);
   }
 }
@@ -1881,6 +1801,13 @@ export class CreatePayseraTransactionResponse extends ResponseBase<string> {
 
 export class CheckStripePaymentStatusResponse extends ResponseBase<string> {
   public constructor(init?: Partial<CheckStripePaymentStatusResponse>) {
+    super(init);
+    (Object as any).assign(this, init);
+  }
+}
+
+export class CreateStripeTransactionResponse extends ResponseBase<StripePaymentIntent> {
+  public constructor(init?: Partial<CreateStripeTransactionResponse>) {
     super(init);
     (Object as any).assign(this, init);
   }
@@ -2031,14 +1958,11 @@ export class AggregateRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'AggregateRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new AggregateResponse();
+  }
+  public getTypeName() {
+    return 'AggregateRequest';
   }
 }
 
@@ -2070,14 +1994,11 @@ export class ChangeResponsibilityRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'ChangeResponsibilityRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new ChangeResponsibilityResponse();
+  }
+  public getTypeName() {
+    return 'ChangeResponsibilityRequest';
   }
 }
 
@@ -2102,28 +2023,25 @@ export class CountRequest
    * The maximum number of records to count
    */
   // @DataMember
-  // @ApiMember(DataType="integer", Description="The maximum number of records to count", Format="int32", Name="Limit", ParameterType="query")
+  // @ApiMember(DataType="int", Description="The maximum number of records to count", Name="Limit", ParameterType="query")
   public limit?: number;
 
   /**
    * The number of records to skip before counting
    */
   // @DataMember
-  // @ApiMember(DataType="integer", Description="The number of records to skip before counting", Format="int32", Name="Skip", ParameterType="query")
+  // @ApiMember(DataType="int", Description="The number of records to skip before counting", Name="Skip", ParameterType="query")
   public skip?: number;
 
   public constructor(init?: Partial<CountRequest>) {
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'CountRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new CountResponse();
+  }
+  public getTypeName() {
+    return 'CountRequest';
   }
 }
 
@@ -2155,14 +2073,11 @@ export class DeleteManyRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'DeleteManyRequest';
-  }
-  public getMethod() {
-    return 'DELETE';
-  }
   public createResponse() {
     return new DeleteManyResponse();
+  }
+  public getTypeName() {
+    return 'DeleteManyRequest';
   }
 }
 
@@ -2202,14 +2117,11 @@ export class DeleteOneRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'DeleteOneRequest';
-  }
-  public getMethod() {
-    return 'DELETE';
-  }
   public createResponse() {
     return new DeleteOneResponse();
+  }
+  public getTypeName() {
+    return 'DeleteOneRequest';
   }
 }
 
@@ -2241,14 +2153,11 @@ export class DistinctRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'DistinctRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new DistinctResponse();
+  }
+  public getTypeName() {
+    return 'DistinctRequest';
   }
 }
 
@@ -2322,14 +2231,11 @@ export class FindRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'FindRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new FindResponse();
+  }
+  public getTypeName() {
+    return 'FindRequest';
   }
 }
 
@@ -2426,14 +2332,11 @@ export class FindOneRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'FindOneRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new FindOneResponse();
+  }
+  public getTypeName() {
+    return 'FindOneRequest';
   }
 }
 
@@ -2486,14 +2389,11 @@ export class InsertManyRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'InsertManyRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new InsertManyResponse();
+  }
+  public getTypeName() {
+    return 'InsertManyRequest';
   }
 }
 
@@ -2553,14 +2453,11 @@ export class InsertOneRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'InsertOneRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new InsertOneResponse();
+  }
+  public getTypeName() {
+    return 'InsertOneRequest';
   }
 }
 
@@ -2635,14 +2532,11 @@ export class ReplaceOneRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'ReplaceOneRequest';
-  }
-  public getMethod() {
-    return 'PUT';
-  }
   public createResponse() {
     return new ReplaceOneResponse();
+  }
+  public getTypeName() {
+    return 'ReplaceOneRequest';
   }
 }
 
@@ -2695,14 +2589,11 @@ export class UpdateManyRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'UpdateManyRequest';
-  }
-  public getMethod() {
-    return 'PATCH';
-  }
   public createResponse() {
     return new UpdateManyResponse();
+  }
+  public getTypeName() {
+    return 'UpdateManyRequest';
   }
 }
 
@@ -2771,14 +2662,11 @@ export class UpdateOneRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'UpdateOneRequest';
-  }
-  public getMethod() {
-    return 'PATCH';
-  }
   public createResponse() {
     return new UpdateOneResponse();
+  }
+  public getTypeName() {
+    return 'UpdateOneRequest';
   }
 }
 
@@ -2810,14 +2698,11 @@ export class FindTermsRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'FindTermsRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new FindTermsResponse();
+  }
+  public getTypeName() {
+    return 'FindTermsRequest';
   }
 }
 
@@ -2858,14 +2743,11 @@ export class FindTermsChildrenRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'FindTermsChildrenRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new FindTermsChildrenResponse();
+  }
+  public getTypeName() {
+    return 'FindTermsChildrenRequest';
   }
 }
 
@@ -2890,13 +2772,10 @@ export class DeleteFileRequest
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
   public getTypeName() {
     return 'DeleteFileRequest';
   }
-  public getMethod() {
-    return 'DELETE';
-  }
-  public createResponse() {}
 }
 
 /**
@@ -2927,14 +2806,11 @@ export class DownloadFileRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'DownloadFileRequest';
-  }
-  public getMethod() {
-    return 'GET';
-  }
   public createResponse() {
     return new HttpResult();
+  }
+  public getTypeName() {
+    return 'DownloadFileRequest';
   }
 }
 
@@ -2966,14 +2842,11 @@ export class GetFileRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'GetFileRequest';
-  }
-  public getMethod() {
-    return 'GET';
-  }
   public createResponse() {
     return new GetFileResponse();
+  }
+  public getTypeName() {
+    return 'GetFileRequest';
   }
 }
 
@@ -3012,14 +2885,11 @@ export class UploadFileRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'UploadFileRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new UploadFileResponse();
+  }
+  public getTypeName() {
+    return 'UploadFileRequest';
   }
 }
 
@@ -3058,14 +2928,11 @@ export class UploadOrderFileRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'UploadOrderFileRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new UploadOrderFileResponse();
+  }
+  public getTypeName() {
+    return 'UploadOrderFileRequest';
   }
 }
 
@@ -3111,53 +2978,11 @@ export class UploadRecordFileRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'UploadRecordFileRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new UploadRecordFileResponse();
   }
-}
-
-/**
- * File services
- */
-// @Route("/notifications/server-events/messages/files", "POST")
-// @Route("/{version}/notifications/server-events/messages/files", "POST")
-// @Api(Description="File services")
-// @DataContract
-export class UploadSseMessageFileRequest
-  extends CodeMashRequestBase
-  implements IReturn<UploadSseMessageFileResponse> {
-  /**
-   * Channel to send message to
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="Channel to send message to", IsRequired=true, Name="ChannelId", ParameterType="form")
-  public channelId: string;
-
-  /**
-   * Alternative way to upload a file by providing a base64 encoded string
-   */
-  // @DataMember
-  // @ApiMember(DataType="object", Description="Alternative way to upload a file by providing a base64 encoded string", Name="Base64File", ParameterType="body")
-  public base64File: Base64FileUpload;
-
-  public constructor(init?: Partial<UploadSseMessageFileRequest>) {
-    super(init);
-    (Object as any).assign(this, init);
-  }
   public getTypeName() {
-    return 'UploadSseMessageFileRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
-  public createResponse() {
-    return new UploadSseMessageFileResponse();
+    return 'UploadRecordFileRequest';
   }
 }
 
@@ -3196,14 +3021,11 @@ export class UploadUserFileRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'UploadUserFileRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new UploadUserFileResponse();
+  }
+  public getTypeName() {
+    return 'UploadUserFileRequest';
   }
 }
 
@@ -3242,14 +3064,11 @@ export class CreateLogRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'CreateLogRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new CreateLogResponse();
+  }
+  public getTypeName() {
+    return 'CreateLogRequest';
   }
 }
 
@@ -3295,14 +3114,11 @@ export class AadAuthenticationRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'AadAuthenticationRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new AadAuthenticationResponse();
+  }
+  public getTypeName() {
+    return 'AadAuthenticationRequest';
   }
 }
 
@@ -3320,14 +3136,11 @@ export class AuthCheckRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'AuthCheckRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new AuthCheckResponse();
+  }
+  public getTypeName() {
+    return 'AuthCheckRequest';
   }
 }
 
@@ -3359,14 +3172,11 @@ export class CredentialsAuthenticationRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'CredentialsAuthenticationRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new CredentialsAuthenticationResponse();
+  }
+  public getTypeName() {
+    return 'CredentialsAuthenticationRequest';
   }
 }
 
@@ -3412,14 +3222,11 @@ export class FacebookAuthenticationRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'FacebookAuthenticationRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new FacebookAuthenticationResponse();
+  }
+  public getTypeName() {
+    return 'FacebookAuthenticationRequest';
   }
 }
 
@@ -3465,14 +3272,11 @@ export class GoogleAuthenticationRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'GoogleAuthenticationRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new GoogleAuthenticationResponse();
+  }
+  public getTypeName() {
+    return 'GoogleAuthenticationRequest';
   }
 }
 
@@ -3539,14 +3343,11 @@ export class TwitterAuthenticationRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'TwitterAuthenticationRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new TwitterAuthenticationResponse();
+  }
+  public getTypeName() {
+    return 'TwitterAuthenticationRequest';
   }
 }
 
@@ -3578,14 +3379,11 @@ export class ValidateUserDeactivationTokenRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'ValidateUserDeactivationTokenRequest';
-  }
-  public getMethod() {
-    return 'GET';
-  }
   public createResponse() {
     return new ValidateUserDeactivationTokenResponse();
+  }
+  public getTypeName() {
+    return 'ValidateUserDeactivationTokenRequest';
   }
 }
 
@@ -3603,13 +3401,10 @@ export class CreateUserDeactivationRequest
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
   public getTypeName() {
     return 'CreateUserDeactivationRequest';
   }
-  public getMethod() {
-    return 'POST';
-  }
-  public createResponse() {}
 }
 
 /**
@@ -3638,13 +3433,10 @@ export class DeactivateUserRequest extends RequestBase implements IReturnVoid {
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
   public getTypeName() {
     return 'DeactivateUserRequest';
   }
-  public getMethod() {
-    return 'POST';
-  }
-  public createResponse() {}
 }
 
 /**
@@ -3668,13 +3460,10 @@ export class BlockUserRequest
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
   public getTypeName() {
     return 'BlockUserRequest';
   }
-  public getMethod() {
-    return 'POST';
-  }
-  public createResponse() {}
 }
 
 /**
@@ -3698,13 +3487,10 @@ export class DeleteUserRequest
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
   public getTypeName() {
     return 'DeleteUserRequest';
   }
-  public getMethod() {
-    return 'DELETE';
-  }
-  public createResponse() {}
 }
 
 /**
@@ -3749,14 +3535,11 @@ export class GetProfileRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'GetProfileRequest';
-  }
-  public getMethod() {
-    return 'GET';
-  }
   public createResponse() {
     return new GetProfileResponse();
+  }
+  public getTypeName() {
+    return 'GetProfileRequest';
   }
 }
 
@@ -3784,13 +3567,6 @@ export class GetUserRequest
   // @DataMember
   // @ApiMember(DataType="string", Description="Email of user", Name="Email", ParameterType="query")
   public email: string;
-
-  /**
-   * User phone number, only viable if user registered with phone
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="User phone number, only viable if user registered with phone", Name="Phone", ParameterType="query")
-  public phone: string;
 
   /**
    * Provider of user
@@ -3831,14 +3607,11 @@ export class GetUserRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'GetUserRequest';
-  }
-  public getMethod() {
-    return 'GET';
-  }
   public createResponse() {
     return new GetUserResponse();
+  }
+  public getTypeName() {
+    return 'GetUserRequest';
   }
 }
 
@@ -3877,14 +3650,11 @@ export class GetUsersRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'GetUsersRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new GetUsersResponse();
+  }
+  public getTypeName() {
+    return 'GetUsersRequest';
   }
 }
 
@@ -3909,13 +3679,10 @@ export class UnblockUserRequest
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
   public getTypeName() {
     return 'UnblockUserRequest';
   }
-  public getMethod() {
-    return 'POST';
-  }
-  public createResponse() {}
 }
 
 /**
@@ -3949,17 +3716,21 @@ export class UpdatePasswordRequest
   // @ApiMember(DataType="string", Description="New password", IsRequired=true, Name="Password", ParameterType="body")
   public password: string;
 
+  /**
+   * New repeated password
+   */
+  // @DataMember
+  // @ApiMember(DataType="string", Description="New repeated password", IsRequired=true, Name="RepeatedPassword", ParameterType="body")
+  public repeatedPassword: string;
+
   public constructor(init?: Partial<UpdatePasswordRequest>) {
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
   public getTypeName() {
     return 'UpdatePasswordRequest';
   }
-  public getMethod() {
-    return 'PATCH';
-  }
-  public createResponse() {}
 }
 
 /**
@@ -4123,13 +3894,10 @@ export class UpdateProfileRequest
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
   public getTypeName() {
     return 'UpdateProfileRequest';
   }
-  public getMethod() {
-    return 'PATCH';
-  }
-  public createResponse() {}
 }
 
 /**
@@ -4323,13 +4091,10 @@ export class UpdateUserRequest
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
   public getTypeName() {
     return 'UpdateUserRequest';
   }
-  public getMethod() {
-    return 'POST';
-  }
-  public createResponse() {}
 }
 
 /**
@@ -4507,14 +4272,11 @@ export class InviteUserRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'InviteUserRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new InviteUserV2Response();
+  }
+  public getTypeName() {
+    return 'InviteUserRequest';
   }
 }
 
@@ -4686,193 +4448,11 @@ export class RegisterGuestUserRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'RegisterGuestUserRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new RegisterGuestUserResponse();
   }
-}
-
-/**
- * Membership
- */
-// @Route("/membership/users/register/phone", "POST")
-// @Route("/{version}/membership/users/register/phone", "POST")
-// @Api(Description="Membership")
-// @DataContract
-export class RegisterPhoneUserRequest
-  extends CodeMashRequestBase
-  implements IReturn<RegisterPhoneUserResponse> {
-  /**
-   * User's phone number
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="User's phone number", IsRequired=true, Name="Phone", ParameterType="body")
-  public phone: string;
-
-  /**
-   * Member display name
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="Member display name", Name="DisplayName", ParameterType="body")
-  public displayName: string;
-
-  /**
-   * Email address
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="Email address", Name="Email", ParameterType="body")
-  public email: string;
-
-  /**
-   * Member first name
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="Member first name", Name="FirstName", ParameterType="body")
-  public firstName: string;
-
-  /**
-   * Member last name
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="Member last name", Name="LastName", ParameterType="body")
-  public lastName: string;
-
-  /**
-   * Meta details as JSON object
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="Meta details as JSON object", Name="Meta", ParameterType="body")
-  public meta: string;
-
-  /**
-   * Main user language
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="Main user language", Name="Language", ParameterType="body")
-  public language: string;
-
-  /**
-   * User's time zone
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="User's time zone", Name="TimeZone", ParameterType="body")
-  public timeZone: string;
-
-  /**
-   * Should user get marketing emails
-   */
-  // @DataMember
-  // @ApiMember(DataType="bool", Description="Should user get marketing emails", Name="SubscribeToNews", ParameterType="body")
-  public subscribeToNews?: boolean;
-
-  /**
-   * User's country
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="User's country", Name="Country", ParameterType="body")
-  public country: string;
-
-  /**
-   * User's 2 letter country code
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="User's 2 letter country code", Name="CountryCode", ParameterType="body")
-  public countryCode: string;
-
-  /**
-   * User's state / province
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="User's state / province", Name="Area", ParameterType="body")
-  public area: string;
-
-  /**
-   * User's city
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="User's city", Name="City", ParameterType="body")
-  public city: string;
-
-  /**
-   * User's street address
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="User's street address", Name="Address", ParameterType="body")
-  public address: string;
-
-  /**
-   * User's secondary street address
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="User's secondary street address", Name="Address2", ParameterType="body")
-  public address2: string;
-
-  /**
-   * User's company
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="User's company", Name="Company", ParameterType="body")
-  public company: string;
-
-  /**
-   * User's company code
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="User's company code", Name="CompanyCode", ParameterType="body")
-  public companyCode: string;
-
-  /**
-   * User's postal code
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="User's postal code", Name="PostalCode", ParameterType="body")
-  public postalCode: string;
-
-  /**
-   * User's gender
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="User's gender", Name="Gender", ParameterType="body")
-  public gender: string;
-
-  /**
-   * User's birthdate
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="User's birthdate", Name="BirthDate", ParameterType="body")
-  public birthDate: string;
-
-  /**
-   * Full permission tree
-   */
-  // @DataMember
-  // @ApiMember(DataType="Array", Description="Full permission tree", Name="RolesTree", ParameterType="body")
-  public rolesTree: UserRoleUpdateInput[];
-
-  /**
-   * User's zone
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="User's zone", Name="Zone", ParameterType="body")
-  public zone: string;
-
-  public constructor(init?: Partial<RegisterPhoneUserRequest>) {
-    super(init);
-    (Object as any).assign(this, init);
-  }
   public getTypeName() {
-    return 'RegisterPhoneUserRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
-  public createResponse() {
-    return new RegisterPhoneUserResponse();
+    return 'RegisterGuestUserRequest';
   }
 }
 
@@ -5072,14 +4652,11 @@ export class RegisterUserRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'RegisterUserRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new RegisterUserV2Response();
+  }
+  public getTypeName() {
+    return 'RegisterUserRequest';
   }
 }
 
@@ -5111,14 +4688,11 @@ export class ValidatePasswordTokenRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'ValidatePasswordTokenRequest';
-  }
-  public getMethod() {
-    return 'GET';
-  }
   public createResponse() {
     return new ValidatePasswordTokenResponse();
+  }
+  public getTypeName() {
+    return 'ValidatePasswordTokenRequest';
   }
 }
 
@@ -5143,14 +4717,11 @@ export class CreatePasswordResetRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'CreatePasswordResetRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new CreatePasswordResetResponse();
+  }
+  public getTypeName() {
+    return 'CreatePasswordResetRequest';
   }
 }
 
@@ -5187,13 +4758,10 @@ export class ResetPasswordRequest extends RequestBase implements IReturnVoid {
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
   public getTypeName() {
     return 'ResetPasswordRequest';
   }
-  public getMethod() {
-    return 'POST';
-  }
-  public createResponse() {}
 }
 
 /**
@@ -5224,14 +4792,11 @@ export class ValidateInvitationTokenRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'ValidateInvitationTokenRequest';
-  }
-  public getMethod() {
-    return 'GET';
-  }
   public createResponse() {
     return new ValidateInvitationTokenResponse();
+  }
+  public getTypeName() {
+    return 'ValidateInvitationTokenRequest';
   }
 }
 
@@ -5254,13 +4819,10 @@ export class VerifyUserRequest extends RequestBase implements IReturnVoid {
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
   public getTypeName() {
     return 'VerifyUserRequest';
   }
-  public getMethod() {
-    return 'POST';
-  }
-  public createResponse() {}
 }
 
 /**
@@ -5298,13 +4860,10 @@ export class VerifyUserInvitationRequest
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
   public getTypeName() {
     return 'VerifyUserInvitationRequest';
   }
-  public getMethod() {
-    return 'POST';
-  }
-  public createResponse() {}
 }
 
 /**
@@ -5329,14 +4888,11 @@ export class DeleteEmailRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'DeleteEmailRequest';
-  }
-  public getMethod() {
-    return 'DELETE';
-  }
   public createResponse() {
     return new DeleteEmailResponse();
+  }
+  public getTypeName() {
+    return 'DeleteEmailRequest';
   }
 }
 
@@ -5445,14 +5001,11 @@ export class SendEmailRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'SendEmailRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new SendEmailNotificationV2Response();
+  }
+  public getTypeName() {
+    return 'SendEmailRequest';
   }
 }
 
@@ -5526,14 +5079,11 @@ export class CreateDeviceRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'CreateDeviceRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new CreateDeviceResponse();
+  }
+  public getTypeName() {
+    return 'CreateDeviceRequest';
   }
 }
 
@@ -5558,13 +5108,10 @@ export class DeleteDeviceRequest
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
   public getTypeName() {
     return 'DeleteDeviceRequest';
   }
-  public getMethod() {
-    return 'DELETE';
-  }
-  public createResponse() {}
 }
 
 /**
@@ -5588,14 +5135,11 @@ export class GetDeviceRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'GetDeviceRequest';
-  }
-  public getMethod() {
-    return 'GET';
-  }
   public createResponse() {
     return new GetDeviceResponse();
+  }
+  public getTypeName() {
+    return 'GetDeviceRequest';
   }
 }
 
@@ -5620,14 +5164,11 @@ export class GetDevicesRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'GetDevicesRequest';
-  }
-  public getMethod() {
-    return 'GET';
-  }
   public createResponse() {
     return new GetDevicesResponse();
+  }
+  public getTypeName() {
+    return 'GetDevicesRequest';
   }
 }
 
@@ -5659,14 +5200,11 @@ export class DeleteDeviceTokenRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'DeleteDeviceTokenRequest';
-  }
-  public getMethod() {
-    return 'DELETE';
-  }
   public createResponse() {
     return new DeleteDeviceTokenResponse();
+  }
+  public getTypeName() {
+    return 'DeleteDeviceTokenRequest';
   }
 }
 
@@ -5768,14 +5306,11 @@ export class RegisterDeviceTokenRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'RegisterDeviceTokenRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new RegisterDeviceTokenResponse();
+  }
+  public getTypeName() {
+    return 'RegisterDeviceTokenRequest';
   }
 }
 
@@ -5828,14 +5363,11 @@ export class RegisterDeviceExpoTokenRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'RegisterDeviceExpoTokenRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new RegisterDeviceExpoTokenResponse();
+  }
+  public getTypeName() {
+    return 'RegisterDeviceExpoTokenRequest';
   }
 }
 
@@ -5909,13 +5441,10 @@ export class UpdateDeviceRequest
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
   public getTypeName() {
     return 'UpdateDeviceRequest';
   }
-  public getMethod() {
-    return 'PATCH';
-  }
-  public createResponse() {}
 }
 
 /**
@@ -5946,14 +5475,11 @@ export class UpdateDeviceUserRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'UpdateDeviceUserRequest';
-  }
-  public getMethod() {
-    return 'PATCH';
-  }
   public createResponse() {
     return new UpdateDeviceUserResponse();
+  }
+  public getTypeName() {
+    return 'UpdateDeviceUserRequest';
   }
 }
 
@@ -5985,14 +5511,11 @@ export class UpdateDeviceMetaRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'UpdateDeviceMetaRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new UpdateDeviceMetaResponse();
+  }
+  public getTypeName() {
+    return 'UpdateDeviceMetaRequest';
   }
 }
 
@@ -6031,14 +5554,11 @@ export class DeleteDeviceMetaRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'DeleteDeviceMetaRequest';
-  }
-  public getMethod() {
-    return 'PATCH';
-  }
   public createResponse() {
     return new DeleteDeviceMetaResponse();
+  }
+  public getTypeName() {
+    return 'DeleteDeviceMetaRequest';
   }
 }
 
@@ -6070,14 +5590,11 @@ export class UpdateDeviceTimeZoneRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'UpdateDeviceTimeZoneRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new UpdateDeviceTimeZoneResponse();
+  }
+  public getTypeName() {
+    return 'UpdateDeviceTimeZoneRequest';
   }
 }
 
@@ -6109,14 +5626,11 @@ export class DeleteNotificationRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'DeleteNotificationRequest';
-  }
-  public getMethod() {
-    return 'DELETE';
-  }
   public createResponse() {
     return new DeleteNotificationResponse();
+  }
+  public getTypeName() {
+    return 'DeleteNotificationRequest';
   }
 }
 
@@ -6148,14 +5662,11 @@ export class GetNotificationRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'GetNotificationRequest';
-  }
-  public getMethod() {
-    return 'GET';
-  }
   public createResponse() {
     return new GetNotificationResponse();
+  }
+  public getTypeName() {
+    return 'GetNotificationRequest';
   }
 }
 
@@ -6194,14 +5705,11 @@ export class GetNotificationsRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'GetNotificationsRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new GetNotificationsResponse();
+  }
+  public getTypeName() {
+    return 'GetNotificationsRequest';
   }
 }
 
@@ -6254,14 +5762,11 @@ export class GetNotificationsCountRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'GetNotificationsCountRequest';
-  }
-  public getMethod() {
-    return 'GET';
-  }
   public createResponse() {
     return new GetNotificationsResponse();
+  }
+  public getTypeName() {
+    return 'GetNotificationsCountRequest';
   }
 }
 
@@ -6307,14 +5812,11 @@ export class MarkAllNotificationsAsReadRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'MarkAllNotificationsAsReadRequest';
-  }
-  public getMethod() {
-    return 'PATCH';
-  }
   public createResponse() {
     return new MarkNotificationAsReadResponse();
+  }
+  public getTypeName() {
+    return 'MarkAllNotificationsAsReadRequest';
   }
 }
 
@@ -6360,14 +5862,11 @@ export class MarkNotificationAsReadRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'MarkNotificationAsReadRequest';
-  }
-  public getMethod() {
-    return 'PATCH';
-  }
   public createResponse() {
     return new MarkNotificationAsReadResponse();
+  }
+  public getTypeName() {
+    return 'MarkNotificationAsReadRequest';
   }
 }
 
@@ -6448,14 +5947,11 @@ export class SendPushNotificationRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'SendPushNotificationRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new SendPushNotificationResponse();
+  }
+  public getTypeName() {
+    return 'SendPushNotificationRequest';
   }
 }
 
@@ -6480,14 +5976,11 @@ export class GetNotificationTemplateRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'GetNotificationTemplateRequest';
-  }
-  public getMethod() {
-    return 'GET';
-  }
   public createResponse() {
     return new GetNotificationTemplateResponse();
+  }
+  public getTypeName() {
+    return 'GetNotificationTemplateRequest';
   }
 }
 
@@ -6505,14 +5998,11 @@ export class GetNotificationTemplatesRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'GetNotificationTemplatesRequest';
-  }
-  public getMethod() {
-    return 'GET';
-  }
   public createResponse() {
     return new GetNotificationTemplatesResponse();
+  }
+  public getTypeName() {
+    return 'GetNotificationTemplatesRequest';
   }
 }
 
@@ -6551,14 +6041,11 @@ export class VerifyAppleAppStoreSubscriptionRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'VerifyAppleAppStoreSubscriptionRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new VerifyAppleAppStoreSubscriptionResponse();
+  }
+  public getTypeName() {
+    return 'VerifyAppleAppStoreSubscriptionRequest';
   }
 }
 
@@ -6667,14 +6154,11 @@ export class CreateCustomerRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'CreateCustomerRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new CreateCustomerResponse();
+  }
+  public getTypeName() {
+    return 'CreateCustomerRequest';
   }
 }
 
@@ -6699,13 +6183,10 @@ export class DeleteCustomerRequest
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
   public getTypeName() {
     return 'DeleteCustomerRequest';
   }
-  public getMethod() {
-    return 'DELETE';
-  }
-  public createResponse() {}
 }
 
 /**
@@ -6750,14 +6231,11 @@ export class GetCustomerRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'GetCustomerRequest';
-  }
-  public getMethod() {
-    return 'GET';
-  }
   public createResponse() {
     return new GetCustomerResponse();
+  }
+  public getTypeName() {
+    return 'GetCustomerRequest';
   }
 }
 
@@ -6782,14 +6260,11 @@ export class GetCustomersRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'GetCustomersRequest';
-  }
-  public getMethod() {
-    return 'GET';
-  }
   public createResponse() {
     return new GetCustomersResponse();
+  }
+  public getTypeName() {
+    return 'GetCustomersRequest';
   }
 }
 
@@ -6891,58 +6366,9 @@ export class UpdateCustomerRequest
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
   public getTypeName() {
     return 'UpdateCustomerRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
-  public createResponse() {}
-}
-
-/**
- * Payments
- */
-// @Route("/payments/orders/{Id}/decta/pay", "POST")
-// @Route("/{version}/payments/orders/{Id}/decta/pay", "POST")
-// @Api(Description="Payments")
-// @DataContract
-export class CreateDectaTransactionRequest
-  extends CodeMashRequestBase
-  implements IReturn<CreateDectaTransactionResponse> {
-  /**
-   * Order ID to pay for.
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="Order ID to pay for.", IsRequired=true, Name="Id", ParameterType="path")
-  public id: string;
-
-  /**
-   * Customer ID to whom belongs this payment method.
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="Customer ID to whom belongs this payment method.", IsRequired=true, Name="CustomerId", ParameterType="body")
-  public customerId: string;
-
-  /**
-   * Should try to charge default card
-   */
-  // @DataMember
-  // @ApiMember(DataType="bool", Description="Should try to charge default card", Name="ChargeCard", ParameterType="body")
-  public chargeCard: boolean;
-
-  public constructor(init?: Partial<CreateDectaTransactionRequest>) {
-    super(init);
-    (Object as any).assign(this, init);
-  }
-  public getTypeName() {
-    return 'CreateDectaTransactionRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
-  public createResponse() {
-    return new CreateDectaTransactionResponse();
   }
 }
 
@@ -7065,14 +6491,14 @@ export class CreateDiscountRequest
    * Amount of times that the same user can redeem. Default - 1.
    */
   // @DataMember
-  // @ApiMember(DataType="integer", Description="Amount of times that the same user can redeem. Default - 1.", Format="int32", Name="UserCanRedeem", ParameterType="body")
+  // @ApiMember(DataType="int", Description="Amount of times that the same user can redeem. Default - 1.", Name="UserCanRedeem", ParameterType="body")
   public userCanRedeem?: number;
 
   /**
    * Amount of times in total this discount can be redeemed.
    */
   // @DataMember
-  // @ApiMember(DataType="integer", Description="Amount of times in total this discount can be redeemed.", Format="int32", Name="TotalCanRedeem", ParameterType="body")
+  // @ApiMember(DataType="int", Description="Amount of times in total this discount can be redeemed.", Name="TotalCanRedeem", ParameterType="body")
   public totalCanRedeem?: number;
 
   /**
@@ -7093,14 +6519,11 @@ export class CreateDiscountRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'CreateDiscountRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new CreateDiscountResponse();
+  }
+  public getTypeName() {
+    return 'CreateDiscountRequest';
   }
 }
 
@@ -7125,13 +6548,10 @@ export class DeleteDiscountRequest
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
   public getTypeName() {
     return 'DeleteDiscountRequest';
   }
-  public getMethod() {
-    return 'DELETE';
-  }
-  public createResponse() {}
 }
 
 /**
@@ -7183,14 +6603,11 @@ export class GetApplicableCouponsRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'GetApplicableCouponsRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new GetApplicableCouponsResponse();
+  }
+  public getTypeName() {
+    return 'GetApplicableCouponsRequest';
   }
 }
 
@@ -7236,14 +6653,11 @@ export class GetApplicableDiscountsRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'GetApplicableDiscountsRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new GetApplicableDiscountsResponse();
+  }
+  public getTypeName() {
+    return 'GetApplicableDiscountsRequest';
   }
 }
 
@@ -7359,14 +6773,14 @@ export class UpdateDiscountRequest
    * Amount of times that the same user can redeem.
    */
   // @DataMember
-  // @ApiMember(DataType="integer", Description="Amount of times that the same user can redeem.", Format="int32", Name="UserCanRedeem", ParameterType="body")
+  // @ApiMember(DataType="int", Description="Amount of times that the same user can redeem.", Name="UserCanRedeem", ParameterType="body")
   public userCanRedeem?: number;
 
   /**
    * Amount of times in total this discount can be redeemed.
    */
   // @DataMember
-  // @ApiMember(DataType="integer", Description="Amount of times in total this discount can be redeemed.", Format="int32", Name="TotalCanRedeem", ParameterType="body")
+  // @ApiMember(DataType="int", Description="Amount of times in total this discount can be redeemed.", Name="TotalCanRedeem", ParameterType="body")
   public totalCanRedeem?: number;
 
   /**
@@ -7387,13 +6801,10 @@ export class UpdateDiscountRequest
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
   public getTypeName() {
     return 'UpdateDiscountRequest';
   }
-  public getMethod() {
-    return 'POST';
-  }
-  public createResponse() {}
 }
 
 /**
@@ -7431,202 +6842,11 @@ export class VerifyGooglePlayStoreSubscriptionRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'VerifyGooglePlayStoreSubscriptionRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new VerifyGooglePlayStoreSubscriptionResponse();
   }
-}
-
-/**
- * Payments
- */
-// @Route("/payments/auth/kevin/token/{id}", "DELETE")
-// @Route("/{version}/payments/auth/kevin/token/{id}", "DELETE")
-// @Api(Description="Payments")
-// @DataContract
-export class CancelKevinTokenRequest
-  extends CodeMashRequestBase
-  implements IReturn<StartKevinAuthResponse> {
-  /**
-   * Payment account token ID.
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="Payment account token ID.", IsRequired=true, Name="Id", ParameterType="path")
-  public id: string;
-
-  public constructor(init?: Partial<CancelKevinTokenRequest>) {
-    super(init);
-    (Object as any).assign(this, init);
-  }
   public getTypeName() {
-    return 'CancelKevinTokenRequest';
-  }
-  public getMethod() {
-    return 'DELETE';
-  }
-  public createResponse() {
-    return new StartKevinAuthResponse();
-  }
-}
-
-/**
- * Payments
- */
-// @Route("/payments/auth/kevin/token", "POST")
-// @Route("/{version}/payments/auth/kevin/token", "POST")
-// @Api(Description="Payments")
-// @DataContract
-export class ReceiveKevinTokenRequest
-  extends CodeMashRequestBase
-  implements IReturn<StartKevinAuthResponse> {
-  /**
-   * Authentication request ID.
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="Authentication request ID.", IsRequired=true, Name="AuthorizationCode", ParameterType="body")
-  public requestId: string;
-
-  /**
-   * Authorization code received from authenticating.
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="Authorization code received from authenticating.", IsRequired=true, Name="AuthorizationCode", ParameterType="body")
-  public authorizationCode: string;
-
-  public constructor(init?: Partial<ReceiveKevinTokenRequest>) {
-    super(init);
-    (Object as any).assign(this, init);
-  }
-  public getTypeName() {
-    return 'ReceiveKevinTokenRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
-  public createResponse() {
-    return new StartKevinAuthResponse();
-  }
-}
-
-/**
- * Payments
- */
-// @Route("/payments/auth/kevin", "GET POST")
-// @Route("/{version}/payments/auth/kevin", "GET POST")
-// @Api(Description="Payments")
-// @DataContract
-export class StartKevinAuthRequest
-  extends CodeMashRequestBase
-  implements IReturn<StartKevinAuthResponse> {
-  /**
-   * Payment account ID.
-   */
-  // @DataMember
-  // @ApiMember(DataType="Guid", Description="Payment account ID.", IsRequired=true, Name="AccountId", ParameterType="body")
-  public accountId: string;
-
-  /**
-   * Id of the bank to connect with.
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="Id of the bank to connect with.", Name="BankId", ParameterType="body")
-  public bankId: string;
-
-  public constructor(init?: Partial<StartKevinAuthRequest>) {
-    super(init);
-    (Object as any).assign(this, init);
-  }
-  public getTypeName() {
-    return 'StartKevinAuthRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
-  public createResponse() {
-    return new StartKevinAuthResponse();
-  }
-}
-
-/**
- * Payments
- */
-// @Route("/payments/orders/kevin/payment/status", "POST")
-// @Route("/{version}/payments/orders/kevin/payment/status", "POST")
-// @Api(Description="Payments")
-// @DataContract
-export class CheckKevinPaymentStatusRequest
-  extends CodeMashRequestBase
-  implements IReturn<CheckKevinPaymentStatusResponse> {
-  /**
-   * Kevin payment ID.
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="Kevin payment ID.", IsRequired=true, Name="PaymentId", ParameterType="query")
-  public paymentId: string;
-
-  public constructor(init?: Partial<CheckKevinPaymentStatusRequest>) {
-    super(init);
-    (Object as any).assign(this, init);
-  }
-  public getTypeName() {
-    return 'CheckKevinPaymentStatusRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
-  public createResponse() {
-    return new CheckKevinPaymentStatusResponse();
-  }
-}
-
-/**
- * Payments
- */
-// @Route("/payments/orders/{Id}/kevin/pay", "POST")
-// @Route("/{version}/payments/orders/{Id}/kevin/pay", "POST")
-// @Api(Description="Payments")
-// @DataContract
-export class CreateKevinTransactionRequest
-  extends CodeMashRequestBase
-  implements IReturn<CreateStripeTransactionResponse> {
-  /**
-   * Order ID to pay for.
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="Order ID to pay for.", IsRequired=true, Name="Id", ParameterType="path")
-  public id: string;
-
-  /**
-   * Id of the payment method.
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="Id of the payment method.", Name="PaymentMethodId", ParameterType="body")
-  public paymentMethodId: string;
-
-  /**
-   * Available values: 'card' or 'bank'. Used if payment method not selected
-   */
-  // @DataMember
-  // @ApiMember(DataType="string", Description="Available values: 'card' or 'bank'. Used if payment method not selected", Name="PreferredPaymentMethod", ParameterType="body")
-  public preferredPaymentMethod: string;
-
-  public constructor(init?: Partial<CreateKevinTransactionRequest>) {
-    super(init);
-    (Object as any).assign(this, init);
-  }
-  public getTypeName() {
-    return 'CreateKevinTransactionRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
-  public createResponse() {
-    return new CreateStripeTransactionResponse();
+    return 'VerifyGooglePlayStoreSubscriptionRequest';
   }
 }
 
@@ -7679,14 +6899,11 @@ export class AttachPaymentMethodRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'AttachPaymentMethodRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new AttachPaymentMethodResponse();
+  }
+  public getTypeName() {
+    return 'AttachPaymentMethodRequest';
   }
 }
 
@@ -7718,13 +6935,10 @@ export class DetachPaymentMethodRequest
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
   public getTypeName() {
     return 'DetachPaymentMethodRequest';
   }
-  public getMethod() {
-    return 'DELETE';
-  }
-  public createResponse() {}
 }
 
 /**
@@ -7755,14 +6969,11 @@ export class GetPaymentMethodSetupRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'GetPaymentMethodSetupRequest';
-  }
-  public getMethod() {
-    return 'GET';
-  }
   public createResponse() {
     return new GetPaymentMethodSetupResponse();
+  }
+  public getTypeName() {
+    return 'GetPaymentMethodSetupRequest';
   }
 }
 
@@ -7871,13 +7082,10 @@ export class UpdatePaymentMethodRequest
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
   public getTypeName() {
     return 'UpdatePaymentMethodRequest';
   }
-  public getMethod() {
-    return 'POST';
-  }
-  public createResponse() {}
 }
 
 /**
@@ -7957,14 +7165,11 @@ export class CreateOrderRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'CreateOrderRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new CreateOrderResponse();
+  }
+  public getTypeName() {
+    return 'CreateOrderRequest';
   }
 }
 
@@ -7996,14 +7201,11 @@ export class GetOrderRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'GetOrderRequest';
-  }
-  public getMethod() {
-    return 'GET';
-  }
   public createResponse() {
     return new GetOrderResponse();
+  }
+  public getTypeName() {
+    return 'GetOrderRequest';
   }
 }
 
@@ -8042,14 +7244,11 @@ export class GetOrdersRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'GetOrdersRequest';
-  }
-  public getMethod() {
-    return 'GET';
-  }
   public createResponse() {
     return new GetOrdersResponse();
+  }
+  public getTypeName() {
+    return 'GetOrdersRequest';
   }
 }
 
@@ -8081,14 +7280,11 @@ export class CreatePayseraTransactionRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'CreatePayseraTransactionRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new CreatePayseraTransactionResponse();
+  }
+  public getTypeName() {
+    return 'CreatePayseraTransactionRequest';
   }
 }
 
@@ -8134,14 +7330,11 @@ export class CheckStripePaymentStatusRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'CheckStripePaymentStatusRequest';
-  }
-  public getMethod() {
-    return 'GET';
-  }
   public createResponse() {
     return new CheckStripePaymentStatusResponse();
+  }
+  public getTypeName() {
+    return 'CheckStripePaymentStatusRequest';
   }
 }
 
@@ -8180,14 +7373,11 @@ export class CreateStripeTransactionRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'CreateStripeTransactionRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new CreateStripeTransactionResponse();
+  }
+  public getTypeName() {
+    return 'CreateStripeTransactionRequest';
   }
 }
 
@@ -8233,14 +7423,11 @@ export class CancelSubscriptionRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'CancelSubscriptionRequest';
-  }
-  public getMethod() {
-    return 'DELETE';
-  }
   public createResponse() {
     return new CancelSubscriptionResponse();
+  }
+  public getTypeName() {
+    return 'CancelSubscriptionRequest';
   }
 }
 
@@ -8293,14 +7480,11 @@ export class ChangeSubscriptionRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'ChangeSubscriptionRequest';
-  }
-  public getMethod() {
-    return 'PUT';
-  }
   public createResponse() {
     return new ChangeSubscriptionResponse();
+  }
+  public getTypeName() {
+    return 'ChangeSubscriptionRequest';
   }
 }
 
@@ -8346,14 +7530,11 @@ export class CreateSubscriptionRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'CreateSubscriptionRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new CreateSubscriptionResponse();
+  }
+  public getTypeName() {
+    return 'CreateSubscriptionRequest';
   }
 }
 
@@ -8406,13 +7587,10 @@ export class UpdateSubscriptionRequest
     super(init);
     (Object as any).assign(this, init);
   }
+  public createResponse() {}
   public getTypeName() {
     return 'UpdateSubscriptionRequest';
   }
-  public getMethod() {
-    return 'PATCH';
-  }
-  public createResponse() {}
 }
 
 /**
@@ -8429,14 +7607,11 @@ export class GetProjectRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'GetProjectRequest';
-  }
-  public getMethod() {
-    return 'GET';
-  }
   public createResponse() {
     return new GetProjectResponse();
+  }
+  public getTypeName() {
+    return 'GetProjectRequest';
   }
 }
 
@@ -8489,14 +7664,11 @@ export class ExecuteFunctionRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'ExecuteFunctionRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new ExecuteFunctionResponse();
+  }
+  public getTypeName() {
+    return 'ExecuteFunctionRequest';
   }
 }
 
@@ -8505,14 +7677,11 @@ export class AwsSesEndpoint implements IReturn<HttpResult> {
   public constructor(init?: Partial<AwsSesEndpoint>) {
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'AwsSesEndpoint';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new HttpResult();
+  }
+  public getTypeName() {
+    return 'AwsSesEndpoint';
   }
 }
 
@@ -8521,14 +7690,11 @@ export class MailGunEndpoint implements IReturn<HttpResult> {
   public constructor(init?: Partial<MailGunEndpoint>) {
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'MailGunEndpoint';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new HttpResult();
+  }
+  public getTypeName() {
+    return 'MailGunEndpoint';
   }
 }
 
@@ -8537,14 +7703,11 @@ export class SendGridEndpoint implements IReturn<HttpResult> {
   public constructor(init?: Partial<SendGridEndpoint>) {
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'SendGridEndpoint';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new HttpResult();
+  }
+  public getTypeName() {
+    return 'SendGridEndpoint';
   }
 }
 
@@ -8597,30 +7760,19 @@ export class AppleAuthenticationRequest
     super(init);
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'AppleAuthenticationRequest';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new AppleAuthenticationResponse();
   }
+  public getTypeName() {
+    return 'AppleAuthenticationRequest';
+  }
 }
 
-/**
- * Sign In
- */
 // @Route("/auth")
 // @Route("/auth/{provider}")
-// @Api(Description="Sign In")
 // @DataContract
 export class Authenticate implements IReturn<AuthenticateResponse>, IPost {
-  /**
-   * AuthProvider, e.g. credentials
-   */
   // @DataMember(Order=1)
-  // @ApiMember(Description="AuthProvider, e.g. credentials")
   public provider: string;
 
   // @DataMember(Order=2)
@@ -8662,6 +7814,9 @@ export class Authenticate implements IReturn<AuthenticateResponse>, IPost {
   // @DataMember(Order=15)
   public cnonce: string;
 
+  // @DataMember(Order=16)
+  public useTokenCookie?: boolean;
+
   // @DataMember(Order=17)
   public accessToken: string;
 
@@ -8677,14 +7832,11 @@ export class Authenticate implements IReturn<AuthenticateResponse>, IPost {
   public constructor(init?: Partial<Authenticate>) {
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'Authenticate';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new AuthenticateResponse();
+  }
+  public getTypeName() {
+    return 'Authenticate';
   }
 }
 
@@ -8701,14 +7853,11 @@ export class GetApiKeys implements IReturn<GetApiKeysResponse>, IGet {
   public constructor(init?: Partial<GetApiKeys>) {
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'GetApiKeys';
-  }
-  public getMethod() {
-    return 'GET';
-  }
   public createResponse() {
     return new GetApiKeysResponse();
+  }
+  public getTypeName() {
+    return 'GetApiKeys';
   }
 }
 
@@ -8726,13 +7875,10 @@ export class RegenerateApiKeys
   public constructor(init?: Partial<RegenerateApiKeys>) {
     (Object as any).assign(this, init);
   }
-  public getTypeName() {
-    return 'RegenerateApiKeys';
-  }
-  public getMethod() {
-    return 'POST';
-  }
   public createResponse() {
     return new RegenerateApiKeysResponse();
+  }
+  public getTypeName() {
+    return 'RegenerateApiKeys';
   }
 }

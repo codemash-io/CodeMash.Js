@@ -1,6 +1,11 @@
 module.exports = {
   root: true,
-  extends: ['airbnb-base', 'prettier', 'eslint:recommended', 'plugin:import/typescript'],
+  extends: [
+    'airbnb-base',
+    'prettier',
+    'eslint:recommended',
+    'plugin:import/typescript',
+  ],
   plugins: ['import', '@typescript-eslint', 'simple-import-sort', 'mocha'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -20,14 +25,14 @@ module.exports = {
         extensions: ['.js', '.ts'],
         paths: ['src/', 'tests/'],
         moduleDirectory: ['node_modules', 'src/'],
-        typescript: {}
+        typescript: {},
       },
     },
   },
   rules: {
     'arrow-body-style': ['error', 'as-needed'],
     'arrow-parens': ['warn', 'as-needed'],
-    quotes: ['error', 'single', {allowTemplateLiterals: true}],
+    quotes: ['error', 'single', { allowTemplateLiterals: true }],
     'no-useless-escape': 1,
     'no-console': 0,
     'no-debugger': 1,
@@ -112,8 +117,8 @@ module.exports = {
       files: ['*.tests.ts'],
       rules: {
         'prefer-arrow-callback': 'off',
-        'func-names': 'off'
-      }
-    }
+        'func-names': 'off',
+      },
+    },
   ],
 };

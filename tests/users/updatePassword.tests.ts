@@ -34,7 +34,6 @@ describe('updatePassword', () => {
       userId: newUser.userId,
       currentPassword: oldPassword,
       password: newPassword,
-      repeatedPassword: newPassword,
     });
     const response = await updatePassword(request);
 

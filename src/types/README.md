@@ -12,6 +12,18 @@ To update types
 x typescript ./src/types/codemash.dtos.ts
 ```
 
+Ensure of what was changed
+
+```bash
+git diff ./src/types/codemash.dtos.ts
+```
+
+Run formatter
+
+```bash
+
+```
+
 To generate types you need to have 'x' tool and dotnet SDK installed. https://docs.servicestack.net/web-new
 
 ```bash
