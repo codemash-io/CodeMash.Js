@@ -27,7 +27,7 @@ describe('deleteUser', () => {
     const createdUser = await registerUser(createUser);
 
     const request = new DeleteUserRequest({
-      id: createdUser.userId,
+      id: createdUser.result.id,
     });
     const response = await deleteUser(request);
 

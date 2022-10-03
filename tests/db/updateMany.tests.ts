@@ -14,7 +14,7 @@ const ENTRIES_TO_CREATE = 3;
 const CREATE_NAME = 'update-many-initial';
 const UPDATE_NAME = 'updated-many';
 
-describe('updateMany', () => {
+describe('db.updateMany', () => {
   beforeEach(() => {
     dotenv.config({
       path: path.resolve(__dirname, '../data/config/.env'),

@@ -13,7 +13,7 @@ import {
 const CREATE_NAME = 'updateMyName';
 const UPDATE_NAME = 'updated-name';
 
-describe('updateOne', () => {
+describe('db.updateOne', () => {
   before(() => {
     dotenv.config({
       path: path.resolve(__dirname, '../data/config/.env'),
@@ -31,7 +31,7 @@ describe('updateOne', () => {
 
     const request = new UpdateOneRequest({
       collectionName: 'employees',
-      id: newEntryResponse?._id?.$oid,
+      id: newEntryResponse.result,
       update: {
         $set: {
           first_name: UPDATE_NAME,
@@ -53,7 +53,7 @@ describe('updateOne', () => {
 
     const request = new UpdateOneRequest({
       collectionName: 'nonExistentCollection',
-      id: newEntry.response?._id?.$oid,
+      id: newEntry.result,
       update: {
         $set: {
           first_name: UPDATE_NAME,

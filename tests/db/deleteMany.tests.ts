@@ -12,7 +12,7 @@ import {
 const ENTRIES_TO_INSERT = 5;
 const ENTRY_FIRST_NAME = 'Dummy-name';
 
-describe('deleteMany', () => {
+describe('db.deleteMany', () => {
   beforeEach(() => {
     dotenv.config({
       path: path.resolve(__dirname, '../data/config/.env'),

@@ -11,7 +11,7 @@ import {
 
 const ENTRY_FIRST_NAME = 'Dummy-name-Single';
 
-describe('deleteOne', () => {
+describe('db.deleteOne', () => {
   beforeEach(() => {
     dotenv.config({
       path: path.resolve(__dirname, '../data/config/.env'),

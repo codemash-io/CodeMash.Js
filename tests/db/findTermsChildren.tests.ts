@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 import { findTermsChildren } from '../../src/modules/database';
 import { FindTermsChildrenRequest } from '../../src/types/codemash.dtos';
 
-describe('findTermsChildren', () => {
+describe('db.findTermsChildren', () => {
   beforeEach(() => {
     dotenv.config({
       path: path.resolve(__dirname, '../data/config/.env'),

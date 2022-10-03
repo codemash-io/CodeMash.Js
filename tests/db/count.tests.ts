@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 import { count } from '../../src/modules/database';
 import { CountRequest } from '../../src/types/codemash.dtos';
 
-describe('count', () => {
+describe('db.count', () => {
   beforeEach(() => {
     dotenv.config({
       path: path.resolve(__dirname, '../data/config/.env'),

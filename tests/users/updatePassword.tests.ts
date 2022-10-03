@@ -31,7 +31,7 @@ describe('updatePassword', () => {
     const newUser = await registerUser(newUserRequest);
 
     const request = new UpdatePasswordRequest({
-      userId: newUser.userId,
+      userId: newUser.result.id,
       currentPassword: oldPassword,
       password: newPassword,
     });

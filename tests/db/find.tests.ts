@@ -5,19 +5,27 @@ import dotenv from 'dotenv';
 
 import { find } from '../../src/modules/database';
 import { FindRequest } from '../../src/types/codemash.dtos';
+import { TestUtils } from './utils';
+
+// export class Employee {
+//   public first_name: string;
+//   public last_name: number;
+// }
 
 describe('db.find', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     dotenv.config({
       path: path.resolve(__dirname, '../data/config/.env'),
     });
+    await TestUtils.FillInEmployees();
   });
 
   it('should get all records', async () => {
     const request = new FindRequest({
       collectionName: 'employees',
     });
-    const response = await find(request);
+    const response = await find<object>(request);
+
     expect(response.totalCount).to.be.greaterThanOrEqual(0);
   });
 

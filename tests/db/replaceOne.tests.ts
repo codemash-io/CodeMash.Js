@@ -13,7 +13,7 @@ import {
 const INITIAL_ENTRY_NAME = 'initial_entry';
 const REPLACE_WITH_NAME = 'replaced';
 
-describe('replaceOne', () => {
+describe('db.replaceOne', () => {
   beforeEach(() => {
     dotenv.config({
       path: path.resolve(__dirname, '../data/config/.env'),
@@ -31,7 +31,7 @@ describe('replaceOne', () => {
 
     const request = new ReplaceOneRequest({
       collectionName: 'employees',
-      id: newEntryResponse?._id?.$oid,
+      id: newEntryResponse.result,
       document: {
         first_name: REPLACE_WITH_NAME,
       },

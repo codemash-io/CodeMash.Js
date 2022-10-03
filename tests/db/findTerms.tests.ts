@@ -4,9 +4,14 @@ import { expect } from 'chai';
 import dotenv from 'dotenv';
 
 import { findTerms } from '../../src/modules/database';
-import { FindTermsRequest } from '../../src/types/codemash.dtos';
+import {
+  FindTermsRequest,
+  FindTermsResponse,
+  ResponseBase,
+  Term,
+} from '../../src/types/codemash.dtos';
 
-describe('findTerms', () => {
+describe('db.findTerms', () => {
   beforeEach(() => {
     dotenv.config({
       path: path.resolve(__dirname, '../data/config/.env'),
@@ -19,7 +24,7 @@ describe('findTerms', () => {
     });
 
     const response = await findTerms(request);
-    expect(response.result).length.to.be.greaterThanOrEqual(0);
+    expect(response).length.to.be.greaterThanOrEqual(0);
   });
 
   it('should throw an error for non-existent taxonomy', async () => {

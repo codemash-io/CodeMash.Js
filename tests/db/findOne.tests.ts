@@ -9,7 +9,7 @@ import { FindOneRequest } from '../../src/types/codemash.dtos';
 
 use(chaiAsPromised);
 
-describe('findOne', () => {
+describe('db.findOne', () => {
   beforeEach(() => {
     dotenv.config({
       path: path.resolve(__dirname, '../data/config/.env'),

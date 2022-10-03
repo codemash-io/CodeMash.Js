@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 import { login, registerUser } from '../../src/modules/users';
 import {
   CredentialsAuthenticationRequest,
+  CredentialsAuthenticationResponse,
   RegisterUserRequest,
 } from '../../src/types/codemash.dtos';
 
@@ -35,8 +36,8 @@ describe('login', () => {
       userName: EMAIL,
       password: PASSWORD,
     });
-    const response = await login(request);
+    const response: CredentialsAuthenticationResponse = await login(request);
 
-    expect(response.bearerToken).to.be.not.null;
+    expect(response.result.bearerToken).to.be.not.null;
   });
 });

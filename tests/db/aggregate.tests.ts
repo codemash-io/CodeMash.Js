@@ -14,7 +14,7 @@ const RECORD_COUNT = 5;
 const MATCH_NAME = 'DummyName';
 const AGGREGATION_ID = '80c1b212-9af9-44ef-b158-00b8227b6127';
 
-describe('aggregate', () => {
+describe('db.aggregate', () => {
   beforeEach(() => {
     dotenv.config({
       path: path.resolve(__dirname, '../data/config/.env'),

@@ -28,12 +28,12 @@ describe('unblockUser', () => {
     const createdUser = await registerUser(createUser);
 
     const blockReq = new BlockUserRequest({
-      id: createdUser.userId,
+      id: createdUser.result.id,
     });
     await blockUser(blockReq);
 
     const request = new UnblockUserRequest({
-      id: createdUser.userId,
+      id: createdUser.result.id,
     });
     const response = await unblockUser(request);
 

@@ -29,7 +29,7 @@ describe('getUser', () => {
     const createRes = await registerUser(createReq);
 
     const request = new GetUserRequest({
-      id: createRes.userId,
+      id: createRes.result.id,
     });
     const response = await getUser(request);
 

@@ -3,117 +3,166 @@ import { CMConfig } from 'config';
 import {
   DeleteDeviceRequest,
   DeleteDeviceTokenRequest,
+  DeleteDeviceTokenResponse,
   DeleteNotificationRequest,
+  DeleteNotificationResponse,
   GetDeviceRequest,
+  GetDeviceResponse,
   GetDevicesRequest,
+  GetDevicesResponse,
   GetNotificationRequest,
+  GetNotificationResponse,
   GetNotificationsCountRequest,
   GetNotificationsRequest,
+  GetNotificationsResponse,
+  IReturnVoid,
   MarkAllNotificationsAsReadRequest,
   MarkNotificationAsReadRequest,
+  MarkNotificationAsReadResponse,
   RegisterDeviceExpoTokenRequest,
+  RegisterDeviceExpoTokenResponse,
   RegisterDeviceTokenRequest,
+  RegisterDeviceTokenResponse,
   SendPushNotificationRequest,
+  SendPushNotificationResponse,
   UpdateDeviceMetaRequest,
+  UpdateDeviceMetaResponse,
   UpdateDeviceRequest,
   UpdateDeviceTimeZoneRequest,
+  UpdateDeviceTimeZoneResponse,
   UpdateDeviceUserRequest,
+  UpdateDeviceUserResponse,
 } from 'types/codemash.dtos';
 
-export async function registerDeviceToken(request: RegisterDeviceTokenRequest) {
-  const client = new RestClient(CMConfig.getInstance());
-  return client.request(request);
+export async function registerDeviceToken(
+  request: RegisterDeviceTokenRequest,
+): Promise<RegisterDeviceTokenResponse> {
+  const response = RestClient.New().CallApi<RegisterDeviceTokenResponse>(
+    request,
+  );
+  return response;
 }
 
 export async function registerDeviceExpoToken(
   request: RegisterDeviceExpoTokenRequest,
-) {
-  const client = new RestClient(CMConfig.getInstance());
-  return client.request(request);
+): Promise<RegisterDeviceExpoTokenResponse> {
+  const response = RestClient.New().CallApi<RegisterDeviceExpoTokenResponse>(
+    request,
+  );
+  return response;
 }
 
-export async function deleteDeviceToken(request: DeleteDeviceTokenRequest) {
-  const client = new RestClient(CMConfig.getInstance());
-  return client.request(request);
+export async function deleteDeviceToken(
+  request: DeleteDeviceTokenRequest,
+): Promise<DeleteDeviceTokenResponse> {
+  const response = RestClient.New().CallApi<DeleteDeviceTokenResponse>(request);
+  return response;
 }
 
-export async function getDevice(request: GetDeviceRequest) {
-  const client = new RestClient(CMConfig.getInstance());
-  return client.request(request);
+export async function getDevice(
+  request: GetDeviceRequest,
+): Promise<GetDeviceResponse> {
+  const response = RestClient.New().CallApi<GetDeviceResponse>(request);
+  return response;
 }
 
-export async function getDevices(request: GetDevicesRequest) {
-  const client = new RestClient(CMConfig.getInstance());
-  return client.request(request);
+export async function getDevices(
+  request: GetDevicesRequest,
+): Promise<GetDevicesResponse> {
+  const response = RestClient.New().CallApi<GetDevicesResponse>(request);
+  return response;
 }
 
-export async function updateDevice(request: UpdateDeviceRequest) {
-  const client = new RestClient(CMConfig.getInstance());
-  return client.request(request);
+export async function updateDevice(
+  request: UpdateDeviceRequest,
+): Promise<IReturnVoid> {
+  const response = RestClient.New().CallApi<IReturnVoid>(request);
+  return response;
 }
 
-export async function updateDeviceUser(request: UpdateDeviceUserRequest) {
-  const client = new RestClient(CMConfig.getInstance());
-  return client.request(request);
+export async function updateDeviceUser(
+  request: UpdateDeviceUserRequest,
+): Promise<UpdateDeviceUserResponse> {
+  const response = RestClient.New().CallApi<UpdateDeviceUserResponse>(request);
+  return response;
 }
 
-export async function updateDeviceMeta(request: UpdateDeviceMetaRequest) {
-  const client = new RestClient(CMConfig.getInstance());
-  return client.request(request);
+export async function updateDeviceMeta(
+  request: UpdateDeviceMetaRequest,
+): Promise<UpdateDeviceMetaResponse> {
+  const response = RestClient.New().CallApi<UpdateDeviceMetaResponse>(request);
+  return response;
 }
 
 export async function updateDeviceTimeZone(
   request: UpdateDeviceTimeZoneRequest,
-) {
-  const client = new RestClient(CMConfig.getInstance());
-  return client.request(request);
+): Promise<UpdateDeviceTimeZoneResponse> {
+  const response = RestClient.New().CallApi<UpdateDeviceTimeZoneResponse>(
+    request,
+  );
+  return response;
 }
 
-export async function getNotifications(request: GetNotificationsRequest) {
-  const client = new RestClient(CMConfig.getInstance());
-  return client.request(request);
+export async function getNotifications(
+  request: GetNotificationsRequest,
+): Promise<GetNotificationsResponse> {
+  const response = RestClient.New().CallApi<GetNotificationsResponse>(request);
+  return response;
 }
 
-export async function getNotification(request: GetNotificationRequest) {
-  const client = new RestClient(CMConfig.getInstance());
-  return client.request(request);
+export async function getNotification(
+  request: GetNotificationRequest,
+): Promise<GetNotificationResponse> {
+  const response = RestClient.New().CallApi<GetNotificationResponse>(request);
+  return response;
 }
 
-export async function deleteDevice(request: DeleteDeviceRequest) {
-  const client = new RestClient(CMConfig.getInstance());
-  return client.request(request);
+export async function deleteDevice(
+  request: DeleteDeviceRequest,
+): Promise<IReturnVoid> {
+  const response = RestClient.New().CallApi<IReturnVoid>(request);
+  return response;
 }
 
 export async function sendPushNotification(
   request: SendPushNotificationRequest,
-) {
-  const client = new RestClient(CMConfig.getInstance());
-  return client.request(request);
+): Promise<SendPushNotificationResponse> {
+  const response = RestClient.New().CallApi<SendPushNotificationResponse>(
+    request,
+  );
+  return response;
 }
 
 export async function markNotificationAsRead(
   request: MarkNotificationAsReadRequest,
-) {
-  const client = new RestClient(CMConfig.getInstance());
-  return client.request(request);
+): Promise<MarkNotificationAsReadResponse> {
+  const response = RestClient.New().CallApi<MarkNotificationAsReadResponse>(
+    request,
+  );
+  return response;
 }
 
 export async function markAllNotificationsAsRead(
   request: MarkAllNotificationsAsReadRequest,
-) {
-  const client = new RestClient(CMConfig.getInstance());
-  return client.request(request);
+): Promise<MarkNotificationAsReadResponse> {
+  const response = RestClient.New().CallApi<MarkNotificationAsReadResponse>(
+    request,
+  );
+  return response;
 }
 
 export async function getNotificationsCount(
   request: GetNotificationsCountRequest,
-) {
-  const client = new RestClient(CMConfig.getInstance());
-  return client.request(request);
+): Promise<GetNotificationsResponse> {
+  const response = RestClient.New().CallApi<GetNotificationsResponse>(request);
+  return response;
 }
 
-export async function deleteNotification(request: DeleteNotificationRequest) {
-  const client = new RestClient(CMConfig.getInstance());
-
-  return client.request(request);
+export async function deleteNotification(
+  request: DeleteNotificationRequest,
+): Promise<DeleteNotificationResponse> {
+  const response = RestClient.New().CallApi<DeleteNotificationResponse>(
+    request,
+  );
+  return response;
 }

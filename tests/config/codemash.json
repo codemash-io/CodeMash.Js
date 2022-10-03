@@ -1,0 +1,12 @@
+{
+  "DATABASE": {
+    "COLLECTIONS": {
+      "EMPLOYEES": "employees"
+    },
+    "TAXONOMIES": { "CITIES": "cities" },
+    "AGGREGATES": {}
+  },
+  "CODE": {
+    "RENAME_IT": { "RENAME_IT": "bb0dab89-5f23-4fce-a4b7-f4e11f2e54c3" }
+  }
+}

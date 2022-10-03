@@ -9,7 +9,7 @@ import {
   InsertOneRequest,
 } from '../../src/types/codemash.dtos';
 
-describe('insertOne', () => {
+describe('db.insertOne', () => {
   beforeEach(() => {
     dotenv.config({
       path: path.resolve(__dirname, '../data/config/.env'),

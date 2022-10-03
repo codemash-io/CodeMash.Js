@@ -28,7 +28,7 @@ describe('updateUser', () => {
     const createResult = await registerUser(createRequest);
 
     const request = new UpdateUserRequest({
-      id: createResult.userId,
+      id: createResult.result.id,
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
       displayName: faker.internet.userName(),

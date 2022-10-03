@@ -9,7 +9,7 @@ import {
   InsertManyRequest,
 } from '../../src/types/codemash.dtos';
 
-describe('insertMany', () => {
+describe('db.insertMany', () => {
   beforeEach(() => {
     dotenv.config({
       path: path.resolve(__dirname, '../data/config/.env'),

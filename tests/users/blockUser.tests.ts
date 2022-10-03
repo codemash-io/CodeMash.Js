@@ -8,6 +8,7 @@ import { blockUser, registerUser } from '../../src/modules/users';
 import {
   BlockUserRequest,
   RegisterUserRequest,
+  RegisterUserV2Response,
 } from '../../src/types/codemash.dtos';
 
 describe('blockUser', () => {
@@ -27,7 +28,7 @@ describe('blockUser', () => {
     const createdUser = await registerUser(createUser);
 
     const request = new BlockUserRequest({
-      id: createdUser.userId,
+      id: createdUser.result.id,
     });
     const response = await blockUser(request);
 
