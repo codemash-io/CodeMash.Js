@@ -1,4 +1,9 @@
 {
+  "TESTS": {
+    "SETTINGS": {
+      "SCHEMAS_CREATED": false
+    }
+  },
   "DATABASE": {
     "COLLECTIONS": {
       "EMPLOYEES": "employees"
