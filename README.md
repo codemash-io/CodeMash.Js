@@ -163,61 +163,11 @@ Please follow our [CodeMash API](https://docs.codemash.io/api/get-started) for a
   - [Find](https://docs.codemash.io/api/database/collections/find)
   - [Find By Id](https://docs.codemash.io/api/database/collections/find-one)
 
+## Hands-On
+
+Run [tests](./CONTRIBUTING.md#tests) and see how it works
+
 ## Get help
 
 - [GitHub Discussions](https://github.com/codemash-io/CodeMash.Js/discussions)
 - [Twitter](https://twitter.com/codemash_io)
-
-## Run Tests
-
-The best way to learn how CodeMash works is to read our [CodeMash API](https://docs.codemash.io/api/get-started) or run this repository code locally and get dirty.
-
-### Prerequisites
-
-Before running tests you need to create collections on CodeMash. You can do that in several ways:
-
-#### Using CLI
-
-Be sure you have installed [CodeMash CLI](https://docs.codemash.io/cli/codemash-cli) and have all credentials ready.
-
-```bash
-codemash project new  "my test project" --template HR
-```
-
-You can have more control over this and include/exclude only modules you want to test or try out.
-
-```bash
-codemash project new  "my test project" --template HR --exlude "push,payments,email"
-```
-
-#### Manual way, using CodeMash Cloud Dashboard
-
-Go to [CodeMash Cloud Dashboard](https://cloud.codemash.io/)
-
-**Project**
-
-1. Go to the Dashboard starting page
-2. Press "Add New" Project
-3. Choose to create from a template
-4. Select the HR project
-
-## Run Tests
-
-1. Install dependencies
-
-```bash
-yarn
-```
-
-2. Ensure that all environment variables are set in the ./tests/data/config/.env file. See [example](./data/config/.env.template)
-
-3. Run tests
-
-```bash
-
-# all
-npm test
-
-# specific tests
-npm test -- --grep "db.find"
-```
