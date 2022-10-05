@@ -1,7 +1,15 @@
 {
   "name": "codemash",
   "version": "1.2.36",
-  "description": "CodeMash tools for Node and javascript developers. Access codemash.io tools from npm",
+  "description": "CodeMash is a vital toolset for each developer who wants to achieve daily development tasks rapidly. CodeMash provides many common back-end services for you so you can focus on your front-end. Services such as database, email and push notifications, authentication, file storage, and many others are already implemented and can be easily accessed through the CodeMash dashboard or API.",
+  "author": "UAB Isidos",
+  "contributors": [
+    "Domantas Jovaisas (https://github.com/Domantas)",
+    "Herkus Dauksas (https://github.com/meow12)"
+  ],
+  "bugs": {
+    "url": "https://github.com/codemash-io/CodeMash.Js/issues"
+  },
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -44,11 +52,7 @@
     "logs",
     "payments"
   ],
-  "author": "Domantas Jovaisas",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/codemash-io/CodeMash.Js/issues"
-  },
   "homepage": "https://codemash.io",
   "devDependencies": {
     "@babel/core": "^7.12.10",

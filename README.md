@@ -1,10 +1,11 @@
 ![](https://github.com/codemash-io/CodeMash.Js/workflows/CI/badge.svg?branch=master&event=push)
 
-# CodeMash
+<h1 align="center" style="border-bottom: none;">🚀 CodeMash</h1>
+<h3 align="center">Back end as a service</h3>
 
 [CodeMash](https://codemash.io) is a vital toolset for each developer who wants to achieve daily development tasks rapidly. CodeMash provides many common back-end services for you so you can focus on your front-end. Services such as database, email and push notifications, authentication, file storage, and [many others](https://docs.codemash.io/dashboard/register-at-codemash) are already implemented and can be easily accessed through the CodeMash dashboard or API.
 
-Please refer to our technical [documentation](https://docs.codemash.io) page for more information.
+> Please refer to our technical [documentation](https://docs.codemash.io) page for more information.
 
 ## CodeMash for JavaScript developers.
 
@@ -20,6 +21,7 @@ You can use this JavaScript library in applications like:
 3. React
 4. React Native
 5. Vanilla JavaScript applications
+   |
 
 ### Installation
 
@@ -140,6 +142,31 @@ await push.send({ template: "Meeting reminder", recipient: employee?._id, tokens
 ```
 
 Please follow our [CodeMash API](https://docs.codemash.io/api/get-started) for all the details about each module and API capabilities.
+
+| Module                                                                      | Description                                                                                                                                                            |
+| --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`Project`](https://docs.codemash.io/api/project)                           | Save general and custom project settings, project deployment location, supported languages                                                                             |
+| [`Membership`](https://docs.codemash.io/api/membership)                     | Manager users authentication and authorization, roles and permissions, OAuth logins, triggers                                                                          |
+| [`Database`](https://docs.codemash.io/api/database)                         | Create a database with No Code. You automatically will get access to the data in your collection over fully managed and secure https endpoints                         |
+| [`Files`](https://docs.codemash.io/api/files)                               | Store files for your project, optimize for separate screens and automatically bind files with the records from the database                                            |
+| [`Code`](https://docs.codemash.io/api/code)                                 | Serverless code for your project. Write code in any language you have experience with or choose from dozens of pre-written built-in functions.                         |
+| [`Push Notification`](https://docs.codemash.io/api/notifications/push)      | Send personal or bulk push notifications to your clients. Schedule them, plan to send by client time zone, and have different languages over each message you deliver. |
+| [`Emails`](https://docs.codemash.io/api/notifications/emails)               | Send personal or bulk emails to your clients. Schedule them, plan to send by client time zone, and have different languages over each message you deliver.             |
+| [`Server Events`](https://docs.codemash.io/api/notifications/server-events) | Web Standard with better HTTP fidelity than WebSockets. Receive push notifications from CodeMash Servers                                                               |
+| [`Payments`](https://docs.codemash.io/api/payments)                         | Seamless payments integration. Choose any provider you like it                                                                                                         |
+| [`Sheduler`](https://docs.codemash.io/api/scheduler)                        | Schedule your code functions by time, timezone, and frequency you want to run it.                                                                                      |
+| [`Logs & monitoring`](https://docs.codemash.io/api/logs)                    | Grasp at what's happening on your project. Have tracing and application logs in one place.                                                                             |
+
+- Project
+  - [Getting started](https://docs.codemash.io/api/project)
+- Database
+  - [Find](https://docs.codemash.io/api/database/collections/find)
+  - [Find By Id](https://docs.codemash.io/api/database/collections/find-one)
+
+## Get help
+
+- [GitHub Discussions](https://github.com/codemash-io/CodeMash.Js/discussions)
+- [Twitter](https://twitter.com/codemash_io)
 
 ## Run Tests
 
