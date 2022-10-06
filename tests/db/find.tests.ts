@@ -2,10 +2,10 @@ import path from 'path';
 
 import { expect } from 'chai';
 import dotenv from 'dotenv';
-import Config from '../config/codemash.json';
 
 import { find } from '../../src/modules/database';
 import { FindRequest } from '../../src/types/codemash.dtos';
+import Config from '../config/codemash.json';
 import { TestUtils } from './utils';
 
 // export class Employee {
@@ -15,7 +15,7 @@ import { TestUtils } from './utils';
 
 describe('db.find', () => {
   beforeEach(async () => {
-    if (Config.TEST.SETTINGS)
+    if (Config.TESTS.SETTINGS)
       dotenv.config({
         path: path.resolve(__dirname, '../data/config/.env'),
       });

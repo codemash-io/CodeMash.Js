@@ -163,7 +163,7 @@ Please follow our [CodeMash API](https://docs.codemash.io/api/get-started) for a
   - [Find](https://docs.codemash.io/api/database/collections/find)
   - [Find By Id](https://docs.codemash.io/api/database/collections/find-one)
 
-## Hands-On
+## 👉🏼 Hands-On
 
 Run [tests](./CONTRIBUTING.md#tests) and see how it works
 
@@ -171,3 +171,7 @@ Run [tests](./CONTRIBUTING.md#tests) and see how it works
 
 - [GitHub Discussions](https://github.com/codemash-io/CodeMash.Js/discussions)
 - [Twitter](https://twitter.com/codemash_io)
+
+## License
+
+CodeMash.Js is licensed under [Apache 2.0 License.](LICENSE). CodeMash.Js comes with an explicit [NOTICE](notice) file containing additional legal notices and information.

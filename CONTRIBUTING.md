@@ -309,16 +309,4 @@ npm test
 
 # specific tests
 npm test -- --grep "db.find"
-
-**Tips:** During development you can:
-
-- run only a subset of test files with `ava <glob>`, for example `ava test/mytestfile.test.js`
-- run in watch mode with `ava -w` to automatically run a test file when you modify it
-- run only the test you are working on by adding [`.only` to the test definition](https://github.com/avajs/ava#running-specific-tests)
-
-### Commits
-
-This repository use [Commitizen](https://github.com/commitizen/cz-cli) to help you create [valid commit messages](#commit-message-guidelines).
-
-After staging your changes with `git add`, run `npm run cm` to start the interactive commit message CLI.
 ```
