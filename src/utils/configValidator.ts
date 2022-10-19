@@ -4,8 +4,10 @@ export class ConfigValidator {
   constructor() {}
 
   public ValidateCM(config: ICMConfig) {
-    if (config.apiKey === undefined || config.apiKey === '') {
-      throw new Error('CodeMash config is not valid, check CODEMASH_API_URL');
+    if (config.apiUri === undefined || config.apiUri === '') {
+      throw new Error(
+        'CodeMash config is not valid, check CODEMASH_API_BASE_URI',
+      );
     }
     if (config.apiKey === undefined || config.apiKey === '') {
       throw Error('CodeMash config is not valid, check CODEMASH_API_KEY');

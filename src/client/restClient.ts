@@ -2,6 +2,7 @@ import { getMethod, IReturn, JsonServiceClient } from '@servicestack/client';
 import { CMConfig } from 'config';
 import { ICMConfig } from 'config/config';
 import { deepParseJson } from 'deep-parse-json';
+import { RequestContext } from 'types';
 import {
   CodeMashDbListRequestBase,
   CodeMashDbRequestBase,
@@ -40,18 +41,32 @@ type TResponse<T> = ResponseBase<T>;
 
 export class RestClient extends JsonServiceClient {
   constructor(private config: ICMConfig) {
-    super(config.apiUrl);
+    super(config.apiUri);
+
     if (this.config.isValid()) {
       if (this.config.cluster) {
         this.headers.set('X-CM-Cluster', this.config.cluster);
       }
       this.headers.set('Authorization', `Bearer ${this.config.apiKey}`);
-      this.headers.set('X-CM-ProjectId', this.config.projectId);
+      this.headers.set('X-CM-ProjectId', this.config.projectId!);
     }
   }
 
-  public static New(): RestClient {
-    return new RestClient(CMConfig.getInstance());
+  public static New(
+    requestContext: RequestContext | undefined = undefined,
+  ): RestClient {
+    const config = CMConfig.getInstance();
+
+    if (requestContext && requestContext.projectId) {
+      config.projectId = requestContext.projectId.ToString();
+    }
+    if (requestContext && requestContext.cluster) {
+      config.cluster = requestContext.cluster;
+    }
+    if (requestContext && requestContext.apiKey) {
+      config.apiKey = requestContext.apiKey;
+    }
+    return new RestClient(config);
   }
 
   private getRequestName(request: any) {
@@ -73,26 +88,6 @@ export class RestClient extends JsonServiceClient {
   }
 
   public async CallApi<TR>(request: any | null): Promise<TR> {
-    console.log('request', request);
-    console.log('request type', typeof request);
-    console.log('request RequestBase ?', request instanceof RequestBase);
-
-    // if (request instanceof RequestBase) {
-    //   request.cultureCode = request.cultureCode || this.config.
-    // }
-    //   console.log(
-    //     'request CodeMashRequestBase ?',
-    //     request instanceof CodeMashRequestBase,
-    //   );
-    // console.log(
-    //   'request CodeMashDbRequestBase ?',
-    //   request instanceof CodeMashDbRequestBase,
-    // );
-    // console.log(
-    //   'request CodeMashDbListRequestBase ?',
-    //   request instanceof CodeMashDbListRequestBase,
-    // );
-
     // TODO remove when API requat will have objects (JValue) instead of strings
     // stringify selected fields that are passed as objects.
     Object.values(StringifiedFields).forEach((key) => {
@@ -109,7 +104,7 @@ export class RestClient extends JsonServiceClient {
       }
     });
 
-    if (CMConfig.getInstance().showLogs) {
+    if (this.config.showLogs) {
       console.log(`Outgoing ${getMethod(request)} request: `, request);
     }
 

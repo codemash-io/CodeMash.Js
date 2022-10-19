@@ -1,15 +1,19 @@
 export interface ICMConfigBase {
-  apiUrl?: string;
-  apiKey?: string;
+  apiUri?: string;
+  accountId?: string;
   projectId?: string;
+  apiKey?: string;
+
   cluster?: string;
   baseFilePath?: string;
   region?: string;
   showLogs?: boolean;
+
+  hubUri?: string;
 }
 
 export type TValidCMClientConfig = Required<
-  Pick<ICMConfigBase, 'apiUrl' | 'apiKey' | 'projectId'>
+  Pick<ICMConfigBase, 'apiUri' | 'apiKey' | 'projectId'>
 >;
 export interface IValidateConfig {
   Validate(): void;

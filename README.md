@@ -78,12 +78,12 @@ Insert into a collection:
 import { db } from 'codemash';
 
 // add new employee to the "Employees" collection
-async function addEmployee(employee: Employee) {
+const addEmployee = async (employee: Employee) => {
   await db.insertOne<Employee>({
     collection: 'employees',
     document: employee,
   });
-}
+};
 
 const newEmployeeId = await addEmployee({
   first_name: 'Scott',
@@ -101,14 +101,14 @@ Find data from the collection:
 import { db } from 'codemash';
 
 // gets all first 100 employees
-async function getEmployees(filter: object) {
+const getEmployees = async (filter: object) => {
   return await db.find<Employee[]>({
     collection: 'employees',
     filter,
     pageNumber: 0,
     pageSize: 100,
   });
-}
+};
 
 // get all employees whose age is greater or equal to 30 years.
 const employees = await getEmployees({ age: { $gte: 30 } });
@@ -124,21 +124,25 @@ Send push notification to one from db:
 import { db, push } from 'codemash';
 
 // gets employee by id
-async function getEmployeeById(id: string) {
+const getEmployee = async (id: string) => {
   return await db.findById<Employee[]>({
     collection: 'employees',
     id: id,
   });
 }
 
-const employee = await getEmployeeById(newEmployeeId);
+const employee = await getEmployee(newEmployeeId);
 
-await push.send({ template: "Meeting reminder", recipient: employee?._id, tokens: {
-  salutation: `Dear ${employee?.first_name}`,
-  when: new Date()
-  room: 11,
-  topic: 'Standup meeting'
-} })
+await push.send({
+  template: "Meeting reminder",
+  recipient: employee?._id,
+  tokens: {
+    salutation: `Dear ${employee?.first_name}`,
+    when: new Date()
+    room: 11,
+    topic: 'Standup meeting'
+  }
+})
 ```
 
 Please follow our [CodeMash API](https://docs.codemash.io/api/get-started) for all the details about each module and API capabilities.

@@ -1,0 +1,20 @@
+{
+  "title": "Employees",
+  "type": "object",
+  "required": ["last_name", "first_name"],
+  "translatable": [],
+  "properties": {
+    "first_name": {
+      "type": "string",
+      "title": "First Name",
+      "order": "None",
+      "minLength": 1
+    },
+    "last_name": {
+      "type": "string",
+      "title": "Last Name",
+      "order": "None",
+      "minLength": 1
+    }
+  }
+}

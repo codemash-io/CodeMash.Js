@@ -1,6 +1,11 @@
 import { RestClient } from 'client';
 import { CMConfig } from 'config';
-import { AggregateResult, FindOneResult, FindResult } from 'types';
+import {
+  AggregateResult,
+  FindOneResult,
+  FindResult,
+  RequestContext,
+} from 'types';
 import {
   AggregateRequest,
   AggregateResponse,
@@ -125,8 +130,13 @@ export async function aggregate<TResponse extends object>(
   return result;
 }
 
-export async function count(request: CountRequest): Promise<CountResponse> {
-  const response = await RestClient.New().CallApi<CountResponse>(request);
+export async function count(
+  request: CountRequest,
+  requestContext: RequestContext | undefined = undefined,
+): Promise<CountResponse> {
+  const response = await RestClient.New(requestContext).CallApi<CountResponse>(
+    request,
+  );
   return response;
 }
 

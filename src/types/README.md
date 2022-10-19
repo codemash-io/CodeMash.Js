@@ -3,19 +3,22 @@
 Generate types
 
 ```bash
-x typescript https://api.codemash.io ./src/types/codemash.dtos.ts
+x typescript http://localhost:5002 ./src/types/codemash.dtos.ts
+x typescript http://localhost:5001 ./tests/types/codemash.hub.dtos.ts
 ```
 
 To update types
 
 ```bash
 x typescript ./src/types/codemash.dtos.ts
+x typescript ./tests/types/codemash.hub.dtos.ts
 ```
 
 Ensure of what was changed
 
 ```bash
 git diff ./src/types/codemash.dtos.ts
+git diff ./tests/types/codemash.hub.dtos.ts
 ```
 
 Run formatter
