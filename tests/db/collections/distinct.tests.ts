@@ -3,13 +3,17 @@ import path from 'path';
 import { expect } from 'chai';
 import dotenv from 'dotenv';
 
-import { deleteMany, distinct, insertMany } from '../../src/modules/database';
+import {
+  deleteMany,
+  distinct,
+  insertMany,
+} from '../../../src/modules/database';
 import {
   DeleteManyRequest,
   DistinctRequest,
   FindRequest,
   InsertManyRequest,
-} from '../../src/types/codemash.dtos';
+} from '../../../src/types/codemash.dtos';
 
 const RECORD_COUNT = 5;
 const MATCH_NAME = 'DistinctReally';

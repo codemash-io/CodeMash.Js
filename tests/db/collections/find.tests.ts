@@ -3,10 +3,10 @@ import path from 'path';
 import { expect } from 'chai';
 import dotenv from 'dotenv';
 
-import { find } from '../../src/modules/database';
-import { FindRequest } from '../../src/types/codemash.dtos';
-import Config from '../config/codemash.json';
-import { TestUtils } from './utils';
+import { find } from '../../../src/modules/database';
+import { FindRequest } from '../../../src/types/codemash.dtos';
+import Config from '../../config/codemash.json';
+import { TestUtils } from '../utils';
 
 // export class Employee {
 //   public first_name: string;

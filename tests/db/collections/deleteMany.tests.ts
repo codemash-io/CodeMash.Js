@@ -3,11 +3,11 @@ import path from 'path';
 import { expect } from 'chai';
 import dotenv from 'dotenv';
 
-import { deleteMany, insertMany } from '../../src/modules/database';
+import { deleteMany, insertMany } from '../../../src/modules/database';
 import {
   DeleteManyRequest,
   InsertManyRequest,
-} from '../../src/types/codemash.dtos';
+} from '../../../src/types/codemash.dtos';
 
 const ENTRIES_TO_INSERT = 5;
 const ENTRY_FIRST_NAME = 'Dummy-name';

@@ -3,12 +3,16 @@ import path from 'path';
 import { expect } from 'chai';
 import dotenv from 'dotenv';
 
-import { deleteMany, insertOne, replaceOne } from '../../src/modules/database';
+import {
+  deleteMany,
+  insertOne,
+  replaceOne,
+} from '../../../src/modules/database';
 import {
   DeleteManyRequest,
   InsertOneRequest,
   ReplaceOneRequest,
-} from '../../src/types/codemash.dtos';
+} from '../../../src/types/codemash.dtos';
 
 const INITIAL_ENTRY_NAME = 'initial_entry';
 const REPLACE_WITH_NAME = 'replaced';

@@ -3,11 +3,11 @@ import path from 'path';
 import { expect } from 'chai';
 import dotenv from 'dotenv';
 
-import { deleteOne, insertOne } from '../../src/modules/database';
+import { deleteOne, insertOne } from '../../../src/modules/database';
 import {
   DeleteOneRequest,
   InsertOneRequest,
-} from '../../src/types/codemash.dtos';
+} from '../../../src/types/codemash.dtos';
 
 const ENTRY_FIRST_NAME = 'Dummy-name-Single';
 

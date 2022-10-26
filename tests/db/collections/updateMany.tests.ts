@@ -3,12 +3,16 @@ import path from 'path';
 import { expect } from 'chai';
 import dotenv from 'dotenv';
 
-import { deleteMany, insertMany, updateMany } from '../../src/modules/database';
+import {
+  deleteMany,
+  insertMany,
+  updateMany,
+} from '../../../src/modules/database';
 import {
   DeleteManyRequest,
   InsertManyRequest,
   UpdateManyRequest,
-} from '../../src/types/codemash.dtos';
+} from '../../../src/types/codemash.dtos';
 
 const ENTRIES_TO_CREATE = 3;
 const CREATE_NAME = 'update-many-initial';

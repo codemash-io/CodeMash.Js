@@ -3,13 +3,13 @@ import path from 'path';
 import { expect } from 'chai';
 import dotenv from 'dotenv';
 
-import { count } from '../../src/modules/database';
-import { RequestContext } from '../../src/types';
-import { CountRequest } from '../../src/types/codemash.dtos';
+import { count } from '../../../src/modules/database';
+import { RequestContext } from '../../../src/types';
+import { CountRequest } from '../../../src/types/codemash.dtos';
 import {
   CodeMashProjectBuilder,
   ProjectOutput,
-} from '../codeMashProjectBuilder';
+} from '../../codeMashProjectBuilder';
 
 describe('db.countNew', () => {
   let output: ProjectOutput;
@@ -19,13 +19,12 @@ describe('db.countNew', () => {
       path: path.resolve(__dirname, '../data/config/.env'),
     });
 
-    const schemaPath: string = '../utils/db/schemas';
-
     output = await CodeMashProjectBuilder.New.CreateAccount()
       .SignInToHub()
       .CreateNewProject()
       .EnableDatabase()
-      .AddNewCollection(schemaPath.ToSchema('employees'))
+      // .AddNewCollection('../utils/db/schemas'.ToSchema('employees'))
+      .AddEmployeesTemplateSchema()
       .CreateAdminAsServiceUser()
       .Build();
   });

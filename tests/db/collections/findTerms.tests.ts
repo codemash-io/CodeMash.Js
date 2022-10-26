@@ -3,13 +3,13 @@ import path from 'path';
 import { expect } from 'chai';
 import dotenv from 'dotenv';
 
-import { findTerms } from '../../src/modules/database';
+import { findTerms } from '../../../src/modules/database';
 import {
   FindTermsRequest,
   FindTermsResponse,
   ResponseBase,
   Term,
-} from '../../src/types/codemash.dtos';
+} from '../../../src/types/codemash.dtos';
 
 describe('db.findTerms', () => {
   beforeEach(() => {

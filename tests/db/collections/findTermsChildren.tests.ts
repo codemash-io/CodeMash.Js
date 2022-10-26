@@ -3,8 +3,8 @@ import path from 'path';
 import { expect } from 'chai';
 import dotenv from 'dotenv';
 
-import { findTermsChildren } from '../../src/modules/database';
-import { FindTermsChildrenRequest } from '../../src/types/codemash.dtos';
+import { findTermsChildren } from '../../../src/modules/database';
+import { FindTermsChildrenRequest } from '../../../src/types/codemash.dtos';
 
 describe('db.findTermsChildren', () => {
   beforeEach(() => {

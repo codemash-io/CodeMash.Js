@@ -4,8 +4,8 @@ import { expect, use } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import dotenv from 'dotenv';
 
-import { findOne } from '../../src/modules/database';
-import { FindOneRequest } from '../../src/types/codemash.dtos';
+import { findOne } from '../../../src/modules/database';
+import { FindOneRequest } from '../../../src/types/codemash.dtos';
 
 use(chaiAsPromised);
 

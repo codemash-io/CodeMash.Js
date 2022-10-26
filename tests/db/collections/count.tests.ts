@@ -3,8 +3,8 @@ import path from 'path';
 import { expect } from 'chai';
 import dotenv from 'dotenv';
 
-import { count } from '../../src/modules/database';
-import { CountRequest } from '../../src/types/codemash.dtos';
+import { count } from '../../../src/modules/database';
+import { CountRequest } from '../../../src/types/codemash.dtos';
 
 describe('db.count', () => {
   beforeEach(() => {

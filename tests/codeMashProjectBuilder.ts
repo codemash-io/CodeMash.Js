@@ -198,6 +198,48 @@ export class CodeMashProjectBuilder {
     return this;
   }
 
+  public AddEmployeesTemplateSchema(): CodeMashProjectBuilder {
+    this.builderQueue.push(async () => {
+      console.log('AddNewCollection From Template');
+
+      const employeesSchemaTemplateId = '5e70ed82362de9480cc3598b';
+
+      const client = new JsonServiceClient(this.appSettings.hubUri);
+      client.cookies = this.output.cookies;
+
+      const request = new Hub.CreateSchemaFromTemplate({
+        id: employeesSchemaTemplateId,
+        names: {
+          employees: 'Employees',
+          'absence-types': 'Absence Types',
+          countries: 'Countries',
+          cities: 'Cities',
+          departments: 'Departments',
+          divisions: 'Divisions',
+          'job-titles': 'Job Titles',
+          'office-locations': 'Office Locations',
+        },
+        created: [
+          'employees',
+          'absence-types',
+          'countries',
+          'cities',
+          'departments',
+          'divisions',
+          'job-titles',
+          'office-locations',
+        ],
+        projectId: this.output.projectId?.ToString(),
+      });
+
+      const response: Hub.CreateSchemaFromTemplateResponse = await client.post(
+        request,
+      );
+    });
+
+    return this;
+  }
+
   public async runSerial(tasks: Array<() => Promise<void>>) {
     let result = Promise.resolve();
     tasks.forEach((task) => {
@@ -208,7 +250,7 @@ export class CodeMashProjectBuilder {
             new Promise((resolve) => {
               setTimeout(() => {
                 resolve();
-              }, 500);
+              }, 1500);
             }),
         );
     });
