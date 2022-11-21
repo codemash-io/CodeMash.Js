@@ -55,7 +55,7 @@ export async function getFileUrl({secretKey, fileId, optimization}) {
 	return response;
 }
 
-// Pass either fileUri (local file location), file or base64 string
+// Pass either: fileUri (local file location), file or base64 string
 export async function uploadFile({
 	secretKey,
 	path,
