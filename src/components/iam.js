@@ -729,7 +729,6 @@ export async function login({username, password}) {
 			method: 'POST',
 			headers: {
 				'X-CM-ProjectId': Config.projectId,
-				// Authorization: `Bearer ${Config.secretKey}`,
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
 			},
