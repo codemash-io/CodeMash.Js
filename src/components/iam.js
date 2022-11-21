@@ -705,6 +705,23 @@ export async function verifyInvitation({
 	return response;
 }
 
+export async function resendUserVerification({secretKey}) {
+	const response = await server.loadJson(
+		`${Config.apiUrl}${Endpoints.PROJECT.MEMBERSHIP.USERS.RESEND_USER_VERIFICATION}`,
+		{
+			method: 'POST',
+			headers: {
+				'X-CM-ProjectId': Config.projectId,
+				Authorization: `Bearer ${secretKey || Config.secretKey}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({}),
+		}
+	);
+	return response;
+}
+
 export async function login({username, password}) {
 	const response = await server.loadJson(
 		`${Config.apiUrl}${Endpoints.ACCOUNT.LOGIN(username, password)}`,

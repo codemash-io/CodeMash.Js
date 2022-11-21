@@ -123,6 +123,7 @@ export const CONFIG = {
 				CHECK_PASSWORD_RESET: '/v2/membership/users/password/reset/token',
 				RESET_PASSWORD: '/v2/membership/users/password/reset',
 				VERIFY_REGISTRATION: '/v2/membership/users/verify',
+				RESEND_USER_VERIFICATION: '/v2/membership/users/verify/resend',
 				VERIFY_INVITATION: '/v2/membership/users/invitation/verify',
 				CHECK_INVITATION_TOKEN: '/v2/membership/users/invitation/token',
 				CREATE_DEACTIVATION: '/v2/membership/users/deactivate/token',
