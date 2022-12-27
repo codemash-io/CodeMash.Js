@@ -183,7 +183,7 @@ export async function deleteRecord({
 		headers: {
 			'X-CM-ProjectId': Config.projectId,
 			'X-CM-Cluster': cluster,
-      'X-CM-Database': database,
+			'X-CM-Database': database,
 			Authorization: `Bearer ${secretKey || Config.secretKey}`,
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
@@ -220,7 +220,7 @@ export async function deleteRecordWithFilter({
 		headers: {
 			'X-CM-ProjectId': Config.projectId,
 			'X-CM-Cluster': cluster,
-      'X-CM-Database': database,
+			'X-CM-Database': database,
 			Authorization: `Bearer ${secretKey || Config.secretKey}`,
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
@@ -255,7 +255,7 @@ export async function deleteManyRecords({
 		headers: {
 			'X-CM-ProjectId': Config.projectId,
 			'X-CM-Cluster': cluster,
-      'X-CM-Database': database,
+			'X-CM-Database': database,
 			Authorization: `Bearer ${secretKey || Config.secretKey}`,
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
@@ -572,7 +572,7 @@ export async function executeAggregate({
 		headers: {
 			'X-CM-ProjectId': Config.projectId,
 			'X-CM-Cluster': cluster,
-      'X-CM-Database': database,
+			'X-CM-Database': database,
 			Authorization: `Bearer ${secretKey || Config.secretKey}`,
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
