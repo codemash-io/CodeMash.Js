@@ -35,11 +35,13 @@ export async function getOrders({
 	userId,
 	includePaidTransactions,
 	cluster,
+	database,
 }) {
 	const request = {
 		userId,
 		includePaidTransactions,
 		cluster,
+		database,
 		pageSize: pageSize || Config.tablePageSize,
 		pageNumber: pageNumber || 0,
 		filter: objectOrStringToString(filter),
