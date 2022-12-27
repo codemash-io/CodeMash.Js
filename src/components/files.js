@@ -137,6 +137,7 @@ export async function uploadRecordFile({
 	recordId,
 	uniqueFieldName,
 	cluster,
+	database,
 }) {
 	if (base64) {
 		const response = await server.loadJson(
@@ -155,6 +156,7 @@ export async function uploadRecordFile({
 					recordId,
 					uniqueFieldName,
 					cluster,
+					database,
 					base64File: {data: base64, contentType: fileType, fileName},
 				}),
 			}
@@ -195,6 +197,7 @@ export async function uploadRecordFile({
 				'X-CM-ProjectId': Config.projectId,
 				Authorization: `Bearer ${secretKey || Config.secretKey}`,
 				'X-CM-Cluster': cluster || '',
+				'X-CM-Database': database || '',
 			},
 			body: formData,
 		}
