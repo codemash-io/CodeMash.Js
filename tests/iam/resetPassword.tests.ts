@@ -4,7 +4,7 @@ import faker from '@faker-js/faker';
 import { expect } from 'chai';
 import dotenv from 'dotenv';
 
-import { resetPassword } from '../../src/modules/users';
+import { resetPassword } from '../../src/modules/iam';
 import { ResetPasswordRequest } from '../../src/types/codemash.dtos';
 
 describe('resetPassword', () => {

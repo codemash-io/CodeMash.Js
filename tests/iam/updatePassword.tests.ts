@@ -4,7 +4,7 @@ import faker from '@faker-js/faker';
 import { expect } from 'chai';
 import dotenv from 'dotenv';
 
-import { registerUser, updatePassword } from '../../src/modules/users';
+import { registerUser, updatePassword } from '../../src/modules/iam';
 import {
   RegisterUserRequest,
   UpdatePasswordRequest,

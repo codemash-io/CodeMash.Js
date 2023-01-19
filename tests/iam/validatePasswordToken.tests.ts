@@ -8,7 +8,7 @@ import {
   createPasswordReset,
   registerUser,
   validatePasswordToken,
-} from '../../src/modules/users';
+} from '../../src/modules/iam';
 import {
   CreatePasswordResetRequest,
   RegisterUserRequest,

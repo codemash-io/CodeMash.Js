@@ -4,7 +4,7 @@ import faker from '@faker-js/faker';
 import { expect } from 'chai';
 import dotenv from 'dotenv';
 
-import { updateProfile } from '../../src/modules/users';
+import { updateProfile } from '../../src/modules/iam';
 import { UpdateProfileRequest } from '../../src/types/codemash.dtos';
 
 describe('updateProfile', () => {

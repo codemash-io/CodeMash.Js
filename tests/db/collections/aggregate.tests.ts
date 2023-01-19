@@ -3,12 +3,16 @@ import path from 'path';
 import { expect } from 'chai';
 import dotenv from 'dotenv';
 
-import { aggregate, deleteMany, insertMany } from '../../src/modules/database';
+import {
+  aggregate,
+  deleteMany,
+  insertMany,
+} from '../../../src/modules/database';
 import {
   AggregateRequest,
   DeleteManyRequest,
   InsertManyRequest,
-} from '../../src/types/codemash.dtos';
+} from '../../../src/types/codemash.dtos';
 
 const RECORD_COUNT = 5;
 const MATCH_NAME = 'DummyName';

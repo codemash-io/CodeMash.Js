@@ -1,6 +1,9 @@
 import { RestClient } from 'client';
 import { CMConfig } from 'config';
+import { RequestContext } from 'types';
 import {
+  AppleAuthenticationRequest,
+  AppleAuthenticationResponse,
   Authenticate,
   AuthenticateResponse,
   BlockUserRequest,
@@ -208,5 +211,15 @@ export async function verifyUser(
   request: VerifyUserRequest,
 ): Promise<IReturnVoid> {
   const response = RestClient.New().CallApi<IReturnVoid>(request);
+  return response;
+}
+
+export async function sighInWithApple(
+  request: AppleAuthenticationRequest,
+  requestContext?: RequestContext | undefined,
+): Promise<AppleAuthenticationResponse> {
+  const response = RestClient.New(
+    requestContext,
+  ).CallApi<AppleAuthenticationResponse>(request);
   return response;
 }

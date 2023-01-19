@@ -3,7 +3,7 @@ import path from 'path';
 import { expect } from 'chai';
 import dotenv from 'dotenv';
 
-import { getUsers } from '../../src/modules/users';
+import { getUsers } from '../../src/modules/iam';
 import { GetUsersRequest } from '../../src/types/codemash.dtos';
 
 describe('getUsers', () => {

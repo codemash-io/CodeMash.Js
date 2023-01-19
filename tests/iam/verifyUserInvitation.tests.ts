@@ -4,7 +4,7 @@ import faker from '@faker-js/faker';
 import { expect } from 'chai';
 import dotenv from 'dotenv';
 
-import { verifyUserInvitation } from '../../src/modules/users';
+import { verifyUserInvitation } from '../../src/modules/iam';
 import { VerifyUserInvitationRequest } from '../../src/types/codemash.dtos';
 
 describe('verifyUserInvitation', () => {

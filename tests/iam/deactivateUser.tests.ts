@@ -3,7 +3,7 @@ import path from 'path';
 import { expect } from 'chai';
 import dotenv from 'dotenv';
 
-import { deactivateUser } from '../../src/modules/users';
+import { deactivateUser } from '../../src/modules/iam';
 import { DeactivateUserRequest } from '../../src/types/codemash.dtos';
 
 describe('deactivateUser', () => {

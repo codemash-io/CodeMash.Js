@@ -4,7 +4,7 @@ import * as emailsService from './modules/email';
 import * as filesService from './modules/files';
 import * as paymentsService from './modules/payments';
 import * as pushService from './modules/push';
-import * as usersService from './modules/users';
+import * as usersService from './modules/iam';
 
 export {
   codeService,

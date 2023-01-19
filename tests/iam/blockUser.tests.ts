@@ -4,21 +4,21 @@ import faker from '@faker-js/faker';
 import { expect } from 'chai';
 import dotenv from 'dotenv';
 
-import { blockUser, registerUser, unblockUser } from '../../src/modules/users';
+import { blockUser, registerUser } from '../../src/modules/iam';
 import {
   BlockUserRequest,
   RegisterUserRequest,
-  UnblockUserRequest,
+  RegisterUserV2Response,
 } from '../../src/types/codemash.dtos';
 
-describe('unblockUser', () => {
+describe('blockUser', () => {
   beforeEach(() => {
     dotenv.config({
       path: path.resolve(__dirname, '../data/config/.env'),
     });
   });
 
-  it('should unblock a new blocked user', async () => {
+  it('should block a new user', async () => {
     const createUser = new RegisterUserRequest({
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
@@ -27,15 +27,10 @@ describe('unblockUser', () => {
     });
     const createdUser = await registerUser(createUser);
 
-    const blockReq = new BlockUserRequest({
+    const request = new BlockUserRequest({
       id: createdUser.result.id,
     });
-    await blockUser(blockReq);
-
-    const request = new UnblockUserRequest({
-      id: createdUser.result.id,
-    });
-    const response = await unblockUser(request);
+    const response = await blockUser(request);
 
     expect(response).to.not.be.null;
   });

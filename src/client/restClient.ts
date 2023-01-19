@@ -57,6 +57,10 @@ export class RestClient extends JsonServiceClient {
   ): RestClient {
     const config = CMConfig.getInstance();
 
+    if (requestContext && requestContext.apiUrl) {
+      config.apiUri = requestContext.apiUrl;
+    }
+
     if (requestContext && requestContext.projectId) {
       config.projectId = requestContext.projectId.ToString();
     }

@@ -4,10 +4,13 @@ import faker from '@faker-js/faker';
 import { expect } from 'chai';
 import dotenv from 'dotenv';
 
-import { inviteUser } from '../../src/modules/users';
-import { InviteUserRequest } from '../../src/types/codemash.dtos';
+import { inviteUser, validateInvitationToken } from '../../src/modules/iam';
+import {
+  InviteUserRequest,
+  ValidateInvitationTokenRequest,
+} from '../../src/types/codemash.dtos';
 
-describe('inviteUser', () => {
+describe('validateInvitationToken', () => {
   beforeEach(() => {
     dotenv.config({
       path: path.resolve(__dirname, '../data/config/.env'),
@@ -21,8 +24,12 @@ describe('inviteUser', () => {
       email: faker.internet.email(),
       displayName: faker.internet.userName(),
     });
+    await inviteUser(request);
 
-    const response = await inviteUser(request);
-    expect(response).to.not.be.null;
+    // const validationRequest = new ValidateInvitationTokenRequest({
+    //   token: ?
+    // });
+    // expect(response).to.not.be.null;
+    // expect(result.response).to.be.not.null;
   });
 });

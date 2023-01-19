@@ -5,5 +5,6 @@ export class RequestContext {
     public readonly projectId: Guid | undefined = undefined,
     public readonly apiKey: string | undefined = undefined,
     public readonly cluster: string | undefined = undefined,
+    public readonly apiUrl: string | undefined = undefined,
   ) {}
 }
